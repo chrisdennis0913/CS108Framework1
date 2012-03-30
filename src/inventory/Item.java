@@ -7,7 +7,7 @@ import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
 
 
-public abstract class Item
+public class Item
 {
     protected static Main game;
     protected String itemName;
