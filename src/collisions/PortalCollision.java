@@ -1,14 +1,15 @@
 package collisions;
 
 import app.Main;
+import app.RPGGame;
 
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.collision.BasicCollisionGroup;
 
 public class PortalCollision extends BasicCollisionGroup{
-	private Main game;
+	private RPGGame game;
 	
-	public PortalCollision (Main game) {
+	public PortalCollision (RPGGame game) {
 		this.game = game;
 	}
 	

@@ -21,7 +21,7 @@ import com.golden.gamedev.object.SpriteGroup;
 import com.golden.gamedev.object.font.SystemFont;
 
 public class Player {
-	private Main game;
+	private RPGGame game;
 	private SpriteGroup group = new SpriteGroup("Player");
 	private AnimatedSprite character;
 	private String startSprite = "resources/player/start_sprite.gif";
@@ -31,8 +31,8 @@ public class Player {
 	private HashMap<String, Action> actions = new HashMap<String, Action>();
 	private HashMap<String, Item> inventory = new HashMap<String, Item>();
 
-	public Player(Main game) {
-		this.game = game;
+	public Player(RPGGame rpgGame) {
+		this.game = rpgGame;
 	}
 
 	public void generate(int[] location) {
@@ -95,7 +95,7 @@ public class Player {
 		return actions;
 	}
 
-	public Main getGame() {
+	public RPGGame getGame() {
 		return game;
 	}
 	

@@ -4,10 +4,11 @@ import java.awt.image.BufferedImage;
 
 import scenery.Portal;
 import app.Main;
+import app.RPGGame;
 
 public class Priest extends NPC {
 
-	public Priest(Main game, String name) {
+	public Priest(RPGGame game, String name) {
 		super(game, name);
 		setCanDie(true);
 	}

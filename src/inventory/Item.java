@@ -2,6 +2,7 @@ package inventory;
 
 import java.awt.image.BufferedImage;
 import app.Main;
+import app.RPGGame;
 import collisions.ItemCollision;
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
@@ -9,7 +10,7 @@ import com.golden.gamedev.object.SpriteGroup;
 
 public class Item
 {
-    protected static Main game;
+    protected static RPGGame game;
     protected String itemName;
     protected SpriteGroup group;
     protected BufferedImage image;
@@ -21,12 +22,12 @@ public class Item
     }
 
 
-    public Item (Main game, String itemName)
+    public Item (RPGGame game2, String itemName)
     {
-        Item.game = game;
+        Item.game = game2;
         this.itemName = itemName;
         group = new SpriteGroup(itemName);
-        image = game.getImage("resources/items/" + itemName + ".gif");
+        image = game2.getImage("resources/items/" + itemName + ".gif");
     }
 
 

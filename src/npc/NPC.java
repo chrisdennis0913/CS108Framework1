@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 
 import app.Main;
+import app.RPGGame;
 
 import collisions.NPCCollision;
 
@@ -12,7 +13,7 @@ import com.golden.gamedev.object.SpriteGroup;
 import com.golden.gamedev.util.FileUtil;
 
 public abstract class NPC {
-	protected static Main game;
+	protected static RPGGame game;
 	private SpriteGroup group;
 	private BufferedImage image;
 	private String name;
@@ -21,11 +22,11 @@ public abstract class NPC {
 	private boolean dead = false;
 	private NPCCollision collision;
 	
-	public NPC (Main game, String name) {
-		NPC.game = game;
+	public NPC (RPGGame game2, String name) {
+		NPC.game = game2;
 		this.name = name;
-		this.group = new SpriteGroup(name+"_"+game.getRandom(0, 10000));
-		this.image = game.getImage("resources/npc/"+name+".gif");
+		this.group = new SpriteGroup(name+"_"+game2.getRandom(0, 10000));
+		this.image = game2.getImage("resources/npc/"+name+".gif");
 		String scriptURL = "resources/script/"+name+".txt";
 		script = FileUtil.fileRead(new File(scriptURL));
 	}

@@ -7,10 +7,11 @@ import java.awt.Graphics2D;
 import npc.Priest;
 import scenery.Scenery;
 import app.Main;
+import app.RPGGame;
 
 public class Start extends Level {
 
-	public Start(Main game) {
+	public Start(RPGGame game) {
 		super(game);
 	}
 

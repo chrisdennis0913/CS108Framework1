@@ -3,20 +3,21 @@ package scenery;
 import java.awt.image.BufferedImage;
 
 import app.Main;
+import app.RPGGame;
 import collisions.SceneryCollision;
 
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
 
 public class Scenery {
-	protected static Main game;
+	protected static RPGGame game;
 	private SpriteGroup group;
 	private BufferedImage image;
 	
-	public Scenery (Main game, String imageURL) {
-		Scenery.game = game;
-		this.image = game.getImage(imageURL);
-		this.group = new SpriteGroup("scenery_"+game.getRandom(0, 1000000));
+	public Scenery (RPGGame game2, String imageURL) {
+		Scenery.game = game2;
+		this.image = game2.getImage(imageURL);
+		this.group = new SpriteGroup("scenery_"+game2.getRandom(0, 1000000));
 	}
 	
 	public BufferedImage getImage() {

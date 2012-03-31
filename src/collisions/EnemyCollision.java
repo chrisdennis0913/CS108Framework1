@@ -2,6 +2,7 @@ package collisions;
 
 import actions.Attacking;
 import app.Main;
+import app.RPGGame;
 
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.collision.BasicCollisionGroup;
@@ -10,10 +11,10 @@ import enemy.Enemy;
 
 public class EnemyCollision extends BasicCollisionGroup {
 
-	private Main game;
+	private RPGGame game;
 	private Enemy enemy;
 
-	public EnemyCollision(Main game, String enemyname) {
+	public EnemyCollision(RPGGame game, String enemyname) {
 		this.game = game;
 		this.enemy = game.getLevel().getEnemy(enemyname);
 	}

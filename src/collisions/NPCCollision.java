@@ -5,16 +5,17 @@ import npc.NPC;
 import actions.Attacking;
 import actions.Talking;
 import app.Main;
+import app.RPGGame;
 
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.collision.BasicCollisionGroup;
 
 public class NPCCollision extends BasicCollisionGroup {
 
-	private Main game;
+	private RPGGame game;
 	private NPC npc;
 	
-	public NPCCollision (Main game, String npcname) {
+	public NPCCollision (RPGGame game, String npcname) {
 		this.game = game;
 		this.npc = game.getLevel().getNPC(npcname);
 	}

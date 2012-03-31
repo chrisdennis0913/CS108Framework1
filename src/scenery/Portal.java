@@ -1,11 +1,12 @@
 package scenery;
 
 import app.Main;
+import app.RPGGame;
 import collisions.PortalCollision;
 
 public class Portal extends Scenery {
 
-	public Portal(Main game, String imageURL) {
+	public Portal(RPGGame game, String imageURL) {
 		super(game, imageURL);
 	}
 	

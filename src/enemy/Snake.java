@@ -3,7 +3,7 @@ package enemy;
 import java.awt.image.BufferedImage;
 
 import scenery.Portal;
-import app.Main;
+import app.RPGGame;
 
 import com.golden.gamedev.engine.timer.SystemTimer;
 
@@ -13,7 +13,7 @@ public class Snake extends Enemy {
 	private boolean acting = false;
 	private long actionStartTime = 0;
 
-	public Snake(Main game, String name) {
+	public Snake(RPGGame game, String name) {
 		super(game, name);
 		timer.setFPS(100);
 		timer.startTimer();

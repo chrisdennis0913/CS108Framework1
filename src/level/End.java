@@ -6,10 +6,11 @@ import enemy.Snake;
 
 import scenery.Scenery;
 import app.Main;
+import app.RPGGame;
 
 public class End extends Level {
 
-	public End(Main game) {
+	public End(RPGGame game) {
 		super(game);
 	}
 

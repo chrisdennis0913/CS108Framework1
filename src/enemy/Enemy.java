@@ -3,13 +3,14 @@ package enemy;
 import java.awt.image.BufferedImage;
 
 import app.Main;
+import app.RPGGame;
 import collisions.EnemyCollision;
 
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
 
 public abstract class Enemy {
-	protected static Main game;
+	protected static RPGGame game;
 	private SpriteGroup group;
 	private BufferedImage image;
 	private String name;
@@ -18,7 +19,7 @@ public abstract class Enemy {
 	private boolean dead = false;
 	private EnemyCollision collision;
 	
-	public Enemy (Main game, String name) {
+	public Enemy (RPGGame game, String name) {
 		Enemy.game = game;
 		this.name = name;
 		this.group = new SpriteGroup(name+"_"+game.getRandom(0, 10000));

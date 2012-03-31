@@ -14,9 +14,10 @@ import scenery.Scenery;
 import npc.NPC;
 
 import app.Main;
+import app.RPGGame;
 
 public abstract class Level {
-	protected Main game;
+	protected RPGGame game;
 	protected HashMap<String, NPC> npcs = new HashMap<String, NPC>();
 	protected HashMap<String, Enemy> enemies = new HashMap<String, Enemy>();
 	protected HashMap<String, Scenery> scenery = new HashMap<String, Scenery>();
@@ -24,8 +25,8 @@ public abstract class Level {
 	protected SystemTimer levelTimer = new SystemTimer();
 	protected long levelStartTime;
 	
-	public Level(Main game) {
-		this.game = game; 
+	public Level(RPGGame game2) {
+		this.game = game2; 
 		
 		addScenery(); addNPCs(); addItems(); addEnemies();
 		

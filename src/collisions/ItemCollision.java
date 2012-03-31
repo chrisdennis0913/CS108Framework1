@@ -2,16 +2,17 @@ package collisions;
 
 import actions.Grabbing;
 import app.Main;
+import app.RPGGame;
 
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.collision.BasicCollisionGroup;
 
 public class ItemCollision extends BasicCollisionGroup {
 
-	private Main game;
+	private RPGGame game;
 	private String itemName;
 	
-	public ItemCollision (Main game, String itemName) {
+	public ItemCollision (RPGGame game, String itemName) {
 		this.game = game;
 		this.itemName = itemName;
 	}
