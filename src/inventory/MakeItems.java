@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import app.RPGGame;
 
 
+/*
+ * Items are constructed in the form 
+ * (RPGgame, "ItemName, GifName, Category, forSale, price")
+ * where forSale is a boolean and price is an int
+ * Be sure to separate by commas and do no use within the Item's Name 
+ */
 public class MakeItems
 {
     protected RPGGame game;
-    // Items are constructed in the form "ItemName, Category, forSale, price"
-    // where forSale is a boolean and price is an int
-    // Be sure to separate by commas and do no use within the Item's Name
 
     public MakeItems (RPGGame game2)
     {

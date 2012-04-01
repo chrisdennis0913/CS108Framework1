@@ -2,6 +2,7 @@ package actions;
 
 
 import app.Player;
+import app.RPGGame;
 
 import com.golden.gamedev.object.AnimatedSprite;
 
@@ -15,7 +16,7 @@ public class Standing extends Action {
 		setActionable(true);
 	}
 
-	public void act() {
+	public void act(RPGGame game2) {
 		AnimatedSprite character = player.getCharacter();
 		
 		if (!walking.isActing() && !isActing()) {

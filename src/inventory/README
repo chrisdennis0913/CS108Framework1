@@ -1,0 +1,4 @@
+Inventory README
+
+Decided to use the factory design pattern to allow the Items to practically create themselves.
+Use the MakeItems class if you need Items made. ;)

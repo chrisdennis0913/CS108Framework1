@@ -20,12 +20,13 @@ public class KeyItem extends ItemSub
         
     }
 
-    public KeyItem (RPGGame game2, String name,
+    public KeyItem (RPGGame game2, String name, String gifName,
                    boolean sale,
                    int price)
     {
-        super(game2, name, sale, price);
+        super(game2, name, gifName, sale, price);
         category = "Key Item";
+        game2.addItems(this);
     }
 
 
@@ -45,12 +46,14 @@ public class KeyItem extends ItemSub
             return parseItemNotForSale(game2, toParse);
         return new KeyItem(game2, 
                            super.parseName(toParse),
+                           super.parseGifName(toParse),
                           true,
                           super.parsePrice(toParse));
     }
     public ItemSub parseItemNotForSale (RPGGame game2, String toParse)
     {
         return new KeyItem(game2, super.parseName(toParse),
+                           super.parseGifName(toParse),
                           false,
                           0);
     }

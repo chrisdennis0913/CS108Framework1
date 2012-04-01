@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 
 import app.Player;
+import app.RPGGame;
 
 import com.golden.gamedev.engine.timer.SystemTimer;
 
@@ -66,7 +67,7 @@ public abstract class Action {
 		actionStartTime = actionTimer.getTime();
 	}
 
-	public boolean isActionable() {
+	public boolean isActionable(RPGGame game2) {
 		return actionable;
 	}
 
@@ -78,6 +79,6 @@ public abstract class Action {
 		return actionTimer.getTime() - actionStartTime;
 	}
 
-	public abstract void act();
+	public abstract void act(RPGGame game2);
 
 }

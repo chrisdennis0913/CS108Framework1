@@ -25,14 +25,16 @@ public class Weapon extends ItemSub
     }
 
     private Weapon (RPGGame game2, String name,
+                    String gifName,
                    boolean sale,
                    int price,
                    int damage)
     {
-        super(game2, name, sale, price);
+        super(game2, name, gifName, sale, price);
         myDamage = damage;
         category = "Weapon";
         equipped = false;
+        game2.addItems(this);
     }
 
 
@@ -51,6 +53,7 @@ public class Weapon extends ItemSub
         if (!super.parseSale(toParse))
             return parseWeaponNotForSale(game2, toParse);
         return new Weapon(game2, super.parseName(toParse),
+                          super.parseGifName(toParse),
                           true,
                           super.parsePrice(toParse),
                           parseDamage(toParse));
@@ -58,6 +61,7 @@ public class Weapon extends ItemSub
     public ItemSub parseWeaponNotForSale (RPGGame game2, String toParse)
     {
         return new Weapon(game2, super.parseName(toParse),
+                          super.parseGifName(toParse),
                           false,
                           0,
                           parseDamage(toParse));

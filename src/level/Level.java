@@ -1,20 +1,14 @@
 package level;
 
-import inventory.Item;
 import inventory.ItemSub;
 import inventory.MakeItems;
 
 import java.awt.Graphics2D;
 import java.util.HashMap;
-
 import com.golden.gamedev.engine.timer.SystemTimer;
-
 import enemy.Enemy;
-
 import scenery.Scenery;
-
 import npc.NPC;
-
 import app.RPGGame;
 
 public abstract class Level {
@@ -28,8 +22,7 @@ public abstract class Level {
 	protected long levelStartTime;
 	
 	public Level(RPGGame game2) {
-		this.game = game2; 
-		
+		this.game = game2;
 		MI = new MakeItems(game);
 		addScenery(); addNPCs(); addItems(); addEnemies();
 		
@@ -61,6 +54,7 @@ public abstract class Level {
 	}
 	
 	public ItemSub getItem(String name) {
+	    
 		return items.get(name);
 	}
 	
