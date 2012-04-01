@@ -66,7 +66,6 @@ public class Start extends Level
 
     protected void addItems ()
     {
-        game.getRandom(5, 10);
         ItemSub sword =
             MI.parseExpression("Golden Sword of Paradise, sword, Weapon, true, 100, 55");
         int[] loc =
@@ -75,7 +74,6 @@ public class Start extends Level
                     game.getBG().getHeight() / 4 * 3 };
         sword.add(loc, 0);
         items.put("sword", sword);
-        System.out.println(sword.getName());
     }
 
 

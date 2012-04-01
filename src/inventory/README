@@ -2,3 +2,17 @@ Inventory README
 
 Decided to use the factory design pattern to allow the Items to practically create themselves.
 Use the MakeItems class if you need Items made. ;)
+
+Look at Start, line 70 for an example of how to create an item properly.
+
+It currently looks like
+        ItemSub sword =
+            MI.parseExpression("Golden Sword of Paradise, sword, Weapon, true, 100, 55");
+        int[] loc =
+            new int[] {
+                    game.getBG().getWidth() / 2 - 10,
+                    game.getBG().getHeight() / 4 * 3 };
+        sword.add(loc, 0);
+        items.put("sword", sword);
+
+where MI is a MakeItems object instantiated in the Level super class.
