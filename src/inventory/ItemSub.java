@@ -1,11 +1,18 @@
 package inventory;
 
+import java.awt.image.BufferedImage;
+import com.golden.gamedev.object.SpriteGroup;
+import app.RPGGame;
+
 public abstract class ItemSub extends Item implements Comparable<ItemSub>
 {
+    protected static RPGGame game;
     protected String myName;
     protected String category;
     protected int myPrice = 0;
     protected boolean forSale;
+    protected SpriteGroup group;
+    protected BufferedImage image;
 
 
     // Can subclass to create other instance variables
@@ -14,9 +21,10 @@ public abstract class ItemSub extends Item implements Comparable<ItemSub>
     {}
 
 
-    public ItemSub (String name, String categ, boolean sale, int price)
+    public ItemSub (RPGGame game2, String name, String categ, boolean sale, int price)
     {
-        myName = name;
+        ItemSub.game= game2;
+        this.myName = name;
         category = categ;
         forSale = sale;
         if (forSale)

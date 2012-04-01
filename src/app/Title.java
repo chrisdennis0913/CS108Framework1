@@ -7,7 +7,6 @@ import java.awt.event.*;
 
 import com.golden.gamedev.*;
 import com.golden.gamedev.object.*;
-import com.golden.gamedev.object.background.*;
 
 
 public class Title extends GameObject {

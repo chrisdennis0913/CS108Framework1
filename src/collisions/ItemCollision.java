@@ -1,7 +1,6 @@
 package collisions;
 
 import actions.Grabbing;
-import app.Main;
 import app.RPGGame;
 
 import com.golden.gamedev.object.Sprite;

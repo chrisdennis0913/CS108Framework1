@@ -4,7 +4,6 @@ package collisions;
 import npc.NPC;
 import actions.Attacking;
 import actions.Talking;
-import app.Main;
 import app.RPGGame;
 
 import com.golden.gamedev.object.Sprite;
