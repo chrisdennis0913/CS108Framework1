@@ -13,7 +13,6 @@ import scenery.Scenery;
 
 import npc.NPC;
 
-import app.Main;
 import app.RPGGame;
 
 public abstract class Level {

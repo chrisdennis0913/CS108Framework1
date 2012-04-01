@@ -1,5 +1,7 @@
 package inventory;
 
+import app.RPGGame;
+
 
 public class ItemFactory
 {
@@ -11,8 +13,8 @@ public class ItemFactory
     public boolean isThisKindOfItem (String toParse){
         return myItem.isThisKindOfItem(toParse);
     }
-    public ItemSub parseItem (String toParse)
+    public ItemSub parseItem (RPGGame game2, String toParse)
     {
-        return myItem.parseItem(toParse);
+        return myItem.parseItem(game2,toParse);
     }
 }

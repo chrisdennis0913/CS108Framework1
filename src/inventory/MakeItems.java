@@ -1,6 +1,7 @@
 package inventory;
 
 import java.util.ArrayList;
+import app.RPGGame;
 
 
 public class MakeItems
@@ -15,17 +16,17 @@ public class MakeItems
     }
 
 
-    public ItemSub parseExpression (String input)
+    public ItemSub parseExpression (RPGGame game2, String input)
     {
         ArrayList<ItemFactory> itemList = new ArrayList<ItemFactory>();
-        itemList.add(Weapon.getFactory(input));
-        itemList.add(KeyItem.getFactory(input));
+        itemList.add(Weapon.getFactory());
+        itemList.add(KeyItem.getFactory());
         
         for (ItemFactory itemFact : itemList)
         {
             if (itemFact.isThisKindOfItem(input))
             {
-                return itemFact.parseItem(input);
+                return itemFact.parseItem(game2, input);
             }
         }
         throw new MakeItemsException("Unexpected item type " + input);

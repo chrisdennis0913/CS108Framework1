@@ -1,5 +1,7 @@
 package inventory;
 
+import app.RPGGame;
+
 
 /**
  * Class for items that do damage.
@@ -22,12 +24,12 @@ public class Weapon extends ItemSub
         
     }
 
-    private Weapon (String name,
+    private Weapon (RPGGame game2, String name,
                    boolean sale,
                    int price,
                    int damage)
     {
-        super(name, sale, price);
+        super(game2, name, sale, price);
         myDamage = damage;
         category = "Weapon";
         equipped = false;
@@ -44,18 +46,18 @@ public class Weapon extends ItemSub
 
 
     @Override
-    public ItemSub parseItem (String toParse)
+    public ItemSub parseItem (RPGGame game2, String toParse)
     {
         if (!super.parseSale(toParse))
-            return parseWeaponNotForSale(toParse);
-        return new Weapon(super.parseName(toParse),
+            return parseWeaponNotForSale(game2, toParse);
+        return new Weapon(game2, super.parseName(toParse),
                           true,
                           super.parsePrice(toParse),
                           parseDamage(toParse));
     }
-    public ItemSub parseWeaponNotForSale (String toParse)
+    public ItemSub parseWeaponNotForSale (RPGGame game2, String toParse)
     {
-        return new Weapon(super.parseName(toParse),
+        return new Weapon(game2, super.parseName(toParse),
                           false,
                           0,
                           parseDamage(toParse));
@@ -85,7 +87,7 @@ public class Weapon extends ItemSub
         return Integer.parseInt(parseArray[parseArray.length-1].trim());
 
     }
-    public static ItemFactory getFactory(String input){
+    public static ItemFactory getFactory(){
         return new ItemFactory(new Weapon());
     }
     
