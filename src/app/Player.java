@@ -1,6 +1,7 @@
 package app;
 
 import inventory.Item;
+import inventory.ItemSub;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -29,7 +30,7 @@ public class Player {
 	private Integer health = 10;
 	
 	private HashMap<String, Action> actions = new HashMap<String, Action>();
-	private HashMap<String, Item> inventory = new HashMap<String, Item>();
+	private HashMap<String, ItemSub> inventory = new HashMap<String, ItemSub>();
 
 	public Player(RPGGame rpgGame) {
 		this.game = rpgGame;
@@ -115,19 +116,19 @@ public class Player {
 		return group;
 	}
 
-	public HashMap<String, Item> getInventory() {
+	public HashMap<String, ItemSub> getInventory() {
 		return inventory;
 	}
 
-	public void addItem(Item item) {
-		inventory.put(item.getItemName(), item);
+	public void addItem(ItemSub grabItem) {
+		inventory.put(grabItem.getName(), grabItem);
 	}
 
 	public boolean hasItem(String name) {
 		return inventory.containsKey(name);
 	}
 
-	public Item getItem(String name) {
+	public ItemSub getItem(String name) {
 		return inventory.get(name);
 	}
 

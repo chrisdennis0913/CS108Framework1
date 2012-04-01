@@ -6,17 +6,18 @@ import app.RPGGame;
 
 public class MakeItems
 {
+    protected RPGGame game;
     // Items are constructed in the form "ItemName, Category, forSale, price"
     // where forSale is a boolean and price is an int
     // Be sure to separate by commas and do no use within the Item's Name
 
-    public MakeItems ()
+    public MakeItems (RPGGame game2)
     {
-
+        game=game2;
     }
 
 
-    public ItemSub parseExpression (RPGGame game2, String input)
+    public ItemSub parseExpression (String input)
     {
         ArrayList<ItemFactory> itemList = new ArrayList<ItemFactory>();
         itemList.add(Weapon.getFactory());
@@ -26,7 +27,7 @@ public class MakeItems
         {
             if (itemFact.isThisKindOfItem(input))
             {
-                return itemFact.parseItem(game2, input);
+                return itemFact.parseItem(game, input);
             }
         }
         throw new MakeItemsException("Unexpected item type " + input);

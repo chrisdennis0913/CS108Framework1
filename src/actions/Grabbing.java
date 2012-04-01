@@ -1,6 +1,7 @@
 package actions;
 
 import inventory.Item;
+import inventory.ItemSub;
 
 import java.awt.event.KeyEvent;
 
@@ -8,14 +9,14 @@ import app.Player;
 
 public class Grabbing extends Action {
 
-	private Item grabItem;
+	private ItemSub grabItem;
 
 	public Grabbing(Player player, int frames, String name) {
 		super(player, frames, name);
 		messageable = true;
 	}
 
-	public void setGrabItem(Item item) {
+	public void setGrabItem(ItemSub item) {
 		grabItem = item;
 	}
 

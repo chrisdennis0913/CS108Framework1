@@ -38,9 +38,12 @@ public abstract class ItemSub implements Comparable<ItemSub>
     }
     public ItemSub (RPGGame game2, String name, boolean sale, int price)
     {
-        myName = name;
+        ItemSub.game=game2;
+        this.myName = name;
         category = "Item";
         forSale = sale;
+        myGroup = new SpriteGroup(myName);
+        this.image= game2.getImage("resources/items/" + myName + ".gif");
         if (forSale)
         {
             myPrice = price;
