@@ -14,7 +14,7 @@ public class Main extends GameEngine {
 	public static final int TITLE = 0, GAME_MODE = 1, LEVEL_EDITOR = 2;
 	
 	public void initResources() {
-		nextGameID = GAME_MODE;
+		nextGameID = TITLE;
 	}
 	
 	public GameObject getGame(int GameID) {

@@ -46,6 +46,7 @@ public class LevelEditor extends GameObject {
 	BufferedImage	priest, enemy;
 	Dialog			askx,asky;
 	int				x,y;
+	int 			start = 0;
 
 	int				option;
 
@@ -132,22 +133,52 @@ public class LevelEditor extends GameObject {
 
 
 	public void render(Graphics2D g) {
-		g.drawImage(bg, 0, 0, null);
+		if (start ==0)
+			g.drawImage(bg, 0, 0, null);
+		
 		if (gameState == PRIEST)
 		{
-			Scanner in = new Scanner(System.in);
-						
-			int x =-1;
-			int y=-1;
-			while(x < 0){
-				System.out.println("Enter x coordinate:");
-				x = in.nextInt();
-			}
-			while(y < 0){
-				System.out.println("Enter y coordinate:");
-				y = in.nextInt();
-			}
-			in.close();
+//			Scanner in = new Scanner(System.in);
+//						
+//			while(x<0){
+//				System.out.println("Enter x coordinate:");
+//				x = in.nextInt();
+//			}
+//			while(y<0){
+//				System.out.println("Enter y coordinate:");
+//				y = in.nextInt();
+//			}
+//			in.close();
+			switch (bsInput.getKeyPressed()) {
+			case KeyEvent.VK_1 :
+				x = 10; y =10;
+				break;
+			case KeyEvent.VK_2 :
+				x = 20; y =20;
+				break;
+			case KeyEvent.VK_3 :
+				x = 30; y =30;
+				break;
+			case KeyEvent.VK_4 :
+				x = 40; y =40;
+				break;
+			case KeyEvent.VK_5 :
+				x = 50; y =50;
+				break;
+			case KeyEvent.VK_6 :
+				x = 60; y =60;
+				break;
+			case KeyEvent.VK_7 :
+				x = 70; y =70;
+				break;
+			case KeyEvent.VK_8 :
+				x = 80; y =80;
+				break;
+			case KeyEvent.VK_9 :
+				x = 90; y =90;
+				break;
+		}
+			
 			g.drawImage(priest, x, y, null);
 			gameState = PICKING;
 			//create the priest
@@ -163,19 +194,50 @@ public class LevelEditor extends GameObject {
 		
 		if (gameState == ENEMY)
 		{
-			Scanner in = new Scanner(System.in);
+//			Scanner in = new Scanner(System.in);
+//			
+//			int x =-1;
+//			int y=-1;
+//			while(x<0){
+//				System.out.println("Enter x coordinate:");
+//				x = in.nextInt();
+//			}
+//			while(y<0){
+//				System.out.println("Enter y coordinate:");
+//				y = in.nextInt();
+//			}
+//			in.close(); 
 			
-			int x =-1;
-			int y=-1;
-			while(x < 0){
-				System.out.println("Enter x coordinate:");
-				x = in.nextInt();
+			switch (bsInput.getKeyPressed()) {
+				case KeyEvent.VK_1 :
+					x = 10; y =10;
+					break;
+				case KeyEvent.VK_2 :
+					x = 20; y =20;
+					break;
+				case KeyEvent.VK_3 :
+					x = 30; y =30;
+					break;
+				case KeyEvent.VK_4 :
+					x = 40; y =40;
+					break;
+				case KeyEvent.VK_5 :
+					x = 50; y =50;
+					break;
+				case KeyEvent.VK_6 :
+					x = 60; y =60;
+					break;
+				case KeyEvent.VK_7 :
+					x = 70; y =70;
+					break;
+				case KeyEvent.VK_8 :
+					x = 80; y =80;
+					break;
+				case KeyEvent.VK_9 :
+					x = 90; y =90;
+					break;
 			}
-			while(y < 0){
-				System.out.println("Enter y coordinate:");
-				y = in.nextInt();
-			}
-			in.close();
+			
 			g.drawImage(enemy, x, y, null);
 			gameState = PICKING;
 			int[] location = new int[]{x,y};
