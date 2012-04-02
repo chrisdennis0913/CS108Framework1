@@ -22,7 +22,7 @@ public class NPCCollision extends BasicCollisionGroup {
 	public void collided(Sprite character, Sprite scenery) {
 			overlap(character, scenery);
 			Talking talking = (Talking) game.getPlayer().getAction("talking");
-			if (!talking.isActionable()) {
+			if (!talking.isActionable(game)) {
 				talking.setActionable(true);
 				talking.setTalkingTo(npc);
 			}

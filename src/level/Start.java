@@ -1,8 +1,6 @@
 package level;
 
-import inventory.Item;
 import inventory.ItemSub;
-import inventory.MakeItems;
 import java.awt.Graphics2D;
 import npc.Priest;
 import scenery.Scenery;
@@ -15,7 +13,7 @@ public class Start extends Level
     public Start (RPGGame game)
     {
         super(game);
-        
+
     }
 
 
@@ -68,9 +66,8 @@ public class Start extends Level
 
     protected void addItems ()
     {
-        game.getRandom(5, 10);
-        ItemSub sword = MI.parseExpression("sword, Weapon, true, 100, 55");
-//		ItemSub sword = new Item(game, "sword");
+        ItemSub sword =
+            MI.parseExpression("Golden Sword of Paradise, sword, Weapon, true, 100, 55");
         int[] loc =
             new int[] {
                     game.getBG().getWidth() / 2 - 10,

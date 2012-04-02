@@ -15,6 +15,7 @@ public abstract class ItemSub implements Comparable<ItemSub>
     protected boolean forSale;
     protected SpriteGroup myGroup;
     protected BufferedImage image;
+    protected Sprite mySprite;
 
 
     // Can subclass to create other instance variables
@@ -23,12 +24,12 @@ public abstract class ItemSub implements Comparable<ItemSub>
     {}
 
 
-    public ItemSub (RPGGame game2, String name, String categ, boolean sale, int price)
+    public ItemSub (RPGGame game2, String name, String gifName, String categ, boolean sale, int price)
     {
         ItemSub.game= game2;
         this.myName = name;
         myGroup = new SpriteGroup(myName);
-        this.image= game2.getImage("resources/items/" + myName + ".gif");
+        this.image= game2.getImage("resources/items/" + gifName + ".gif");
         category = categ;
         forSale = sale;
         if (forSale)
@@ -36,14 +37,14 @@ public abstract class ItemSub implements Comparable<ItemSub>
             myPrice = price;
         }
     }
-    public ItemSub (RPGGame game2, String name, boolean sale, int price)
+    public ItemSub (RPGGame game2, String name, String gifName, boolean sale, int price)
     {
         ItemSub.game=game2;
         this.myName = name;
         category = "Item";
         forSale = sale;
         myGroup = new SpriteGroup(myName);
-        this.image= game2.getImage("resources/items/" + myName + ".gif");
+        this.image= game2.getImage("resources/items/" + gifName + ".gif");
         if (forSale)
         {
             myPrice = price;
@@ -53,10 +54,11 @@ public abstract class ItemSub implements Comparable<ItemSub>
 
     public void add (int[] loc, int layer)
     {
-        Sprite item = new Sprite(image, loc[0], loc[1]);
-        item.setLayer(layer);
-        myGroup.add(item);
+        mySprite = new Sprite(image, loc[0], loc[1]);
+        mySprite.setLayer(layer);
+        myGroup.add(mySprite);
     }
+    
     public void generate ()
     {
         game.getField().addGroup(myGroup);
@@ -64,7 +66,7 @@ public abstract class ItemSub implements Comparable<ItemSub>
     }
     public void setCollision ()
     {
-        ItemCollision collision = new ItemCollision(game, myName);
+        ItemCollision collision = new ItemCollision(game, myName, this,mySprite);
         game.getField().addCollisionGroup(game.getPlayer().getGroup(),
                                           getGroup(),
                                           collision);
@@ -160,19 +162,25 @@ public abstract class ItemSub implements Comparable<ItemSub>
         String[] parseArray = toParse.split(",");
         return parseArray[0].trim();
     }
+    public String parseGifName (String toParse)
+    {
+        String[] parseArray = toParse.split(",");
+        return parseArray[1].trim();
+    }
+    
 
 
     public String parseCategory (String toParse)
     {
         String[] parseArray = toParse.split(",");
-        return parseArray[1].trim();
+        return parseArray[2].trim();
     }
 
 
     public boolean parseSale (String toParse)
     {
         String[] parseArray = toParse.split(",");
-        return !parseArray[2].trim().equals("false");
+        return !parseArray[3].trim().equals("false");
     }
 
 
@@ -181,7 +189,7 @@ public abstract class ItemSub implements Comparable<ItemSub>
         String[] parseArray = toParse.split(",");
         if (parseArray.length < 4) throw new MakeItemsException("Improper format for including price: " +
                                                                 toParse);
-        return Integer.parseInt(parseArray[3].trim());
+        return Integer.parseInt(parseArray[4].trim());
     }
 
 }

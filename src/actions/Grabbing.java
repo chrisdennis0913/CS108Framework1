@@ -1,11 +1,11 @@
 package actions;
 
-import inventory.Item;
 import inventory.ItemSub;
 
 import java.awt.event.KeyEvent;
 
 import app.Player;
+import app.RPGGame;
 
 public class Grabbing extends Action {
 
@@ -20,9 +20,10 @@ public class Grabbing extends Action {
 		grabItem = item;
 	}
 
-	public void act() {
+	public void act(RPGGame game2) {
 		if (!isActing() && player.getGame().keyDown(KeyEvent.VK_ENTER)) {
 			setActing(true);
+			System.out.println(grabItem);
 			player.getGame().getDialog().setMessage(grabItem.getMessage());
 			grabItem.getGroup().setActive(false);
 			player.addItem(grabItem);

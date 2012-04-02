@@ -3,7 +3,6 @@ package npc;
 import java.awt.image.BufferedImage;
 
 import scenery.Portal;
-import app.Main;
 import app.RPGGame;
 
 public class Priest extends NPC {
@@ -14,7 +13,7 @@ public class Priest extends NPC {
 	}
 
 	public String getTalk() {
-		if (game.getPlayer().hasItem("sword"))
+		if (game.getPlayer().hasItem("Golden Sword of Paradise"))
 			return getScript()[1];
 		return getScript()[0];
 	}
