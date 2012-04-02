@@ -2,6 +2,7 @@ package enemy;
 
 import java.awt.image.BufferedImage;
 
+import app.Jsonable;
 import app.Main;
 import app.RPGGame;
 import collisions.EnemyCollision;
@@ -9,7 +10,7 @@ import collisions.EnemyCollision;
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
 
-public abstract class Enemy {
+public abstract class Enemy implements Jsonable{
 	protected static RPGGame game;
 	private SpriteGroup group;
 	private BufferedImage image;
@@ -18,6 +19,7 @@ public abstract class Enemy {
 	protected int health = 1;
 	private boolean dead = false;
 	private EnemyCollision collision;
+	protected int[] location = new int[2];
 	
 	public Enemy (RPGGame game, String name) {
 		Enemy.game = game;
@@ -27,6 +29,7 @@ public abstract class Enemy {
 	}
 	
 	public void add(int[] location, int layer) {
+		this.location = location;
 		enemy = new Sprite(image, location[0], location[1]);
 		enemy.setLayer(layer);
 		group.add(enemy);

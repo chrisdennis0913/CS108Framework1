@@ -3,6 +3,7 @@ package npc;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
+import app.Jsonable;
 import app.Main;
 import app.RPGGame;
 
@@ -12,7 +13,7 @@ import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
 import com.golden.gamedev.util.FileUtil;
 
-public abstract class NPC {
+public abstract class NPC implements Jsonable{
 	protected static RPGGame game;
 	private SpriteGroup group;
 	private BufferedImage image;
@@ -21,6 +22,8 @@ public abstract class NPC {
 	private boolean canDie = false;
 	private boolean dead = false;
 	private NPCCollision collision;
+	protected int[] location = new int[2];
+
 	
 	public NPC (RPGGame game2, String name) {
 		NPC.game = game2;
@@ -32,6 +35,7 @@ public abstract class NPC {
 	}
 	
 	public void add(int[] location, int layer) {
+		this.location = location;
 		Sprite npc = new Sprite(image, location[0], location[1]);
 		npc.setLayer(layer);
 		group.add(npc);

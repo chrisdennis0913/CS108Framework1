@@ -1,25 +1,25 @@
 package level;
 
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Graphics2D;
+import java.util.List;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Comparator;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Scanner;
 
-import app.Dialog;
-import app.Main;
-import app.Player;
-import app.RPGGame;
+import npc.Priest;
 
-import com.golden.gamedev.*;
-import com.golden.gamedev.object.*;
-import com.golden.gamedev.object.background.*;
-import com.golden.gamedev.util.*;
+import app.Dialog;
+
+import com.golden.gamedev.GameEngine;
+import com.golden.gamedev.GameObject;
+import com.golden.gamedev.object.GameFont;
+import com.golden.gamedev.object.Timer;
+import com.google.gson.Gson;
 
 
 /**
@@ -36,12 +36,14 @@ import com.golden.gamedev.util.*;
 public class LevelEditor extends GameObject {
 
 	GameFont		font;
-	public static final int PICKING = 0, BUSH = 1, ENEMY = 2;
+	public static final int PICKING = 0, PRIEST = 1, ENEMY = 2;
 	int gameState = PICKING;
+	List<String> jsonStrings = new ArrayList<String>();
+	public Gson gson = new Gson();
 
 	BufferedImage	bg;
 	BufferedImage	arrow;
-	BufferedImage	bush, enemy;
+	BufferedImage	priest, enemy;
 	Dialog			askx,asky;
 	int				x,y;
 
@@ -58,7 +60,7 @@ public class LevelEditor extends GameObject {
 
 	public void initResources() {
 		bg = getImage("resources/bg.jpg", false);
-		bush = getImage("resources/scenery/shrub.gif", false);
+		priest = getImage("resources/npc/priest.gif", false);
 		enemy = getImage("resources/npc/snake_1.gif", false);
 		arrow = getImage("Arrow.png");
 
@@ -78,7 +80,7 @@ public class LevelEditor extends GameObject {
 			switch (bsInput.getKeyPressed()) {
 				case KeyEvent.VK_ENTER :
 					if (option == 0) {
-						gameState = BUSH;
+						gameState = PRIEST;
 
 				} else if (option == 1) {
 						gameState = ENEMY;
@@ -98,9 +100,24 @@ public class LevelEditor extends GameObject {
 			case KeyEvent.VK_ESCAPE :
 				finish();
 				break;
+			case KeyEvent.VK_S:
+			 try {
+			    	FileWriter f1 = new FileWriter("savedmaps/map00.json"); 
+			    	for(String str : jsonStrings){
+			    		f1.write(str);
+			    		f1.write("\n");
+			    	}
+			    	f1.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}   
+				finish();
+				break;
 			}
+			
 			break;
-		case BUSH:
+		case PRIEST:
 			if (keyPressed(KeyEvent.VK_SPACE)) {
 				gameState = PICKING;
 			}
@@ -116,31 +133,63 @@ public class LevelEditor extends GameObject {
 
 	public void render(Graphics2D g) {
 		g.drawImage(bg, 0, 0, null);
-		if (gameState == BUSH)
+		if (gameState == PRIEST)
 		{
 			Scanner in = new Scanner(System.in);
-			
+						
+			int x =-1;
+			int y=-1;
+			while(x < 0){
 				System.out.println("Enter x coordinate:");
 				x = in.nextInt();
+			}
+			while(y < 0){
 				System.out.println("Enter y coordinate:");
 				y = in.nextInt();
-				in.close();
-			g.drawImage(bush, x, y, null);
+			}
+			in.close();
+			g.drawImage(priest, x, y, null);
+			gameState = PICKING;
+			//create the priest
+			int[] location = new int[]{x,y};
+			Collection collection = new ArrayList();
+		    collection.add("priest");
+		    collection.add("priest");
+		    collection.add(location[0]);
+		    collection.add(location[1]);
+		    String json = gson.toJson(collection);
+			jsonStrings.add(json);
 		}
 		
 		if (gameState == ENEMY)
 		{
 			Scanner in = new Scanner(System.in);
 			
-			System.out.println("Enter x coordinate:");
-			x = in.nextInt();
-			System.out.println("Enter y coordinate:");
-			y = in.nextInt();
+			int x =-1;
+			int y=-1;
+			while(x < 0){
+				System.out.println("Enter x coordinate:");
+				x = in.nextInt();
+			}
+			while(y < 0){
+				System.out.println("Enter y coordinate:");
+				y = in.nextInt();
+			}
 			in.close();
 			g.drawImage(enemy, x, y, null);
+			gameState = PICKING;
+			int[] location = new int[]{x,y};
+			Collection collection = new ArrayList();
+		    collection.add("snake");
+		    collection.add("snake");
+		    collection.add(location[0]);
+		    collection.add(location[1]);
+		    String json = gson.toJson(collection);
+		    jsonStrings.add(json);
+		    
 		}
 		
-		g.drawString("Add bush", 325, 300);
+		g.drawString("Add priest", 325, 300);
 		g.drawString("Add enemy", 325, 320);
 		if (!blink) {
 			g.drawImage(arrow, 309, 290+(option*20), null);

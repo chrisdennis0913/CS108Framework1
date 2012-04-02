@@ -5,6 +5,7 @@ import inventory.ItemSub;
 import java.awt.Graphics2D;
 import java.util.Comparator;
 import level.Level;
+import level.LevelFromFile;
 import level.Start;
 import com.golden.gamedev.GameEngine;
 import com.golden.gamedev.GameObject;
@@ -28,6 +29,7 @@ public class RPGGame extends GameObject
     private Dialog dialog;
     private Level level;
     private Inventory myInventory;
+    private String levelFilename;
 
 
     @SuppressWarnings("rawtypes")
@@ -44,7 +46,8 @@ public class RPGGame extends GameObject
             new int[] { getBG().getWidth() / 2, getBG().getHeight() / 2 };
         player.generate(loc);
 
-        level = new Start(this);
+        //level = new Start(this);
+        level = new LevelFromFile(this,levelFilename, bsIO);
         level.generate();
 
         field.setComparator(new Comparator()
