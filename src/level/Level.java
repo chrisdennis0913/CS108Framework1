@@ -6,12 +6,13 @@ import inventory.MakeItems;
 import java.awt.Graphics2D;
 import java.util.HashMap;
 import com.golden.gamedev.engine.timer.SystemTimer;
+
 import enemy.Enemy;
 import scenery.Scenery;
 import npc.NPC;
 import app.RPGGame;
 
-public abstract class Level {
+public abstract class Level{
     protected MakeItems MI;
 	protected RPGGame game;
 	protected HashMap<String, NPC> npcs = new HashMap<String, NPC>();
