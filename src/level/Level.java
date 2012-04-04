@@ -8,6 +8,7 @@ import java.util.HashMap;
 import com.golden.gamedev.engine.timer.SystemTimer;
 
 import enemy.Enemy;
+import enemy.IEnemy;
 
 import scenery.Scenery;
 
@@ -53,7 +54,7 @@ public abstract class Level {
 		return npcs.get(name);
 	}
 	
-	public Enemy getEnemy(String name) {
+	public IEnemy getEnemy(String name) {
 		return enemies.get(name);
 	}
 	

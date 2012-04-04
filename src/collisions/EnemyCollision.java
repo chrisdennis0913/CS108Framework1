@@ -7,12 +7,12 @@ import app.RPGGame;
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.collision.BasicCollisionGroup;
 
-import enemy.Enemy;
+import enemy.IEnemy;
 
 public class EnemyCollision extends BasicCollisionGroup {
 
 	private RPGGame game;
-	private Enemy enemy;
+	private IEnemy enemy;
 
 	public EnemyCollision(RPGGame game, String enemyname) {
 		this.game = game;
