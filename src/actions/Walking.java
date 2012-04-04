@@ -3,6 +3,7 @@ package actions;
 import java.awt.event.KeyEvent;
 
 import app.Player;
+import app.RPGGame;
 
 import com.golden.gamedev.object.AnimatedSprite;
 
@@ -27,10 +28,10 @@ public class Walking extends Action {
 		this.direction = direction;
 	}
 
-	public void act() {
+	public void act(RPGGame game2) {
 		AnimatedSprite character = player.getCharacter();
 		
-		if (isActionable()) {
+		if (isActionable(game2)) {
 			double speedX = 0, speedY = 0;
 			double curSpeedX = character.getHorizontalSpeed(), curSpeedY = character
 					.getVerticalSpeed();

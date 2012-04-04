@@ -1,7 +1,6 @@
 package inventory;
 
 import java.awt.image.BufferedImage;
-import app.Main;
 import app.RPGGame;
 import collisions.ItemCollision;
 import com.golden.gamedev.object.Sprite;

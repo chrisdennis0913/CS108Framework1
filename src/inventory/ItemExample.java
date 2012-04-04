@@ -6,7 +6,7 @@ public class ItemExample
     {
         MakeItems MI = new MakeItems();
         Inventory gameInventory = new Inventory();
-        gameInventory.add(MI.parseExpression("Dagger, Weapon, true, 100, 55"));
+        gameInventory.add(MI.parseExpression(this,"Dagger, Weapon, true, 100, 55"));
         gameInventory.add(MI.parseExpression("Golden Sword, Weapon, true, 80, 165"));
         gameInventory.add(MI.parseExpression("Golden Sword2, Weapon, false, 165"));
         gameInventory.add(MI.parseExpression("Master Key, KeyItem, false"));

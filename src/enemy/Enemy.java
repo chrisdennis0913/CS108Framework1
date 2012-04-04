@@ -3,6 +3,7 @@ package enemy;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
+import app.Jsonable;
 import app.Main;
 import app.RPGGame;
 import collisions.EnemyCollision;
@@ -10,7 +11,7 @@ import collisions.EnemyCollision;
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
 
-public abstract class Enemy implements IEnemy{
+public abstract class Enemy implements Jsonable, IEnemy {
 	protected static RPGGame game;
 	private SpriteGroup group;
 	private BufferedImage image;
@@ -20,6 +21,7 @@ public abstract class Enemy implements IEnemy{
 	private EnemyCollision collision;
 	private HashMap<String,AbstractAttack> attacks;
 	private AbstractAI ai;
+	protected int[] location = new int[2];
 	
 	private static final int DEFAULT_INITIAL_HEALTH = 1;
 	
@@ -37,6 +39,7 @@ public abstract class Enemy implements IEnemy{
 	
 	@Override
 	public void add(int[] location, int layer) {
+		this.location = location;
 		enemy = new Sprite(image, location[0], location[1]);
 		enemy.setLayer(layer);
 		group.add(enemy);

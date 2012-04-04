@@ -1,34 +1,32 @@
 package level;
 
-import inventory.Item;
+import inventory.ItemSub;
+import inventory.MakeItems;
 
 import java.awt.Graphics2D;
 import java.util.HashMap;
-
 import com.golden.gamedev.engine.timer.SystemTimer;
 
 import enemy.Enemy;
 import enemy.IEnemy;
 
 import scenery.Scenery;
-
 import npc.NPC;
-
-import app.Main;
 import app.RPGGame;
 
-public abstract class Level {
+public abstract class Level{
+    protected MakeItems MI;
 	protected RPGGame game;
 	protected HashMap<String, NPC> npcs = new HashMap<String, NPC>();
 	protected HashMap<String, Enemy> enemies = new HashMap<String, Enemy>();
 	protected HashMap<String, Scenery> scenery = new HashMap<String, Scenery>();
-	protected HashMap<String, Item> items = new HashMap<String, Item>();
+	protected HashMap<String, ItemSub> items = new HashMap<String, ItemSub>();
 	protected SystemTimer levelTimer = new SystemTimer();
 	protected long levelStartTime;
 	
 	public Level(RPGGame game2) {
-		this.game = game2; 
-		
+		this.game = game2;
+		MI = new MakeItems(game);
 		addScenery(); addNPCs(); addItems(); addEnemies();
 		
 		levelTimer.setFPS(100);
@@ -58,7 +56,8 @@ public abstract class Level {
 		return enemies.get(name);
 	}
 	
-	public Item getItem(String name) {
+	public ItemSub getItem(String name) {
+	    
 		return items.get(name);
 	}
 	

@@ -4,7 +4,6 @@ package collisions;
 import npc.NPC;
 import actions.Attacking;
 import actions.Talking;
-import app.Main;
 import app.RPGGame;
 
 import com.golden.gamedev.object.Sprite;
@@ -23,7 +22,7 @@ public class NPCCollision extends BasicCollisionGroup {
 	public void collided(Sprite character, Sprite scenery) {
 			overlap(character, scenery);
 			Talking talking = (Talking) game.getPlayer().getAction("talking");
-			if (!talking.isActionable()) {
+			if (!talking.isActionable(game)) {
 				talking.setActionable(true);
 				talking.setTalkingTo(npc);
 			}

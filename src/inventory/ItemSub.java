@@ -1,11 +1,21 @@
 package inventory;
 
-public abstract class ItemSub extends Item implements Comparable<ItemSub>
+import java.awt.image.BufferedImage;
+import collisions.ItemCollision;
+import com.golden.gamedev.object.Sprite;
+import com.golden.gamedev.object.SpriteGroup;
+import app.RPGGame;
+
+public abstract class ItemSub implements Comparable<ItemSub>
 {
+    protected static RPGGame game;
     protected String myName;
     protected String category;
     protected int myPrice = 0;
     protected boolean forSale;
+    protected SpriteGroup myGroup;
+    protected BufferedImage image;
+    protected Sprite mySprite;
 
 
     // Can subclass to create other instance variables
@@ -14,9 +24,12 @@ public abstract class ItemSub extends Item implements Comparable<ItemSub>
     {}
 
 
-    public ItemSub (String name, String categ, boolean sale, int price)
+    public ItemSub (RPGGame game2, String name, String gifName, String categ, boolean sale, int price)
     {
-        myName = name;
+        ItemSub.game= game2;
+        this.myName = name;
+        myGroup = new SpriteGroup(myName);
+        this.image= game2.getImage("resources/items/" + gifName + ".gif");
         category = categ;
         forSale = sale;
         if (forSale)
@@ -24,13 +37,14 @@ public abstract class ItemSub extends Item implements Comparable<ItemSub>
             myPrice = price;
         }
     }
-
-
-    public ItemSub (String name, boolean sale, int price)
+    public ItemSub (RPGGame game2, String name, String gifName, boolean sale, int price)
     {
-        myName = name;
+        ItemSub.game=game2;
+        this.myName = name;
         category = "Item";
         forSale = sale;
+        myGroup = new SpriteGroup(myName);
+        this.image= game2.getImage("resources/items/" + gifName + ".gif");
         if (forSale)
         {
             myPrice = price;
@@ -38,9 +52,40 @@ public abstract class ItemSub extends Item implements Comparable<ItemSub>
     }
 
 
+    public void add (int[] loc, int layer)
+    {
+        mySprite = new Sprite(image, loc[0], loc[1]);
+        mySprite.setLayer(layer);
+        myGroup.add(mySprite);
+    }
+    
+    public void generate ()
+    {
+        game.getField().addGroup(myGroup);
+        setCollision();
+    }
+    public void setCollision ()
+    {
+        ItemCollision collision = new ItemCollision(game, myName, this,mySprite);
+        game.getField().addCollisionGroup(game.getPlayer().getGroup(),
+                                          getGroup(),
+                                          collision);
+    }
+
+
+    public SpriteGroup getGroup ()
+    {
+        return myGroup;
+    }
+
+
     public String getName ()
     {
         return myName;
+    }
+    public String getMessage ()
+    {
+        return "Picked up " + myName + ".";
     }
 
 
@@ -109,7 +154,7 @@ public abstract class ItemSub extends Item implements Comparable<ItemSub>
     public abstract boolean isThisKindOfItem (String toParse);
 
 
-    public abstract ItemSub parseItem (String toParse);
+    public abstract ItemSub parseItem (RPGGame game2, String toParse);
 
 
     public String parseName (String toParse)
@@ -117,19 +162,25 @@ public abstract class ItemSub extends Item implements Comparable<ItemSub>
         String[] parseArray = toParse.split(",");
         return parseArray[0].trim();
     }
+    public String parseGifName (String toParse)
+    {
+        String[] parseArray = toParse.split(",");
+        return parseArray[1].trim();
+    }
+    
 
 
     public String parseCategory (String toParse)
     {
         String[] parseArray = toParse.split(",");
-        return parseArray[1].trim();
+        return parseArray[2].trim();
     }
 
 
     public boolean parseSale (String toParse)
     {
         String[] parseArray = toParse.split(",");
-        return !parseArray[2].trim().equals("false");
+        return !parseArray[3].trim().equals("false");
     }
 
 
@@ -138,7 +189,7 @@ public abstract class ItemSub extends Item implements Comparable<ItemSub>
         String[] parseArray = toParse.split(",");
         if (parseArray.length < 4) throw new MakeItemsException("Improper format for including price: " +
                                                                 toParse);
-        return Integer.parseInt(parseArray[3].trim());
+        return Integer.parseInt(parseArray[4].trim());
     }
 
 }

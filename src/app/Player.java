@@ -1,6 +1,7 @@
 package app;
 
-import inventory.Item;
+import inventory.Inventory;
+import inventory.ItemSub;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -25,11 +26,10 @@ public class Player {
 	private SpriteGroup group = new SpriteGroup("Player");
 	private AnimatedSprite character;
 	private String startSprite = "resources/player/start_sprite.gif";
-	
+	private Inventory myInventory= new Inventory();
 	private Integer health = 10;
-	
 	private HashMap<String, Action> actions = new HashMap<String, Action>();
-	private HashMap<String, Item> inventory = new HashMap<String, Item>();
+	private HashMap<String, ItemSub> inventoryWithNames = new HashMap<String, ItemSub>();
 
 	public Player(RPGGame rpgGame) {
 		this.game = rpgGame;
@@ -47,7 +47,9 @@ public class Player {
 				(Walking) actions.get("walking")));
 		actions.put("talking", new Talking(this, 1, "stand"));
 		actions.put("grabbing", new Grabbing(this, 1, "stand"));
-		actions.put("attacking", new Attacking(this, 3, "attack"));
+        for (ItemSub itm : game.getInventory())
+            System.out.println(itm + "in Player");
+		actions.put("attacking", new Attacking(this, 3, "attack", game));
 	}
 
 	private void initCharacter(int[] location) {
@@ -68,14 +70,14 @@ public class Player {
 		if (getHealth() < 1)
 			game.finish();
 		for (String name : actions.keySet())
-			if (actions.get(name).isActionable())
-				actions.get(name).act();
+			if (actions.get(name).isActionable(game))
+				actions.get(name).act(game);
 	}
 
 	public void render(Graphics2D g) {
 		for (String name : actions.keySet()) {
 			Action action = actions.get(name);
-			if (action.isActing() && action.isActionable()
+			if (action.isActing() && action.isActionable(game)
 					&& action.isMessageable())
 				game.getDialog().showMessage(g);
 		}
@@ -115,20 +117,27 @@ public class Player {
 		return group;
 	}
 
-	public HashMap<String, Item> getInventory() {
-		return inventory;
+	public HashMap<String, ItemSub> getInventory() {
+		return inventoryWithNames;
+	}
+	
+
+	public void addItem(ItemSub grabItem) {
+		inventoryWithNames.put(grabItem.getName(), grabItem);
+		myInventory.add(grabItem);
 	}
 
-	public void addItem(Item item) {
-		inventory.put(item.getItemName(), item);
+	public boolean hasItem(ItemSub itm) {
+	    return myInventory.contains(itm);
 	}
+	public boolean hasItem(String itemName){
+	     return myInventory.contains(inventoryWithNames.get(itemName));
+	}
+	
 
-	public boolean hasItem(String name) {
-		return inventory.containsKey(name);
-	}
-
-	public Item getItem(String name) {
-		return inventory.get(name);
-	}
+//	public ItemSub getItem(String name) {
+//	    myInventory.
+//		return inventory.get(name);
+//	}
 
 }

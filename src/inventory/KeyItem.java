@@ -1,5 +1,7 @@
 package inventory;
 
+import app.RPGGame;
+
 
 /**
  * Class for items that must be collected to complete the game.
@@ -18,12 +20,13 @@ public class KeyItem extends ItemSub
         
     }
 
-    public KeyItem (String name,
+    public KeyItem (RPGGame game2, String name, String gifName,
                    boolean sale,
                    int price)
     {
-        super(name, sale, price);
+        super(game2, name, gifName, sale, price);
         category = "Key Item";
+        game2.addItems(this);
     }
 
 
@@ -37,22 +40,25 @@ public class KeyItem extends ItemSub
 
 
     @Override
-    public ItemSub parseItem (String toParse)
+    public ItemSub parseItem (RPGGame game2, String toParse)
     {
         if (!super.parseSale(toParse))
-            return parseItemNotForSale(toParse);
-        return new KeyItem(super.parseName(toParse),
+            return parseItemNotForSale(game2, toParse);
+        return new KeyItem(game2, 
+                           super.parseName(toParse),
+                           super.parseGifName(toParse),
                           true,
                           super.parsePrice(toParse));
     }
-    public ItemSub parseItemNotForSale (String toParse)
+    public ItemSub parseItemNotForSale (RPGGame game2, String toParse)
     {
-        return new KeyItem(super.parseName(toParse),
+        return new KeyItem(game2, super.parseName(toParse),
+                           super.parseGifName(toParse),
                           false,
                           0);
     }
 
-    public static ItemFactory getFactory(String input){
+    public static ItemFactory getFactory(){
         return new ItemFactory(new KeyItem());
     }
 

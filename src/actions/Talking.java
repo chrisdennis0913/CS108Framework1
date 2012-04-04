@@ -3,6 +3,7 @@ package actions;
 import java.awt.event.KeyEvent;
 
 import app.Player;
+import app.RPGGame;
 
 import npc.NPC;
 
@@ -19,8 +20,8 @@ public class Talking extends Action {
 		talkingTo = npc;
 	}
 
-	public void act() {
-		if (isActionable() && !isActing() && player.getGame().keyDown(KeyEvent.VK_ENTER)) {
+	public void act(RPGGame game2) {
+		if (isActionable(game2) && !isActing() && player.getGame().keyDown(KeyEvent.VK_ENTER)) {
 			setActing(true);
 			player.getGame().getDialog().setMessage(talkingTo.getTalk());
 		}

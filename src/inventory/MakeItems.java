@@ -1,31 +1,36 @@
 package inventory;
 
 import java.util.ArrayList;
+import app.RPGGame;
 
 
+/*
+ * Items are constructed in the form 
+ * (RPGgame, "ItemName, GifName, Category, forSale, price")
+ * where forSale is a boolean and price is an int
+ * Be sure to separate by commas and do no use within the Item's Name 
+ */
 public class MakeItems
 {
-    // Items are constructed in the form "ItemName, Category, forSale, price"
-    // where forSale is a boolean and price is an int
-    // Be sure to separate by commas and do no use within the Item's Name
+    protected RPGGame game;
 
-    public MakeItems ()
+    public MakeItems (RPGGame game2)
     {
-
+        game=game2;
     }
 
 
     public ItemSub parseExpression (String input)
     {
         ArrayList<ItemFactory> itemList = new ArrayList<ItemFactory>();
-        itemList.add(Weapon.getFactory(input));
-        itemList.add(KeyItem.getFactory(input));
+        itemList.add(Weapon.getFactory());
+        itemList.add(KeyItem.getFactory());
         
         for (ItemFactory itemFact : itemList)
         {
             if (itemFact.isThisKindOfItem(input))
             {
-                return itemFact.parseItem(input);
+                return itemFact.parseItem(game, input);
             }
         }
         throw new MakeItemsException("Unexpected item type " + input);
