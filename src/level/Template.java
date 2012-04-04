@@ -1,6 +1,5 @@
 package level;
 
-import inventory.Item;
 import inventory.ItemSub;
 import inventory.MakeItems;
 import java.awt.Graphics2D;

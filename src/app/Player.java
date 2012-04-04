@@ -130,14 +130,13 @@ public class Player {
 	public boolean hasItem(ItemSub itm) {
 	    return myInventory.contains(itm);
 	}
+	
 	public boolean hasItem(String itemName){
+	    if (!inventoryWithNames.containsKey(itemName)){
+	        return false;
+	    }
 	     return myInventory.contains(inventoryWithNames.get(itemName));
 	}
 	
-
-//	public ItemSub getItem(String name) {
-//	    myInventory.
-//		return inventory.get(name);
-//	}
 
 }
