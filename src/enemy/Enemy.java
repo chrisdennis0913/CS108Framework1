@@ -3,7 +3,6 @@ package enemy;
 import java.awt.image.BufferedImage;
 
 import app.Jsonable;
-import app.Main;
 import app.RPGGame;
 import collisions.EnemyCollision;
 
@@ -68,7 +67,7 @@ public abstract class Enemy implements Jsonable{
 	public abstract void die();
 	
 	public void setCollision() {
-		collision = new EnemyCollision(game, name);
+		collision = new EnemyCollision(game, game.getPlayer(), name);
 		collision.pixelPerfectCollision = true;
 		game.getField().addCollisionGroup(game.getPlayer().getGroup(),
 				getGroup(), collision);

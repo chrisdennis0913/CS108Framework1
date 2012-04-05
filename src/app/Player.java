@@ -3,8 +3,6 @@ package app;
 import inventory.Inventory;
 import inventory.ItemSub;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
@@ -19,7 +17,8 @@ import collisions.PlayerBoundaryCollision;
 
 import com.golden.gamedev.object.AnimatedSprite;
 import com.golden.gamedev.object.SpriteGroup;
-import com.golden.gamedev.object.font.SystemFont;
+
+import counters.PlayerCounters;
 
 public class Player {
 	private RPGGame game;
@@ -27,7 +26,7 @@ public class Player {
 	private AnimatedSprite character;
 	private String startSprite = "resources/player/start_sprite.gif";
 	private Inventory myInventory= new Inventory();
-	private Integer health = 10;
+	private PlayerCounters pcs = new PlayerCounters(this);
 	private HashMap<String, Action> actions = new HashMap<String, Action>();
 	private HashMap<String, ItemSub> inventoryWithNames = new HashMap<String, ItemSub>();
 
@@ -35,6 +34,10 @@ public class Player {
 		this.game = rpgGame;
 	}
 
+	public PlayerCounters getPCs() {
+		return pcs;
+	}
+	
 	public void generate(int[] location) {
 		initCharacter(location);
 		initCollisions();
@@ -67,26 +70,20 @@ public class Player {
 	}
 
 	public void update() {
-		if (getHealth() < 1)
-			game.finish();
+		pcs.updated(0);
 		for (String name : actions.keySet())
 			if (actions.get(name).isActionable(game))
 				actions.get(name).act(game);
 	}
 
 	public void render(Graphics2D g) {
+		pcs.render(g);
 		for (String name : actions.keySet()) {
 			Action action = actions.get(name);
 			if (action.isActing() && action.isActionable(game)
 					&& action.isMessageable())
 				game.getDialog().showMessage(g);
 		}
-		
-		SystemFont font = new SystemFont(new Font("Arial", Font.BOLD, 20), new Color(255,0,0));
-		g.setColor(new Color(0));
-		g.drawRect(10, 10, 25, 25);
-		g.fillRect(10, 10, 25, 25);
-		font.drawText(g, health.toString(), SystemFont.LEFT, 12, 12, 25, 2, 0);
 	}
 
 	public Action getAction(String name) {
@@ -99,14 +96,6 @@ public class Player {
 
 	public RPGGame getGame() {
 		return game;
-	}
-	
-	public Integer getHealth() {
-		return health;
-	}
-	
-	public void reduceHealth() {
-		health--;
 	}
 
 	public AnimatedSprite getCharacter() {
