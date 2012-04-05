@@ -61,7 +61,10 @@ public class Inventory implements Iterable<ItemSub>
         }
         myItemMap.put(itm, quant - quantity);
     }
+    
     public boolean contains(ItemSub itm){
+        System.out.println(myItemMap);
+        System.out.println(itm);
         return myItemMap.containsKey(itm);
     }
 
