@@ -1,6 +1,7 @@
 package collisions;
 
 import actions.Attacking;
+import app.Player;
 import app.RPGGame;
 
 import com.golden.gamedev.object.Sprite;
@@ -12,16 +13,17 @@ public class EnemyCollision extends BasicCollisionGroup {
 
 	private RPGGame game;
 	private IEnemy enemy;
+	private Player player;
 
-	public EnemyCollision(RPGGame game, String enemyname) {
+	public EnemyCollision(RPGGame game, Player player, String enemyname) {
 		this.game = game;
+		this.player = player;
 		this.enemy = game.getLevel().getEnemy(enemyname);
 	}
 
 	public void collided(Sprite character, Sprite scenery) {
 		overlap(character, scenery);
-		Attacking attacking = (Attacking) game.getPlayer().getAction(
-				"attacking");
+		Attacking attacking = (Attacking) player.getAction("attacking");
 		if (attacking.isActing()) {
 			enemy.reduceHealth();
 			if (enemy.getHealth() < 1) {
@@ -31,7 +33,7 @@ public class EnemyCollision extends BasicCollisionGroup {
 			jump(character, scenery);
 		} else {
 			jump(character, scenery);
-			game.getPlayer().reduceHealth();
+			player.getPCs().enemy(enemy);
 		}
 	}
 
@@ -39,7 +41,7 @@ public class EnemyCollision extends BasicCollisionGroup {
 		scenery.setX(character.getX() - 100);
 		scenery.setY(character.getY() - 100);
 	}
-	
+
 	protected void overlap(Sprite character, Sprite scenery) {
 		double maxsep = scenery.getImage().getHeight()
 				- character.getImage().getHeight() / 6 * 5;

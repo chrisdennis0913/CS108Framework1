@@ -4,7 +4,6 @@ import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
 import app.Jsonable;
-import app.Main;
 import app.RPGGame;
 import collisions.EnemyCollision;
 
@@ -12,6 +11,7 @@ import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
 
 public abstract class Enemy implements Jsonable, IEnemy {
+
 	protected static RPGGame game;
 	private SpriteGroup group;
 	private BufferedImage image;
