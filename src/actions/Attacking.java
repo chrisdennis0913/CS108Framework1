@@ -1,14 +1,17 @@
 package actions;
 
 import inventory.ItemSub;
+
 import java.awt.event.KeyEvent;
 import java.util.TreeSet;
-import app.Player;
+
+import player.Player;
 import app.RPGGame;
+
 import com.golden.gamedev.object.AnimatedSprite;
 
 
-public class Attacking extends Action
+public class Attacking extends Action1
 {
     private TreeSet<ItemSub> myWeaponList = new TreeSet<ItemSub>();
     private RPGGame myGame;

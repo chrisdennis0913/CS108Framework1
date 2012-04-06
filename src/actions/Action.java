@@ -5,7 +5,7 @@ import java.io.File;
 import java.util.HashMap;
 
 
-import app.Player;
+import player.Player;
 import app.RPGGame;
 
 import com.golden.gamedev.engine.timer.SystemTimer;

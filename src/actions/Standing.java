@@ -1,12 +1,12 @@
 package actions;
 
 
-import app.Player;
+import player.Player;
 import app.RPGGame;
 
 import com.golden.gamedev.object.AnimatedSprite;
 
-public class Standing extends Action {
+public class Standing extends Action1 {
 
 	private Walking walking;
 

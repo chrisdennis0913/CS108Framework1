@@ -1,7 +1,7 @@
 package collisions;
 
 import actions.Attacking;
-import app.Player;
+import player.Player;
 import app.RPGGame;
 
 import com.golden.gamedev.object.Sprite;
