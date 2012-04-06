@@ -33,7 +33,7 @@ public class RPGGame extends GameObject
     private Dialog dialog;
     private Level level;
     private Inventory myInventory;
-    public static String startLevelFilename;
+    public static String startLevelFilename = "map00.json";
 
 
     @SuppressWarnings("rawtypes")
