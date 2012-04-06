@@ -33,7 +33,7 @@ public class RPGGame extends GameObject
     private Dialog dialog;
     private Level level;
     private Inventory myInventory;
-    private String levelFilename;
+    public static String startLevelFilename = "map00.json";
 
 
     @SuppressWarnings("rawtypes")
@@ -51,7 +51,7 @@ public class RPGGame extends GameObject
         player.generate(loc);
 
         //level = new Start(this);
-        level = new LevelFromFile(this,levelFilename, bsIO);
+        level = new LevelFromFile(this,startLevelFilename);
         level.generate();
 
         field.setComparator(new Comparator()

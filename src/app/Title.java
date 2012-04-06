@@ -1,12 +1,17 @@
 package app;
 
 
-import java.awt.*;
-import java.awt.image.*;
-import java.awt.event.*;
+import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
-import com.golden.gamedev.*;
-import com.golden.gamedev.object.*;
+import javax.swing.JFileChooser;
+
+import com.golden.gamedev.GameEngine;
+import com.golden.gamedev.GameObject;
+import com.golden.gamedev.object.GameFont;
+import com.golden.gamedev.object.Timer;
 
 
 public class Title extends GameObject {
@@ -50,6 +55,44 @@ public class Title extends GameObject {
 
 				} else if (option == 1) {
 					// load
+					//LoadFileFilter lwrFilter = new LoadFileFilter(new String[]{".lwr"});
+				    //LoadFileFilter uprFilter = new LoadFileFilter(new String[]{".upr"});
+				    LoadFileFilter jsonFilter = new LoadFileFilter(new String[]{".json"});
+					
+					//JFileChooser lwrChooser = new JFileChooser();
+					//JFileChooser uprChooser = new JFileChooser();
+					JFileChooser jsonChooser = new JFileChooser();
+				    /*	
+				     * TO BE IMPLEMENTED FULLY WHEN SCENERY IS CHANGED    
+				    lwrChooser.setFileFilter(lwrFilter);
+				    lwrChooser.setDialogTitle("Choose your lower map file");
+				    int lwrReturnVal = lwrChooser.showOpenDialog(lwrChooser);
+				    
+				    if(lwrReturnVal == JFileChooser.APPROVE_OPTION) {
+				       System.out.println("You chose to open this file: " +
+				            lwrChooser.getSelectedFile().getName());
+				       RPGGame.lwrFilename = lwrChooser.getSelectedFile().getName();
+				    }
+				    
+				    uprChooser.setFileFilter(uprFilter);
+				    uprChooser.setDialogTitle("Choose your upper map file");
+				    int uprReturnVal = lwrChooser.showOpenDialog(lwrChooser);
+				    if(uprReturnVal == JFileChooser.APPROVE_OPTION) {
+				       System.out.println("You chose to open this file: " +
+				            uprChooser.getSelectedFile().getName());
+				       RPGGame.uprFilename = uprChooser.getSelectedFile().getName();
+				    }
+				    */
+				    jsonChooser.setFileFilter(jsonFilter);
+				    jsonChooser.setDialogTitle("Choose your json level file");
+				    jsonChooser.setCurrentDirectory(new File("savedmaps/"));
+				    int jsonReturnVal = jsonChooser.showOpenDialog(jsonChooser);
+				    if(jsonReturnVal == JFileChooser.APPROVE_OPTION) {
+				       System.out.println("You chose to open this file: " +
+				            jsonChooser.getSelectedFile().getName());
+				       RPGGame.startLevelFilename = jsonChooser.getSelectedFile().getName();
+				    }
+					
 
 				} else if (option == 2) {
 					// end

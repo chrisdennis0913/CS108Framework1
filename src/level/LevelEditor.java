@@ -21,6 +21,8 @@ import com.golden.gamedev.object.GameFont;
 import com.golden.gamedev.object.Timer;
 import com.google.gson.Gson;
 
+import enemy.Snake;
+
 
 /**
  * Arrow key	: navigate
@@ -184,8 +186,11 @@ public class LevelEditor extends GameObject {
 			//create the priest
 			int[] location = new int[]{x,y};
 			Collection collection = new ArrayList();
+			//add tag
 		    collection.add("priest");
-		    collection.add("priest");
+		    //add name
+		    collection.add("priest_"+Priest.numPriests);
+		    Priest.numPriests++;
 		    collection.add(location[0]);
 		    collection.add(location[1]);
 		    String json = gson.toJson(collection);
@@ -243,7 +248,8 @@ public class LevelEditor extends GameObject {
 			int[] location = new int[]{x,y};
 			Collection collection = new ArrayList();
 		    collection.add("snake");
-		    collection.add("snake");
+		    collection.add("snake_"+Snake.numSnakes);
+		    Snake.numSnakes++;
 		    collection.add(location[0]);
 		    collection.add(location[1]);
 		    String json = gson.toJson(collection);

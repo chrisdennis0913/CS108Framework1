@@ -2,12 +2,14 @@ package level;
 
 
 
+import inventory.ItemSub;
+
 import java.awt.Graphics2D;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +24,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
 
-import inventory.ItemSub;
 import enemy.Snake;
 
 
@@ -31,30 +32,19 @@ public class LevelFromFile extends Level{
 	private String[] fileLines;
 	private List<RWGameObject> gameObjects;
 		
-    public LevelFromFile (RPGGame game, String levelFilename, BaseIO bsIO)
+    public LevelFromFile (RPGGame game, String levelFilename)
     {
         super(game);        
         
         Priest priest = new Priest(game, "priest");
-        Snake snake = new Snake(game, "snake");
-        /*
-        try {
-	    	FileWriter f1 = new FileWriter("savedmaps/map00.json"); 
-	    	f1.write(priestJson+"\n"); 
-	    	f1.write(snakeJson);
-	    	f1.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}     
-		*/           
+        Snake snake = new Snake(game, "snake");     
         
         gameObjects = new ArrayList<RWGameObject>();
         gameObjects.add(new Priest.Factory());
         gameObjects.add(new Snake.Factory());
         Gson gson = new Gson();
         MapContainer maps = new MapContainer(npcs, enemies, scenery, items);
-		String[] event = FileUtil.fileRead(bsIO.getStream("savedmaps/map00.json"));		
+		String[] event = FileUtil.fileRead(new File("savedmaps/"+levelFilename));			
 		
 		for(int i=0;i<event.length; i++){
 			String json = event[i];
