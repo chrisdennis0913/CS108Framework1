@@ -1,9 +1,11 @@
 package enemy;
 
+import inventory.ItemSub;
+
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import app.Jsonable;
-import app.Main;
 import app.RPGGame;
 import collisions.EnemyCollision;
 
@@ -16,16 +18,29 @@ public abstract class Enemy implements Jsonable{
 	private BufferedImage image;
 	private String name;
 	private Sprite enemy;
-	protected int health = 1;
+	protected int health;
 	private boolean dead = false;
 	private EnemyCollision collision;
 	protected int[] location = new int[2];
 	
-	public Enemy (RPGGame game, String name) {
+	private ArrayList<EnemyMod> mods; 
+	
+	public Enemy (RPGGame game, String name, int health) {
 		Enemy.game = game;
 		this.name = name;
+		this.health = health;
+		
+		//change to check for duplicates
 		this.group = new SpriteGroup(name+"_"+game.getRandom(0, 10000));
 		this.image = game.getImage("resources/npc/"+name+".gif");
+		
+		initMods();
+	}
+	
+	public void initMods()
+	{
+		mods = new ArrayList<EnemyMod>();
+		mods.add(new HealthMod(this, 5));
 	}
 	
 	public void add(int[] location, int layer) {
@@ -43,8 +58,9 @@ public abstract class Enemy implements Jsonable{
 		return health;
 	}
 	
-	public void reduceHealth() {
-		health--;
+	public void reduceHealth(int delta)
+	{
+		health -= delta;
 	}
 	
 	public void generate() {
@@ -54,6 +70,11 @@ public abstract class Enemy implements Jsonable{
 	
 	public void setDead(boolean dead) {
 		this.dead = dead;
+	}
+	
+	public ItemSub getItem()
+	{
+		return EnemyItemGen.getInstance(game).getDroppedItem(this);
 	}
 	
 	public boolean isDead() {

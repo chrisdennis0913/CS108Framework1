@@ -20,10 +20,9 @@ public class Snake extends Enemy {
 	private SystemTimer timer = new SystemTimer();
 	private boolean acting = false;
 	private long actionStartTime = 0;
-	private static int snakeCount = 0;
 
 	public Snake(RPGGame game, String name) {
-		super(game, name);
+		super(game, name, 1);
 		timer.setFPS(100);
 		timer.startTimer();
 		setActing(false);

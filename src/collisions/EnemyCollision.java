@@ -23,7 +23,7 @@ public class EnemyCollision extends BasicCollisionGroup {
 		Attacking attacking = (Attacking) game.getPlayer().getAction(
 				"attacking");
 		if (attacking.isActing()) {
-			enemy.reduceHealth();
+			enemy.reduceHealth(1);
 			if (enemy.getHealth() < 1) {
 				enemy.die();
 				game.getField().removeCollisionGroup(this);
