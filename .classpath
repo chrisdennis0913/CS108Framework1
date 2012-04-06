@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry excluding="resources/|src/|savedmaps/|lib/" kind="src" path=""/>
+	<classpathentry kind="src" path="resources"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-<<<<<<< HEAD
-	<classpathentry kind="lib" path="C:/Users/Robert/workspace/GTGE/golden_0_2_3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Robert/workspace/gson-2.1.jar"/>
-=======
-	<classpathentry kind="lib" path="/Users/kklimuk/Documents/compsci-108/vooga/lib/golden_0_2_3.jar"/>
-	<classpathentry kind="lib" path="/Users/kklimuk/Documents/compsci-108/vooga/lib/gson-2.1-javadoc.jar"/>
-	<classpathentry kind="lib" path="/Users/kklimuk/Documents/compsci-108/vooga/lib/gson-2.1-sources.jar"/>
-	<classpathentry kind="lib" path="/Users/kklimuk/Documents/compsci-108/vooga/lib/gson-2.1.jar"/>
->>>>>>> 5ff2e804fc028971f8c8fbf349c76966f0baf2b2
+	<classpathentry kind="src" path="savedmaps"/>
+	<classpathentry kind="src" path="lib"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
