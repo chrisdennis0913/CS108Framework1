@@ -4,13 +4,14 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.HashMap;
 
-
 import player.Player;
+
+
 import app.RPGGame;
 
 import com.golden.gamedev.engine.timer.SystemTimer;
 
-public abstract class Action {
+public abstract class Action1 {
 
 	protected Player player;
 
@@ -26,7 +27,7 @@ public abstract class Action {
 	private SystemTimer actionTimer = new SystemTimer();
 	private long actionStartTime = 0;
 
-	public Action(Player player, int frames, String name) {
+	public Action1(Player player, int frames, String name) {
 		this.player = player;
 		this.frames = frames;
 		this.name = name;

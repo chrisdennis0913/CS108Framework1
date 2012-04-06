@@ -2,12 +2,12 @@ package actions;
 
 import java.awt.event.KeyEvent;
 
-import app.Player;
+import player.Player;
 import app.RPGGame;
 
 import com.golden.gamedev.object.AnimatedSprite;
 
-public class Walking extends Action {
+public class Walking extends Action1 {
 
 	public enum cardinal {
 		LEFT, RIGHT, UP, DOWN, NONE

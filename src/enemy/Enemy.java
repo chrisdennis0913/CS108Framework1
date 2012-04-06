@@ -89,7 +89,7 @@ public abstract class Enemy implements Jsonable{
 	public abstract void die();
 	
 	public void setCollision() {
-		collision = new EnemyCollision(game, name);
+		collision = new EnemyCollision(game, game.getPlayer(), name);
 		collision.pixelPerfectCollision = true;
 		game.getField().addCollisionGroup(game.getPlayer().getGroup(),
 				getGroup(), collision);
