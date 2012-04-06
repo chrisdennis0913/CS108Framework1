@@ -2,8 +2,9 @@ package quest;
 
 import java.util.ArrayList;
 
-import app.RPGGame;
 import inventory.ItemSub;
+
+import app.RPGGame;
 
 public class QuestItem extends ItemSub implements Observable
 {

@@ -1,8 +1,9 @@
 package quest;
 
-import inventory.ItemSub;
 
 import java.util.Queue;
+
+import inventory.ItemSub;
 
 public abstract class Quest
 {

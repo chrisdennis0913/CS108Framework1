@@ -1,6 +1,5 @@
 package enemy;
 
-import inventory.ItemSub;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -11,6 +10,8 @@ import collisions.EnemyCollision;
 
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
+
+import inventory.ItemSub;
 
 public abstract class Enemy implements Jsonable{
 	protected static RPGGame game;

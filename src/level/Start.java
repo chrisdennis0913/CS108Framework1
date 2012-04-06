@@ -1,7 +1,8 @@
 package level;
 
-import inventory.ItemSub;
 import java.awt.Graphics2D;
+
+import inventory.ItemSub;
 import npc.Priest;
 import scenery.Scenery;
 import app.RPGGame;

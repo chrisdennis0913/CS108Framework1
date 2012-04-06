@@ -1,7 +1,5 @@
 package app;
 
-import inventory.Inventory;
-import inventory.ItemSub;
 
 import java.awt.Graphics2D;
 import java.util.Comparator;
@@ -16,6 +14,9 @@ import com.golden.gamedev.object.Background;
 import com.golden.gamedev.object.PlayField;
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.background.ImageBackground;
+
+import inventory.Inventory;
+import inventory.ItemSub;
 
 
 public class RPGGame extends GameObject

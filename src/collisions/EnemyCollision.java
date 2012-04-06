@@ -9,6 +9,7 @@ import com.golden.gamedev.object.collision.BasicCollisionGroup;
 
 import enemy.Enemy;
 
+
 public class EnemyCollision extends BasicCollisionGroup {
 
 	private RPGGame game;

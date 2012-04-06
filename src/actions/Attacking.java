@@ -1,6 +1,5 @@
 package actions;
 
-import inventory.ItemSub;
 
 import java.awt.event.KeyEvent;
 import java.util.TreeSet;
@@ -9,6 +8,8 @@ import player.Player;
 import app.RPGGame;
 
 import com.golden.gamedev.object.AnimatedSprite;
+
+import inventory.ItemSub;
 
 
 public class Attacking extends Action1

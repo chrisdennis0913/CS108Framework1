@@ -1,13 +1,14 @@
 package level;
 
-import inventory.ItemSub;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import enemy.Enemy;
+import inventory.ItemSub;
+
 import npc.NPC;
 import scenery.Scenery;
-import enemy.Enemy;
 
 public class MapContainer {
 		
