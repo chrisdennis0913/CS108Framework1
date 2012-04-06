@@ -32,49 +32,22 @@ public class LevelFromFile extends Level{
 	private String[] fileLines;
 	private List<RWGameObject> gameObjects;
 		
-    public LevelFromFile (RPGGame game, String levelFilename, BaseIO bsIO)
+    public LevelFromFile (RPGGame game, String levelFilename)
     {
         super(game);        
         
         Priest priest = new Priest(game, "priest");
-        Snake snake = new Snake(game, "snake");
-        /*
-        try {
-	    	FileWriter f1 = new FileWriter("savedmaps/map00.json"); 
-	    	f1.write(priestJson+"\n"); 
-	    	f1.write(snakeJson);
-	    	f1.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}     
-		*/           
+        Snake snake = new Snake(game, "snake");     
         
         gameObjects = new ArrayList<RWGameObject>();
         gameObjects.add(new Priest.Factory());
         gameObjects.add(new Snake.Factory());
         Gson gson = new Gson();
         MapContainer maps = new MapContainer(npcs, enemies, scenery, items);
-		String[] event = FileUtil.fileRead(new File("savedmaps/map00.json"));//fileRead(bsIO.getStream("savedmaps/map00.json"));	
-		List<String> events = new ArrayList<String>();
-		  try{
-			  FileInputStream fstream = new FileInputStream("savedmaps/map00.json");
-			  DataInputStream in = new DataInputStream(fstream);
-			  BufferedReader br = new BufferedReader(new InputStreamReader(in));
-			  String strLine;
-			  while ((strLine = br.readLine()) != null)   {
-				  events.add(strLine);
-				  System.out.println (strLine);
-			  }
-			  in.close();
-		    }
-		  catch (Exception e){//Catch exception if any
-		    	System.err.println("Error: " + e.getMessage());
-		  }		  
+		String[] event = FileUtil.fileRead(new File("savedmaps/"+levelFilename));			
 		
-		
-		for(int i=0;i<events.size(); i++){
-			String json = events.get(i);
+		for(int i=0;i<event.length; i++){
+			String json = event[i];
 		    System.out.println("Using Gson.toJson() on a raw collection: " + json);
 		    JsonParser parser = new JsonParser();
 		    JsonArray array = parser.parse(json).getAsJsonArray();

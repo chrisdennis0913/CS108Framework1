@@ -2,11 +2,11 @@ package npc;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 import app.Jsonable;
-import app.Main;
 import app.RPGGame;
-
 import collisions.NPCCollision;
 
 import com.golden.gamedev.object.Sprite;
@@ -23,16 +23,13 @@ public abstract class NPC implements Jsonable{
 	private boolean dead = false;
 	private NPCCollision collision;
 	protected int[] location = new int[2];
-
 	
 	public NPC (RPGGame game2, String name) {
 		NPC.game = game2;
 		this.name = name;
 		this.group = new SpriteGroup(name+"_"+game2.getRandom(0, 10000));
 		//Parse out the type from the name
-		String type = name;
-		if(name.indexOf('_') >0)
-			type = name.substring(0,name.indexOf('_'));
+		String type = getType(name);
 		this.image = game2.getImage("resources/npc/"+type+".gif");
 		String scriptURL = "resources/script/"+name+".txt";
 		script = FileUtil.fileRead(new File(scriptURL));
@@ -90,5 +87,12 @@ public abstract class NPC implements Jsonable{
 	
 	public String[] getScript() {
 		return script;
+	}
+	
+	public String getType(String name){
+		String type =name;
+		if(name.indexOf('_') >0)
+			type = name.substring(0,name.indexOf('_'));
+		return type;
 	}
 }

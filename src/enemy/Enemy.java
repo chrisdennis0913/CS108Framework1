@@ -33,7 +33,8 @@ public abstract class Enemy implements Jsonable{
 		
 		//change to check for duplicates
 		this.group = new SpriteGroup(name+"_"+game.getRandom(0, 10000));
-		this.image = game.getImage("resources/npc/"+name+".gif");
+		String type = getType(name);
+		this.image = game.getImage("resources/npc/"+type+".gif");
 		
 		initMods();
 	}
@@ -102,5 +103,12 @@ public abstract class Enemy implements Jsonable{
 	
 	public SpriteGroup getGroup() {
 		return group;
+	}
+	
+	public String getType(String name){
+		String type =name;
+		if(name.indexOf('_') >0)
+			type = name.substring(0,name.indexOf('_'));
+		return type;
 	}
 }
