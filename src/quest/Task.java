@@ -1,9 +1,9 @@
 package quest;
 
-public class Task 
+public abstract class Task 
 {
-	private boolean isComplete =  false;
-	private String description;
+	protected boolean isComplete =  false;
+	protected String description;
 	
 	public Task (String description)
 	{

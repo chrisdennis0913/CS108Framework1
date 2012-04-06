@@ -26,7 +26,6 @@ public class Snake extends Enemy {
 		timer.setFPS(100);
 		timer.startTimer();
 		setActing(false);
-		health = 5;
 	}
 
 	public void setActing(boolean acting) {
