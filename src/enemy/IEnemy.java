@@ -1,6 +1,7 @@
 package enemy;
 
 import java.awt.image.BufferedImage;
+import java.util.Collection;
 
 import collisions.EnemyCollision;
 
@@ -37,5 +38,9 @@ public interface IEnemy {
 	public abstract EnemyCollision getCollision();
 
 	public abstract SpriteGroup getGroup();
+
+	public abstract void attack(AbstractAttack a, long elapsedTime);
+
+	public abstract Collection<AbstractAttack> getAttacks();
 
 }

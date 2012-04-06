@@ -1,7 +1,5 @@
 package level;
 
-import inventory.ItemSub;
-import inventory.MakeItems;
 
 import java.awt.Graphics2D;
 import java.util.HashMap;
@@ -9,6 +7,8 @@ import com.golden.gamedev.engine.timer.SystemTimer;
 
 import enemy.Enemy;
 import enemy.IEnemy;
+import inventory.ItemSub;
+import inventory.MakeItems;
 
 import scenery.Scenery;
 import npc.NPC;

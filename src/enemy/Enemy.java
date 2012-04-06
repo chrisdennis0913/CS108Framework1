@@ -1,14 +1,19 @@
 package enemy;
 
-import java.awt.image.BufferedImage;
-import java.util.HashMap;
 
+import java.awt.image.BufferedImage;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.ArrayList;
+
+import ai.AbstractAI;
 import app.Jsonable;
 import app.RPGGame;
 import collisions.EnemyCollision;
 
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
+import inventory.ItemSub;
 
 public abstract class Enemy implements Jsonable, IEnemy {
 
@@ -17,24 +22,44 @@ public abstract class Enemy implements Jsonable, IEnemy {
 	private BufferedImage image;
 	private String name;
 	private Sprite enemy;
-	protected int health;
+	private int health;
 	private EnemyCollision collision;
-	private HashMap<String,AbstractAttack> attacks;
-	private AbstractAI ai;
+	protected HashMap<String,AbstractAttack> attacks;
+	private AbstractAI myAI;
 	protected int[] location = new int[2];
+	private ArrayList<EnemyMod> mods; 
 	
 	private static final int DEFAULT_INITIAL_HEALTH = 1;
 	
-	public Enemy (RPGGame game, String name, int initialHealth) {
+	public Enemy (RPGGame game, String name, int health) {
 		Enemy.game = game;
 		this.name = name;
+		this.health = health;
+		
+		//change to check for duplicates
 		this.group = new SpriteGroup(name+"_"+game.getRandom(0, 10000));
 		this.image = game.getImage("resources/npc/"+name+".gif");
-		health = initialHealth;
+		initMods();
+		initAttacks();
+
 	}
 	
 	public Enemy (RPGGame game, String name) {
-		this(game,name,DEFAULT_INITIAL_HEALTH);
+		this(game,name,DEFAULT_INITIAL_HEALTH);		
+	}
+	
+	public void initMods()
+	{
+		mods = new ArrayList<EnemyMod>();
+		mods.add(new HealthMod(this, 5));
+	}
+	
+	public void initAttacks(){
+		attacks = new HashMap<String,AbstractAttack>();
+	}
+	
+	public void setAI(AbstractAI ai){
+		myAI = ai;
 	}
 	
 	@Override
@@ -60,6 +85,11 @@ public abstract class Enemy implements Jsonable, IEnemy {
 	public void reduceHealth() {
 		addToHealth(-1);
 	}
+	
+	public void reduceHealth(int delta)
+	{
+		health -= delta;
+	}
 
 	@Override
 	public void addToHealth(int delta) {
@@ -78,6 +108,11 @@ public abstract class Enemy implements Jsonable, IEnemy {
 			health = 0;
 	}
 
+	public ItemSub getItem()
+	{
+		return EnemyItemGen.getInstance(game).getDroppedItem(this);
+	}
+	
 	@Override
 	public boolean isDead() {
 		return (health>0);
@@ -89,12 +124,20 @@ public abstract class Enemy implements Jsonable, IEnemy {
 	}
 
 	@Override
-	public void act(long elapsed){
-		ai.act();
+	public void act(long elapsedTime){
+		myAI.act(elapsedTime);
 	}
 	
-	public void attack(String attackName){
-		attacks.get(attackName);
+	public void attack(String attackName, long elapsedTime){
+		attack(attacks.get(attackName), elapsedTime);
+	}
+	
+	public void attack(AbstractAttack attack, long elapsedTime){
+		attack.performAttack(elapsedTime);
+	}
+	
+	public Collection<AbstractAttack> getAttacks(){
+		return attacks.values();
 	}
 	
 	@Override
@@ -102,7 +145,7 @@ public abstract class Enemy implements Jsonable, IEnemy {
 
 	@Override
 	public void setCollision() {
-		collision = new EnemyCollision(game, name);
+		collision = new EnemyCollision(game, game.getPlayer(), name);
 		collision.pixelPerfectCollision = true;
 		game.getField().addCollisionGroup(game.getPlayer().getGroup(),
 				getGroup(), collision);

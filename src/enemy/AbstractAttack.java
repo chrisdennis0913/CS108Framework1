@@ -1,26 +1,39 @@
 package enemy;
 
-import app.Player;
+import player.Player;
 import app.RPGGame;
 
 public abstract class AbstractAttack {
-	private static RPGGame game;
-	private String name;
-	private Player target;
+	protected static RPGGame game;
+	protected IEnemy enemy;
+	protected Player target;
 	
-	public AbstractAttack (RPGGame game, String name){
+	public AbstractAttack (RPGGame game, IEnemy enemy){
 		AbstractAttack.game = game;
-		this.name = name;
-		setPlayerAsTarget();
+		this.enemy = enemy;
+		setDefaultPlayerAsTarget();
 	}
 	
-	public void setPlayerAsTarget(){
-		this.target = game.getPlayer();
+	public void setTarget(Player p){
+		this.target = p;
 	}
 	
-	public void performAttack(){
+	public void setDefaultPlayerAsTarget(){
+		setTarget(game.getPlayer());
+	}
+	
+	public double getAttackerX(){
+		return enemy.getSprite().getX();
+	}
+	
+	public double getAttackerY(){
+		return enemy.getSprite().getY();
+	}
+	
+	public abstract boolean isAttackValid(long elapsedTime);
+	
+	public abstract void performAttack(long elapsedTime);
+	
+	public abstract int valueOfAttack();
 		
-	}
-	
-	
 }

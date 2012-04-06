@@ -1,13 +1,14 @@
 package actions;
 
-import inventory.ItemSub;
 
 import java.awt.event.KeyEvent;
 
-import app.Player;
+import inventory.ItemSub;
+
+import player.Player;
 import app.RPGGame;
 
-public class Grabbing extends Action {
+public class Grabbing extends Action1 {
 
 	private ItemSub grabItem;
 

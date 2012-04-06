@@ -2,12 +2,12 @@ package actions;
 
 import java.awt.event.KeyEvent;
 
-import app.Player;
+import player.Player;
 import app.RPGGame;
 
 import npc.NPC;
 
-public class Talking extends Action {
+public class Talking extends Action1 {
 
 	private NPC talkingTo;
 

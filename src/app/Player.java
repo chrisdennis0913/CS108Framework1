@@ -1,8 +1,8 @@
 package app;
 
-import inventory.Inventory;
-import inventory.ItemSub;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
@@ -17,115 +17,127 @@ import collisions.PlayerBoundaryCollision;
 
 import com.golden.gamedev.object.AnimatedSprite;
 import com.golden.gamedev.object.SpriteGroup;
+import com.golden.gamedev.object.font.SystemFont;
 
-import counters.PlayerCounters;
+import inventory.Inventory;
+import inventory.ItemSub;
 
 public class Player {
-	private RPGGame game;
-	private SpriteGroup group = new SpriteGroup("Player");
-	private AnimatedSprite character;
-	private String startSprite = "resources/player/start_sprite.gif";
-	private Inventory myInventory= new Inventory();
-	private PlayerCounters pcs = new PlayerCounters(this);
-	private HashMap<String, Action> actions = new HashMap<String, Action>();
-	private HashMap<String, ItemSub> inventoryWithNames = new HashMap<String, ItemSub>();
+private RPGGame game;
+private SpriteGroup group = new SpriteGroup("Player");
+private AnimatedSprite character;
+private String startSprite = "resources/player/start_sprite.gif";
+private Inventory myInventory= new Inventory();
+private Integer health = 10;
+private HashMap<String, Action> actions = new HashMap<String, Action>();
+private HashMap<String, ItemSub> inventoryWithNames = new HashMap<String, ItemSub>();
 
-	public Player(RPGGame rpgGame) {
-		this.game = rpgGame;
-	}
+public Player(RPGGame rpgGame) {
+this.game = rpgGame;
+}
 
-	public PlayerCounters getPCs() {
-		return pcs;
-	}
-	
-	public void generate(int[] location) {
-		initCharacter(location);
-		initCollisions();
-		initActions();
-	}
+public void generate(int[] location) {
+initCharacter(location);
+initCollisions();
+//initActions();
+}
 
-	private void initActions() {
-		actions.put("walking", new Walking(this, 6, "walk"));
-		actions.put("standing", new Standing(this, 1, "stand",
-				(Walking) actions.get("walking")));
-		actions.put("talking", new Talking(this, 1, "stand"));
-		actions.put("grabbing", new Grabbing(this, 1, "stand"));
+/*private void initActions() {
+actions.put("walking", new Walking(this, 6, "walk"));
+actions.put("standing", new Standing(this, 1, "stand",
+(Walking) actions.get("walking")));
+actions.put("talking", new Talking(this, 1, "stand"));
+actions.put("grabbing", new Grabbing(this, 1, "stand"));
         for (ItemSub itm : game.getInventory())
             System.out.println(itm + "in Player");
-		actions.put("attacking", new Attacking(this, 3, "attack", game));
-	}
+actions.put("attacking", new Attacking(this, 3, "attack", game));
+}*/
 
-	private void initCharacter(int[] location) {
-		BufferedImage[] image = new BufferedImage[] { game
-				.getImage(startSprite) };
-		character = new AnimatedSprite(image, location[0], location[1]);
-		character.setLayer(10);
-		group.add(character);
-		game.getField().addGroup(group);
-	}
+private void initCharacter(int[] location) {
+BufferedImage[] image = new BufferedImage[] { game
+.getImage(startSprite) };
+character = new AnimatedSprite(image, location[0], location[1]);
+character.setLayer(10);
+group.add(character);
+game.getField().addGroup(group);
+}
 
-	private void initCollisions() {
-		game.getField().addCollisionGroup(group, null,
-				new PlayerBoundaryCollision(game.getBG()));
-	}
+private void initCollisions() {
+game.getField().addCollisionGroup(group, null,
+new PlayerBoundaryCollision(game.getBG()));
+}
 
-	public void update() {
-		pcs.updated(0);
-		for (String name : actions.keySet())
-			if (actions.get(name).isActionable(game))
-				actions.get(name).act(game);
-	}
+public void update() {
+if (getHealth() < 1)
+game.finish();
+for (String name : actions.keySet())
+if (actions.get(name).isActionable(game))
+actions.get(name).act(game);
+}
 
-	public void render(Graphics2D g) {
-		pcs.render(g);
-		for (String name : actions.keySet()) {
-			Action action = actions.get(name);
-			if (action.isActing() && action.isActionable(game)
-					&& action.isMessageable())
-				game.getDialog().showMessage(g);
-		}
-	}
+public void render(Graphics2D g) {
+for (String name : actions.keySet()) {
+Action action = actions.get(name);
+if (action.isActing() && action.isActionable(game)
+&& action.isMessageable())
+game.getDialog().showMessage(g);
+}
 
-	public Action getAction(String name) {
-		return actions.get(name);
-	}
-	
-	public HashMap<String, Action> getActions() {
-		return actions;
-	}
+SystemFont font = new SystemFont(new Font("Arial", Font.BOLD, 20), new Color(255,0,0));
+g.setColor(new Color(0));
+g.drawRect(10, 10, 25, 25);
+g.fillRect(10, 10, 25, 25);
+font.drawText(g, health.toString(), SystemFont.LEFT, 12, 12, 25, 2, 0);
+}
 
-	public RPGGame getGame() {
-		return game;
-	}
+public Action getAction(String name) {
+return actions.get(name);
+}
 
-	public AnimatedSprite getCharacter() {
-		return character;
-	}
+public HashMap<String, Action> getActions() {
+return actions;
+}
 
-	public SpriteGroup getGroup() {
-		return group;
-	}
+public RPGGame getGame() {
+return game;
+}
 
-	public HashMap<String, ItemSub> getInventory() {
-		return inventoryWithNames;
-	}
-	
+public Integer getHealth() {
+return health;
+}
 
-	public void addItem(ItemSub grabItem) {
-		inventoryWithNames.put(grabItem.getName(), grabItem);
-		myInventory.add(grabItem);
-	}
+public void reduceHealth() {
+health--;
+}
 
-	public boolean hasItem(ItemSub itm) {
-	    return myInventory.contains(itm);
-	}
-	
-	public boolean hasItem(String itemName){
-	    if (!inventoryWithNames.containsKey(itemName)){
-	        return false;
-	    }
-	     return myInventory.contains(inventoryWithNames.get(itemName));
-	}
-	
+public AnimatedSprite getCharacter() {
+return character;
+}
+
+public SpriteGroup getGroup() {
+return group;
+}
+
+public HashMap<String, ItemSub> getInventory() {
+return inventoryWithNames;
+}
+
+
+public void addItem(ItemSub grabItem) {
+inventoryWithNames.put(grabItem.getName(), grabItem);
+myInventory.add(grabItem);
+}
+
+public boolean hasItem(ItemSub itm) {
+return myInventory.contains(itm);
+}
+
+public boolean hasItem(String itemName){
+if (!inventoryWithNames.containsKey(itemName)){
+return false;
+}
+return myInventory.contains(inventoryWithNames.get(itemName));
+}
+
 
 }

@@ -11,7 +11,7 @@ public abstract class BaseCounters {
 		return counters;
 	}
 
-	public void updated(long elapsed) {
+	public void update(long elapsed) {
 		for (BaseCounter counter : counters)
 			counter.update(elapsed);
 	}

@@ -1,13 +1,14 @@
 package collisions;
 
 import actions.Attacking;
-import app.Player;
+import player.Player;
 import app.RPGGame;
 
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.collision.BasicCollisionGroup;
 
 import enemy.IEnemy;
+
 
 public class EnemyCollision extends BasicCollisionGroup {
 
@@ -25,7 +26,7 @@ public class EnemyCollision extends BasicCollisionGroup {
 		overlap(character, scenery);
 		Attacking attacking = (Attacking) player.getAction("attacking");
 		if (attacking.isActing()) {
-			enemy.reduceHealth();
+			enemy.addToHealth(-1);
 			if (enemy.getHealth() < 1) {
 				enemy.die();
 				game.getField().removeCollisionGroup(this);

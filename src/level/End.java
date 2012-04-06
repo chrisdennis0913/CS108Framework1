@@ -1,8 +1,10 @@
 package level;
 
+
 import java.awt.Graphics2D;
 
 import enemy.Snake;
+
 
 import scenery.Scenery;
 import app.Main;
