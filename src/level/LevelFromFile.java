@@ -2,12 +2,14 @@ package level;
 
 
 
+import inventory.ItemSub;
+
 import java.awt.Graphics2D;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +24,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
 
-import inventory.ItemSub;
 import enemy.Snake;
 
 
@@ -54,10 +55,26 @@ public class LevelFromFile extends Level{
         gameObjects.add(new Snake.Factory());
         Gson gson = new Gson();
         MapContainer maps = new MapContainer(npcs, enemies, scenery, items);
-		String[] event = FileUtil.fileRead(bsIO.getStream("savedmaps/map00.json"));		
+		String[] event = FileUtil.fileRead(new File("savedmaps/map00.json"));//fileRead(bsIO.getStream("savedmaps/map00.json"));	
+		List<String> events = new ArrayList<String>();
+		  try{
+			  FileInputStream fstream = new FileInputStream("savedmaps/map00.json");
+			  DataInputStream in = new DataInputStream(fstream);
+			  BufferedReader br = new BufferedReader(new InputStreamReader(in));
+			  String strLine;
+			  while ((strLine = br.readLine()) != null)   {
+				  events.add(strLine);
+				  System.out.println (strLine);
+			  }
+			  in.close();
+		    }
+		  catch (Exception e){//Catch exception if any
+		    	System.err.println("Error: " + e.getMessage());
+		  }		  
 		
-		for(int i=0;i<event.length; i++){
-			String json = event[i];
+		
+		for(int i=0;i<events.size(); i++){
+			String json = events.get(i);
 		    System.out.println("Using Gson.toJson() on a raw collection: " + json);
 		    JsonParser parser = new JsonParser();
 		    JsonArray array = parser.parse(json).getAsJsonArray();

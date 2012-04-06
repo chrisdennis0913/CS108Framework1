@@ -20,6 +20,8 @@ public class Snake extends Enemy {
 	private SystemTimer timer = new SystemTimer();
 	private boolean acting = false;
 	private long actionStartTime = 0;
+	// Used to give each snake a unique name
+	public static int numSnakes =0;
 
 	public Snake(RPGGame game, String name) {
 		super(game, name, 1);
