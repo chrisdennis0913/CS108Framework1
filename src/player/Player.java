@@ -27,6 +27,7 @@ public class Player {
 	private String startSprite = "resources/player/start_sprite.gif";
 	private Inventory myInventory= new Inventory();
 	private PlayerCounters pcs = new PlayerCounters(this);
+	private PlayerActions pas = new PlayerActions(this);
 	private HashMap<String, Action1> actions = new HashMap<String, Action1>();
 	private HashMap<String, ItemSub> inventoryWithNames = new HashMap<String, ItemSub>();
 
@@ -36,6 +37,10 @@ public class Player {
 
 	public PlayerCounters getPCs() {
 		return pcs;
+	}
+	
+	public PlayerActions getPAs() {
+		return pas;
 	}
 	
 	public void generate(int[] location) {
@@ -71,6 +76,7 @@ public class Player {
 
 	public void update() {
 		pcs.update(0);
+		pas.update(0);
 		for (String name : actions.keySet())
 			if (actions.get(name).isActionable(game))
 				actions.get(name).act(game);
@@ -78,6 +84,7 @@ public class Player {
 
 	public void render(Graphics2D g) {
 		pcs.render(g);
+		pas.render(g);
 		for (String name : actions.keySet()) {
 			Action1 action = actions.get(name);
 			if (action.isActing() && action.isActionable(game)
