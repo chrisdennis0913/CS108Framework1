@@ -1,7 +1,6 @@
 package player;
 
 import counters.GraphicalCounter;
-import enemy.Enemy;
 import enemy.IEnemy;
 
 public abstract class PlayerCounter extends GraphicalCounter{
@@ -17,6 +16,6 @@ public abstract class PlayerCounter extends GraphicalCounter{
 		return player;
 	}
 	
-	public abstract void enemy(IEnemy enemy);
+	public abstract void reactToEnemy(IEnemy enemy);
 
 }

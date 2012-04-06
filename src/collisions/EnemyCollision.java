@@ -34,7 +34,7 @@ public class EnemyCollision extends BasicCollisionGroup {
 			jump(character, scenery);
 		} else {
 			jump(character, scenery);
-			player.getPCs().enemy(enemy);
+			player.getPCs().reactToEnemy(enemy);
 		}
 	}
 

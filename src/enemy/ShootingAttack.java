@@ -8,7 +8,7 @@ import app.RPGGame;
 public class ShootingAttack extends AbstractAttackWithVector {
 
 	Timer timer;
-	
+
 	public ShootingAttack(RPGGame game, IEnemy enemy) {
 		super(game, enemy);
 		timer = new Timer(1000);
@@ -18,27 +18,27 @@ public class ShootingAttack extends AbstractAttackWithVector {
 
 	@Override
 	public void launchVector(double x, double y, double speedX, double speedY) {
-		new ShotVector(game, this ,x,y,speedX,speedY);
+		new ShotVector(game, this, x, y, speedX, speedY);
 	}
 
 	@Override
 	public void onCollision(Sprite vector, Sprite player) {
 		vector.setActive(false);
-		game.getPlayer().getPCs().addToHealth(-1);
+		game.getPlayer().getPCs().reactToEnemy(enemy);
 	}
 
 	@Override
 	public boolean isAttackValid(long elapsedTime) {
 		return timer.action(elapsedTime);
-		//return true;
+		// return true;
 	}
 
 	@Override
 	public void performAttack(long elapsedTime) {
-		if(isAttackValid(elapsedTime))
+		if (isAttackValid(elapsedTime))
 			launchVector();
 	}
-	
+
 	@Override
 	public int valueOfAttack() {
 		// TODO Auto-generated method stub

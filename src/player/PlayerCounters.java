@@ -2,7 +2,6 @@ package player;
 
 import counters.BaseCounter;
 import counters.BaseCounters;
-import enemy.Enemy;
 import enemy.IEnemy;
 
 public class PlayerCounters extends BaseCounters {
@@ -16,18 +15,14 @@ public class PlayerCounters extends BaseCounters {
 		getCounters().add(health);
 	}
 	
-	public void enemy(IEnemy enemy) {
+	public void reactToEnemy(IEnemy enemy) {
 		for (BaseCounter counter : getCounters()) {
 			PlayerCounter pcounter = (PlayerCounter) counter;
-			pcounter.enemy(enemy);
+			pcounter.reactToEnemy(enemy);
 		}
 	}
-
-	public int getHealth(){
-		return health.getCount();
-	}
 	
-	public void addToHealth(int delta){
-		health.increase(delta);
+	public BaseCounter getHealth() {
+		return health;
 	}
 }

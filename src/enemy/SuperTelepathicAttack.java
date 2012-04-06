@@ -22,7 +22,7 @@ public class SuperTelepathicAttack extends AbstractAttack {
 	public void performAttack(long elapsedTime) {
 		if(isAttackValid(elapsedTime)){
 			strikes--;
-			target.getPCs().addToHealth(-1);
+			target.getPCs().reactToEnemy(enemy);
 		}
 	}
 

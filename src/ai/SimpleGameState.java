@@ -12,7 +12,7 @@ public class SimpleGameState extends AbstractGameState {
 
 	@Override
 	public void extractGameInfo(RPGGame game) {
-		playerHealth = game.getPlayer().getPCs().getHealth();
+		playerHealth = game.getPlayer().getPCs().getHealth().getCount();
 	}
 	
 	@Override

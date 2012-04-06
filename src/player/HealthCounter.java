@@ -5,11 +5,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 
-
-
 import com.golden.gamedev.object.font.SystemFont;
 
-import enemy.Enemy;
 import enemy.IEnemy;
 
 
@@ -32,7 +29,7 @@ public class HealthCounter extends PlayerCounter {
 			getPlayer().getGame().finish();
 	}
 
-	public void enemy(IEnemy enemy) {
+	public void reactToEnemy(IEnemy enemy) {
 		decrease();
 	}
 	
