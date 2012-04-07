@@ -1,7 +1,5 @@
 package player;
 
-import inventory.Inventory;
-import inventory.ItemSub;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -18,6 +16,9 @@ import collisions.PlayerBoundaryCollision;
 
 import com.golden.gamedev.object.AnimatedSprite;
 import com.golden.gamedev.object.SpriteGroup;
+
+import inventory.Inventory;
+import inventory.ItemSub;
 
 
 public class Player {

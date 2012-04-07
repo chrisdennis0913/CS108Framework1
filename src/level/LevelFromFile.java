@@ -1,7 +1,6 @@
 package level;
 
 
-import inventory.ItemSub;
 
 import java.awt.Graphics2D;
 import java.io.BufferedReader;
@@ -23,7 +22,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
 
+import inventory.ItemSub;
 import enemy.Snake;
+
 
 public class LevelFromFile extends Level{
 	

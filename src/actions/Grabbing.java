@@ -1,8 +1,9 @@
 package actions;
 
-import inventory.ItemSub;
 
 import java.awt.event.KeyEvent;
+
+import inventory.ItemSub;
 
 import player.Player;
 import app.RPGGame;

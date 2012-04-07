@@ -1,7 +1,7 @@
 package enemy;
 
-import app.RPGGame;
 import inventory.ItemSub;
+import app.RPGGame;
 
 public class HealthMod extends ItemSub implements EnemyMod 
 {

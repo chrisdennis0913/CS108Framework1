@@ -1,5 +1,6 @@
 package player;
 
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -9,6 +10,7 @@ import java.awt.Graphics2D;
 import com.golden.gamedev.object.font.SystemFont;
 
 import enemy.Enemy;
+
 
 public class HealthCounter extends PlayerCounter {
 	

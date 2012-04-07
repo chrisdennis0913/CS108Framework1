@@ -1,12 +1,13 @@
 package collisions;
 
-import inventory.ItemSub;
 import java.util.HashMap;
 import actions.Grabbing;
 import app.RPGGame;
 
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.collision.BasicCollisionGroup;
+
+import inventory.ItemSub;
 
 public class ItemCollision extends BasicCollisionGroup {
 

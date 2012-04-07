@@ -13,12 +13,11 @@ import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
 import com.golden.gamedev.util.FileUtil;
 
-public abstract class NPC implements Jsonable{
+public abstract class NPC extends Sprite implements Jsonable{
 	protected static RPGGame game;
 	private SpriteGroup group;
 	private BufferedImage image;
 	private String name;
-	private String[] script;
 	private boolean canDie = false;
 	private boolean dead = false;
 	private NPCCollision collision;
@@ -30,8 +29,6 @@ public abstract class NPC implements Jsonable{
 		this.name = name;
 		this.group = new SpriteGroup(name+"_"+game2.getRandom(0, 10000));
 		this.image = game2.getImage("resources/npc/"+name+".gif");
-		String scriptURL = "resources/script/"+name+".txt";
-		script = FileUtil.fileRead(new File(scriptURL));
 	}
 	
 	public void add(int[] location, int layer) {
@@ -82,9 +79,5 @@ public abstract class NPC implements Jsonable{
 	
 	public SpriteGroup getGroup() {
 		return group;
-	}
-	
-	public String[] getScript() {
-		return script;
 	}
 }
