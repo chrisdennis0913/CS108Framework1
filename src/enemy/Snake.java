@@ -7,6 +7,7 @@ import java.util.Collection;
 import level.MapContainer;
 
 import scenery.Portal;
+import ai.SimpleAI;
 import app.RPGGame;
 import app.RWGameObject;
 
@@ -20,12 +21,23 @@ public class Snake extends Enemy {
 	private SystemTimer timer = new SystemTimer();
 	private boolean acting = false;
 	private long actionStartTime = 0;
+	// Used to give each snake a unique name
+	public static int numSnakes =0;
 
 	public Snake(RPGGame game, String name) {
 		super(game, name, 1);
 		timer.setFPS(100);
 		timer.startTimer();
 		setActing(false);
+		setAI(new SimpleAI(game,this));
+	}
+
+
+	@Override
+	public void initAttacks() {
+		super.initAttacks();
+		attacks.put("shooting", new ShootingAttack(game,this));
+		//attacks.put("supertelepathic", new SuperTelepathicAttack(game,this));
 	}
 
 	public void setActing(boolean acting) {
@@ -47,12 +59,6 @@ public class Snake extends Enemy {
 		setDead(true);
 		game.getLevel().addSceneryObject(
 				new Portal(game, "resources/scenery/portal.gif"));
-	}
-
-	public void act(long elapsed) {
-		if (!isDead())
-			getSprite().moveTo(elapsed, game.getPlayer().getCharacter().getX(),
-				game.getPlayer().getCharacter().getY(), 0.1);
 	}
 	
 	@Override

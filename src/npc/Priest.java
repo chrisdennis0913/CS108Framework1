@@ -21,7 +21,7 @@ import app.RWGameObject;
 public class Priest extends StationaryNPC {
 	
 	SimpleDialogue dialogue;
-
+	public static int numPriests =0;
 	public Priest(RPGGame game, String name) {
 		super(game, name);
 		setCanDie(true);
@@ -52,7 +52,7 @@ public class Priest extends StationaryNPC {
 		Gson gson = new Gson();
 		Collection collection = new ArrayList();
 	    collection.add("priest");
-	    collection.add("priest");
+	    collection.add(name);
 	    collection.add(location[0]);
 	    collection.add(location[1]);
 	    String json = gson.toJson(collection);
