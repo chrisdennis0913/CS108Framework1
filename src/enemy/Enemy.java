@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.ArrayList;
 
-import ai.AbstractAI;
+import AI.AbstractAI;
 import app.Jsonable;
 import app.RPGGame;
 import collisions.EnemyCollision;
