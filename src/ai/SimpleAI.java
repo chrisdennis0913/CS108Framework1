@@ -6,8 +6,8 @@ import java.util.Iterator;
 import enemy.AbstractAttack;
 import enemy.IEnemy;
 
+import ai.AbstractAI;
 import app.RPGGame;
-import AI.AbstractAI;
 
 public class SimpleAI extends AbstractAI {
 

@@ -1,4 +1,4 @@
-package AI;
+package ai;
 
 import enemy.AbstractAttack;
 import enemy.IEnemy;

@@ -10,13 +10,14 @@ public class PlayerActions extends BaseActions {
 	
 	public PlayerActions(Player player) {
 		this.player = player;
-		walking = new Walking(player);
-		standing = new Standing(player);
-		getActions().add(walking);
-		getActions().add(standing);
+//		walking = new Walking(player);
+//		standing = new Standing(player);
+//		getActions().add(walking);
+//		getActions().add(standing);
 	}
 	
 	public boolean isWalking() {
 		return walking.isActive();
 	}
 }
+//

@@ -8,7 +8,7 @@ import java.util.TreeMap;
 
 public class Inventory implements Iterable<ItemSub>
 {
-    private Map<ItemSub, Integer> myItemMap;
+    protected Map<ItemSub, Integer> myItemMap;
 
 
     public Inventory ()
