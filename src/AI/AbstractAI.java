@@ -1,8 +1,8 @@
-package AI;
+package ai;
 
+import app.RPGGame;
 import enemy.AbstractAttack;
 import enemy.IEnemy;
-import app.RPGGame;
 
 
 public abstract class AbstractAI{

@@ -8,7 +8,7 @@ import actions.Direction;
 import actions.Directions;
 
 public class Walking extends PlayerAction {
-	public Directions directions = new Directions();
+	private Directions directions = new Directions();
 
 	public Walking(Player player) {
 		super(player);
@@ -58,6 +58,10 @@ public class Walking extends PlayerAction {
 		};
 		directions.add(new PlayerDirection(player, rightImages, speed, 0,
 				KeyEvent.VK_RIGHT));
+	}
+	
+	public Direction getCurrentDirection() {
+		return directions.getCu
 	}
 
 	public void update(long elapsed) {

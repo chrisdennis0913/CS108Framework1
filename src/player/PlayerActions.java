@@ -1,12 +1,13 @@
 package player;
 
 import actions.BaseActions;
+import actions.Direction;
 
 public class PlayerActions extends BaseActions {
 
-	Player player;
-	Walking walking;
-	Standing standing;
+	private Player player;
+	private Walking walking;
+	private Standing standing;
 	
 	public PlayerActions(Player player) {
 		this.player = player;
@@ -14,6 +15,11 @@ public class PlayerActions extends BaseActions {
 		standing = new Standing(player);
 		getActions().add(walking);
 		getActions().add(standing);
+	}
+	
+	public Direction getCurrentDirection() {
+		walking
+		return null;
 	}
 	
 	public boolean isWalking() {

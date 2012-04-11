@@ -1,19 +1,20 @@
 package enemy;
 
 
+import inventory.ItemSub;
+
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.ArrayList;
 
-import AI.AbstractAI;
+import ai.AbstractAI;
 import app.Jsonable;
 import app.RPGGame;
 import collisions.EnemyCollision;
 
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
-import inventory.ItemSub;
 
 public abstract class Enemy implements Jsonable, IEnemy {
 
