@@ -2,6 +2,7 @@ package player;
 
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 
 import actions.Direction;
 import actions.Directions;
@@ -14,27 +15,69 @@ public class Walking extends PlayerAction {
 		setEnabled(true);
 
 		double speed = 0.1;
-		directions.add(new PlayerDirection(player, player.getGame().getIm, 0, speed,
+		BufferedImage[] upImages = new BufferedImage[] {
+				player.getGame().getImage("resources/player/walk/back_walk_1.png"),
+				player.getGame().getImage("resources/player/walk/back_walk_2.png"),
+				player.getGame().getImage("resources/player/walk/back_walk_3.png"),
+				player.getGame().getImage("resources/player/walk/back_walk_4.png"),
+				player.getGame().getImage("resources/player/walk/back_walk_5.png"),
+				player.getGame().getImage("resources/player/walk/back_walk_6.png")
+		};
+		directions.add(new PlayerDirection(player, upImages, 0, speed,
 				KeyEvent.VK_UP));
-		directions.add(new PlayerDirection(player, images, 0, -speed,
+		
+		BufferedImage[] downImages = new BufferedImage[] {
+				player.getGame().getImage("resources/player/walk/front_walk_1.png"),
+				player.getGame().getImage("resources/player/walk/front_walk_2.png"),
+				player.getGame().getImage("resources/player/walk/front_walk_3.png"),
+				player.getGame().getImage("resources/player/walk/front_walk_4.png"),
+				player.getGame().getImage("resources/player/walk/front_walk_5.png"),
+				player.getGame().getImage("resources/player/walk/front_walk_6.png")
+		};
+		directions.add(new PlayerDirection(player, downImages, 0, -speed,
 				KeyEvent.VK_DOWN));
-		directions.add(new PlayerDirection(player, images, -speed, 0,
+		
+		BufferedImage[] leftImages = new BufferedImage[] {
+				player.getGame().getImage("resources/player/walk/left_walk_1.png"),
+				player.getGame().getImage("resources/player/walk/left_walk_2.png"),
+				player.getGame().getImage("resources/player/walk/left_walk_3.png"),
+				player.getGame().getImage("resources/player/walk/left_walk_4.png"),
+				player.getGame().getImage("resources/player/walk/left_walk_5.png"),
+				player.getGame().getImage("resources/player/walk/left_walk_6.png"),
+		};
+		directions.add(new PlayerDirection(player, leftImages, -speed, 0,
 				KeyEvent.VK_LEFT));
-		directions.add(new PlayerDirection(player, images, speed, 0,
+		
+		BufferedImage[] rightImages = new BufferedImage[] {
+				player.getGame().getImage("resources/player/walk/right_walk_1.png"),
+				player.getGame().getImage("resources/player/walk/right_walk_2.png"),
+				player.getGame().getImage("resources/player/walk/right_walk_3.png"),
+				player.getGame().getImage("resources/player/walk/right_walk_4.png"),
+				player.getGame().getImage("resources/player/walk/right_walk_5.png"),
+				player.getGame().getImage("resources/player/walk/right_walk_6.png"),
+		};
+		directions.add(new PlayerDirection(player, rightImages, speed, 0,
 				KeyEvent.VK_RIGHT));
 	}
 
 	public void update(long elapsed) {
+		boolean checker = false;
 		if (isEnabled())
-			for (Direction direction : directions)
+			for (Direction direction : directions) {
 				if (getPlayer().getGame().keyDown(direction.getKey())) {
 					keyPress((PlayerDirection) direction);
+					checker = true;
+					break;
 				}
+			}
+		if (!checker)
+			setActive(false);
 	}
 
 	public void keyPress(PlayerDirection direction) {
-		getPlayer().getCharacter().setSpeed(direction.getHorSpeed(),
-				direction.getVerSpeed());
+		directions.setCurrentDirection(direction);
+		setActive(true);
+		direction.changeCharacter();
 	}
 
 	public void render(Graphics2D g) {
