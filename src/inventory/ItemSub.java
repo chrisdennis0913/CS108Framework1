@@ -11,8 +11,6 @@ public abstract class ItemSub implements Comparable<ItemSub>
     protected static RPGGame game;
     protected String myName;
     protected String category;
-    protected int myPrice = 0;
-    protected boolean forSale;
     protected SpriteGroup myGroup;
     protected BufferedImage image;
     protected Sprite mySprite;
@@ -24,31 +22,21 @@ public abstract class ItemSub implements Comparable<ItemSub>
     {}
 
 
-    public ItemSub (RPGGame game2, String name, String gifName, String categ, boolean sale, int price)
+    public ItemSub (RPGGame game2, String name, String gifName, String categ)
     {
         ItemSub.game= game2;
         this.myName = name;
         myGroup = new SpriteGroup(myName);
         this.image= game2.getImage("resources/items/" + gifName + ".gif");
         category = categ;
-        forSale = sale;
-        if (forSale)
-        {
-            myPrice = price;
-        }
     }
-    public ItemSub (RPGGame game2, String name, String gifName, boolean sale, int price)
+    public ItemSub (RPGGame game2, String name, String gifName)
     {
         ItemSub.game=game2;
         this.myName = name;
         category = "Item";
-        forSale = sale;
         myGroup = new SpriteGroup(myName);
         this.image= game2.getImage("resources/items/" + gifName + ".gif");
-        if (forSale)
-        {
-            myPrice = price;
-        }
     }
 
 
@@ -89,22 +77,11 @@ public abstract class ItemSub implements Comparable<ItemSub>
     }
 
 
-    public int getPrice ()
-    {
-        return myPrice;
-    }
-
-
     public String getCategory ()
     {
         return category;
     }
 
-
-    public boolean isForSale ()
-    {
-        return forSale;
-    }
 
 
     /**
@@ -115,12 +92,7 @@ public abstract class ItemSub implements Comparable<ItemSub>
         StringBuffer result = new StringBuffer();
         result.append("(");
         result.append(myName + " ");
-        result.append("is a " + category + " ");
-        if (forSale)
-        {
-            result.append("is sold at " + myPrice + ".");
-        }
-        else result.append("is not for sale.");
+        result.append("is a " + category + ".");
         result.append(")");
 
         return result.toString();
@@ -138,7 +110,6 @@ public abstract class ItemSub implements Comparable<ItemSub>
     {
         if (category != it.getCategory()) return category.compareTo(it.getCategory());
         if (myName != it.getName()) return myName.compareTo(it.getName());
-        if (forSale && it.isForSale()) return myPrice - it.getPrice();
         return 0;
     }
 
@@ -162,34 +133,17 @@ public abstract class ItemSub implements Comparable<ItemSub>
         String[] parseArray = toParse.split(",");
         return parseArray[0].trim();
     }
+    
     public String parseGifName (String toParse)
     {
         String[] parseArray = toParse.split(",");
         return parseArray[1].trim();
     }
-    
-
 
     public String parseCategory (String toParse)
     {
         String[] parseArray = toParse.split(",");
         return parseArray[2].trim();
-    }
-
-
-    public boolean parseSale (String toParse)
-    {
-        String[] parseArray = toParse.split(",");
-        return !parseArray[3].trim().equals("false");
-    }
-
-
-    public int parsePrice (String toParse)
-    {
-        String[] parseArray = toParse.split(",");
-        if (parseArray.length < 4) throw new MakeItemsException("Improper format for including price: " +
-                                                                toParse);
-        return Integer.parseInt(parseArray[4].trim());
     }
 
 }

@@ -26,11 +26,9 @@ public class Weapon extends ItemSub
 
     private Weapon (RPGGame game2, String name,
                     String gifName,
-                   boolean sale,
-                   int price,
                    int damage)
     {
-        super(game2, name, gifName, sale, price);
+        super(game2, name, gifName);
         myDamage = damage;
         category = "Weapon";
         equipped = false;
@@ -50,22 +48,11 @@ public class Weapon extends ItemSub
     @Override
     public ItemSub parseItem (RPGGame game2, String toParse)
     {
-        if (!super.parseSale(toParse))
-            return parseWeaponNotForSale(game2, toParse);
         return new Weapon(game2, super.parseName(toParse),
                           super.parseGifName(toParse),
-                          true,
-                          super.parsePrice(toParse),
                           parseDamage(toParse));
     }
-    public ItemSub parseWeaponNotForSale (RPGGame game2, String toParse)
-    {
-        return new Weapon(game2, super.parseName(toParse),
-                          super.parseGifName(toParse),
-                          false,
-                          0,
-                          parseDamage(toParse));
-    }
+
 
     public int getDamage ()
     {
@@ -99,12 +86,7 @@ public class Weapon extends ItemSub
         StringBuffer result = new StringBuffer();
         result.append("(");
         result.append(myName + " ");
-        result.append("is a weapon which does " + myDamage+ " damage and ");
-        if (forSale)
-        {
-            result.append("is sold at " + myPrice + ".");
-        }
-        else result.append("is not for sale.");
+        result.append("is a weapon which does " + myDamage+ " damage.");
         result.append(")");
 
         return result.toString();
@@ -122,9 +104,7 @@ public class Weapon extends ItemSub
     {
         if (myDamage != wp.getDamage()) return myDamage - wp.getDamage();
         if (myName != wp.getName()) return myName.compareTo(wp.getName());
-        if (forSale && wp.isForSale()) return myPrice - wp.getPrice();
         return 0;
-
     }
 
 }

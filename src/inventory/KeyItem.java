@@ -20,11 +20,9 @@ public class KeyItem extends ItemSub
         
     }
 
-    public KeyItem (RPGGame game2, String name, String gifName,
-                   boolean sale,
-                   int price)
+    public KeyItem (RPGGame game2, String name, String gifName)
     {
-        super(game2, name, gifName, sale, price);
+        super(game2, name, gifName);
         category = "Key Item";
         game2.addItems(this);
     }
@@ -42,20 +40,9 @@ public class KeyItem extends ItemSub
     @Override
     public ItemSub parseItem (RPGGame game2, String toParse)
     {
-        if (!super.parseSale(toParse))
-            return parseItemNotForSale(game2, toParse);
         return new KeyItem(game2, 
                            super.parseName(toParse),
-                           super.parseGifName(toParse),
-                          true,
-                          super.parsePrice(toParse));
-    }
-    public ItemSub parseItemNotForSale (RPGGame game2, String toParse)
-    {
-        return new KeyItem(game2, super.parseName(toParse),
-                           super.parseGifName(toParse),
-                          false,
-                          0);
+                           super.parseGifName(toParse));
     }
 
     public static ItemFactory getFactory(){

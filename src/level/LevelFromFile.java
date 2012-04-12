@@ -1,9 +1,6 @@
 package level;
 
-
-
 import inventory.ItemSub;
-
 import java.awt.Graphics2D;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -12,74 +9,73 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-
 import npc.Priest;
 import scenery.Scenery;
 import app.RPGGame;
 import app.RWGameObject;
-
 import com.golden.gamedev.engine.BaseIO;
 import com.golden.gamedev.util.FileUtil;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
-
 import enemy.Snake;
 
 
-public class LevelFromFile extends Level{
-	
-	private String[] fileLines;
-	private List<RWGameObject> gameObjects;
-		
+public class LevelFromFile extends Level
+{
+
+    private String[] fileLines;
+    private List<RWGameObject> gameObjects;
+
+
     public LevelFromFile (RPGGame game, String levelFilename)
     {
-        super(game);        
-        
+        super(game);
+
         Priest priest = new Priest(game, "priest");
-        Snake snake = new Snake(game, "snake");     
-        
+        Snake snake = new Snake(game, "snake");
+
         gameObjects = new ArrayList<RWGameObject>();
         gameObjects.add(new Priest.Factory());
         gameObjects.add(new Snake.Factory());
         Gson gson = new Gson();
         MapContainer maps = new MapContainer(npcs, enemies, scenery, items);
-		String[] event = FileUtil.fileRead(new File("savedmaps/"+levelFilename));			
-		
-		for(int i=0;i<event.length; i++){
-			String json = event[i];
-		    System.out.println("Using Gson.toJson() on a raw collection: " + json);
-		    JsonParser parser = new JsonParser();
-		    JsonArray array = parser.parse(json).getAsJsonArray();
-		    String tag = gson.fromJson(array.get(0), String.class);	
-			for(int j=0; j< gameObjects.size();j++){
-				if(gameObjects.get(j).isThisKindOfObject(tag)){
-					gameObjects.get(j).createAndAddToMap(json, maps);
-				}
-			}
-		}
+        String[] event =
+            FileUtil.fileRead(new File("savedmaps/" + levelFilename));
+
+        for (int i = 0; i < event.length; i++)
+        {
+            String json = event[i];
+            System.out.println("Using Gson.toJson() on a raw collection: " +
+                               json);
+            JsonParser parser = new JsonParser();
+            JsonArray array = parser.parse(json).getAsJsonArray();
+            String tag = gson.fromJson(array.get(0), String.class);
+            for (int j = 0; j < gameObjects.size(); j++)
+            {
+                if (gameObjects.get(j).isThisKindOfObject(tag))
+                {
+                    gameObjects.get(j).createAndAddToMap(json, maps);
+                }
+            }
+        }
     }
 
 
     protected void addNPCs ()
     {
         /*
-    	Priest priest = new Priest(game, "priest");
-        int[] loc =
-            new int[] {
-                    game.getBG().getWidth() / 2 - priest.getImage().getWidth() /
-                            4,
-                    90 };
-        priest.add(loc, 6);
-        npcs.put("priest", priest);
-        */
+         * Priest priest = new Priest(game, "priest"); int[] loc = new int[] {
+         * game.getBG().getWidth() / 2 - priest.getImage().getWidth() / 4, 90 };
+         * priest.add(loc, 6); npcs.put("priest", priest);
+         */
     }
 
 
     protected void addScenery ()
     {
-        
-    	Scenery shrubs = new Scenery(game, "resources/scenery/plant.gif");
+
+        Scenery shrubs = new Scenery(game, "resources/scenery/plant.gif");
         int reverser = -1;
         int leveler = 0;
         for (int i = 1; i <= 10; i++)
@@ -114,13 +110,21 @@ public class LevelFromFile extends Level{
     protected void addItems ()
     {
         ItemSub sword =
-            MI.parseExpression("Golden Sword of Paradise, sword, Weapon, true, 100, 55");
+            MI.parseExpression("Golden Sword of Paradise, sword, Weapon, 55");
         int[] loc =
             new int[] {
                     game.getBG().getWidth() / 2 - 10,
                     game.getBG().getHeight() / 4 * 3 };
         sword.add(loc, 0);
         items.put("sword", sword);
+        ItemSub potion =
+            MI.parseExpression("Super Potion, potion, HealthPotion, 5");
+        int[] potLoc =
+            new int[] {
+                    game.getBG().getWidth() / 3 * 2,
+                    game.getBG().getHeight() / 4 * 3 };
+        potion.add(potLoc, 0);
+        items.put("potion", potion);
     }
 
 
@@ -128,19 +132,18 @@ public class LevelFromFile extends Level{
     {
         if (game.getDialog().getMessage().equals("")) game.getDialog()
                                                           .setMessage("Press \"enter\" to talk to NPCs and pick up objects.");
-	        if (getLevelTime() < 1500) game.getDialog().showMessage(g);
-	    }
+        if (getLevelTime() < 1500) game.getDialog().showMessage(g);
+    }
 
 
-	    public void nextLevel ()
-	    {
-	        game.setLevel(new End(game));
-	        game.getLevel().generate();
-	    }
+    public void nextLevel ()
+    {
+        game.setLevel(new End(game));
+        game.getLevel().generate();
+    }
 
 
-	    protected void addEnemies ()
-	    {}
+    protected void addEnemies ()
+    {}
 
-	
 }

@@ -1,7 +1,6 @@
 package level;
 
 import java.awt.Graphics2D;
-
 import inventory.ItemSub;
 import npc.Priest;
 import scenery.Scenery;
@@ -68,13 +67,22 @@ public class Start extends Level
     protected void addItems ()
     {
         ItemSub sword =
-            MI.parseExpression("Golden Sword of Paradise, sword, Weapon, true, 100, 55");
-        int[] loc =
+            MI.parseExpression("Golden Sword within Start, sword, Weapon, 55");
+        int[] swordLoc =
             new int[] {
                     game.getBG().getWidth() / 2 - 10,
                     game.getBG().getHeight() / 4 * 3 };
-        sword.add(loc, 0);
+        sword.add(swordLoc, 0);
         items.put("sword", sword);
+        
+        ItemSub potion =
+            MI.parseExpression("SuperPotion within Start, sword, HealthPotion, 5");
+        int[] potLoc =
+            new int[] {
+                    game.getBG().getWidth() / 2 - 10,
+                    game.getBG().getHeight() / 4 * 3 + 10 };
+        potion.add(potLoc, 0);
+        items.put("potion", potion);
     }
 
 
