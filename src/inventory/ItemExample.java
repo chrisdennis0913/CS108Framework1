@@ -12,9 +12,5 @@ public class ItemExample
         gameInventory.add(MI.parseExpression("Master Key, KeyItem, false"));
         gameInventory.add(MI.parseExpression("Skeleton Key, KeyItem, true, 85"));
         gameInventory.add(MI.parseExpression("Room Key, KeyItem, true, 130"));
-        for (ItemSub itm : gameInventory)
-        {
-            System.out.println(itm);
-        }
     }
 }
