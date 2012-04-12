@@ -1,6 +1,5 @@
 package collisions;
 
-import actions.Attacking;
 import player.Player;
 import app.RPGGame;
 
@@ -24,8 +23,7 @@ public class EnemyCollision extends BasicCollisionGroup {
 
 	public void collided(Sprite character, Sprite scenery) {
 		overlap(character, scenery);
-		Attacking attacking = (Attacking) player.getAction("attacking");
-		if (attacking.isActing()) {
+		if (player.getActions().isAttacking()) {
 			enemy.addToHealth(-1);
 			if (enemy.getHealth() < 1) {
 				enemy.die();

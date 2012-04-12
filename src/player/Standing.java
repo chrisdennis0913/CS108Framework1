@@ -6,10 +6,10 @@ public class Standing extends PlayerAction {
 
 	private PlayerDirections directions;
 
-	public Standing(PlayerActions pas) {
-		super(pas);
+	public Standing(Player player) {
+		super(player);
 		setEnabled(true);
-		directions = new PlayerDirections(pas.getPlayer(),
+		directions = new PlayerDirections(getPlayer(),
 				"resources/player/actions/standing.json");
 	}
 

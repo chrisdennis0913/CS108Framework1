@@ -1,6 +1,5 @@
 package player;
 
-import java.awt.image.BufferedImage;
 import java.util.List;
 
 import actions.BaseActions;
@@ -9,15 +8,17 @@ import actions.Directions.Cardinal;
 public class PlayerActions extends BaseActions {
 
 	private Player player;
+	private Cardinal curDirection;
 	private Walking walking;
 	private Standing standing;
 	private Attacking attacking;
 	
 	public PlayerActions(Player player) {
 		this.player = player;
-		walking = new Walking(this);
-		standing = new Standing(this);
-		attacking = new Attacking(this);
+		curDirection = Cardinal.DOWN;
+		walking = new Walking(player);
+		standing = new Standing(player);
+		attacking = new Attacking(player);
 		getActions().add(walking);
 		getActions().add(standing);
 		getActions().add(attacking);
@@ -30,21 +31,17 @@ public class PlayerActions extends BaseActions {
 		return true;
 	}
 	
-	public void switchForAttack(boolean theswitch) {
+	public void enableNonAttack(boolean theswitch) {
 		walking.setEnabled(theswitch);
 		standing.setEnabled(theswitch);
 	}
 	
-	public BufferedImage getImage(String url) {
-		return player.getGame().getImage(url);
-	}
-	
-	public Player getPlayer() {
-		return player;
-	}
-	
 	public Cardinal getCurrentDirection() {
-		return walking.getCurrentDirection();
+		return curDirection;
+	}
+	
+	public void setCurrentDirection(Cardinal direction) {
+		curDirection = direction;
 	}
 	
 	public boolean isWalking() {
@@ -55,4 +52,3 @@ public class PlayerActions extends BaseActions {
 		return attacking.isActive();
 	}
 }
-//

@@ -8,6 +8,8 @@ public abstract class BaseAction {
 	public abstract void update(long elapsed);
 	
 	public void setEnabled(boolean enabled) {
+		if (enabled == false)
+			active = false;
 		this.enabled = enabled;
 	}
 	

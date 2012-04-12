@@ -6,10 +6,10 @@ import actions.Directions.Cardinal;
 public class Walking extends PlayerAction {
 	private PlayerDirections directions;
 
-	public Walking(PlayerActions pas) {
-		super(pas);
+	public Walking(Player player) {
+		super(player);
 		setEnabled(true);
-		directions = new PlayerDirections(pas.getPlayer(),
+		directions = new PlayerDirections(player,
 				"resources/player/actions/walking.json");
 	}
 
@@ -36,7 +36,6 @@ public class Walking extends PlayerAction {
 
 	public void keyPress(PlayerDirection direction, boolean isSame) {
 		directions.setCurrentDirection(direction.getCardinality());
-		System.out.println(direction.getCardinality());
 		direction.changeCharacter(!isActive() || !isSame, 100);
 		setActive(true);
 	}

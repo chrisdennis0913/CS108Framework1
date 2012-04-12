@@ -12,24 +12,25 @@ public class Attacking extends PlayerAction {
 	private TreeSet<ItemSub> myWeaponList = new TreeSet<ItemSub>();
 	private long timer = 0;
 
-	public Attacking(PlayerActions pas) {
-		super(pas);
+	public Attacking(Player player) {
+		super(player);
 		setEnabled(false);
-		directions = new PlayerDirections(pas.getPlayer(),
+		directions = new PlayerDirections(getPlayer(),
 				"resources/player/actions/attacking.json");
 	}
 
 	public boolean isEnabled() {
-		Player player = getActions().getPlayer();
-		for (ItemSub itm : player.getGame().getInventory()) {
-			myWeaponList.add(itm);
-		}
-		for (ItemSub itm : myWeaponList) {
-			if (player.hasItem(itm)) {
-				return true;
-			}
-		}
-		return false;
+//		Player player = getActions().getPlayer();
+//		for (ItemSub itm : player.getGame().getInventory()) {
+//			myWeaponList.add(itm);
+//		}
+//		for (ItemSub itm : myWeaponList) {
+//			if (player.hasItem(itm)) {
+//				return true;
+//			}
+//		}
+//		return false;
+		return true;
 	}
 	
 	private void reset() {
@@ -37,21 +38,28 @@ public class Attacking extends PlayerAction {
 	}
 
 	public void update(long elapsed) {
-		System.out.println(elapsed);
 		if (isEnabled()) {
 			if (!isActive()) {
 				PlayerDirection direction = (PlayerDirection) directions
 						.getDirections()[0];
-				timer += elapsed;
 				if (getActions().checkKeys(direction.getKeys()))
 					for (Direction dir : directions) {
 						if (getActions().getCurrentDirection().equals(
 								dir.getCardinality())) {
-							dir.changeCharacter(true, 0);
+							dir.changeCharacter(true, 150);
 							setActive(true);
+							getActions().enableNonAttack(false);
 							break;
 						}
 					}
+			}
+			else {
+				timer += elapsed;
+				if (timer > 500) {
+					reset();
+					setActive(false);
+					getActions().enableNonAttack(true);
+				}
 			}
 		}
 	}

@@ -7,12 +7,6 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
-import actions.Action1;
-import actions.Attacking;
-import actions.Grabbing;
-import actions.Standing;
-import actions.Talking;
-import actions.Walking;
 import app.RPGGame;
 import collisions.PlayerBoundaryCollision;
 
@@ -27,33 +21,26 @@ public class Player {
 	private String startSprite = "resources/player/start_sprite.gif";
 	private PlayerInventory myInventory= new PlayerInventory(game);
 	private PlayerCounters pcs = new PlayerCounters(this);
-	private HashMap<String, Action1> actions = new HashMap<String, Action1>();
+	private PlayerActions pas;
 	private HashMap<String, ItemSub> inventoryWithNames = new HashMap<String, ItemSub>();
 
 	public Player(RPGGame rpgGame) {
 		this.game = rpgGame;
 		myInventory = new PlayerInventory(game);
+		pas = new PlayerActions(this);
 	}
 
 	public PlayerCounters getPCs() {
 		return pcs;
 	}
 	
+	public PlayerActions getActions() {
+		return pas;
+	}
+	
 	public void generate(int[] location) {
 		initCharacter(location);
 		initCollisions();
-		initActions();
-	}
-
-	private void initActions() {
-		actions.put("walking", new Walking(this, 6, "walk"));
-		actions.put("standing", new Standing(this, 1, "stand",
-				(Walking) actions.get("walking")));
-		actions.put("talking", new Talking(this, 1, "stand"));
-		actions.put("grabbing", new Grabbing(this, 1, "stand"));
-        for (ItemSub itm : game.getInventory())
-            System.out.println(itm + "in Player");
-		actions.put("attacking", new Attacking(this, 3, "attack", game));
 	}
 
 	private void initCharacter(int[] location) {
@@ -70,34 +57,14 @@ public class Player {
 				new PlayerBoundaryCollision(game.getBG()));
 	}
 
-	public void update() {
-		pcs.update(0);
-		for (String name : actions.keySet())
-			if (actions.get(name).isActionable(game))
-				actions.get(name).act(game);
-        if (game.keyPressed(java.awt.event.KeyEvent.VK_I))
-        {
-            myInventory.toggleShow();
-        }
+	public void update(long elapsed) {
+		pcs.update(elapsed);
+		pas.update(elapsed);
 	}
 
 	public void render(Graphics2D g) {
 		pcs.render(g);
-		for (String name : actions.keySet()) {
-			Action1 action = actions.get(name);
-			if (action.isActing() && action.isActionable(game)
-					&& action.isMessageable())
-				game.getDialog().showMessage(g);
-		}
-		myInventory.showInventory(g);
-	}
-
-	public Action1 getAction(String name) {
-		return actions.get(name);
-	}
-	
-	public HashMap<String, Action1> getActions() {
-		return actions;
+		pas.render(g);
 	}
 
 	public RPGGame getGame() {

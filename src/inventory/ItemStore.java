@@ -11,7 +11,7 @@ public class ItemStore
     private Map<String, ArrayList<ItemSub>> itemsByCategory;
     
     public ItemStore(RPGGame game){
-        myInventory = new Inventory(game);
+        myInventory = new Inventory();
         itemsByCategory= new TreeMap<String, ArrayList<ItemSub>>();
     }
     

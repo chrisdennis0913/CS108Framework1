@@ -23,11 +23,11 @@ public class ItemCollision extends BasicCollisionGroup {
 	}
 	
 	public void collided(Sprite character, Sprite item) {
-		Grabbing grabbing = (Grabbing) game.getPlayer().getAction("grabbing");
-		if (!grabbing.isActionable(game)) {
-			grabbing.setActionable(true);
-			grabbing.setGrabItem(itemSpriteMap.get(item));
-		}
+//		Grabbing grabbing = (Grabbing) game.getPlayer().getAction("grabbing");
+//		if (!grabbing.isActionable(game)) {
+//			grabbing.setActionable(true);
+//			grabbing.setGrabItem(itemSpriteMap.get(item));
+//		}
 	}
 
 }
