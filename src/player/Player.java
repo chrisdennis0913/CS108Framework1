@@ -1,10 +1,11 @@
 package player;
 
 
+import inventory.ItemSub;
+import inventory.PlayerInventory;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
-
 import actions.Action1;
 import actions.Attacking;
 import actions.Grabbing;
@@ -13,13 +14,8 @@ import actions.Talking;
 import actions.Walking;
 import app.RPGGame;
 import collisions.PlayerBoundaryCollision;
-
 import com.golden.gamedev.object.AnimatedSprite;
 import com.golden.gamedev.object.SpriteGroup;
-
-import inventory.Inventory;
-import inventory.ItemSub;
-import inventory.PlayerInventory;
 
 
 public class Player {
@@ -27,7 +23,7 @@ public class Player {
 	private SpriteGroup group = new SpriteGroup("Player");
 	private AnimatedSprite character;
 	private String startSprite = "resources/player/start_sprite.gif";
-	private Inventory myInventory= new PlayerInventory(game);
+	private PlayerInventory myInventory= new PlayerInventory(game);
 	private PlayerCounters pcs = new PlayerCounters(this);
 	private PlayerActions pas = new PlayerActions(this);
 	private HashMap<String, Action1> actions = new HashMap<String, Action1>();
@@ -35,6 +31,7 @@ public class Player {
 
 	public Player(RPGGame rpgGame) {
 		this.game = rpgGame;
+		myInventory = new PlayerInventory(game);
 	}
 
 	public PlayerCounters getPCs() {
@@ -82,6 +79,10 @@ public class Player {
 		for (String name : actions.keySet())
 			if (actions.get(name).isActionable(game))
 				actions.get(name).act(game);
+        if (game.keyPressed(java.awt.event.KeyEvent.VK_I))
+        {
+            myInventory.toggleShow();
+        }
 	}
 
 	public void render(Graphics2D g) {
@@ -93,6 +94,7 @@ public class Player {
 					&& action.isMessageable())
 				game.getDialog().showMessage(g);
 		}
+		myInventory.showInventory(g);
 	}
 
 	public Action1 getAction(String name) {

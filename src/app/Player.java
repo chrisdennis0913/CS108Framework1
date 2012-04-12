@@ -21,13 +21,15 @@ public class Player {
 	private SpriteGroup group = new SpriteGroup("Player");
 	private AnimatedSprite character;
 	private String startSprite = "resources/player/start_sprite.gif";
-	private Inventory myInventory = new Inventory();
+	private Inventory myInventory = new Inventory(game);
 	private Integer health = 10;
 	private HashMap<String, Action1> actions = new HashMap<String, Action1>();
 	private HashMap<String, ItemSub> inventoryWithNames = new HashMap<String, ItemSub>();
 
 	public Player(RPGGame rpgGame) {
-		this.game = rpgGame;
+		System.out.println("This version of player");
+	    this.game = rpgGame;
+		
 	}
 
 	public void generate(int[] location) {

@@ -10,50 +10,52 @@ import com.golden.gamedev.object.font.SystemFont;
 
 public class PlayerInventory extends Inventory
 {
-    private RPGGame game;
-    
-    public PlayerInventory(RPGGame game){
-        this.game=game;
+    public boolean showInventory=false;
+    public PlayerInventory (RPGGame rpggame)
+    {
+        super(rpggame);
     }
+
+
     public ItemSub getItem (String itemName)
     {
         return null;
     }
 
 
-    public void showMessage (Graphics2D g)
-    {
-        myItemMap.keySet();
-        ItemSub[] itemSubArray = (ItemSub[]) myItemMap.keySet().toArray();
-
+    public void showInventory (Graphics2D g)
+    {  
+        if (!showInventory)
+            return;
         SystemFont font =
             new SystemFont(new Font("Arial", Font.BOLD, 12), new Color(255,
                                                                        255,
                                                                        255));
         drawFiveItemBoxes(g);
-
-        for (int num = 0; num < 5; num++)
+        int iter = 0;
+        for (ItemSub currentItem : this)
         {
-            ItemSub currentItem = itemSubArray[num];
+            if (iter > 5) break;
             String currentItemName = currentItem.getName();
             if (currentItemName == null) continue;
-            if (currentItemName.length() > 20)
+            if (currentItemName.length() > 12)
             {
-                currentItemName = currentItemName.substring(0, 20) + "...";
+                currentItemName = currentItemName.substring(0, 12) + "...";
             }
             font.drawText(g,
                           currentItemName,
                           SystemFont.LEFT,
-                          (num * 70) + 5,
+                          (iter * 70) + 5,
                           345,
                           70,
                           2,
                           0);
             Sprite item =
-                new Sprite(game.getImage("resources/items/sword.gif"),
-                           num * 70 + 5,
+                new Sprite(currentItem.image,
+                           iter * 70 + 5,
                            360);
             item.render(g);
+            iter++;
         }
     }
 
@@ -71,7 +73,12 @@ public class PlayerInventory extends Inventory
         g.fillRect(245, 340, 70, 50);
         g.drawRect(325, 340, 70, 50); //item five
         g.fillRect(325, 340, 70, 50);
-
     }
-
+    public void toggleShow(){
+        showInventory=!showInventory;
+    }
+    public void turnShowOff(){
+        showInventory=false;
+    }
+    
 }

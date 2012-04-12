@@ -43,7 +43,7 @@ public class RPGGame extends GameObject
         field = new PlayField();
         field.setBackground(bg);
         dialog = new Dialog();
-        myInventory = new Inventory();
+        myInventory = new Inventory(this);
 
         player = new Player(this);
         int[] loc =

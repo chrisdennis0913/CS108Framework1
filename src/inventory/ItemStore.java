@@ -3,16 +3,18 @@ package inventory;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
+import app.RPGGame;
 
 public class ItemStore
 {
     private Inventory myInventory;
     private Map<String, ArrayList<ItemSub>> itemsByCategory;
     
-    public ItemStore(){
-        myInventory = new Inventory();
+    public ItemStore(RPGGame game){
+        myInventory = new Inventory(game);
         itemsByCategory= new TreeMap<String, ArrayList<ItemSub>>();
     }
+    
     public void addItems(ItemSub itm, int quantity){
         myInventory.add(itm, quantity);
         

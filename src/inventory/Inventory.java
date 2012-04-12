@@ -4,15 +4,18 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
+import app.RPGGame;
 
 
 public class Inventory implements Iterable<ItemSub>
 {
     protected Map<ItemSub, Integer> myItemMap;
+    protected RPGGame myGame;
 
 
-    public Inventory ()
+    public Inventory (RPGGame game)
     {
+        myGame=game;
         myItemMap = new TreeMap<ItemSub, Integer>();
     }
 
@@ -63,8 +66,6 @@ public class Inventory implements Iterable<ItemSub>
     }
     
     public boolean contains(ItemSub itm){
-        System.out.println(myItemMap);
-        System.out.println(itm);
         return myItemMap.containsKey(itm);
     }
 
