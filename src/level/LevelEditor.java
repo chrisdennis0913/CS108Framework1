@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Scanner;
 
+import saving_loading.AttributeContainer;
+
 import npc.Priest;
 
 import app.Dialog;
@@ -33,7 +35,7 @@ import enemy.Snake;
  * Home			: fast prev tile
  * Right click	: select tile
  * Click		: put tile
- * Ctrl + S		: save
+ * S		: save
  */
 public class LevelEditor extends GameObject {
 
@@ -115,6 +117,7 @@ public class LevelEditor extends GameObject {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}   
+				System.out.println("Level Saved!");
 				finish();
 				break;
 			}
@@ -140,17 +143,17 @@ public class LevelEditor extends GameObject {
 		
 		if (gameState == PRIEST)
 		{
-//			Scanner in = new Scanner(System.in);
-//						
-//			while(x<0){
-//				System.out.println("Enter x coordinate:");
-//				x = in.nextInt();
-//			}
-//			while(y<0){
-//				System.out.println("Enter y coordinate:");
-//				y = in.nextInt();
-//			}
-//			in.close();
+			Scanner in = new Scanner(System.in);
+						
+			while(x<0){
+				System.out.println("Enter x coordinate:");
+				x = in.nextInt();
+			}
+			while(y<0){
+				System.out.println("Enter y coordinate:");
+				y = in.nextInt();
+			}
+			in.close();
 			switch (bsInput.getKeyPressed()) {
 			case KeyEvent.VK_1 :
 				x = 10; y =10;
@@ -183,35 +186,30 @@ public class LevelEditor extends GameObject {
 			
 			g.drawImage(priest, x, y, null);
 			gameState = PICKING;
-			//create the priest
-			int[] location = new int[]{x,y};
-			Collection collection = new ArrayList();
-			//add tag
-		    collection.add("priest");
-		    //add name
-		    collection.add("priest_"+Priest.numPriests);
-		    Priest.numPriests++;
-		    collection.add(location[0]);
-		    collection.add(location[1]);
-		    String json = gson.toJson(collection);
-			jsonStrings.add(json);
+			
+			Priest.numPriests++;
+			AttributeContainer priestAttributes = new AttributeContainer();
+			priestAttributes.put("name", "priest_"+Priest.numPriests);
+			priestAttributes.put("type", "priest");
+			priestAttributes.put("location", new int[]{x,y});		    
+			jsonStrings.add(priestAttributes.asJsonString());
 		}
 		
 		if (gameState == ENEMY)
 		{
-//			Scanner in = new Scanner(System.in);
-//			
-//			int x =-1;
-//			int y=-1;
-//			while(x<0){
-//				System.out.println("Enter x coordinate:");
-//				x = in.nextInt();
-//			}
-//			while(y<0){
-//				System.out.println("Enter y coordinate:");
-//				y = in.nextInt();
-//			}
-//			in.close(); 
+			Scanner in = new Scanner(System.in);
+			
+			int x =-1;
+			int y=-1;
+			while(x<0){
+				System.out.println("Enter x coordinate:");
+				x = in.nextInt();
+			}
+			while(y<0){
+				System.out.println("Enter y coordinate:");
+				y = in.nextInt();
+			}
+			in.close(); 
 			
 			switch (bsInput.getKeyPressed()) {
 				case KeyEvent.VK_1 :
@@ -245,16 +243,13 @@ public class LevelEditor extends GameObject {
 			
 			g.drawImage(enemy, x, y, null);
 			gameState = PICKING;
-			int[] location = new int[]{x,y};
-			Collection collection = new ArrayList();
-		    collection.add("snake");
-		    collection.add("snake_"+Snake.numSnakes);
-		    Snake.numSnakes++;
-		    collection.add(location[0]);
-		    collection.add(location[1]);
-		    String json = gson.toJson(collection);
-		    jsonStrings.add(json);
-		    
+			
+			Snake.numSnakes++;
+			AttributeContainer snakeAttributes = new AttributeContainer();
+			snakeAttributes.put("name", "snake_"+Snake.numSnakes);
+			snakeAttributes.put("type", "snake");
+			snakeAttributes.put("location", new int[]{x,y});
+		    jsonStrings.add(snakeAttributes.asJsonString());		    
 		}
 		
 		g.drawString("Add priest", 325, 300);

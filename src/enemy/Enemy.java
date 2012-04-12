@@ -8,13 +8,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
+import saving_loading.AttributeContainer;
+import saving_loading.Jsonable;
+
 import ai.AbstractAI;
-import app.Jsonable;
 import app.RPGGame;
 import collisions.EnemyCollision;
 
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
+import com.google.gson.Gson;
 
 public abstract class Enemy implements Jsonable, IEnemy {
 
@@ -29,25 +32,27 @@ public abstract class Enemy implements Jsonable, IEnemy {
 	private AbstractAI myAI;
 	protected int[] location = new int[2];
 	private ArrayList<EnemyMod> mods; 
+	protected AttributeContainer attributes;
+	protected Gson gson = new Gson();
 	
 	private static final int DEFAULT_INITIAL_HEALTH = 1;
 	
-	public Enemy (RPGGame game, String name, int health) {
+	public Enemy (RPGGame game, AttributeContainer ac, int health) {
 		Enemy.game = game;
-		this.name = name;
+		name = ac.getName();
+		attributes = ac;
 		this.health = health;
 		
 		//change to check for duplicates
 		this.group = new SpriteGroup(name+"_"+game.getRandom(0, 10000));
-		String type = getType(name);
-		this.image = game.getImage("resources/npc/"+type+".gif");
+		this.image = game.getImage("resources/npc/"+attributes.getType()+".gif");
 		initMods();
 		initAttacks();
 
 	}
 	
-	public Enemy (RPGGame game, String name) {
-		this(game,name,DEFAULT_INITIAL_HEALTH);		
+	public Enemy (RPGGame game, AttributeContainer ac) {
+		this(game,ac,DEFAULT_INITIAL_HEALTH);		
 	}
 	
 	public void initMods()
@@ -67,6 +72,7 @@ public abstract class Enemy implements Jsonable, IEnemy {
 	@Override
 	public void add(int[] location, int layer) {
 		this.location = location;
+		
 		enemy = new Sprite(image, location[0], location[1]);
 		enemy.setLayer(layer);
 		group.add(enemy);
@@ -163,10 +169,4 @@ public abstract class Enemy implements Jsonable, IEnemy {
 		return group;
 	}
 	
-	public String getType(String name){
-		String type =name;
-		if(name.indexOf('_') >0)
-			type = name.substring(0,name.indexOf('_'));
-		return type;
-	}
 }

@@ -23,7 +23,6 @@ public class Main extends GameEngine {
 			case GAME_MODE : return new RPGGame(this);
 			case LEVEL_EDITOR : return new LevelEditor(this);
 		}
-
 		return null;
 	}
 	
