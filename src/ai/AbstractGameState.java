@@ -18,15 +18,15 @@ public abstract class AbstractGameState implements Comparable<AbstractGameState>
 	}
 
 	public abstract void extractGameInfo(RPGGame game);
-	
+
 	public abstract int getStateValue();
-	
+
 	public void addSuccessor(AbstractGameState ags){
 		successors.add(ags);
 	}
-	
+
 	public int compareTo(AbstractGameState ags){
 		return getStateValue() - ags.getStateValue();
 	}
-	
+
 }

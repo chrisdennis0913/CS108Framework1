@@ -1,23 +1,18 @@
 package npc;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
-
 import level.MapContainer;
-
-import com.golden.gamedev.util.FileUtil;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonParser;
-
-import dialogue.SimpleDialogue;
-
 import scenery.Portal;
 import app.RPGGame;
 import app.RWGameObject;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
+import dialogue.SimpleDialogue;
 
+@SuppressWarnings("serial")
 public class Priest extends StationaryNPC {
 	
 	SimpleDialogue dialogue;
@@ -47,7 +42,6 @@ public class Priest extends StationaryNPC {
 
 	@Override
 	public String toJson() {
-		// TODO Auto-generated method stub
 		// {"value1":1,"value2":"abc"}
 		Gson gson = new Gson();
 		Collection collection = new ArrayList();
@@ -57,7 +51,6 @@ public class Priest extends StationaryNPC {
 	    collection.add(location[1]);
 	    String json = gson.toJson(collection);
 		//String json = "[\"tag\": \"priest\", "+"\"name\":"+ "\"priest\", \"xlocation\":"+location[0]+", \""+location[1]+"]]";
-		
 	    System.out.println(json);
 		return json;
 	}
@@ -72,13 +65,11 @@ public class Priest extends StationaryNPC {
 		
 		@Override
 		public boolean isThisKindOfObject(String objectTag) {
-			// TODO Auto-generated method stub
 			return (objectTag.equals("priest"));
 		}
 
 		@Override
 		public void createAndAddToMap(String jsonData, MapContainer maps) {
-			// TODO Auto-generated method stub
 			Gson gson = new Gson();
 			JsonParser parser = new JsonParser();
 		    JsonArray array = parser.parse(jsonData).getAsJsonArray();
@@ -91,6 +82,4 @@ public class Priest extends StationaryNPC {
 		    maps.npcs.put(name, priest);
 		}		
 	}
-
-
 }

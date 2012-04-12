@@ -3,9 +3,11 @@ package ai;
 import java.util.Collection;
 import java.util.Iterator;
 
-import app.RPGGame;
 import enemy.AbstractAttack;
 import enemy.IEnemy;
+
+import ai.AbstractAI;
+import app.RPGGame;
 
 public class SimpleAI extends AbstractAI {
 
@@ -48,7 +50,7 @@ public class SimpleAI extends AbstractAI {
 	@Override
 	public void onCollision() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
