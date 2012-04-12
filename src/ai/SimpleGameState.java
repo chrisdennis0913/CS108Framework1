@@ -3,7 +3,7 @@ package ai;
 import app.RPGGame;
 
 public class SimpleGameState extends AbstractGameState {
-	
+
 	int playerHealth;
 
 	public SimpleGameState(RPGGame game) {
@@ -14,7 +14,7 @@ public class SimpleGameState extends AbstractGameState {
 	public void extractGameInfo(RPGGame game) {
 		playerHealth = game.getPlayer().getPCs().getHealth().getCount();
 	}
-	
+
 	@Override
 	public int getStateValue() {
 		return -playerHealth;

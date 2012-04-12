@@ -50,7 +50,7 @@ public class SimpleAI extends AbstractAI {
 	@Override
 	public void onCollision() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
