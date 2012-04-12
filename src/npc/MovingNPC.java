@@ -1,5 +1,6 @@
 package npc;
 
+import saving_loading.AttributeContainer;
 import app.RPGGame;
 
 public abstract class MovingNPC extends NPC{
@@ -7,8 +8,8 @@ public abstract class MovingNPC extends NPC{
 	int xVelocity;
 	int yVelocity;
 
-	public MovingNPC(RPGGame game2, String name) {
-		super(game2, name);
+	public MovingNPC(RPGGame game2, AttributeContainer ac) {
+		super(game2, ac);
 	}
 	
 	//TODO: implement this with different algorithms

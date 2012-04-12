@@ -2,7 +2,6 @@ package scenery;
 
 import java.awt.image.BufferedImage;
 
-import app.Main;
 import app.RPGGame;
 import collisions.SceneryCollision;
 

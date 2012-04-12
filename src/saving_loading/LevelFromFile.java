@@ -1,61 +1,70 @@
-package level;
+package saving_loading;
+
+
 
 import inventory.ItemSub;
 import java.awt.Graphics2D;
-import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import level.End;
+import level.Level;
 import npc.Priest;
 import scenery.Scenery;
 import app.RPGGame;
-import app.RWGameObject;
-import com.golden.gamedev.engine.BaseIO;
 import com.golden.gamedev.util.FileUtil;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonParser;
 import enemy.Snake;
 
 
-public class LevelFromFile extends Level
-{
+public class LevelFromFile extends Level{
 
-    private String[] fileLines;
     private List<RWGameObject> gameObjects;
-
 
     public LevelFromFile (RPGGame game, String levelFilename)
     {
         super(game);
+        
+//        //FOR DEBUGGING : Create a dummy AttributeCollection to write out for debugging purposes
+//        AttributeContainer testAC = new AttributeContainer();
+//        testAC.put("type", "priest");
+//        testAC.put("name", "priest_1");
+//        testAC.put("location", new int[]{300,100});
+//        
+//        FileWriter f1;
+//      try {
+//          f1 = new FileWriter("savedmaps/map00.json");
+//          f1.write(testAC.asJsonString());
+//          f1.close();
+//      } catch (IOException e) {
+//          // TODO Auto-generated catch block
+//          e.printStackTrace();
+//      }         
 
-        Priest priest = new Priest(game, "priest");
-        Snake snake = new Snake(game, "snake");
-
+		
+        AttributeContainer pac = new AttributeContainer();
+        pac.put("name", "priest");
+        pac.put("type", "priest");
+        AttributeContainer sac = new AttributeContainer();
+        sac.put("name", "priest");
+        sac.put("type", "priest");
+        Priest priest = new Priest(game, pac);
+        Snake snake = new Snake(game, sac);     
+        
         gameObjects = new ArrayList<RWGameObject>();
         gameObjects.add(new Priest.Factory());
         gameObjects.add(new Snake.Factory());
-        Gson gson = new Gson();
         MapContainer maps = new MapContainer(npcs, enemies, scenery, items);
-        String[] event =
-            FileUtil.fileRead(new File("savedmaps/" + levelFilename));
+        String[] event = FileUtil.fileRead(new File("savedmaps/"+levelFilename));           
 
-        for (int i = 0; i < event.length; i++)
-        {
+        for(int i=0;i<event.length; i++){
             String json = event[i];
-            System.out.println("Using Gson.toJson() on a raw collection: " +
-                               json);
-            JsonParser parser = new JsonParser();
-            JsonArray array = parser.parse(json).getAsJsonArray();
-            String tag = gson.fromJson(array.get(0), String.class);
-            for (int j = 0; j < gameObjects.size(); j++)
-            {
-                if (gameObjects.get(j).isThisKindOfObject(tag))
-                {
-                    gameObjects.get(j).createAndAddToMap(json, maps);
+            System.out.println("Using Gson.toJson() on a raw collection: " + json);         
+            // Create an attribute collection from the line of JSON from file
+            AttributeContainer ac = new AttributeContainer(json);
+            String type = ac.getType();
+            for(int j=0; j< gameObjects.size();j++){
+                if(gameObjects.get(j).isThisKindOfObject(type)){
+                    gameObjects.get(j).createAndAddToMap(ac, maps);
                 }
             }
         }
@@ -64,11 +73,7 @@ public class LevelFromFile extends Level
 
     protected void addNPCs ()
     {
-        /*
-         * Priest priest = new Priest(game, "priest"); int[] loc = new int[] {
-         * game.getBG().getWidth() / 2 - priest.getImage().getWidth() / 4, 90 };
-         * priest.add(loc, 6); npcs.put("priest", priest);
-         */
+
     }
 
 

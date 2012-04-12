@@ -3,6 +3,7 @@ package level;
 import java.awt.Graphics2D;
 import inventory.ItemSub;
 import npc.Priest;
+import saving_loading.AttributeContainer;
 import scenery.Scenery;
 import app.RPGGame;
 
@@ -19,12 +20,16 @@ public class Start extends Level
 
     protected void addNPCs ()
     {
-        Priest priest = new Priest(game, "priest");
-        int[] loc =
+    	AttributeContainer ac = new AttributeContainer();
+    	Priest priest = new Priest(game, ac); 
+    	int[] loc =
             new int[] {
                     game.getBG().getWidth() / 2 - priest.getImage().getWidth() /
                             4,
                     90 };
+    	ac.put("location", loc);
+    	ac.put("name", "priest");
+    	ac.put("type", "priest");
         priest.add(loc, 6);
         npcs.put("priest", priest);
     }

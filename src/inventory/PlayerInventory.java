@@ -13,7 +13,7 @@ public class PlayerInventory extends Inventory
     public boolean showInventory=false;
     public PlayerInventory (RPGGame rpggame)
     {
-        super(rpggame);
+        super();
     }
 
 
