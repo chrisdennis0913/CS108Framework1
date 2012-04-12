@@ -7,14 +7,14 @@ import app.RPGGame;
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.collision.BasicCollisionGroup;
 
-import enemy.Enemy;
+import enemy.IEnemy;
 
 
 public class EnemyCollision extends BasicCollisionGroup {
 
 	private RPGGame game;
+	private IEnemy enemy;
 	private Player player;
-	private Enemy enemy;
 
 	public EnemyCollision(RPGGame game, Player player, String enemyname) {
 		this.game = game;
@@ -26,7 +26,7 @@ public class EnemyCollision extends BasicCollisionGroup {
 		overlap(character, scenery);
 		Attacking attacking = (Attacking) player.getAction("attacking");
 		if (attacking.isActing()) {
-			enemy.reduceHealth(1);
+			enemy.addToHealth(-1);
 			if (enemy.getHealth() < 1) {
 				enemy.die();
 				game.getField().removeCollisionGroup(this);
@@ -34,7 +34,7 @@ public class EnemyCollision extends BasicCollisionGroup {
 			jump(character, scenery);
 		} else {
 			jump(character, scenery);
-			player.getPCs().enemy(enemy);
+			player.getPCs().reactToEnemy(enemy);
 		}
 	}
 

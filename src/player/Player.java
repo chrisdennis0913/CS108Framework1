@@ -19,6 +19,7 @@ import com.golden.gamedev.object.SpriteGroup;
 
 import inventory.Inventory;
 import inventory.ItemSub;
+import inventory.PlayerInventory;
 
 
 public class Player {
@@ -26,7 +27,7 @@ public class Player {
 	private SpriteGroup group = new SpriteGroup("Player");
 	private AnimatedSprite character;
 	private String startSprite = "resources/player/start_sprite.gif";
-	private Inventory myInventory= new Inventory();
+	private Inventory myInventory= new PlayerInventory(game);
 	private PlayerCounters pcs = new PlayerCounters(this);
 	private PlayerActions pas = new PlayerActions(this);
 	private HashMap<String, Action1> actions = new HashMap<String, Action1>();

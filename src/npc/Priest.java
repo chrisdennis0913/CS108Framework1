@@ -1,31 +1,38 @@
 package npc;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 
 import level.MapContainer;
 
+import com.golden.gamedev.util.FileUtil;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
+
+import dialogue.SimpleDialogue;
 
 import scenery.Portal;
 import app.RPGGame;
 import app.RWGameObject;
 
-public class Priest extends NPC {
-
+public class Priest extends StationaryNPC {
+	
+	SimpleDialogue dialogue;
+	public static int numPriests =0;
 	public Priest(RPGGame game, String name) {
 		super(game, name);
 		setCanDie(true);
+		dialogue = new SimpleDialogue("resources/script/"+name+".txt");
 	}
 	
 
 	public String getTalk() {
 		if (game.getPlayer().hasItem("Golden Sword of Paradise"))
-			return getScript()[1];
-		return getScript()[0];
+			dialogue.goToNextLine(true);
+		return dialogue.getCurrentLine();
 	}
 
 	public void die() {
@@ -45,7 +52,7 @@ public class Priest extends NPC {
 		Gson gson = new Gson();
 		Collection collection = new ArrayList();
 	    collection.add("priest");
-	    collection.add("priest");
+	    collection.add(name);
 	    collection.add(location[0]);
 	    collection.add(location[1]);
 	    String json = gson.toJson(collection);
@@ -53,6 +60,12 @@ public class Priest extends NPC {
 		
 	    System.out.println(json);
 		return json;
+	}
+	
+	@Override
+	public void changeLocation(int[] newLocation) {
+		this.location = newLocation;
+		this.setLocation(newLocation[0], newLocation[1]);
 	}
 	
 	public static class Factory implements RWGameObject{
@@ -78,4 +91,6 @@ public class Priest extends NPC {
 		    maps.npcs.put(name, priest);
 		}		
 	}
+
+
 }
