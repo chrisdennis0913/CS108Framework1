@@ -5,7 +5,6 @@
 package quest;
 
 import inventory.ItemSub;
-
 import java.util.Queue;
 
 import app.RPGGame;
@@ -13,6 +12,7 @@ import app.RPGGame;
 public class RewardQuest extends Quest
 {
 	private ItemSub reward;
+
 	
 	public RewardQuest(Queue<Task> required, ItemSub reward) {
 		super(required);
@@ -21,7 +21,9 @@ public class RewardQuest extends Quest
 
 	public void completeQuest(RPGGame game2) 
 	{
-		
+		game2.getPlayer().addItem(reward);
 	}
+
+
 
 }

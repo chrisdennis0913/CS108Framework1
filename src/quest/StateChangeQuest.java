@@ -9,6 +9,8 @@ import inventory.ItemSub;
 
 import java.util.Queue;
 
+import npc.QuestGiver;
+
 import app.RPGGame;
 
 public class StateChangeQuest extends Quest
@@ -23,5 +25,4 @@ public class StateChangeQuest extends Quest
 		
 		
 	}
-
 }

@@ -46,7 +46,7 @@ public class QuestGiver extends NPC implements Observer
 		return dialogue.getCurrentLine();
 	}
 
-	//QuestGivers cannot die... lawl
+	//QuestGivers cannot die
 	public void die()
 	{
 
@@ -54,7 +54,6 @@ public class QuestGiver extends NPC implements Observer
 
 	public void update(Quest qu) 
 	{
-		qu.update();
 		questComplete = qu.isDone();
 	}
 }

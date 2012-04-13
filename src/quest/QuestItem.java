@@ -17,19 +17,6 @@ public class QuestItem extends ItemSub implements Observable
 	{
 		myItem = item;
 	}
-
-	@Override
-	public String getState() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setState(String state) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	@Override
 	public boolean isThisKindOfItem(String toParse) 
 	{

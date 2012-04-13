@@ -1,7 +1,10 @@
 package quest;
 
 
+import java.util.ArrayList;
 import java.util.Queue;
+
+import npc.QuestGiver;
 
 import app.RPGGame;
 
@@ -11,15 +14,17 @@ import inventory.ItemSub;
 //Register to multiple game objects
 
 
-public abstract class Quest
+public abstract class Quest implements Observable
 {
 	protected Queue<Task> toDo;
 	protected Queue<Task> done;
 	private boolean isActive = false;
+	protected ArrayList<QuestGiver> observers;
 	
 	public Quest(Queue<Task> required)
 	{
 		toDo = required;
+		observers = new ArrayList<QuestGiver>();
 	}
 	
 	public boolean isDone()
@@ -46,6 +51,18 @@ public abstract class Quest
 				return;
 			done.offer(toDo.remove());
 		}	
+	}
+	
+	public void addObserver(QuestGiver qu)
+	{
+		for (QuestGiver qg: observers)
+			qg.update(this);
+	}
+
+
+	public void removeObserver(QuestGiver qu)
+	{
+		observers.remove(qu);
 	}
 	
 	public abstract void completeQuest(RPGGame game2);
