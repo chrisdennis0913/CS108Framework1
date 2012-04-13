@@ -107,4 +107,9 @@ public class Weapon extends ItemSub
         return 0;
     }
 
+    @Override
+    public void use ()
+    {
+    }
+
 }

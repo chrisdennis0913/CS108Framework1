@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class Inventory implements Iterable<ItemSub> {
-	private Map<ItemSub, Integer> myItemMap;
+	protected Map<ItemSub, Integer> myItemMap;
 
 	public Inventory() {
 		myItemMap = new TreeMap<ItemSub, Integer>();
@@ -32,7 +32,7 @@ public class Inventory implements Iterable<ItemSub> {
 		if (myItemMap.containsKey(itm))
 			myItemMap.remove(itm);
 		else
-			System.out.println("Item Store does not contain " + itm.getName()
+			System.out.println("Inventory does not contain " + itm.getName()
 					+ ".");
 	}
 

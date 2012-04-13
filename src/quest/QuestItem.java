@@ -49,4 +49,11 @@ public class QuestItem extends ItemSub implements Observable
 		return myItem.parseItem(game2, toParse);
 	}
 
+    @Override
+    public void use ()
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

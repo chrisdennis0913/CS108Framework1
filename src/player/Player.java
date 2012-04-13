@@ -79,6 +79,10 @@ public class Player {
         {
             myInventory.toggleShow();
         }
+        else if (game.keyPressed(java.awt.event.KeyEvent.VK_O))
+        {
+            myInventory.showFullInventoryMenu();
+        }
 	}
 
 	public void render(Graphics2D g) {
@@ -112,8 +116,8 @@ public class Player {
 		return group;
 	}
 
-	public HashMap<String, ItemSub> getInventory() {
-		return inventoryWithNames;
+	public PlayerInventory getInventory() {
+		return myInventory;
 	}
 	
 

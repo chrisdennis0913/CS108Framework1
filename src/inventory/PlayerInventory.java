@@ -3,6 +3,7 @@ package inventory;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import app.InventoryMenu;
 import app.RPGGame;
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.font.SystemFont;
@@ -10,10 +11,14 @@ import com.golden.gamedev.object.font.SystemFont;
 
 public class PlayerInventory extends Inventory
 {
-    public boolean showInventory=false;
+    private boolean showInventory=false;
+    private RPGGame game;
+    private InventoryMenu menu;
+    
     public PlayerInventory (RPGGame rpggame)
     {
         super();
+        game = rpggame;
     }
 
 
@@ -21,7 +26,21 @@ public class PlayerInventory extends Inventory
     {
         return null;
     }
-
+    
+    public void showFullInventoryMenu(){
+        menu=new InventoryMenu(this);
+        game.pauseGame();
+        
+    }
+    
+    public void renderMenu(Graphics2D g){
+        menu.render(g);
+    }
+    
+    public void updateMenu (long elapsed)
+    {
+        menu.update(elapsed);
+    }
 
     public void showInventory (Graphics2D g)
     {  
@@ -79,6 +98,12 @@ public class PlayerInventory extends Inventory
     }
     public void turnShowOff(){
         showInventory=false;
+    }
+    public RPGGame getGame(){
+        return game;
+    }
+    public int getSize(){
+        return myItemMap.size();
     }
     
 }

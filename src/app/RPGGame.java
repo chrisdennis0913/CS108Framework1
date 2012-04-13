@@ -34,6 +34,7 @@ public class RPGGame extends GameObject
     private Level level;
     private Inventory myInventory;
     public static String startLevelFilename = "map00.json";
+    private boolean pausedForInventory=false;
 
 
     @SuppressWarnings("rawtypes")
@@ -67,6 +68,10 @@ public class RPGGame extends GameObject
 
     public void render (Graphics2D g)
     {
+        if (pausedForInventory){
+            player.getInventory().renderMenu(g);
+            return;
+        }
         field.render(g);
         player.render(g);
         level.render(g);
@@ -75,6 +80,10 @@ public class RPGGame extends GameObject
 
     public void update (long elapsed)
     {
+        if (pausedForInventory){
+            player.getInventory().updateMenu(elapsed);
+            return;
+        }
         player.update();
         level.update(elapsed);
         field.update(elapsed);
@@ -128,5 +137,11 @@ public class RPGGame extends GameObject
     {
         return myInventory;
 
+    }
+    public void pauseGame(){
+        pausedForInventory = true;
+    }
+    public void unPauseGame(){
+        pausedForInventory = false;
     }
 }

@@ -8,7 +8,7 @@ public abstract class BaseCounter {
 	
 	public BaseCounter (int count) {
 		this.count = count;
-		this.init = count;
+		this.init = count + 5;
 	}
 	
 	public abstract void update(long elapsed);
