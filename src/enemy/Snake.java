@@ -9,7 +9,9 @@ import saving_loading.AttributeContainer;
 import saving_loading.MapContainer;
 import saving_loading.RWGameObject;
 import scenery.Portal;
+import ai.BetterAI;
 import ai.SimpleAI;
+import ai.SlowPlayerAttack;
 import app.RPGGame;
 
 import com.golden.gamedev.engine.timer.SystemTimer;
@@ -30,15 +32,16 @@ public class Snake extends Enemy {
 		timer.setFPS(100);
 		timer.startTimer();
 		setActing(false);
-		setAI(new SimpleAI(game,this));
+		setAI(new BetterAI(game,this));
 		attributes = ac;
 	}
 
 
 	@Override
 	public void initAttacks() {
-		super.initAttacks();
-		attacks.put("shooting", new ShootingAttack(game,this));
+		spontaneousAttacks.put("shooting", new ShootingAttack(game,this));
+		reactiveAttacks.put("poison", new PoisonAttack(game,this,true));
+		reactiveAttacks.put("slow", new SlowPlayerAttack(game, this, true));
 		//attacks.put("supertelepathic", new SuperTelepathicAttack(game,this));
 	}
 

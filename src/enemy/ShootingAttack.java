@@ -5,7 +5,7 @@ import com.golden.gamedev.object.Timer;
 
 import app.RPGGame;
 
-public class ShootingAttack extends AbstractAttackWithVector {
+public class ShootingAttack extends AbstractAttackWithVector{
 
 	Timer timer;
 

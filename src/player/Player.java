@@ -5,7 +5,11 @@ import inventory.PlayerInventory;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 import actions.Action1;
 import actions.Attacking;
@@ -13,6 +17,7 @@ import actions.Grabbing;
 import actions.Standing;
 import actions.Talking;
 import actions.Walking;
+import ai.AbstractBehaviorModifier;
 import app.RPGGame;
 import collisions.PlayerBoundaryCollision;
 
@@ -20,7 +25,10 @@ import com.golden.gamedev.object.AnimatedSprite;
 import com.golden.gamedev.object.SpriteGroup;
 
 
-public class Player {
+public class Player implements Cloneable {
+	private static final double INITIAL_PLAYER_X_SPEED = 0.1;
+	private static final double INITIAL_PLAYER_Y_SPEED = 0.1;
+	
 	private RPGGame game;
 	private SpriteGroup group = new SpriteGroup("Player");
 	private AnimatedSprite character;
@@ -29,6 +37,10 @@ public class Player {
 	private PlayerCounters pcs = new PlayerCounters(this);
 	private HashMap<String, Action1> actions = new HashMap<String, Action1>();
 	private HashMap<String, ItemSub> inventoryWithNames = new HashMap<String, ItemSub>();
+	private LinkedList<AbstractBehaviorModifier> behaviorModifiers = new LinkedList<AbstractBehaviorModifier>();
+	private double maxXSpeed = INITIAL_PLAYER_X_SPEED;
+	private double maxYSpeed = INITIAL_PLAYER_Y_SPEED;
+	
 
 	public Player(RPGGame rpgGame) {
 		this.game = rpgGame;
@@ -70,7 +82,9 @@ public class Player {
 				new PlayerBoundaryCollision(game.getBG()));
 	}
 
-	public void update() {
+	public void update(long elapsedTime) {
+		for (AbstractBehaviorModifier bm : behaviorModifiers)
+			bm.setUp(elapsedTime);
 		pcs.update(0);
 		for (String name : actions.keySet())
 			if (actions.get(name).isActionable(game))
@@ -83,6 +97,12 @@ public class Player {
         {
             myInventory.showFullInventoryMenu();
         }
+        Iterator<AbstractBehaviorModifier> bmReverse = behaviorModifiers.descendingIterator();
+        while(bmReverse.hasNext()){
+        	if(bmReverse.next().unsetUp(elapsedTime))
+        		bmReverse.remove();
+        }
+        	
 	}
 
 	public void render(Graphics2D g) {
@@ -119,7 +139,6 @@ public class Player {
 	public PlayerInventory getInventory() {
 		return myInventory;
 	}
-	
 
 	public void addItem(ItemSub grabItem) {
 		inventoryWithNames.put(grabItem.getName(), grabItem);
@@ -137,5 +156,51 @@ public class Player {
 	     return myInventory.contains(inventoryWithNames.get(itemName));
 	}
 	
+	public double getMaxXSpeed(){
+		return maxXSpeed;
+	}
 
+	public double getMaxYSpeed(){
+		return maxYSpeed;
+	}
+
+	public void setMaxXSpeed(double xs){
+		maxXSpeed = xs;
+	}
+
+	public void setMaxYSpeed(double ys){
+		maxYSpeed = ys;
+	}
+
+	public void registerBehaviorModifier(AbstractBehaviorModifier bm){
+		//default is to insert at end of linked list
+		registerBehaviorModifier(bm, false);
+	}
+	
+	public void registerBehaviorModifier(AbstractBehaviorModifier bm, boolean insertAtTop){
+		if(insertAtTop)
+			behaviorModifiers.addFirst(bm);
+		else
+			behaviorModifiers.addLast(bm);
+	}
+	
+	public void registerBehaviorModifierExclusive(AbstractBehaviorModifier bm, boolean insertAtTop){
+		Iterator<AbstractBehaviorModifier> iter = behaviorModifiers.iterator();
+		while(iter.hasNext())
+			if(iter.next().getClass() == bm.getClass())
+				iter.remove();
+		
+		registerBehaviorModifier(bm,insertAtTop);
+	}
+	
+	public void deregisterBehaviorModifier(AbstractBehaviorModifier bm){
+		behaviorModifiers.remove(bm);
+	}
+
+	/* TODO: deep clone
+	@Override
+	public Object clone(){
+		
+		return ;
+	}*/
 }

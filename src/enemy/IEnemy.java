@@ -41,6 +41,14 @@ public interface IEnemy {
 
 	public abstract void attack(AbstractAttack a, long elapsedTime);
 
-	public abstract Collection<AbstractAttack> getAttacks();
+	public abstract Collection<AbstractAttack> getSpontaneousAttacks();
+
+	public abstract void onCollision();
+
+	public abstract Collection<AbstractAttack> getReactiveAttacks();
+
+	public abstract double getMaxXSpeed();
+
+	public abstract double getMaxYSpeed();
 
 }

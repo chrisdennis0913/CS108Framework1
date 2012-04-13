@@ -1,23 +1,28 @@
 package ai;
 
 import java.util.*;
+
+import player.Player;
+
+import level.Level;
+
+import com.golden.gamedev.GameObject;
+
 import app.RPGGame;
 
-public abstract class AbstractGameState implements Comparable<AbstractGameState>{
+public abstract class AbstractGameState implements GameStateProvider,Cloneable,Comparable<AbstractGameState>{
 
-	List<AbstractGameState> successors;
-
-	//TODO: previous game state and action that led to this
-	public AbstractGameState(){
-		successors = new ArrayList<AbstractGameState>();		
-	}
-
+	List<AbstractGameState> successors = new ArrayList<AbstractGameState>();
+	public Player player;
+	public Level level;
+	
 	public AbstractGameState(RPGGame game){
-		this();
 		extractGameInfo(game);
 	}
 
-	public abstract void extractGameInfo(RPGGame game);
+	public void extractGameInfo(RPGGame game){
+		game.copyGameState(this);
+	}
 
 	public abstract int getStateValue();
 

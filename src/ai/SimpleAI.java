@@ -20,7 +20,7 @@ public class SimpleAI extends AbstractAI {
 		//if (!enemy.isDead()){
 			move(elapsedTime);
 			if (shouldAttack())
-				enemy.attack(pickBestAttack(),elapsedTime);
+				enemy.attack(pickBestSpontaneousAttack(),elapsedTime);
 		//}
 	}
 
@@ -37,9 +37,19 @@ public class SimpleAI extends AbstractAI {
 	}
 
 	@Override
-	public AbstractAttack pickBestAttack() {
+	public AbstractAttack pickBestSpontaneousAttack() {
 		//Just returns the first attack in the HashMap
-		Collection<AbstractAttack> attacks = enemy.getAttacks();
+		Collection<AbstractAttack> attacks = enemy.getSpontaneousAttacks();
+		Iterator<AbstractAttack> itr = attacks.iterator();
+		if(itr.hasNext())
+			return itr.next();
+		else
+			throw new RuntimeException("No attacks available");
+	}
+
+	@Override
+	public AbstractAttack pickBestReactiveAttack() {
+		Collection<AbstractAttack> attacks = enemy.getReactiveAttacks();
 		Iterator<AbstractAttack> itr = attacks.iterator();
 		if(itr.hasNext())
 			return itr.next();
@@ -49,8 +59,7 @@ public class SimpleAI extends AbstractAI {
 
 	@Override
 	public void onCollision() {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 }

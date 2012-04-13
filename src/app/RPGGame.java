@@ -8,6 +8,8 @@ import level.Level;
 import saving_loading.LevelFromFile;
 import player.Player;
 
+import ai.GameStateProvider;
+
 import com.golden.gamedev.GameEngine;
 import com.golden.gamedev.GameObject;
 import com.golden.gamedev.object.Background;
@@ -19,7 +21,7 @@ import inventory.Inventory;
 import inventory.ItemSub;
 
 
-public class RPGGame extends GameObject
+public class RPGGame extends GameObject //implements GameStateProvider
 {
 
     public RPGGame (GameEngine arg0)
@@ -85,7 +87,7 @@ public class RPGGame extends GameObject
             player.getInventory().updateMenu(elapsed);
             return;
         }
-        player.update();
+        player.update(elapsed);
         level.update(elapsed);
         field.update(elapsed);
     }
@@ -145,4 +147,12 @@ public class RPGGame extends GameObject
     public void unPauseGame(){
         pausedForInventory = false;
     }
+
+
+    /*
+	@Override
+	public void copyGameState(GameStateProvider gsp) {
+		gsp.player = player.clone();
+		gsp.level = level.clone();
+	}*/
 }

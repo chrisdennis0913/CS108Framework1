@@ -18,7 +18,8 @@ public abstract class AbstractAI{
 	public abstract void act(long elapsedTime);
 	public abstract void move(long elapsedTime);
 	public abstract boolean shouldAttack();
-	public abstract AbstractAttack pickBestAttack();
+	public abstract AbstractAttack pickBestSpontaneousAttack();
+	public abstract AbstractAttack pickBestReactiveAttack();
 	public abstract void onCollision();
 
 }
