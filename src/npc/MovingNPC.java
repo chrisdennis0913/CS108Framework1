@@ -1,12 +1,13 @@
 package npc;
 
+import java.util.Arrays;
+
 import saving_loading.AttributeContainer;
 import app.RPGGame;
 
 public abstract class MovingNPC extends NPC{
 	
-	int xVelocity;
-	int yVelocity;
+	int[] velocity;
 
 	public MovingNPC(RPGGame game2, AttributeContainer ac) {
 		super(game2, ac);
@@ -16,7 +17,7 @@ public abstract class MovingNPC extends NPC{
 	public void getMovementStrategy(){};
 
 	public int[] getVelocity(){
-		return new int[] {xVelocity, yVelocity};
+		return Arrays.copyOf(velocity, velocity.length);
 	}
 
 	@Override
