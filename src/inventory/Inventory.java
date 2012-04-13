@@ -53,6 +53,11 @@ public class Inventory implements Iterable<ItemSub> {
 	public boolean contains(ItemSub itm) {
 		return myItemMap.containsKey(itm);
 	}
+	
+	public Integer getCount(ItemSub itm)
+	{
+		return myItemMap.get(itm);
+	}
 
 	@Override
 	public Iterator<ItemSub> iterator() {

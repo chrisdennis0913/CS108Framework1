@@ -92,7 +92,7 @@ public class Title extends GameObject {
 				    if(jsonReturnVal == JFileChooser.APPROVE_OPTION) {
 				       System.out.println("You chose to open this file: " +
 				            jsonChooser.getSelectedFile().getName());
-				       RPGGame.startLevelFilename = jsonChooser.getSelectedFile().getName();
+				       RPGGame.startLevelFileName = jsonChooser.getSelectedFile().getName();
 				    }
 					
 

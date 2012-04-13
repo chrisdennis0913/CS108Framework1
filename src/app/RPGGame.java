@@ -5,8 +5,8 @@ import java.awt.Graphics2D;
 import java.util.Comparator;
 
 import level.Level;
-import player.Player;
 import saving_loading.LevelFromFile;
+import player.Player;
 
 import com.golden.gamedev.GameEngine;
 import com.golden.gamedev.GameObject;
@@ -33,7 +33,7 @@ public class RPGGame extends GameObject
     private Dialog dialog;
     private Level level;
     private Inventory myInventory;
-    public static String startLevelFilename = "map00.json";
+    private String levelFilename;
 
 
     @SuppressWarnings("rawtypes")
@@ -51,7 +51,7 @@ public class RPGGame extends GameObject
         player.generate(loc);
 
         //level = new Start(this);
-        level = new LevelFromFile(this,startLevelFilename);
+        level = new LevelFromFile(this,levelFilename, bsIO);
         level.generate();
 
         field.setComparator(new Comparator()
@@ -67,6 +67,10 @@ public class RPGGame extends GameObject
 
     public void render (Graphics2D g)
     {
+    	
+    	
+    	
+    	
         field.render(g);
         player.render(g);
         level.render(g);
