@@ -5,8 +5,8 @@ import java.awt.Graphics2D;
 import java.util.Comparator;
 
 import level.Level;
-import player.Player;
 import saving_loading.LevelFromFile;
+import player.Player;
 
 import com.golden.gamedev.GameEngine;
 import com.golden.gamedev.GameObject;
@@ -33,8 +33,9 @@ public class RPGGame extends GameObject
     private Dialog dialog;
     private Level level;
     private Inventory myInventory;
-    public static String startLevelFilename = "map00.json";
     private boolean pausedForInventory=false;
+    public static String startLevelFilename= "map00.json";
+
 
 
     @SuppressWarnings("rawtypes")
