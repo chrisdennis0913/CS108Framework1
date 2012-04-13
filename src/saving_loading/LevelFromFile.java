@@ -47,8 +47,6 @@ public class LevelFromFile extends Level{
         AttributeContainer sac = new AttributeContainer();
         sac.put("name", "priest");
         sac.put("type", "priest");
-        //sac.put("xspeed", (double)0.05);
-        //sac.put("yspeed", (double)0.05);
         Priest priest = new Priest(game, pac);
         Snake snake = new Snake(game, sac);     
         

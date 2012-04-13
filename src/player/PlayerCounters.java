@@ -8,7 +8,6 @@ public class PlayerCounters extends BaseCounters {
 
 	Player player;
 	HealthCounter health;
-	SpeedCounter speed;
 	
 	public PlayerCounters(Player player) {
 		this.player = player;

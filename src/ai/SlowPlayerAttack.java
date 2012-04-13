@@ -12,7 +12,6 @@ public class SlowPlayerAttack extends AbstractAttackWithCollision {
 
 	public SlowPlayerAttack(RPGGame game, IEnemy enemy, boolean startActive) {
 		super(game, enemy, startActive);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

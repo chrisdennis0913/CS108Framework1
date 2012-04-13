@@ -179,11 +179,9 @@ public abstract class Enemy implements Jsonable, IEnemy {
 	
 	public double getMaxXSpeed(){
 		return 0.05;
-		//return attributes.getDoubleForKey("xspeed");
 	}
 	public double getMaxYSpeed(){
 		return 0.05;
-		//return attributes.getDoubleForKey("yspeed");
 	}
 	
 }

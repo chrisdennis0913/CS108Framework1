@@ -197,10 +197,4 @@ public class Player implements Cloneable {
 		behaviorModifiers.remove(bm);
 	}
 
-	/* TODO: deep clone
-	@Override
-	public Object clone(){
-		
-		return ;
-	}*/
 }
