@@ -8,11 +8,9 @@ import app.RPGGame;
 public class ItemStore
 {
     private Inventory myInventory;
-    private Map<String, ArrayList<ItemSub>> itemsByCategory;
-    
+   
     public ItemStore(RPGGame game){
         myInventory = new Inventory(game);
-        itemsByCategory= new TreeMap<String, ArrayList<ItemSub>>();
     }
     
     public void addItems(ItemSub itm, int quantity){
@@ -20,14 +18,9 @@ public class ItemStore
         
         ArrayList<ItemSub> IBCArray;
         String itmCateg= itm.getCategory();
-        if (itemsByCategory.containsKey(itmCateg)){
-            IBCArray=itemsByCategory.get(itmCateg);
-        }
-        else{
-            IBCArray = new ArrayList<ItemSub>();
-        }
+        IBCArray = new ArrayList<ItemSub>();
         IBCArray.add(itm);
-        itemsByCategory.put(itmCateg, IBCArray);
+
     }
     public void removeItems(ItemSub itm, int quantity){
         myInventory.remove(itm, quantity); 
@@ -37,7 +30,6 @@ public class ItemStore
      */
     public void removeItems(ItemSub itm){
         myInventory.remove(itm); 
-        itemsByCategory.remove(itm);
     }
     
 }
