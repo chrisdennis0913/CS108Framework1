@@ -1,0 +1,38 @@
+[
+{
+	"cardinal": 0,
+	"speedX": 0,
+	"speedY": 0.0,
+	"images": [
+		"resources/player/stand/back_stand_1.gif"
+	],
+	"keys": [38]
+},
+{
+	"cardinal": 1,
+	"speedX": 0,
+	"speedY": 0,
+	"images": [
+		"resources/player/stand/front_stand_1.gif"
+	],
+	"keys": [40]
+},
+{
+	"cardinal": 2,
+	"speedX": 0,
+	"speedY": 0,
+	"images": [
+		"resources/player/stand/right_stand_1.gif"
+	],
+	"keys": [39]
+},
+{
+	"cardinal": 3,
+	"speedX": 0,
+	"speedY": 0,
+	"images": [
+		"resources/player/stand/left_stand_1.gif"
+	],
+	"keys": [37]
+}
+]

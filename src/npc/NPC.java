@@ -1,17 +1,16 @@
 package npc;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
 
-import app.Jsonable;
+import saving_loading.AttributeContainer;
+import saving_loading.Jsonable;
+
 import app.RPGGame;
 import collisions.NPCCollision;
 
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
-import com.golden.gamedev.util.FileUtil;
+import com.google.gson.Gson;
 
 public abstract class NPC extends Sprite implements Jsonable{
 	protected static RPGGame game;
@@ -23,12 +22,16 @@ public abstract class NPC extends Sprite implements Jsonable{
 	private boolean dead = false;
 	private NPCCollision collision;
 	protected int[] location = new int[2];
+	protected AttributeContainer attributes;
+	protected Gson gson = new Gson();
 	
-	public NPC (RPGGame game2, String name) {
+	public NPC (RPGGame game2, AttributeContainer ac) {
 		NPC.game = game2;
-		this.name = name;
+		attributes = ac;
+		name = ac.getName();
+		String type = ac.getType();
 		this.group = new SpriteGroup(name+"_"+game2.getRandom(0, 10000));
-		this.image = game2.getImage("resources/npc/"+name+".gif");
+		this.image = game2.getImage("resources/npc/"+type+".gif");
 	}
 	
 	public void add(int[] location, int layer) {
@@ -81,10 +84,4 @@ public abstract class NPC extends Sprite implements Jsonable{
 		return group;
 	}
 	
-	public String getType(String name){
-		String type =name;
-		if(name.indexOf('_') >0)
-			type = name.substring(0,name.indexOf('_'));
-		return type;
-	}
 }

@@ -12,12 +12,10 @@ import inventory.ItemSub;
 public class ItemCollision extends BasicCollisionGroup {
 
 	private RPGGame game;
-	private String itemName;
 	private HashMap<Sprite, ItemSub> itemSpriteMap = new HashMap<Sprite, ItemSub>();
 	
 	public ItemCollision (RPGGame game, String itemName, ItemSub item, Sprite spr) {
 		this.game = game;
-		this.itemName = itemName;
 		itemSpriteMap.put(spr, item);
 //		System.out.println(itemSpriteMap.keySet());
 	}

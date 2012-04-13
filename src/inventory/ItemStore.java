@@ -10,7 +10,12 @@ public class ItemStore
     private Inventory myInventory;
    
     public ItemStore(RPGGame game){
+
         myInventory = new Inventory(game);
+
+        myInventory = new Inventory();
+        itemsByCategory= new TreeMap<String, ArrayList<ItemSub>>();
+
     }
     
     public void addItems(ItemSub itm, int quantity){

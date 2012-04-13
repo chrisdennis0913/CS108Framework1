@@ -1,23 +1,34 @@
 package player;
 
-import java.awt.Graphics2D;
+import actions.Direction;
 
 public class Standing extends PlayerAction {
 
-	public Standing(Player player) {
-		super(player);
+	private PlayerDirections directions;
+
+	public Standing(PlayerActions pas) {
+		super(pas);
+		setEnabled(true);
+		directions = new PlayerDirections(pas.getPlayer(),
+				"resources/player/actions/standing.json");
 	}
 
 	public void update(long elapsed) {
-		if (!getPlayer().getPAs().isWalking()) {
-			setActive(true);
+		if (isEnabled()) {
+			if (!getActions().isWalking()) {
+				if (!isActive()) {
+					for (Direction dir : directions) {
+						if (getActions().getCurrentDirection().equals(
+								dir.getCardinality())) {
+							dir.changeCharacter(true, 0);
+							setActive(true);
+							break;
+						}
+					}
+				}
+			} else {
+				setActive(false);
+			}
 		}
-		else {
-			setActive(false);
-		}
-	}
-
-	public void render(Graphics2D g) {
-
 	}
 }

@@ -1,0 +1,58 @@
+[
+{
+	"cardinal": 0,
+	"speedX": 0,
+	"speedY": -0.1,
+	"images": [
+		"resources/player/walk/back_walk_1.png",
+		"resources/player/walk/back_walk_2.png",
+		"resources/player/walk/back_walk_3.png",
+		"resources/player/walk/back_walk_4.png",
+		"resources/player/walk/back_walk_5.png",
+		"resources/player/walk/back_walk_6.png"
+	],
+	"keys": [38]
+},
+{
+	"cardinal": 1,
+	"speedX": 0,
+	"speedY": 0.1,
+	"images": [
+		"resources/player/walk/front_walk_1.png",
+		"resources/player/walk/front_walk_2.png",
+		"resources/player/walk/front_walk_3.png",
+		"resources/player/walk/front_walk_4.png",
+		"resources/player/walk/front_walk_5.png",
+		"resources/player/walk/front_walk_6.png"
+	],
+	"keys": [40]
+},
+{
+	"cardinal": 2,
+	"speedX": 0.1,
+	"speedY": 0,
+	"images": [
+		"resources/player/walk/right_walk_1.png",
+		"resources/player/walk/right_walk_2.png",
+		"resources/player/walk/right_walk_3.png",
+		"resources/player/walk/right_walk_4.png",
+		"resources/player/walk/right_walk_5.png",
+		"resources/player/walk/right_walk_6.png"
+	],
+	"keys": [39]
+},
+{
+	"cardinal": 3,
+	"speedX": -0.1,
+	"speedY": 0,
+	"images": [
+		"resources/player/walk/left_walk_1.png",
+		"resources/player/walk/left_walk_2.png",
+		"resources/player/walk/left_walk_3.png",
+		"resources/player/walk/left_walk_4.png",
+		"resources/player/walk/left_walk_5.png",
+		"resources/player/walk/left_walk_6.png"
+	],
+	"keys": [37]
+}
+]

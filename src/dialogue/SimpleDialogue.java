@@ -25,7 +25,7 @@ public class SimpleDialogue extends AbstractDialogue{
 
 	@Override
 	public boolean isDone() {
-		return index == script.length;
+		return index >= script.length-1;
 	}
 
 }

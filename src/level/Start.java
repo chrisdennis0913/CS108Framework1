@@ -1,9 +1,9 @@
 package level;
 
 import java.awt.Graphics2D;
-
 import inventory.ItemSub;
 import npc.Priest;
+import saving_loading.AttributeContainer;
 import scenery.Scenery;
 import app.RPGGame;
 
@@ -20,12 +20,16 @@ public class Start extends Level
 
     protected void addNPCs ()
     {
-        Priest priest = new Priest(game, "priest");
-        int[] loc =
+    	AttributeContainer ac = new AttributeContainer();
+    	Priest priest = new Priest(game, ac); 
+    	int[] loc =
             new int[] {
                     game.getBG().getWidth() / 2 - priest.getImage().getWidth() /
                             4,
                     90 };
+    	ac.put("location", loc);
+    	ac.put("name", "priest");
+    	ac.put("type", "priest");
         priest.add(loc, 6);
         npcs.put("priest", priest);
     }
@@ -68,13 +72,22 @@ public class Start extends Level
     protected void addItems ()
     {
         ItemSub sword =
-            MI.parseExpression("Golden Sword of Paradise, sword, Weapon, true, 100, 55");
-        int[] loc =
+            MI.parseExpression("Golden Sword within Start, sword, Weapon, 55");
+        int[] swordLoc =
             new int[] {
                     game.getBG().getWidth() / 2 - 10,
                     game.getBG().getHeight() / 4 * 3 };
-        sword.add(loc, 0);
+        sword.add(swordLoc, 0);
         items.put("sword", sword);
+        
+        ItemSub potion =
+            MI.parseExpression("SuperPotion within Start, sword, HealthPotion, 5");
+        int[] potLoc =
+            new int[] {
+                    game.getBG().getWidth() / 2 - 10,
+                    game.getBG().getHeight() / 4 * 3 + 10 };
+        potion.add(potLoc, 0);
+        items.put("potion", potion);
     }
 
 

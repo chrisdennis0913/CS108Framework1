@@ -1,17 +1,17 @@
 package player;
 
-import actions.GraphicalAction;
+import actions.BaseAction;
 
-public abstract class PlayerAction extends GraphicalAction {
+public abstract class PlayerAction extends BaseAction {
 
-	private Player player;
+	private PlayerActions pas;
 	
-	public PlayerAction(Player player) {
-		this.player = player;
+	public PlayerAction(PlayerActions pas) {
+		this.pas = pas;
 	}
 	
-	public Player getPlayer() {
-		return player;
+	public PlayerActions getActions() {
+		return pas;
 	}
 
 }

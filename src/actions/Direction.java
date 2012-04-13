@@ -1,14 +1,21 @@
 package actions;
 
+import java.awt.image.BufferedImage;
+
+import actions.Directions.Cardinal;
+
 public abstract class Direction{
 	private Double speedX;
 	private Double speedY;
-	private Integer key;
+	private BufferedImage[] images;
+	private Cardinal cardinal;
 	
-	public Direction(double speedX, double speedY, int key) {
+	
+	public Direction(double speedX, double speedY, Cardinal cardinal, BufferedImage[] images) {
 		this.speedX = speedX;
 		this.speedY = speedY;
-		this.key = key;
+		this.images = images;
+		this.cardinal = cardinal;
 	}
 	
 	public Double getHorSpeed() {
@@ -19,7 +26,17 @@ public abstract class Direction{
 		return speedY;
 	}
 	
-	public Integer getKey() {
-		return key;
+	public Cardinal getCardinality() {
+		return cardinal;
 	}
+	
+	public BufferedImage[] getImages() {
+		return images;
+	}
+	
+	public int frameCount() {
+		return images.length;
+	}
+	
+	public abstract void changeCharacter(boolean animate, int delay);
 }

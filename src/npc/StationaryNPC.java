@@ -1,17 +1,12 @@
 package npc;
 
-import level.MapContainer;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonParser;
-
+import saving_loading.AttributeContainer;
 import app.RPGGame;
 
 public abstract class StationaryNPC extends NPC{
 
-	public StationaryNPC(RPGGame game2, String name) {
-		super(game2, name);
+	public StationaryNPC(RPGGame game2, AttributeContainer ac) {
+		super(game2, ac);
 		// TODO Auto-generated constructor stub
 	}
 

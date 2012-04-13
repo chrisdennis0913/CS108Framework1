@@ -25,6 +25,7 @@ public class MakeItems
         ArrayList<ItemFactory> itemList = new ArrayList<ItemFactory>();
         itemList.add(Weapon.getFactory());
         itemList.add(KeyItem.getFactory());
+        itemList.add(HealthPotion.getFactory());
         
         for (ItemFactory itemFact : itemList)
         {

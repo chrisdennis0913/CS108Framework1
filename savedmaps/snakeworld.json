@@ -1,5 +1,7 @@
-["snake","snake_1",300,100]
-["snake","snake_2",400,100]
-["snake","snake_3",0,0]
-["snake","snake_4",600,600]
-["snake","snake_5",350,100]
+{"location":"[100,30]","name":"\"snake_1\"","type":"\"snake\""}
+{"location":"[200,310]","name":"\"snake_2\"","type":"\"snake\""}
+{"location":"[300,500]","name":"\"snake_3\"","type":"\"snake\""}
+{"location":"[230,400]","name":"\"snake_4\"","type":"\"snake\""}
+{"location":"[100,100]","name":"\"snake_5\"","type":"\"snake\""}
+{"location":"[200,180]","name":"\"snake_6\"","type":"\"snake\""}
+{"location":"[270,450]","name":"\"snake_7\"","type":"\"snake\""}

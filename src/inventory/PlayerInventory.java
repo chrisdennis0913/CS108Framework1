@@ -13,7 +13,7 @@ public class PlayerInventory extends Inventory
     public boolean showInventory=false;
     public PlayerInventory (RPGGame rpggame)
     {
-        super(rpggame);
+        super();
     }
 
 
@@ -45,16 +45,16 @@ public class PlayerInventory extends Inventory
             font.drawText(g,
                           currentItemName,
                           SystemFont.LEFT,
-                          (iter * 70) + 5,
+                          (iter * 80) + 8,
                           345,
                           70,
                           2,
                           0);
-            Sprite item =
+            Sprite itemSprite =
                 new Sprite(currentItem.image,
-                           iter * 70 + 5,
+                           iter * 80 + 10,
                            360);
-            item.render(g);
+            itemSprite.render(g);
             iter++;
         }
     }

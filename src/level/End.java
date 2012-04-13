@@ -3,12 +3,10 @@ package level;
 
 import java.awt.Graphics2D;
 
-import enemy.Snake;
-
-
+import saving_loading.AttributeContainer;
 import scenery.Scenery;
-import app.Main;
 import app.RPGGame;
+import enemy.Snake;
 
 public class End extends Level {
 
@@ -59,8 +57,12 @@ public class End extends Level {
 	}
 
 	protected void addEnemies() {
-		Snake snake = new Snake(game, "snake");
-		snake.add(new int[]{100, 100}, 4);
+		AttributeContainer ac = new AttributeContainer();
+		ac.put("name", "snake");
+		ac.put("type", "snake");
+		ac.put("location", new int[]{100,100});
+		Snake snake = new Snake(game, ac);
+		snake.add( (int[]) ac.getObjectForKey("location", int[].class), 4);
 		enemies.put("snake", snake);
 	}
 

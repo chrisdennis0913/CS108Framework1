@@ -1,36 +1,44 @@
 package actions;
 
-import java.util.ArrayList;
+import java.io.File;
+import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
 
-public class Directions implements Iterable<Direction>{
-	private Direction curDirection;
-	private List<Direction> directions = new ArrayList<Direction>();
+import com.golden.gamedev.util.FileUtil;
+
+public abstract class Directions implements Iterable<Direction>{
+	private Cardinal curDirection;
+	private Direction[] directions = new Direction[4];
+	protected String json;
+	public enum Cardinal {
+		UP, DOWN, RIGHT, LEFT;
+	}
+	
+	public Directions(String url) {
+		String[] jsonPacked = FileUtil.fileRead(new File(url));
+		StringBuilder jsonBuilder = new StringBuilder();
+		for (String line : jsonPacked) {
+			jsonBuilder.append(line);
+		}
+		json = jsonBuilder.toString();
+	}
+	
+	protected abstract void constructDirections(String json);
 	
 	public Iterator<Direction> iterator() {
-		Iterator<Direction> iterator = directions.iterator();
+		Iterator<Direction> iterator = Arrays.asList(directions).iterator();
 		return iterator;
 	}
 	
-	public void add(Direction direction) {
-		directions.add(direction);
-	}
-	
-	public boolean contains(Direction direction) {
-		return directions.contains(direction);
-	}
-	
-	public void setCurrentDirection(Direction direction) {
+	public void setCurrentDirection(Cardinal direction) {
 		curDirection = direction;
 	}
 	
-	public Direction getCurrentDirection() {
+	public Cardinal getCurrentDirection() {
 		return curDirection;
 	}
-	
-	public List<Direction> getDirections() {
+
+	public Direction[] getDirections() {
 		return directions;
 	}
-
 }
