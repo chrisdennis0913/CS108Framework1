@@ -20,4 +20,10 @@ public class SimpleGameState extends AbstractGameState {
 		return -playerHealth;
 	}
 
+	@Override
+	public void copyGameState(GameStateProvider gsp) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

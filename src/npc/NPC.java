@@ -51,6 +51,11 @@ public abstract class NPC extends Sprite implements Jsonable{
 		this.canDie = canDie;
 	}
 	
+	public int[] getLocation()
+	{
+		return location;
+	}
+	
 	public boolean canDie() {
 		return canDie;
 	}

@@ -1,15 +1,11 @@
 package app;
 
-
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
-
 import javax.swing.JFileChooser;
-
 import saving_loading.LoadFileFilter;
-
 import com.golden.gamedev.GameEngine;
 import com.golden.gamedev.GameObject;
 import com.golden.gamedev.object.GameFont;

@@ -37,4 +37,11 @@ public class HealthMod extends ItemSub implements EnemyMod
 		return null;
 	}
 
+    @Override
+    public void use ()
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

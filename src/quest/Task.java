@@ -12,12 +12,13 @@ public abstract class Task
 	
 	public String getDescription()
 	{
-		return this.toString();
+		return toString();
 	}
 	
-	public boolean getStatus()
+	public abstract void update();
+	
+	public boolean isDone()
 	{
 		return isComplete;
 	}
-
 }

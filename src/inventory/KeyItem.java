@@ -50,4 +50,11 @@ public class KeyItem extends ItemSub
         return new ItemFactory(new KeyItem());
     }
 
+    @Override
+    public void use ()
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

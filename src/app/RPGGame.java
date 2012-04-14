@@ -5,8 +5,10 @@ import java.awt.Graphics2D;
 import java.util.Comparator;
 
 import level.Level;
-import player.Player;
 import saving_loading.LevelFromFile;
+import player.Player;
+
+import ai.GameStateProvider;
 
 import com.golden.gamedev.GameEngine;
 import com.golden.gamedev.GameObject;
@@ -19,7 +21,7 @@ import inventory.Inventory;
 import inventory.ItemSub;
 
 
-public class RPGGame extends GameObject
+public class RPGGame extends GameObject //implements GameStateProvider
 {
 
     public RPGGame (GameEngine arg0)
@@ -33,7 +35,9 @@ public class RPGGame extends GameObject
     private Dialog dialog;
     private Level level;
     private Inventory myInventory;
-    public static String startLevelFilename = "map00.json";
+    private boolean pausedForInventory=false;
+    public static String startLevelFilename= "map00.json";
+
 
 
     @SuppressWarnings("rawtypes")
@@ -67,6 +71,10 @@ public class RPGGame extends GameObject
 
     public void render (Graphics2D g)
     {
+        if (pausedForInventory){
+            player.getInventory().renderMenu(g);
+            return;
+        }
         field.render(g);
         player.render(g);
         level.render(g);
@@ -75,7 +83,11 @@ public class RPGGame extends GameObject
 
     public void update (long elapsed)
     {
-        player.update();
+        if (pausedForInventory){
+            player.getInventory().updateMenu(elapsed);
+            return;
+        }
+        player.update(elapsed);
         level.update(elapsed);
         field.update(elapsed);
     }
@@ -129,4 +141,18 @@ public class RPGGame extends GameObject
         return myInventory;
 
     }
+    public void pauseGame(){
+        pausedForInventory = true;
+    }
+    public void unPauseGame(){
+        pausedForInventory = false;
+    }
+
+
+    /*
+	@Override
+	public void copyGameState(GameStateProvider gsp) {
+		gsp.player = player.clone();
+		gsp.level = level.clone();
+	}*/
 }

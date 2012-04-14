@@ -60,8 +60,10 @@ public class HealthPotion extends ItemSub implements UseItemInter
     @Override
     public void use ()
     {
-        game.getPlayer().getPCs().getHealth().increase(healthChange);   
+        game.getPlayer().getPCs().getHealth().decrease(1);
+        game.getPlayer().getPCs().getHealth().increase(healthChange+1);
     }
+    
     public int getHealthChange(){
         return healthChange;
     }

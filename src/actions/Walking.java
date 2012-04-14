@@ -39,25 +39,25 @@ public class Walking extends Action1 {
 				if (curSpeedX == 0.0)
 					character.setImages(images.get("left"));
 				setDirection(cardinal.LEFT);
-				speedX = -0.1;
+				speedX = -player.getMaxXSpeed();
 			}
 			if (player.getGame().keyDown(KeyEvent.VK_RIGHT)) {
 				if (curSpeedX == 0.0)
 					character.setImages(images.get("right"));
 				setDirection(cardinal.RIGHT);
-				speedX = 0.1;
+				speedX = player.getMaxXSpeed();
 			}
 			if (player.getGame().keyDown(KeyEvent.VK_UP)) {
 				if (curSpeedY == 0.0)
 					character.setImages(images.get("back"));
 				setDirection(cardinal.UP);
-				speedY = -0.1;
+				speedY = -player.getMaxYSpeed();
 			}
 			if (player.getGame().keyDown(KeyEvent.VK_DOWN)) {
 				if (curSpeedY == 0.0)
 					character.setImages(images.get("front"));
 				setDirection(cardinal.DOWN);
-				speedY = 0.1;
+				speedY = player.getMaxYSpeed();
 			}
 
 			if ((speedX != 0 || speedY != 0) && !isActing()) {

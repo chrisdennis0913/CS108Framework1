@@ -28,12 +28,13 @@ public abstract class Enemy implements Jsonable, IEnemy {
 	private Sprite enemy;
 	private int health;
 	private EnemyCollision collision;
-	protected HashMap<String,AbstractAttack> attacks;
 	private AbstractAI myAI;
 	protected int[] location = new int[2];
 	private ArrayList<EnemyMod> mods; 
 	protected AttributeContainer attributes;
 	protected Gson gson = new Gson();
+	protected HashMap<String,AbstractAttack> spontaneousAttacks = new HashMap<String,AbstractAttack>();
+	protected HashMap<String, AbstractAttack> reactiveAttacks = new HashMap<String,AbstractAttack>();
 	
 	private static final int DEFAULT_INITIAL_HEALTH = 1;
 	
@@ -61,9 +62,7 @@ public abstract class Enemy implements Jsonable, IEnemy {
 		mods.add(new HealthMod(this, 5));
 	}
 	
-	public void initAttacks(){
-		attacks = new HashMap<String,AbstractAttack>();
-	}
+	public abstract void initAttacks();
 	
 	public void setAI(AbstractAI ai){
 		myAI = ai;
@@ -136,16 +135,25 @@ public abstract class Enemy implements Jsonable, IEnemy {
 		myAI.act(elapsedTime);
 	}
 	
+	@Override
+	public void onCollision(){
+		myAI.onCollision();
+	}
+
 	public void attack(String attackName, long elapsedTime){
-		attack(attacks.get(attackName), elapsedTime);
+		attack(spontaneousAttacks.get(attackName), elapsedTime);
 	}
 	
 	public void attack(AbstractAttack attack, long elapsedTime){
 		attack.performAttack(elapsedTime);
 	}
 	
-	public Collection<AbstractAttack> getAttacks(){
-		return attacks.values();
+	public Collection<AbstractAttack> getSpontaneousAttacks(){
+		return spontaneousAttacks.values();
+	}
+	
+	public Collection<AbstractAttack> getReactiveAttacks(){
+		return reactiveAttacks.values();
 	}
 	
 	@Override
@@ -167,6 +175,13 @@ public abstract class Enemy implements Jsonable, IEnemy {
 	@Override
 	public SpriteGroup getGroup() {
 		return group;
+	}
+	
+	public double getMaxXSpeed(){
+		return 0.05;
+	}
+	public double getMaxYSpeed(){
+		return 0.05;
 	}
 	
 }
