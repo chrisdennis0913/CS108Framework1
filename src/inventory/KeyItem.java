@@ -15,6 +15,7 @@ import app.RPGGame;
  */
 public class KeyItem extends ItemSub
 {
+    private int price = 1;
 
     private KeyItem(){
         

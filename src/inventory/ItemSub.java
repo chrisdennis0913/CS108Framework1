@@ -15,7 +15,6 @@ public abstract class ItemSub implements Comparable<ItemSub>
     protected BufferedImage image;
     protected Sprite mySprite;
 
-
     // Can subclass to create other instance variables
     // such as weight
     protected ItemSub ()
@@ -52,6 +51,7 @@ public abstract class ItemSub implements Comparable<ItemSub>
         game.getField().addGroup(myGroup);
         setCollision();
     }
+    
     public void setCollision ()
     {
         ItemCollision collision = new ItemCollision(game, myName, this,mySprite);
@@ -81,7 +81,6 @@ public abstract class ItemSub implements Comparable<ItemSub>
     {
         return category;
     }
-
 
 
     /**
@@ -145,5 +144,6 @@ public abstract class ItemSub implements Comparable<ItemSub>
         String[] parseArray = toParse.split(",");
         return parseArray[2].trim();
     }
+
 
 }

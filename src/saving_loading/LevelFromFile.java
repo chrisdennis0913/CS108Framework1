@@ -105,10 +105,15 @@ public class LevelFromFile extends Level{
         Scenery arch = new Scenery(game, "resources/scenery/arch.gif");
         int[] archloc = new int[] { game.getBG().getWidth() / 2 - 65, -50 };
         arch.add(archloc, 3);
+        
+        Scenery archStore = new Scenery(game, "resources/scenery/arch.gif");
+        int[] archloc2 = new int[] { game.getBG().getWidth() / 300, 15 };
+        arch.add(archloc2, 3);
 
         scenery.put("shrubs", shrubs);
         scenery.put("statue", statue);
         scenery.put("arch", arch);
+        scenery.put("store", archStore);
     }
 
 
@@ -130,6 +135,14 @@ public class LevelFromFile extends Level{
                     game.getBG().getHeight() / 4 * 3 };
         potion.add(potLoc, 0);
         items.put("potion", potion);
+//        ItemSub key =
+//                MI.parseExpression("Key, key, HealthPotion, 5");
+//            int[] keyLoc =
+//                new int[] {
+//                        game.getBG().getWidth() / 6 * 2,
+//                        game.getBG().getHeight() / 4 * 3 };
+//            key.add(keyLoc, 0);
+//            items.put("key", key);
     }
 
 

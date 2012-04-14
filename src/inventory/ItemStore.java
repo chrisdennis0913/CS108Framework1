@@ -1,28 +1,23 @@
 package inventory;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.TreeMap;
 import app.RPGGame;
 
 public class ItemStore
 {
     private Inventory myInventory;
+    private TreeMap<ItemSub, Integer> myPrices;
    
     public ItemStore(RPGGame game){
 
-        myInventory = new Inventory(game);
-
         myInventory = new Inventory();
-        itemsByCategory= new TreeMap<String, ArrayList<ItemSub>>();
-
     }
     
     public void addItems(ItemSub itm, int quantity){
         myInventory.add(itm, quantity);
         
         ArrayList<ItemSub> IBCArray;
-        String itmCateg= itm.getCategory();
         IBCArray = new ArrayList<ItemSub>();
         IBCArray.add(itm);
 
@@ -36,5 +31,13 @@ public class ItemStore
     public void removeItems(ItemSub itm){
         myInventory.remove(itm); 
     }
+    
+//    public void adjustPrice(ItemSub item, int amtChange){
+//        for (ItemSub i : myInventory){
+//            int currentPrice = i.getPrice();
+//            int newPrice = currentPrice.adjustPrice();
+//            item.setPrice(newPrice);
+//        }
+//    }
     
 }
