@@ -1,14 +1,10 @@
 package actions;
 
-
 import java.awt.event.KeyEvent;
 import java.util.TreeSet;
-
 import player.Player;
 import app.RPGGame;
-
 import com.golden.gamedev.object.AnimatedSprite;
-
 import inventory.ItemSub;
 
 
@@ -22,15 +18,20 @@ public class Attacking extends Action1
     {
         super(player, frames, name);
         myGame = game2;
-        for (ItemSub itm : myGame.getInventory()){
-            myWeaponList.add(itm);
+        for (ItemSub itm : myGame.getInventory())
+        {
+            if (itm.getCategory().equalsIgnoreCase("weapon"))
+            {
+                myWeaponList.add(itm);
+            }
         }
     }
 
 
     public boolean isActionable (RPGGame game2)
     {
-        for (ItemSub itm : game2.getInventory()){
+        for (ItemSub itm : game2.getInventory())
+        {
             myWeaponList.add(itm);
         }
         for (ItemSub itm : myWeaponList)
@@ -61,7 +62,7 @@ public class Attacking extends Action1
     }
 
 
-    private void animate ()
+    private void animateSword ()
     {
         AnimatedSprite character = player.getCharacter();
         Walking walking = (Walking) player.getAction("walking");
@@ -75,7 +76,6 @@ public class Attacking extends Action1
         character.setLoopAnim(true);
         character.setAnimate(true);
         character.setAnimationFrame(0, 2);
-
         character.setSpeed(0, 0);
     }
 
@@ -89,8 +89,9 @@ public class Attacking extends Action1
         if (isActionable(game2) && !isActing() &&
             player.getGame().keyDown(KeyEvent.VK_SPACE))
         {
+            //place different actions for different weapons here
             turn(false);
-            animate();
+            animateSword();
             setActing(true);
         }
 

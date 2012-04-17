@@ -6,7 +6,7 @@ import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
 import app.RPGGame;
 
-public abstract class ItemSub implements Comparable<ItemSub>, UseItemInter
+public abstract class ItemSub implements Comparable<ItemSub>, EquipItemInterface
 {
     protected static RPGGame game;
     protected String myName;

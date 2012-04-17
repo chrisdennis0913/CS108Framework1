@@ -13,7 +13,7 @@ import app.RPGGame;
  * 
  * @author Chris Dennis
  */
-public class HealthPotion extends ItemSub implements UseItemInter
+public class HealthPotion extends ItemSub
 {
     private int healthChange;
     private HealthPotion(){
@@ -80,6 +80,27 @@ public class HealthPotion extends ItemSub implements UseItemInter
         if (healthChange != hp.getHealthChange()) return healthChange - hp.getHealthChange();
         if (myName != hp.getName()) return myName.compareTo(hp.getName());
         return 0;
+    }
+
+    @Override
+    public void equip ()
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void unequip ()
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void drop ()
+    {
+        // TODO Auto-generated method stub
+        
     }
 
 }

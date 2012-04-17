@@ -2,7 +2,8 @@ package inventory;
 
 public interface EquipItemInterface
 {
+    void use();
     void equip();
-    void unequp();
+    void unequip();
     void drop();
 }

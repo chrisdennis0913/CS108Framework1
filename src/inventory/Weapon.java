@@ -1,5 +1,7 @@
 package inventory;
 
+import player.PlayerDirection;
+import com.golden.gamedev.object.AnimatedSprite;
 import app.RPGGame;
 
 
@@ -20,7 +22,7 @@ public class Weapon extends ItemSub
     private int myDamage;
     private boolean equipped;
 
-    private Weapon(){
+    protected Weapon(){
         
     }
 
@@ -110,6 +112,37 @@ public class Weapon extends ItemSub
     @Override
     public void use ()
     {
+        
+    }
+    public void animateCharacter(PlayerDirection pd, boolean animate, int delay) {
+        AnimatedSprite character = ItemSub.game.getPlayer().getCharacter();
+        character.setSpeed(pd.getHorSpeed(), pd.getVerSpeed());
+        if (animate) {
+            character.setImages(pd.getImages());
+            if (pd.frameCount() == 1) {
+                character.setLoopAnim(false);
+                character.setAnimate(false);
+            } else {
+                character.getAnimationTimer().setDelay(delay);
+                character.setLoopAnim(true);
+                character.setAnimate(true);
+                character.setAnimationFrame(0, pd.frameCount() - 1);
+            }
+        }
+        ItemSub.game.getBG().setToCenter(character);
+    }
+    @Override
+    public void unequip ()
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void drop ()
+    {
+        // TODO Auto-generated method stub
+        
     }
 
 }

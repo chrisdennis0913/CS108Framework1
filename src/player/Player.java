@@ -144,7 +144,11 @@ public class Player implements Cloneable {
 		inventoryWithNames.put(grabItem.getName(), grabItem);
 		myInventory.add(grabItem);
 	}
-
+	
+	public ItemSub getEquipped(){
+	    return myInventory.getEquipped();
+	}
+	
 	public boolean hasItem(ItemSub itm) {
 	    return myInventory.contains(itm);
 	}

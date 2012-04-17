@@ -57,4 +57,25 @@ public class KeyItem extends ItemSub
         
     }
 
+    @Override
+    public void equip ()
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void unequip ()
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void drop ()
+    {
+        System.out.println("Cannot drop key items");
+        
+    }
+
 }

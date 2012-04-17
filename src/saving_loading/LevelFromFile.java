@@ -120,7 +120,7 @@ public class LevelFromFile extends Level{
     protected void addItems ()
     {
         ItemSub sword =
-            MI.parseExpression("Golden Sword of Paradise, sword, Weapon, 55");
+            MI.parseExpression("Golden Sword, sword, Weapon, 55");
         int[] loc =
             new int[] {
                     game.getBG().getWidth() / 2 - 10,
