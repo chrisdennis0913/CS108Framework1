@@ -82,25 +82,23 @@ public class HealthPotion extends ItemSub
         return 0;
     }
 
-    @Override
-    public void equip ()
+    public void equip()
     {
-        // TODO Auto-generated method stub
-        
+        game.getPlayer().setEquipped(this);
     }
-
-    @Override
-    public void unequip ()
+    public void unequip()
     {
-        // TODO Auto-generated method stub
-        
+        if (game.getPlayer().getEquipped()==this)
+            game.getPlayer().setEquipped(null);
+    }
+    public boolean isEquipped()
+    {
+        return game.getPlayer().getEquipped()==this;
     }
 
     @Override
     public void drop ()
     {
-        // TODO Auto-generated method stub
-        
+        // TODO Auto-generated method stub   
     }
-
 }

@@ -135,5 +135,13 @@ public class PlayerInventory extends Inventory
     public ItemSub getEquipped () {
         return equippedItem;
     }
+
+
+    public void setEquipped (ItemSub itm) {
+        if(contains(itm)){
+            equippedItem=itm;
+        }
+        
+    }
     
 }

@@ -78,4 +78,10 @@ public class KeyItem extends ItemSub
         
     }
 
+    @Override
+    public boolean isEquipped () {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
 }

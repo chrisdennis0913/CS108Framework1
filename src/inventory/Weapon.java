@@ -20,7 +20,6 @@ import app.RPGGame;
 public class Weapon extends ItemSub
 {
     private int myDamage;
-    private boolean equipped;
 
     protected Weapon(){
         
@@ -33,7 +32,6 @@ public class Weapon extends ItemSub
         super(game2, name, gifName);
         myDamage = damage;
         category = "Weapon";
-        equipped = false;
         game2.addItems(this);
     }
 
@@ -62,15 +60,16 @@ public class Weapon extends ItemSub
     }
     public void equip()
     {
-        equipped=true;
+        game.getPlayer().setEquipped(this);
     }
-    public void unEquip()
+    public void unequip()
     {
-        equipped=false;
+        if (game.getPlayer().getEquipped()==this)
+            game.getPlayer().setEquipped(null);
     }
     public boolean isEquipped()
     {
-        return equipped;
+        return game.getPlayer().getEquipped()==this;
     }
 
 
@@ -121,6 +120,7 @@ public class Weapon extends ItemSub
             character.setImages(pd.getImages());
             if (pd.frameCount() == 1) {
                 character.setLoopAnim(false);
+                
                 character.setAnimate(false);
             } else {
                 character.getAnimationTimer().setDelay(delay);
@@ -131,12 +131,7 @@ public class Weapon extends ItemSub
         }
         ItemSub.game.getBG().setToCenter(character);
     }
-    @Override
-    public void unequip ()
-    {
-        // TODO Auto-generated method stub
-        
-    }
+
 
     @Override
     public void drop ()

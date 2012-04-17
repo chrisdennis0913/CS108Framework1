@@ -2,15 +2,11 @@ package player;
 
 import inventory.ItemSub;
 import inventory.PlayerInventory;
-
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
-
 import actions.Action1;
 import actions.Attacking;
 import actions.Grabbing;
@@ -20,7 +16,6 @@ import actions.Walking;
 import ai.AbstractBehaviorModifier;
 import app.RPGGame;
 import collisions.PlayerBoundaryCollision;
-
 import com.golden.gamedev.object.AnimatedSprite;
 import com.golden.gamedev.object.SpriteGroup;
 
@@ -65,7 +60,7 @@ public class Player implements Cloneable {
 		actions.put("grabbing", new Grabbing(this, 1, "stand"));
         for (ItemSub itm : game.getInventory())
             System.out.println(itm + "in Player");
-		actions.put("attacking", new Attacking(this, 3, "attack", game));
+		actions.put("attacking", new Attacking(this, 3, "attacksword", game));
 	}
 
 	private void initCharacter(int[] location) {
@@ -147,6 +142,9 @@ public class Player implements Cloneable {
 	
 	public ItemSub getEquipped(){
 	    return myInventory.getEquipped();
+	}
+	public void setEquipped(ItemSub itm){
+	    myInventory.setEquipped(itm);
 	}
 	
 	public boolean hasItem(ItemSub itm) {

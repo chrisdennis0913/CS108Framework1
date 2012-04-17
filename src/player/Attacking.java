@@ -1,14 +1,13 @@
 package player;
 
 import inventory.ItemSub;
-import java.util.TreeSet;
+import inventory.Weapon;
 import actions.Direction;
 
 
 public class Attacking extends PlayerAction {
 
     private PlayerDirections directions;
-    private TreeSet<ItemSub> myWeaponList = new TreeSet<ItemSub>();
     private long timer = 0;
     private Player player;
 
@@ -24,14 +23,11 @@ public class Attacking extends PlayerAction {
 
     public boolean isEnabled () {
         player = getActions().getPlayer();
-        for (ItemSub itm : player.getGame().getInventory()) {
-            myWeaponList.add(itm);
+        if (player.getEquipped()==null){
+            return false;
         }
-        for (ItemSub itm : myWeaponList) {
-            if (player.hasItem(itm) &
-                itm.getCategory().equalsIgnoreCase("weapon")) {
-                return true;
-            }
+        if (player.getEquipped().getCategory().equals("weapon")){
+            return true;
         }
         return false;
     }
@@ -50,7 +46,7 @@ public class Attacking extends PlayerAction {
                 PlayerDirection direction =
                     (PlayerDirection) directions.getDirections()[0];
                 timer += elapsed;
-                ItemSub currentItem=player.getEquipped();
+                Weapon currentWeapon=(Weapon) player.getEquipped();
                 if (getActions().checkKeys(direction.getKeys())) for (Direction dir : directions) {
                     if (getActions().getCurrentDirection()
                                     .equals(dir.getCardinality())) {

@@ -4,9 +4,9 @@
 	"speedX": 0,
 	"speedY": 0,
 	"images": [
-		"resources/player/attack/back_attack_1.png",
-		"resources/player/attack/back_attack_2.png",
-		"resources/player/attack/back_attack_3.png"
+		"resources/player/attacksword/back_attacksword_1.png",
+		"resources/player/attacksword/back_attacksword_2.png",
+		"resources/player/attacksword/back_attacksword_3.png"
 	],
 	"keys": [17]
 },
@@ -15,9 +15,9 @@
 	"speedX": 0,
 	"speedY": 0,
 	"images": [
-		"resources/player/attack/front_attack_1.png",
-		"resources/player/attack/front_attack_2.png",
-		"resources/player/attack/front_attack_3.png"
+		"resources/player/attacksword/front_attacksword_1.png",
+		"resources/player/attacksword/front_attacksword_2.png",
+		"resources/player/attacksword/front_attacksword_3.png"
 	],
 	"keys": [17]
 },
@@ -26,9 +26,9 @@
 	"speedX": 0,
 	"speedY": 0,
 	"images": [
-		"resources/player/attack/right_attack_1.png",
-		"resources/player/attack/right_attack_2.png",
-		"resources/player/attack/right_attack_3.png"
+		"resources/player/attacksword/right_attacksword_1.png",
+		"resources/player/attacksword/right_attacksword_2.png",
+		"resources/player/attacksword/right_attacksword_3.png"
 	],
 	"keys": [17]
 },
@@ -37,9 +37,9 @@
 	"speedX": 0,
 	"speedY": 0,
 	"images": [
-		"resources/player/attack/left_attack_1.png",
-		"resources/player/attack/left_attack_2.png",
-		"resources/player/attack/left_attack_3.png"
+		"resources/player/attacksword/left_attacksword_1.png",
+		"resources/player/attacksword/left_attacksword_2.png",
+		"resources/player/attacksword/left_attacksword_3.png"
 	],
 	"keys": [17]
 }

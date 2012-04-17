@@ -6,4 +6,5 @@ public interface EquipItemInterface
     void equip();
     void unequip();
     void drop();
+    boolean isEquipped();
 }
