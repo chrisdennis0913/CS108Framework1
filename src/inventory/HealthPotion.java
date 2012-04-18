@@ -23,7 +23,7 @@ public class HealthPotion extends ItemSub
     public HealthPotion (RPGGame game2, String name, String gifName, int value)
     {
         super(game2, name, gifName);
-        category = "Health Potion";
+        category = "HealthPotion";
         game2.addItems(this);
         healthChange= value;
     }

@@ -114,7 +114,7 @@ public class Weapon extends ItemSub
     @Override
     public void use ()
     {
-        
+        equip();
     }
     public void animateCharacter(PlayerDirection pd, boolean animate, int delay) {
         AnimatedSprite character = ItemSub.game.getPlayer().getCharacter();
