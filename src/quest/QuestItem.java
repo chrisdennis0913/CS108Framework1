@@ -47,5 +47,25 @@ public class QuestItem extends ItemSub implements Observable
         // TODO Auto-generated method stub
         
     }
+    @Override
+    public void equip () {
+        // TODO Auto-generated method stub
+        
+    }
+    @Override
+    public void unequip () {
+        // TODO Auto-generated method stub
+        
+    }
+    @Override
+    public void drop () {
+        // TODO Auto-generated method stub
+        
+    }
+    @Override
+    public boolean isEquipped () {
+        // TODO Auto-generated method stub
+        return false;
+    }
 
 }

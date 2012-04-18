@@ -26,7 +26,8 @@ public class NPCCollision extends BasicCollisionGroup {
 				talking.setActionable(true);
 				talking.setTalkingTo(npc);
 			}
-			Attacking attacking = (Attacking) game.getPlayer().getAction("attacking");
+			Attacking attacking = (Attacking) game.getPlayer().getAction("swordAttacking");
+			//need to allow for attacking with any item
 			if (attacking.isActing() && npc.canDie())
 				npc.die();
 	}

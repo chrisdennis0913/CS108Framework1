@@ -118,9 +118,9 @@ public class LevelFromFile extends Level{
 
 
     protected void addItems ()
-    {
+    { // name, gifName, type/category, damage/value
         ItemSub sword =
-            MI.parseExpression("Golden Sword, sword, Weapon, 55");
+            MI.parseExpression("Golden Sword, sword, Sword, 55");
         int[] loc =
             new int[] {
                     game.getBG().getWidth() / 2 - 10,
@@ -128,13 +128,22 @@ public class LevelFromFile extends Level{
         sword.add(loc, 0);
         items.put("sword", sword);
         ItemSub potion =
-            MI.parseExpression("Super Potion, potion, HealthPotion, 5");
+            MI.parseExpression("Super Potion, potion, HealthPotion, 2");
         int[] potLoc =
             new int[] {
                     game.getBG().getWidth() / 3 * 2,
                     game.getBG().getHeight() / 4 * 3 };
         potion.add(potLoc, 0);
         items.put("potion", potion);
+        
+        ItemSub bowAndArrows =
+                MI.parseExpression("Twin Bow, bowAndArrow, BowAndArrows, 30");
+            int[] bowLoc =
+                new int[] {
+                        game.getBG().getWidth() / 3,
+                        game.getBG().getHeight() / 4 * 3 };
+            bowAndArrows.add(bowLoc, 0);
+            items.put("BowAndArrows", bowAndArrows);
 //        ItemSub key =
 //                MI.parseExpression("Key, key, HealthPotion, 5");
 //            int[] keyLoc =

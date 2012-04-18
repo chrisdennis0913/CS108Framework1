@@ -20,12 +20,13 @@ import app.RPGGame;
 public class Weapon extends ItemSub
 {
     private int myDamage;
+    protected String weaponType;
 
     protected Weapon(){
         
     }
 
-    private Weapon (RPGGame game2, String name,
+    protected Weapon (RPGGame game2, String name,
                     String gifName,
                    int damage)
     {
@@ -79,6 +80,7 @@ public class Weapon extends ItemSub
         return Integer.parseInt(parseArray[parseArray.length-1].trim());
 
     }
+    
     public static ItemFactory getFactory(){
         return new ItemFactory(new Weapon());
     }
@@ -87,8 +89,9 @@ public class Weapon extends ItemSub
         StringBuffer result = new StringBuffer();
         result.append("(");
         result.append(myName + " ");
-        result.append("is a weapon which does " + myDamage+ " damage.");
-        result.append(")");
+        result.append("is a weapon which does " + myDamage+ " damage");
+        result.append(" of type " + weaponType);
+        result.append(".)");
 
         return result.toString();
     }
@@ -131,8 +134,11 @@ public class Weapon extends ItemSub
         }
         ItemSub.game.getBG().setToCenter(character);
     }
-
-
+    
+    public String getWeaponType(){
+        return weaponType;
+    }
+    
     @Override
     public void drop ()
     {

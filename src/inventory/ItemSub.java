@@ -66,7 +66,6 @@ public abstract class ItemSub implements Comparable<ItemSub>, EquipItemInterface
         return myGroup;
     }
 
-
     public String getName ()
     {
         return myName;
