@@ -3,22 +3,28 @@ package saving_loading;
 
 
 import inventory.ItemSub;
+
 import java.awt.Graphics2D;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
 import level.End;
 import level.Level;
 import npc.Priest;
 import scenery.Scenery;
 import app.RPGGame;
+
 import com.golden.gamedev.util.FileUtil;
+
 import enemy.Snake;
 
 
 public class LevelFromFile extends Level{
 
     private List<RWGameObject> gameObjects;
+    private String nextLevelName;
+    private String startText;
 
     public LevelFromFile (RPGGame game, String levelFilename)
     {
@@ -63,6 +69,18 @@ public class LevelFromFile extends Level{
             System.out.println("Using Gson.toJson() on a raw collection: " + json);         
             // Create an attribute collection from the line of JSON from file
             AttributeContainer ac = new AttributeContainer(json);
+            
+            // Set the name of the file for the level after the one being loaded
+            if(ac.getStringForKey("nextLevel") != null){
+            	nextLevelName = ac.getStringForKey("nextLevel");
+            	continue;
+            }
+            
+            if(ac.getStringForKey("startText") != null){
+            	startText = ac.getStringForKey("startText");
+            	continue;
+            }
+            	
             String type = ac.getType();
             for(int j=0; j< gameObjects.size();j++){
                 if(gameObjects.get(j).isThisKindOfObject(type)){
@@ -124,17 +142,25 @@ public class LevelFromFile extends Level{
 
 
     public void render (Graphics2D g)
-    {
-        if (game.getDialog().getMessage().equals("")) game.getDialog()
-                                                          .setMessage("Press \"enter\" to talk to NPCs and pick up objects.");
-        if (getLevelTime() < 1500) game.getDialog().showMessage(g);
+    {        
+        if(!startText.equals("") || !(startText == null)){
+        	if (game.getDialog().getMessage().equals("")) game.getDialog().setMessage(startText);
+        	if (getLevelTime() < 1500) game.getDialog().showMessage(g);
+        }        
     }
 
 
     public void nextLevel ()
     {
-        game.setLevel(new End(game));
-        game.getLevel().generate();
+    	if(nextLevelName.equals("") || nextLevelName == null){
+    		game.finish();
+    	}
+    	else{
+    		game.setLevel(new LevelFromFile(game, nextLevelName));
+    		game.getLevel().generate();
+    	}
+       // game.setLevel(new End(game));
+       // game.getLevel().generate();
     }
 
 
