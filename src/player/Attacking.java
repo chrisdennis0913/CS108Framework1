@@ -14,23 +14,22 @@ public class Attacking extends PlayerAction {
 
 	public Attacking(Player player) {
 		super(player);
-		setEnabled(false);
+		setEnabled(false, true);
 		directions = new PlayerDirections(getPlayer(),
 				"resources/player/actions/attacking.json");
 	}
 
 	public boolean isEnabled() {
-//		Player player = getActions().getPlayer();
-//		for (ItemSub itm : player.getGame().getInventory()) {
-//			myWeaponList.add(itm);
-//		}
-//		for (ItemSub itm : myWeaponList) {
-//			if (player.hasItem(itm)) {
-//				return true;
-//			}
-//		}
-//		return false;
-		return true;
+		Player player = getPlayer();
+		for (ItemSub itm : player.getGame().getInventory()) {
+			myWeaponList.add(itm);
+		}
+		for (ItemSub itm : myWeaponList) {
+			if (player.hasItem(itm)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	private void reset() {

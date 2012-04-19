@@ -8,7 +8,7 @@ public class Standing extends PlayerAction {
 
 	public Standing(Player player) {
 		super(player);
-		setEnabled(true);
+		setEnabled(true, true);
 		directions = new PlayerDirections(getPlayer(),
 				"resources/player/actions/standing.json");
 	}

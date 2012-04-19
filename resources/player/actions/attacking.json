@@ -8,7 +8,7 @@
 		"resources/player/attack/back_attack_2.gif",
 		"resources/player/attack/back_attack_3.gif"
 	],
-	"keys": [17]
+	"keys": [32]
 },
 {
 	"cardinal": 1,
@@ -19,7 +19,7 @@
 		"resources/player/attack/front_attack_2.gif",
 		"resources/player/attack/front_attack_3.gif"
 	],
-	"keys": [17]
+	"keys": [32]
 },
 {
 	"cardinal": 2,
@@ -30,7 +30,7 @@
 		"resources/player/attack/right_attack_2.gif",
 		"resources/player/attack/right_attack_3.gif"
 	],
-	"keys": [17]
+	"keys": [32]
 },
 {
 	"cardinal": 3,
@@ -41,6 +41,6 @@
 		"resources/player/attack/left_attack_2.gif",
 		"resources/player/attack/left_attack_3.gif"
 	],
-	"keys": [17]
+	"keys": [32]
 }
 ]

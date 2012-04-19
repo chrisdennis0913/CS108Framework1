@@ -1,6 +1,7 @@
 package collisions;
 
 
+import player.PlayerActions;
 import npc.NPC;
 import app.RPGGame;
 
@@ -19,11 +20,11 @@ public class NPCCollision extends BasicCollisionGroup {
 	
 	public void collided(Sprite character, Sprite scenery) {
 			overlap(character, scenery);
-//			Talking talking = (Talking) game.getPlayer().getAction("talking");
-//			if (!talking.isActionable(game)) {
-//				talking.setActionable(true);
-//				talking.setTalkingTo(npc);
-//			}
+			PlayerActions actions = game.getPlayer().getActions();
+			if (!actions.isTalkable()) {
+				actions.setTalkable(true);
+				actions.setTalkingNPC(npc);
+			}
 			if (game.getPlayer().getActions().isAttacking() && npc.canDie())
 				npc.die();
 	}

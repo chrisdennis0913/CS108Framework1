@@ -1,10 +1,11 @@
 package player;
 
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-import actions.BaseAction;
+import actions.GraphicalAction;
 
-public abstract class PlayerAction extends BaseAction {
+public abstract class PlayerAction extends GraphicalAction {
 
 	private Player player;
 	
@@ -22,6 +23,10 @@ public abstract class PlayerAction extends BaseAction {
 	
 	public PlayerActions getActions() {
 		return player.getActions();
+	}
+	
+	public void render(Graphics2D g) {
+		
 	}
 
 }

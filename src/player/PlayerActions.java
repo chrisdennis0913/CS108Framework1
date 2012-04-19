@@ -1,6 +1,10 @@
 package player;
 
+import inventory.ItemSub;
+
 import java.util.List;
+
+import npc.NPC;
 
 import actions.BaseActions;
 import actions.Directions.Cardinal;
@@ -12,6 +16,8 @@ public class PlayerActions extends BaseActions {
 	private Walking walking;
 	private Standing standing;
 	private Attacking attacking;
+	private Grabbing grabbing;
+	private Talking talking;
 	
 	public PlayerActions(Player player) {
 		this.player = player;
@@ -19,9 +25,13 @@ public class PlayerActions extends BaseActions {
 		walking = new Walking(player);
 		standing = new Standing(player);
 		attacking = new Attacking(player);
+		grabbing = new Grabbing(player);
+		talking = new Talking(player);
 		getActions().add(walking);
 		getActions().add(standing);
 		getActions().add(attacking);
+		getActions().add(grabbing);
+		getActions().add(talking);
 	}
 	
 	public boolean checkKeys(List<Integer> keys) {
@@ -32,8 +42,8 @@ public class PlayerActions extends BaseActions {
 	}
 	
 	public void enableNonAttack(boolean theswitch) {
-		walking.setEnabled(theswitch);
-		standing.setEnabled(theswitch);
+		walking.setEnabled(theswitch, true);
+		standing.setEnabled(theswitch, true);
 	}
 	
 	public Cardinal getCurrentDirection() {
@@ -46,6 +56,30 @@ public class PlayerActions extends BaseActions {
 	
 	public boolean isWalking() {
 		return walking.isActive();
+	}
+	
+	public boolean isGrabbable() {
+		return grabbing.isEnabled();
+	}
+	
+	public void setGrabbable(boolean enabled) {
+		grabbing.setEnabled(enabled, true);
+	}
+	
+	public void setGrabbableItem(ItemSub item) {
+		grabbing.setItem(item);
+	}
+	
+	public boolean isTalkable() {
+		return talking.isEnabled();
+	}
+	
+	public void setTalkable(boolean enabled) {
+		talking.setEnabled(enabled, true);
+	}
+	
+	public void setTalkingNPC(NPC npc) {
+		talking.setNPC(npc);
 	}
 	
 	public boolean isAttacking() {

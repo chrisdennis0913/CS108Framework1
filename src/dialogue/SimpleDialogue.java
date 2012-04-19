@@ -12,11 +12,8 @@ public class SimpleDialogue extends AbstractDialogue{
 	
 	@Override
 	public void goToNextLine(boolean choice) {
-		if (isDone()){
-			System.out.println("tried to access past index of current script array");
-			return;
-		}
-		index ++;
+		if (!isDone())
+			index++;
 	}
 	
 	public String getCurrentLine(){
@@ -25,7 +22,7 @@ public class SimpleDialogue extends AbstractDialogue{
 
 	@Override
 	public boolean isDone() {
-		return index == script.length;
+		return index == script.length-1;
 	}
 
 }

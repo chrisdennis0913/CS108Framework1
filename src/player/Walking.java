@@ -8,7 +8,7 @@ public class Walking extends PlayerAction {
 
 	public Walking(Player player) {
 		super(player);
-		setEnabled(true);
+		setEnabled(true, true);
 		directions = new PlayerDirections(player,
 				"resources/player/actions/walking.json");
 	}

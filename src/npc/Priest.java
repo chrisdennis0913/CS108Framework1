@@ -25,7 +25,7 @@ public class Priest extends StationaryNPC {
 	
 
 	public String getTalk() {
-		if (game.getPlayer().hasItem("Golden Sword of Paradise"))
+		if (game.getPlayer().hasItem("Golden Sword of Paradise") && !dialogue.isDone())
 			dialogue.goToNextLine(true);
 		return dialogue.getCurrentLine();
 	}
