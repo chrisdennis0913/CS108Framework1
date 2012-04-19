@@ -1,1 +1,5 @@
 {"location":"[300,100]","name":"\"priest_1\"","type":"\"priest\""}
+{"locations":"[[330,30],[240,30],[390,40],[180,40],[450,50],[120,50],[510,60],[60,60],[570,70],[0,70]]","layer":"0","type":"\"scenery\"","name":"\"shrubs_1\"","imageURL":"\"resources/scenery/plant.gif\""}
+{"locations":"[[284,0]]","layer":"4","name":"\"statues_1\"","type":"\"scenery\"","imageURL":"\"resources/scenery/statue.gif\""}
+{"locations":"[[235,-50]]","layer":"3","name":"\"arch_1\"","type":"\"scenery\"","imageURL":"\"resources/scenery/arch.gif\""}
+{"locations":"[[2,15]]","layer":"3","name":"\"archstore_1\"","type":"\"scenery\"","imageURL":"\"resources/scenery/arch.gif\""}

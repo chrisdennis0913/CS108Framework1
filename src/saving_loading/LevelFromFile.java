@@ -49,10 +49,12 @@ public class LevelFromFile extends Level{
         sac.put("type", "priest");
         Priest priest = new Priest(game, pac);
         Snake snake = new Snake(game, sac);     
+        Scenery scene = new Scenery(game, "resources/scenery/arch.gif");
         
         gameObjects = new ArrayList<RWGameObject>();
         gameObjects.add(new Priest.Factory());
         gameObjects.add(new Snake.Factory());
+        gameObjects.add(new Scenery.Factory());
         MapContainer maps = new MapContainer(npcs, enemies, scenery, items);
         String[] event = FileUtil.fileRead(new File("savedmaps/"+levelFilename));           
 
@@ -79,41 +81,7 @@ public class LevelFromFile extends Level{
 
     protected void addScenery ()
     {
-
-        Scenery shrubs = new Scenery(game, "resources/scenery/plant.gif");
-        int reverser = -1;
-        int leveler = 0;
-        for (int i = 1; i <= 10; i++)
-        {
-            reverser *= -1;
-            if ((i - 1) % 2 == 0) leveler++;
-            int[] location =
-                new int[] {
-                        game.getBG().getWidth() / 2 + 30 * reverser * i,
-                        20 + leveler * 10 };
-            shrubs.add(location, 0);
-        }
-
-        Scenery statue = new Scenery(game, "resources/scenery/statue.gif");
-        int[] statloc =
-            new int[] {
-                    game.getBG().getWidth() / 2 - statue.getImage().getWidth() /
-                            4,
-                    0 };
-        statue.add(statloc, 4);
-
-        Scenery arch = new Scenery(game, "resources/scenery/arch.gif");
-        int[] archloc = new int[] { game.getBG().getWidth() / 2 - 65, -50 };
-        arch.add(archloc, 3);
-        
-        Scenery archStore = new Scenery(game, "resources/scenery/arch.gif");
-        int[] archloc2 = new int[] { game.getBG().getWidth() / 300, 15 };
-        arch.add(archloc2, 3);
-
-        scenery.put("shrubs", shrubs);
-        scenery.put("statue", statue);
-        scenery.put("arch", arch);
-        scenery.put("store", archStore);
+    	
     }
 
 
