@@ -1,12 +1,15 @@
 package player;
 
+import inventory.ItemStore;
 import inventory.ItemSub;
 import inventory.PlayerInventory;
+
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+
 import actions.Action1;
 import actions.Attacking;
 import actions.Grabbing;
@@ -16,6 +19,7 @@ import actions.Walking;
 import ai.AbstractBehaviorModifier;
 import app.RPGGame;
 import collisions.PlayerBoundaryCollision;
+
 import com.golden.gamedev.object.AnimatedSprite;
 import com.golden.gamedev.object.SpriteGroup;
 
@@ -35,7 +39,7 @@ public class Player implements Cloneable {
 	private LinkedList<AbstractBehaviorModifier> behaviorModifiers = new LinkedList<AbstractBehaviorModifier>();
 	private double maxXSpeed = INITIAL_PLAYER_X_SPEED;
 	private double maxYSpeed = INITIAL_PLAYER_Y_SPEED;
-	
+	private ItemStore myStore;
 
 	public Player(RPGGame rpgGame) {
 		this.game = rpgGame;
@@ -91,6 +95,9 @@ public class Player implements Cloneable {
         else if (game.keyPressed(java.awt.event.KeyEvent.VK_O))
         {
             myInventory.showFullInventoryMenu();
+        }
+        else if (game.keyPressed(java.awt.event.KeyEvent.VK_S)){
+        	myStore.openStore();
         }
         Iterator<AbstractBehaviorModifier> bmReverse = behaviorModifiers.descendingIterator();
         while(bmReverse.hasNext()){

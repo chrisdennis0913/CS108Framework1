@@ -13,7 +13,7 @@ import app.RPGGame;
  * 
  * @author Chris Dennis
  */
-public class KeyItem extends ItemSub
+public class KeyItem extends ItemSub implements Sellable
 {
     private int price = 1;
 
@@ -82,6 +82,13 @@ public class KeyItem extends ItemSub
     public boolean isEquipped () {
         // TODO Auto-generated method stub
         return false;
+    }
+
+    @Override
+    public boolean isSellable() {
+        if(price == 0)
+            return false;
+        return true;
     }
 
 }
