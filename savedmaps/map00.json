@@ -3,5 +3,4 @@
 {"locations":"[[284,0]]","layer":"4","name":"\"statues_1\"","type":"\"scenery\"","imageURL":"\"resources/scenery/statue.gif\""}
 {"locations":"[[235,-50]]","layer":"3","name":"\"arch_1\"","type":"\"scenery\"","imageURL":"\"resources/scenery/arch.gif\""}
 {"locations":"[[2,15]]","layer":"3","name":"\"archstore_1\"","type":"\"scenery\"","imageURL":"\"resources/scenery/arch.gif\""}
-{"nextLevel":"\"end.json\""}
-{"startText":"\"Press enter to talk to NPCs and pick up objects.\""}
+{"type":"\"settings\"","nextLevel":"\"end.json\"","startText":"\"Press enter to talk to NPCs and pick up objects.\""}

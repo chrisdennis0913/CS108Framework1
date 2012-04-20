@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import level.Level;
+
 import saving_loading.AttributeContainer;
 import saving_loading.MapContainer;
 import saving_loading.RWGameObject;
@@ -56,7 +58,7 @@ public class Priest extends StationaryNPC {
 		}
 
 		@Override
-		public void createAndAddToMap(AttributeContainer attributeContainer, MapContainer maps) {
+		public void createAndAddToMap(AttributeContainer attributeContainer, MapContainer maps, Level level) {
 			String name = attributeContainer.getName();
 			int[] location = (int[]) attributeContainer.getObjectForKey("location", int[].class);
 		    Priest priest = new Priest(game, attributeContainer);
