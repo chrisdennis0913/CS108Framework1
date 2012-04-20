@@ -16,9 +16,11 @@ public class BetterAI extends AbstractAI{
 
 	@Override
 	public void act(long elapsedTime) {
-		move(elapsedTime);
-		if (shouldAttack())
-			enemy.attack(pickBestSpontaneousAttack(),elapsedTime);
+		if(!enemy.isDead()){
+			move(elapsedTime);
+			if (shouldAttack())
+				enemy.attack(pickBestSpontaneousAttack(),elapsedTime);
+		}
 	}
 
 	@Override
@@ -48,21 +50,20 @@ public class BetterAI extends AbstractAI{
 		double playerMaxSpeed = (game.getPlayer().getMaxXSpeed() + game.getPlayer().getMaxYSpeed())/2;
 		double enemyMaxSpeed = (enemy.getMaxXSpeed() + enemy.getMaxYSpeed())/2;
 
-		if(playerMaxSpeed > enemyMaxSpeed){
+		/*if(playerMaxSpeed > enemyMaxSpeed){
 			if(enemy.getReactiveAttacks().get("slow") != null)
 				return enemy.getReactiveAttacks().get("slow");
-		}
-		else{
+		}*/
+		//else{
 			if(enemy.getReactiveAttacks().get("poison") != null)
 				return enemy.getReactiveAttacks().get("poison");
-		}
+		//}
 		throw new RuntimeException("No attacks available");
 	}
 
 	@Override
 	public void onCollision() {
 		pickBestReactiveAttack().performAttack(0);
-		System.err.println("yay");
 	}
 
 }

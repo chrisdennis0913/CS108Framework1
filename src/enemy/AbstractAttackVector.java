@@ -8,9 +8,9 @@ public abstract class AbstractAttackVector {
 
 	protected static RPGGame game;
 	private AnimatedSprite vectorSprite;
-	private AbstractAttackWithVector owner;
+	private AbstractVectorAttack owner;
 	
-	public AbstractAttackVector(RPGGame game, AbstractAttackWithVector owner, double x, double y, double speedX, double speedY){
+	public AbstractAttackVector(RPGGame game, AbstractVectorAttack owner, double x, double y, double speedX, double speedY){
 		this.game = game;
 		this.owner = owner;
 		vectorSprite = loadVectorSprite();

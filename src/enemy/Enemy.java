@@ -24,7 +24,7 @@ public abstract class Enemy implements Jsonable, IEnemy {
     private String name;
     private Sprite enemy;
     private int health;
-    private EnemyCollision collision;
+    EnemyCollision collision;
     private ProjectileCollision projectileCollision;
     private AbstractAI myAI;
     protected int[] location = new int[2];
@@ -128,7 +128,8 @@ public abstract class Enemy implements Jsonable, IEnemy {
 
     @Override
     public void setDead (boolean dead) {
-        if (dead) health = 0;
+        if (dead)
+        	health = 0;
     }
 
 
@@ -139,7 +140,7 @@ public abstract class Enemy implements Jsonable, IEnemy {
 
     @Override
     public boolean isDead () {
-        return (health > 0);
+        return (health <= 0);
     }
 
 

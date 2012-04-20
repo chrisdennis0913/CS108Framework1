@@ -1,8 +1,7 @@
-package ai;
+package enemy;
 
 import player.HealthCounter;
 import counters.BaseCounter;
-import enemy.SimulateableAttack;
 import app.RPGGame;
 
 public class PoisonedBehaviorModifier extends AbstractRecurrentTimeBehaviorModifier{

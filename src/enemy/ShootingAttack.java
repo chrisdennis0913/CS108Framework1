@@ -5,12 +5,12 @@ import com.golden.gamedev.object.Timer;
 
 import app.RPGGame;
 
-public class ShootingAttack extends AbstractAttackWithVector{
+public class ShootingAttack extends AbstractVectorAttack{
 
 	Timer timer;
 
-	public ShootingAttack(RPGGame game, IEnemy enemy) {
-		super(game, enemy);
+	public ShootingAttack(RPGGame game, IEnemy enemy, String name) {
+		super(game, enemy, name);
 		timer = new Timer(1000);
 		vectorSpeedX = 0.1;
 		vectorSpeedY = 0.1;
@@ -37,12 +37,6 @@ public class ShootingAttack extends AbstractAttackWithVector{
 	public void performAttack(long elapsedTime) {
 		if (isAttackValid(elapsedTime))
 			launchVector();
-	}
-
-	@Override
-	public int valueOfAttack() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 }

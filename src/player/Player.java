@@ -10,13 +10,15 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import ai.AbstractBehaviorModifier;
 import app.RPGGame;
 
 import collisions.PlayerBoundaryCollision;
 
 import com.golden.gamedev.object.AnimatedSprite;
+import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
+
+import enemy.AbstractBehaviorModifier;
 
 public class Player implements Cloneable {
 
@@ -38,9 +40,6 @@ public class Player implements Cloneable {
 
 	private static final double INITIAL_PLAYER_X_SPEED = 0.1;
 	private static final double INITIAL_PLAYER_Y_SPEED = 0.1;
-
-	private double maxXSpeed = INITIAL_PLAYER_X_SPEED;
-	private double maxYSpeed = INITIAL_PLAYER_Y_SPEED;
 
 	public Player(RPGGame rpgGame) {
 		this.game = rpgGame;
@@ -128,14 +127,6 @@ public class Player implements Cloneable {
 		myInventory.setEquipped(itm);
 	}
 
-	public double getMaxXSpeed() {
-		return maxXSpeed;
-	}
-
-	public double getMaxYSpeed() {
-		return maxYSpeed;
-	}
-
 	public boolean hasItem(ItemSub itm) {
 		return myInventory.contains(itm);
 	}
@@ -151,12 +142,12 @@ public class Player implements Cloneable {
 		return myInventory.contains(inventoryWithNames.get(itemName));
 	}
 	
-	public void setMaxXSpeed(double xs) {
-		maxXSpeed = xs;
+	public void setWalkingSpeed(double[] speed){
+		pas.setWalkingSpeed(speed);
 	}
-
-	public void setMaxYSpeed(double ys) {
-		maxYSpeed = ys;
+	
+	public double[] getWalkingSpeed(){
+		return pas.getWalkingSpeed();
 	}
 
 	public void registerBehaviorModifier(AbstractBehaviorModifier bm) {
@@ -186,6 +177,10 @@ public class Player implements Cloneable {
 		behaviorModifiers.remove(bm);
 	}
 
+	public Sprite getSprite(){
+		return character;
+	}
+	
 	public RPGGame getGame() {
 		return game;
 	}

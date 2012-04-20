@@ -1,6 +1,7 @@
 package ai;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import enemy.AbstractAttack;
@@ -39,8 +40,8 @@ public class SimpleAI extends AbstractAI {
 	@Override
 	public AbstractAttack pickBestSpontaneousAttack() {
 		//Just returns the first attack in the HashMap
-		Collection<AbstractAttack> attacks = enemy.getSpontaneousAttacks();
-		Iterator<AbstractAttack> itr = attacks.iterator();
+		HashMap<String,AbstractAttack> attacks = enemy.getSpontaneousAttacks();
+		Iterator<AbstractAttack> itr = attacks.values().iterator();
 		if(itr.hasNext())
 			return itr.next();
 		else
@@ -49,8 +50,8 @@ public class SimpleAI extends AbstractAI {
 
 	@Override
 	public AbstractAttack pickBestReactiveAttack() {
-		Collection<AbstractAttack> attacks = enemy.getReactiveAttacks();
-		Iterator<AbstractAttack> itr = attacks.iterator();
+		HashMap<String,AbstractAttack> attacks = enemy.getReactiveAttacks();
+		Iterator<AbstractAttack> itr = attacks.values().iterator();
 		if(itr.hasNext())
 			return itr.next();
 		else
