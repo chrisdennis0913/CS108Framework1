@@ -11,7 +11,7 @@ public abstract class AbstractAttackWithCollision extends AbstractAttack {
 	protected boolean active = true;
 	
 	public AbstractAttackWithCollision(RPGGame game, IEnemy enemy, boolean startActive) {
-		super(game, enemy);
+		super(game, enemy, null);
 		active = startActive;
 	}
 	

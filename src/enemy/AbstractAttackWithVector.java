@@ -15,7 +15,7 @@ public abstract class AbstractAttackWithVector extends AbstractAttack {
 	protected double vectorSpeedY = 0;
 
 	public AbstractAttackWithVector(RPGGame game, IEnemy enemy) {
-		super(game, enemy);
+		super(game, enemy, null);
 		vectors = new SpriteGroup(getClass().getName());
 		game.getField().addGroup(vectors);
 		initCollisions();

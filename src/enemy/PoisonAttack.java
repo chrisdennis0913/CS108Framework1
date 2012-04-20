@@ -1,7 +1,6 @@
 package enemy;
 
 import ai.AbstractGameState;
-import ai.PoisonedBehaviorModifier;
 import app.RPGGame;
 
 import com.golden.gamedev.object.Sprite;

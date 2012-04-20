@@ -9,14 +9,9 @@ import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
-<<<<<<< HEAD
-
-=======
-
 import quest.QuestJournal;
 
 import ai.AbstractBehaviorModifier;
->>>>>>> cee2ddac63366a07de9f1fde96fe8026b18bfc8b
 import app.RPGGame;
 
 import collisions.PlayerBoundaryCollision;
@@ -24,8 +19,6 @@ import collisions.PlayerBoundaryCollision;
 import com.golden.gamedev.object.AnimatedSprite;
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
-
-import enemy.AbstractBehaviorModifier;
 
 public class Player implements Cloneable {
 
@@ -205,9 +198,5 @@ public class Player implements Cloneable {
 
 	public Sprite getSprite(){
 		return character;
-	}
-	
-	public RPGGame getGame() {
-		return game;
 	}
 }

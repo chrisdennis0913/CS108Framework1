@@ -29,19 +29,6 @@ public class FetchTask extends Task
 		inv = game.getInventory();
 	}
 	
-
-	public boolean checkComplete()
-	{
-		isComplete = true;
-		for (ItemSub s: itemsToFetch.keySet())
-		{
-			if (inv.getCount(s) != itemsToFetch.get(s))
-				isComplete = false;
-		}
-		
-		return isComplete;
-	}
-
 	public String toString()
 	{
 		String str = "Collect";
@@ -57,4 +44,19 @@ public class FetchTask extends Task
 		str += " for" + recipient.toString();
 		return str;
 	}
+
+
+	public boolean checkComplete() 
+	{
+		isComplete = true;
+		for (ItemSub s: itemsToFetch.keySet())
+		{
+			if (inv.getCount(s) != itemsToFetch.get(s))
+				isComplete = false;
+		}
+		return isComplete;
+	}
+
+
+	
 }
