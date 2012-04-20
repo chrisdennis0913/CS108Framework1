@@ -1,0 +1,46 @@
+[
+{
+	"cardinal": 0,
+	"speedX": 0,
+	"speedY": 0,
+	"images": [
+		"resources/player/attack/back_attack_1.gif",
+		"resources/player/attack/back_attack_2.gif",
+		"resources/player/attack/back_attack_3.gif"
+	],
+	"keys": [32]
+},
+{
+	"cardinal": 1,
+	"speedX": 0,
+	"speedY": 0,
+	"images": [
+		"resources/player/attack/front_attack_1.gif",
+		"resources/player/attack/front_attack_2.gif",
+		"resources/player/attack/front_attack_3.gif"
+	],
+	"keys": [32]
+},
+{
+	"cardinal": 2,
+	"speedX": 0,
+	"speedY": 0,
+	"images": [
+		"resources/player/attack/right_attack_1.gif",
+		"resources/player/attack/right_attack_2.gif",
+		"resources/player/attack/right_attack_3.gif"
+	],
+	"keys": [32]
+},
+{
+	"cardinal": 3,
+	"speedX": 0,
+	"speedY": 0,
+	"images": [
+		"resources/player/attack/left_attack_1.gif",
+		"resources/player/attack/left_attack_2.gif",
+		"resources/player/attack/left_attack_3.gif"
+	],
+	"keys": [32]
+}
+]

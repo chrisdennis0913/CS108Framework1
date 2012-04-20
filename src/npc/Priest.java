@@ -1,17 +1,12 @@
 package npc;
 
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Collection;
 
 import saving_loading.AttributeContainer;
 import saving_loading.MapContainer;
 import saving_loading.RWGameObject;
 import scenery.Portal;
 import app.RPGGame;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonParser;
 import dialogue.SimpleDialogue;
 
 @SuppressWarnings("serial")
@@ -29,6 +24,8 @@ public class Priest extends StationaryNPC {
 
 	public String getTalk() {
 		if (game.getPlayer().getEquipped().getCategory().equals("Weapon"))
+			dialogue.goToNextLine(dialogue.new SimpleDialogueObject());
+		if (game.getPlayer().hasItem("Golden Sword of Paradise") && !dialogue.isDone())
 			dialogue.goToNextLine(dialogue.new SimpleDialogueObject());
 		return dialogue.getCurrentLine();
 	}

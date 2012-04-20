@@ -9,7 +9,7 @@
 		"resources/player/attackbow/back_attackbow_3.gif",
 		"resources/player/attackbow/back_attackbow_4.gif"
 	],
-	"keys": [17]
+	"keys": [32]
 },
 {
 	"cardinal": 1,
@@ -18,10 +18,10 @@
 	"images": [
 		"resources/player/attackbow/front_attackbow_1.gif",
 		"resources/player/attackbow/front_attackbow_2.gif",
-		"resources/player/attackbow/front_attackbow_3.gif"
+		"resources/player/attackbow/front_attackbow_3.gif",
 		"resources/player/attackbow/front_attackbow_4.gif"
 	],
-	"keys": [17]
+	"keys": [32]
 },
 {
 	"cardinal": 2,
@@ -33,7 +33,7 @@
 		"resources/player/attackbow/right_attackbow_3.gif",
 		"resources/player/attackbow/right_attackbow_4.gif"
 	],
-	"keys": [17]
+	"keys": [32]
 },
 {
 	"cardinal": 3,
@@ -45,6 +45,6 @@
 		"resources/player/attackbow/left_attackbow_3.gif",
 		"resources/player/attackbow/left_attackbow_4.gif"
 	],
-	"keys": [17]
+	"keys": [32]
 }
 ]

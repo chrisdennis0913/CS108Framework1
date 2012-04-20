@@ -10,8 +10,7 @@ public class ItemStore
     private TreeMap<ItemSub, Integer> myPrices;
    
     public ItemStore(RPGGame game){
-
-        myInventory = new Inventory();
+    	myInventory = new Inventory();
     }
     
     public void addItems(ItemSub itm, int quantity){
