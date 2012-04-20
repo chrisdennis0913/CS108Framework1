@@ -27,7 +27,9 @@ public class Player implements Cloneable {
 
     private RPGGame game;
     private SpriteGroup group = new SpriteGroup("Player");
+    
     public SpriteGroup projectiles = new SpriteGroup("Projectiles");
+    
     private AnimatedSprite character;
     private String startSprite = "resources/player/start_sprite.gif";
     private PlayerInventory myInventory = new PlayerInventory(game);
@@ -112,6 +114,7 @@ public class Player implements Cloneable {
         else if (game.keyPressed(java.awt.event.KeyEvent.VK_O)) {
             myInventory.showFullInventoryMenu();
         }
+        
         Iterator<AbstractBehaviorModifier> bmReverse =
             behaviorModifiers.descendingIterator();
         while (bmReverse.hasNext()) {
@@ -128,7 +131,8 @@ public class Player implements Cloneable {
             if (action.isActing() && action.isActionable(game) &&
                 action.isMessageable()) game.getDialog().showMessage(g);
         }
-        myInventory.showInventory(g);
+        myInventory.showLimitedInventory(g);
+        myInventory.drawAccessories(g);
     }
 
 
