@@ -25,7 +25,6 @@ import com.golden.gamedev.object.AnimatedSprite;
 import com.golden.gamedev.object.SpriteGroup;
 
 public class Player implements Cloneable {
-<<<<<<< .merge_file_jkyk6b
 
 	private static final double INITIAL_PLAYER_X_SPEED = 0.1;
 	private static final double INITIAL_PLAYER_Y_SPEED = 0.1;
@@ -121,8 +120,9 @@ public class Player implements Cloneable {
 					&& action.isMessageable())
 				game.getDialog().showMessage(g);
 		}
-		myInventory.showInventory(g);
+		myInventory.showLimitedInventory(g);
 		myStore.showStore(g);
+		myInventory.drawAccessories(g);
 	}
 
 	public Action1 getAction(String name) {
@@ -219,6 +219,4 @@ public class Player implements Cloneable {
 	public void deregisterBehaviorModifier(AbstractBehaviorModifier bm) {
 		behaviorModifiers.remove(bm);
 	}
-
-
 }
