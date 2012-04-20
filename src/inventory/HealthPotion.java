@@ -4,16 +4,16 @@ import app.RPGGame;
 
 
 /**
- * Class for items that heal the hero.
+ * Class for items that affect the hero's counters.
  * 
  * Health potions are of the form
- * "Name, healthpotion, boolean forSale, int Price"
+ * "Name, gif name, healthpotion, value of change"
  * for example
- * "Super Potion, healthpotion, false"
+ * "Super Potion, potion, healthpotion, 4"
  * 
  * @author Chris Dennis
  */
-public class HealthPotion extends ItemSub implements UseItemInter
+public class HealthPotion extends ItemSub
 {
     private int healthChange;
     private HealthPotion(){
@@ -23,7 +23,7 @@ public class HealthPotion extends ItemSub implements UseItemInter
     public HealthPotion (RPGGame game2, String name, String gifName, int value)
     {
         super(game2, name, gifName);
-        category = "Health Potion";
+        category = "HealthPotion";
         game2.addItems(this);
         healthChange= value;
     }
@@ -33,8 +33,7 @@ public class HealthPotion extends ItemSub implements UseItemInter
     public boolean isThisKindOfItem (String toParse)
     {    
         String myCateg=super.parseCategory(toParse);
-        if (myCateg.equalsIgnoreCase("HealthPotion")) return true;
-        return false;
+        return myCateg.equalsIgnoreCase("HealthPotion");
     }
 
 
@@ -82,4 +81,22 @@ public class HealthPotion extends ItemSub implements UseItemInter
         return 0;
     }
 
+    public void equip()
+    {
+    }
+    public void unequip()
+    {
+        if (game.getPlayer().getEquipped()==this)
+            game.getPlayer().setEquipped(null);
+    }
+    public boolean isEquipped()
+    {
+        return game.getPlayer().getEquipped()==this;
+    }
+
+    @Override
+    public void drop ()
+    {
+        // TODO Auto-generated method stub   
+    }
 }

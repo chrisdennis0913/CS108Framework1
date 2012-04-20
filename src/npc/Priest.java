@@ -1,17 +1,14 @@
 package npc;
 
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Collection;
+
+import level.Level;
 
 import saving_loading.AttributeContainer;
 import saving_loading.MapContainer;
 import saving_loading.RWGameObject;
 import scenery.Portal;
 import app.RPGGame;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonParser;
 import dialogue.SimpleDialogue;
 
 @SuppressWarnings("serial")
@@ -26,10 +23,11 @@ public class Priest extends StationaryNPC {
 		if(attributes.getType() != null)
 			dialogue = new SimpleDialogue("resources/script/"+attributes.getType()+".txt");
 	}
-	
 
 	public String getTalk() {
-		if (game.getPlayer().hasItem("Golden Sword of Paradise"))
+		if (game.getPlayer().getEquipped().getCategory().equals("Weapon"))
+			dialogue.goToNextLine(dialogue.new SimpleDialogueObject());
+		if (game.getPlayer().hasItem("Golden Sword of Paradise") && !dialogue.isDone())
 			dialogue.goToNextLine(dialogue.new SimpleDialogueObject());
 		return dialogue.getCurrentLine();
 	}
@@ -43,11 +41,6 @@ public class Priest extends StationaryNPC {
 		}
 	}
 	
-
-	@Override
-	public String toJson() {
-		return attributes.asJsonString();
-	}
 	
 	@Override
 	public void changeLocation(int[] newLocation) {
@@ -63,7 +56,7 @@ public class Priest extends StationaryNPC {
 		}
 
 		@Override
-		public void createAndAddToMap(AttributeContainer attributeContainer, MapContainer maps) {
+		public void createAndAddToMap(AttributeContainer attributeContainer, MapContainer maps, Level level) {
 			String name = attributeContainer.getName();
 			int[] location = (int[]) attributeContainer.getObjectForKey("location", int[].class);
 		    Priest priest = new Priest(game, attributeContainer);

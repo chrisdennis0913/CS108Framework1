@@ -2,8 +2,8 @@ package counters;
 
 public abstract class BaseCounter {
 	private Integer count;
-	private Integer init;
-	private boolean full = true;
+	protected Integer init; // Initial is used as maximum
+	private boolean full = false;
 	private boolean empty = false;
 	
 	public BaseCounter (int count) {
@@ -69,4 +69,8 @@ public abstract class BaseCounter {
 	public Integer getInitial() {
 		return init;
 	}
+	   
+    public void boostTotal(int statChange){
+        this.init += statChange;
+    }
 }

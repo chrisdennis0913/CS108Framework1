@@ -41,6 +41,8 @@ public abstract class Level extends AbstractTileBackground{
 	protected HashMap<String, ItemSub> items = new HashMap<String, ItemSub>();
 	protected SystemTimer levelTimer = new SystemTimer();
 	protected long levelStartTime;
+	protected String nextLevelName;
+	protected String startText;
 	
 	public Level(BaseLoader bsLoader, BaseIO bsIO, RPGGame game2, String levelFileName) {
 		super(0, 0, TILE_WIDTH, TILE_HEIGHT);
@@ -140,7 +142,17 @@ public abstract class Level extends AbstractTileBackground{
 		nextLevel(nextLevel);
 	}
 	
+
 	public abstract void nextLevel(String next);
+
+	public void setStartText(String text){
+		startText = text;
+	}
+	
+	public void setNextLevel(String nextLevel){
+		nextLevelName = nextLevel;
+	}
+
 	public abstract void render(Graphics2D g);
 	
 	public void renderTile(Graphics2D g,

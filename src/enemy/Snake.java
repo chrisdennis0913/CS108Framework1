@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import level.Level;
+
 
 import saving_loading.AttributeContainer;
 import saving_loading.MapContainer;
@@ -66,20 +68,16 @@ public class Snake extends Enemy {
 				new Portal(game, "resources/scenery/portal.gif"));
 	}
 	
-	@Override
-	public String toJson() {
-	    return attributes.asJsonString();
-	}
-	
 	public static class Factory implements RWGameObject{
 		
 		@Override
 		public boolean isThisKindOfObject(String objectTag) {
 			return (objectTag.equals("snake"));
 		}
-
+		
 		@Override
-		public void createAndAddToMap(AttributeContainer attributeContainer, MapContainer maps) {
+		public void createAndAddToMap(AttributeContainer attributeContainer,
+				MapContainer maps, Level level) {
 			String name = attributeContainer.getName();
 			int[] location = (int[]) attributeContainer.getObjectForKey("location", int[].class);
 		    Snake snake = new Snake(game, attributeContainer);

@@ -6,7 +6,7 @@ import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
 import app.RPGGame;
 
-public abstract class ItemSub implements Comparable<ItemSub>, UseItemInter
+public abstract class ItemSub implements Comparable<ItemSub>, EquipItemInterface
 {
     protected static RPGGame game;
     protected String myName;
@@ -35,6 +35,7 @@ public abstract class ItemSub implements Comparable<ItemSub>, UseItemInter
         this.myName = name;
         category = "Item";
         myGroup = new SpriteGroup(myName);
+        System.out.println(gifName);
         this.image= game2.getImage("resources/items/" + gifName + ".gif");
     }
 
@@ -65,7 +66,6 @@ public abstract class ItemSub implements Comparable<ItemSub>, UseItemInter
     {
         return myGroup;
     }
-
 
     public String getName ()
     {

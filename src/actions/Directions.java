@@ -7,7 +7,7 @@ import java.util.Iterator;
 import com.golden.gamedev.util.FileUtil;
 
 public abstract class Directions implements Iterable<Direction>{
-	private Cardinal curDirection;
+	protected Cardinal curDirection;
 	private Direction[] directions = new Direction[4];
 	protected String json;
 	public enum Cardinal {

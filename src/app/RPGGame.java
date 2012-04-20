@@ -1,15 +1,18 @@
 package app;
 
+import inventory.Inventory;
+import inventory.ItemSub;
 
 import java.awt.Graphics2D;
 import java.util.Comparator;
 
 import level.Level;
+
 import level.Map;
 import saving_loading.LevelFromFile;
-import player.Player;
 
-import ai.GameStateProvider;
+import player.Player;
+import saving_loading.LevelFromFile;
 
 import com.golden.gamedev.GameEngine;
 import com.golden.gamedev.GameObject;
@@ -20,8 +23,6 @@ import com.golden.gamedev.object.PlayField;
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.background.ImageBackground;
 
-import inventory.Inventory;
-import inventory.ItemSub;
 
 public class RPGGame extends GameObject //implements GameStateProvider
 {
@@ -39,8 +40,8 @@ public class RPGGame extends GameObject //implements GameStateProvider
     private Level level;
     private Inventory myInventory;
     private boolean pausedForInventory=false;
+    private boolean pausedForItemStore=false;
     public static String startLevelFilename= "map00.json";
-
 
 
     @SuppressWarnings("rawtypes")
@@ -80,6 +81,10 @@ public class RPGGame extends GameObject //implements GameStateProvider
             player.getInventory().renderMenu(g);
             return;
         }
+        if (pausedForItemStore){
+            player.getItemStore().renderStore(g);
+            return;
+        }
         field.render(g);
         player.render(g);
         level.render(g);
@@ -90,6 +95,10 @@ public class RPGGame extends GameObject //implements GameStateProvider
     {
         if (pausedForInventory){
             player.getInventory().updateMenu(elapsed);
+            return;
+        }
+        if (pausedForItemStore){
+            player.getItemStore().updateStore(elapsed);
             return;
         }
         player.update(elapsed);
@@ -139,7 +148,6 @@ public class RPGGame extends GameObject //implements GameStateProvider
     public void addItems (ItemSub itm)
     {
         myInventory.add(itm);
-
     }
 
 
@@ -148,11 +156,18 @@ public class RPGGame extends GameObject //implements GameStateProvider
         return myInventory;
 
     }
-    public void pauseGame(){
+    public void pauseGameForInventory(){
         pausedForInventory = true;
     }
-    public void unPauseGame(){
+    public void unPauseGameForInventory(){
         pausedForInventory = false;
+    }
+    
+    public void pauseGameForStore(){
+        pausedForItemStore = true;
+    }
+    public void unPauseGameForStore(){
+        pausedForItemStore = false;
     }
 
 
@@ -162,4 +177,5 @@ public class RPGGame extends GameObject //implements GameStateProvider
 		gsp.player = player.clone();
 		gsp.level = level.clone();
 	}*/
+
 }

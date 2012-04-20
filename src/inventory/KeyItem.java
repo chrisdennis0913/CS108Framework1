@@ -13,7 +13,7 @@ import app.RPGGame;
  * 
  * @author Chris Dennis
  */
-public class KeyItem extends ItemSub
+public class KeyItem extends ItemSub implements Sellable
 {
     private int price = 1;
 
@@ -24,7 +24,7 @@ public class KeyItem extends ItemSub
     public KeyItem (RPGGame game2, String name, String gifName)
     {
         super(game2, name, gifName);
-        category = "Key Item";
+        category = "KeyItem";
         game2.addItems(this);
     }
 
@@ -55,6 +55,40 @@ public class KeyItem extends ItemSub
     {
         // TODO Auto-generated method stub
         
+    }
+
+    @Override
+    public void equip ()
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void unequip ()
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void drop ()
+    {
+        System.out.println("Cannot drop key items");
+        
+    }
+
+    @Override
+    public boolean isEquipped () {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean isSellable() {
+        if(price == 0)
+            return false;
+        return true;
     }
 
 }
