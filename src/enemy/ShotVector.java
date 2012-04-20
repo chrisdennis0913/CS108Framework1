@@ -10,7 +10,7 @@ public class ShotVector extends AbstractAttackVector {
 
 	private static final String imagePath = "resources/enemy/projectile.png";
 	
-	public ShotVector(RPGGame game, AbstractAttackWithVector owner, double x, double y, double speedX, double speedY) {
+	public ShotVector(RPGGame game, AbstractVectorAttack owner, double x, double y, double speedX, double speedY) {
 		super(game, owner,x,y, speedX, speedY);
 	}
 

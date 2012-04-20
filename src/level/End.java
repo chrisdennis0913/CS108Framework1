@@ -1,6 +1,5 @@
 package level;
 
-
 import java.awt.Graphics2D;
 
 import com.golden.gamedev.engine.BaseIO;
@@ -19,6 +18,11 @@ public class End extends Level {
 
 	protected void addNPCs() {
 		
+	}
+	
+	protected void initQuests()
+	{
+	
 	}
 
 	protected void addScenery() {

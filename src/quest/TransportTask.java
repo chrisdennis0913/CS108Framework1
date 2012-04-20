@@ -24,13 +24,15 @@ public class TransportTask extends Task
 		inv = game.getInventory();
 	}
 
-	public void update() {
-		isComplete = inv.contains(item);
-	}
-	
 	public String toString()
 	{
 		return "transport " + item.toString() + " to " + recipient.toString();
+	}
+
+	public boolean checkComplete() 
+	{
+		isComplete = inv.contains(item);
+		return isComplete;
 	}
 
 }

@@ -3,13 +3,13 @@ package collisions;
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.collision.BasicCollisionGroup;
 
-import enemy.AbstractAttackWithVector;
+import enemy.AbstractVectorAttack;
 
 public class AttackVectorCollision extends BasicCollisionGroup{
 
-	AbstractAttackWithVector owner;
+	AbstractVectorAttack owner;
 	
-	public AttackVectorCollision(AbstractAttackWithVector owner){
+	public AttackVectorCollision(AbstractVectorAttack owner){
 		this.owner = owner;
 	}
 	

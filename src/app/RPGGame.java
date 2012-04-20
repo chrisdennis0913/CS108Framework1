@@ -39,8 +39,10 @@ public class RPGGame extends GameObject //implements GameStateProvider
     private Dialog dialog;
     private Level level;
     private Inventory myInventory;
-    private boolean pausedForInventory=false;
+
     private boolean pausedForItemStore=false;
+    private boolean pausedForInventory=false;
+
     public static String startLevelFilename= "map00.json";
 
 

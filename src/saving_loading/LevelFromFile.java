@@ -5,8 +5,16 @@ import inventory.ItemSub;
 import java.awt.Graphics2D;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import quest.FetchTask;
+import quest.Quest;
+import quest.RewardQuest;
+import quest.Task;
+import quest.FetchTask;
 import npc.Priest;
+import npc.TestQuestGiver;
 
 import level.End;
 import level.Level;
@@ -49,7 +57,7 @@ public class LevelFromFile extends Level {
 //          f1.write(testAC.asJsonString());
 //          f1.close();
 //      } catch (IOException e) {
-//          // TODO Auto-generated catch block
+//         // TODO Auto-generated catch block
 //          e.printStackTrace();
 //      }         
 
@@ -85,6 +93,34 @@ public class LevelFromFile extends Level {
                 }
             }
         }
+        
+        TestQuestGiver questGiver = new TestQuestGiver(game, sac);
+		
+		
+    	int[] locs = new int[] {game.getBG().getWidth() / 2, 200 };
+    	sac.put("location", locs);
+    	sac.put("name", "QuestGiver");
+    	sac.put("type", "priest");
+        questGiver.add(locs, 6);
+        npcs.put("QuestGiver", questGiver);
+        
+        HashMap<ItemSub, Integer> toFetch = new HashMap<ItemSub, Integer>();
+        
+        ItemSub bowAndArrows = MI.parseExpression("Twin Bow, bowAndArrow, BowAndArrows, 30"); 
+        
+        toFetch.put(bowAndArrows, 1);
+		
+		Task t = new FetchTask(game, "Collect the item", questGiver, toFetch);
+		
+		ItemSub potion = MI.parseExpression("SuperPotion within Start, sword, HealthPotion, 5");
+	       
+	    items.put("potion", potion);
+		
+		Quest getBow = new RewardQuest("Bow Quest", potion, t);
+		
+		getBow.addObserver(questGiver);
+		
+		game.getPlayer().getQuestJournal().addQuest(getBow);
     }
 
 
@@ -167,7 +203,7 @@ public class LevelFromFile extends Level {
     		game.getLevel().generate();
     	}
     	*/
-       game.setLevel(new End(game));
+       game.setLevel(new End(bsLoader, bsIO, game, levelFilename));
        game.getLevel().generate();
     }
 

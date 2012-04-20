@@ -1,4 +1,4 @@
-package ai;
+package enemy;
 
 import app.RPGGame;
 
@@ -19,13 +19,13 @@ public class SlowBehaviorModifier extends AbstractTimedBehaviorModifier {
 
 	@Override
 	public void doUnique(long elapsedTime) {
-		player.setMaxXSpeed(slowFactor*player.getMaxXSpeed());
-		player.setMaxYSpeed(slowFactor*player.getMaxYSpeed());
+		player.setWalkingSpeed(new double[] {player.getWalkingSpeed()[0]*slowFactor,
+											player.getWalkingSpeed()[1]*slowFactor});
 	}
 	
 	@Override
 	public void undoUnique(long elapsedTime) {
-		player.setMaxXSpeed(player.getMaxXSpeed()/slowFactor);
-		player.setMaxYSpeed(player.getMaxYSpeed()/slowFactor);
+		player.setWalkingSpeed(new double[] {player.getWalkingSpeed()[0]/slowFactor,
+											player.getWalkingSpeed()[1]/slowFactor});
 	}	
 }

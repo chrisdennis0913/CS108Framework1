@@ -6,8 +6,8 @@ public class SuperTelepathicAttack extends AbstractAttack {
 	
 	int strikes;
 	
-	public SuperTelepathicAttack(RPGGame game, IEnemy enemy) {
-		super(game, enemy);
+	public SuperTelepathicAttack(RPGGame game, IEnemy enemy, String name) {
+		super(game, enemy, name);
 		strikes = 3;
 	}
 
@@ -24,12 +24,6 @@ public class SuperTelepathicAttack extends AbstractAttack {
 			strikes--;
 			target.getPCs().reactToEnemy(enemy);
 		}
-	}
-
-	@Override
-	public int valueOfAttack() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 }

@@ -95,4 +95,12 @@ public class PlayerActions extends BaseActions {
 	            return true;
 		return false;
 	}
+	
+	public void setWalkingSpeed(double[] speed){
+		walking.setSpeed(speed);
+	}
+	
+	public double[] getWalkingSpeed(){
+		return walking.getSpeed();
+	}
 }

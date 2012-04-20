@@ -6,7 +6,6 @@ import java.awt.*;
 import java.awt.image.*;
 import java.util.StringTokenizer;
 
-import com.golden.gamedev.object.*;
 import com.golden.gamedev.object.background.abstraction.*;
 import com.golden.gamedev.util.*;
 import com.golden.gamedev.engine.*;

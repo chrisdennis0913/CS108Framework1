@@ -21,7 +21,7 @@ public abstract class AbstractGameState implements GameStateProvider,Cloneable,C
 	}
 
 	public void extractGameInfo(RPGGame game){
-		game.copyGameState(this);
+		//game.copyGameState(this);
 	}
 
 	public abstract int getStateValue();

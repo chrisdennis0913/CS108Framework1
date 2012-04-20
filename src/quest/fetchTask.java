@@ -14,14 +14,14 @@ import npc.NPC;
 import inventory.Inventory;
 import inventory.ItemSub;
 
-public class fetchTask extends Task 
+public class FetchTask extends Task 
 {
 
 	private HashMap<ItemSub,Integer> itemsToFetch;
 	private NPC recipient;
 	private Inventory inv;
 	
-	public fetchTask(RPGGame game, String description, NPC recipient, HashMap<ItemSub, Integer> itemsToFetch) 
+	public FetchTask(RPGGame game, String description, NPC recipient, HashMap<ItemSub, Integer> itemsToFetch) 
 	{
 		super(description);
 		this.itemsToFetch = itemsToFetch;
@@ -30,7 +30,7 @@ public class fetchTask extends Task
 	}
 	
 
-	public void update()
+	public boolean checkComplete()
 	{
 		isComplete = true;
 		for (ItemSub s: itemsToFetch.keySet())
@@ -38,6 +38,8 @@ public class fetchTask extends Task
 			if (inv.getCount(s) != itemsToFetch.get(s))
 				isComplete = false;
 		}
+		
+		return isComplete;
 	}
 
 	public String toString()
@@ -55,7 +57,4 @@ public class fetchTask extends Task
 		str += " for" + recipient.toString();
 		return str;
 	}
-
-
-	
 }
