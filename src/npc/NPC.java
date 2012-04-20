@@ -36,6 +36,9 @@ public abstract class NPC extends Sprite implements Jsonable {
         this.image = game2.getImage("resources/npc/" + type + ".gif");
     }
 
+    public String toJson(){
+		return attributes.asJsonString();    	
+    }
 
     public void add (int[] location, int layer) {
         this.location = location;

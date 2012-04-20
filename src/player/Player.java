@@ -1,35 +1,36 @@
 package player;
 
+import inventory.ItemStore;
 import inventory.ItemSub;
 import inventory.PlayerInventory;
 
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 
 import ai.AbstractBehaviorModifier;
 import app.RPGGame;
-import collisions.PlayerBoundaryCollision;
 
 import com.golden.gamedev.object.AnimatedSprite;
 import com.golden.gamedev.object.SpriteGroup;
 
-public class Player {
-	private RPGGame game;
+public class Player implements Cloneable {
+
+	private HashMap<String, ItemSub> inventoryWithNames =
+	        new HashMap<String, ItemSub>();
+	
 	private SpriteGroup group = new SpriteGroup("Player");
 	public SpriteGroup projectiles = new SpriteGroup("Projectiles");
 	private AnimatedSprite character;
 	private String startSprite = "resources/player/start_sprite.gif";
-
-	private PlayerInventory myInventory = new PlayerInventory(game);
-	private HashMap<String, ItemSub> inventoryWithNames =
-	        new HashMap<String, ItemSub>();
 	
 	private PlayerCounters pcs = new PlayerCounters(this);
 	private PlayerActions pas;
-
+	private ItemStore myStore;
+	private RPGGame game;
+	private PlayerInventory myInventory = new PlayerInventory(game);
+	
 	private LinkedList<AbstractBehaviorModifier> behaviorModifiers = new LinkedList<AbstractBehaviorModifier>();
 
 	private static final double INITIAL_PLAYER_X_SPEED = 0.1;
@@ -42,6 +43,7 @@ public class Player {
 		this.game = rpgGame;
 		myInventory = new PlayerInventory(game);
 		pas = new PlayerActions(this);
+		myStore = new ItemStore(game);
 	}
 
 	public PlayerCounters getPCs() {
@@ -50,25 +52,6 @@ public class Player {
 
 	public PlayerActions getActions() {
 		return pas;
-	}
-
-	public void generate(int[] location) {
-		initCharacter(location);
-		initCollisions();
-	}
-
-	private void initCharacter(int[] location) {
-		BufferedImage[] image = new BufferedImage[] { game
-				.getImage(startSprite) };
-		character = new AnimatedSprite(image, location[0], location[1]);
-		character.setLayer(10);
-		group.add(character);
-		game.getField().addGroup(group);
-	}
-
-	private void initCollisions() {
-		game.getField().addCollisionGroup(group, null,
-				new PlayerBoundaryCollision(game.getBG()));
 	}
 
 	public void update(long elapsed) {
@@ -94,15 +77,24 @@ public class Player {
 	public void render(Graphics2D g) {
 		pcs.render(g);
 		pas.render(g);
-		myInventory.showInventory(g);
+		myInventory.showLimitedInventory(g);
 	}
-
-	public RPGGame getGame() {
-		return game;
-	}
-
+	
 	public AnimatedSprite getCharacter() {
 		return character;
+	}
+	
+	public PlayerInventory getInventory() {
+		return myInventory;
+	}
+
+	public ItemStore getItemStore() {
+		return myStore;
+	}
+
+	public void addItem(ItemSub grabItem) {
+		inventoryWithNames.put(grabItem.getName(), grabItem);
+		myInventory.add(grabItem);
 	}
 
 	public ItemSub getEquipped() {
@@ -113,17 +105,20 @@ public class Player {
 		myInventory.setEquipped(itm);
 	}
 
-	public SpriteGroup getGroup() {
-		return group;
+	public double getMaxXSpeed() {
+		return maxXSpeed;
 	}
 
-	public void addItem(ItemSub grabItem) {
-		inventoryWithNames.put(grabItem.getName(), grabItem);
-		myInventory.add(grabItem);
+	public double getMaxYSpeed() {
+		return maxYSpeed;
 	}
 
 	public boolean hasItem(ItemSub itm) {
 		return myInventory.contains(itm);
+	}
+	
+	public SpriteGroup getGroup() {
+		return group;
 	}
 
 	public boolean hasItem(String itemName) {
@@ -131,6 +126,14 @@ public class Player {
 			return false;
 		}
 		return myInventory.contains(inventoryWithNames.get(itemName));
+	}
+	
+	public void setMaxXSpeed(double xs) {
+		maxXSpeed = xs;
+	}
+
+	public void setMaxYSpeed(double ys) {
+		maxYSpeed = ys;
 	}
 
 	public void registerBehaviorModifier(AbstractBehaviorModifier bm) {
@@ -160,23 +163,7 @@ public class Player {
 		behaviorModifiers.remove(bm);
 	}
 
-	public double getMaxXSpeed() {
-		return maxXSpeed;
-	}
-
-	public double getMaxYSpeed() {
-		return maxYSpeed;
-	}
-
-	public void setMaxXSpeed(double xs) {
-		maxXSpeed = xs;
-	}
-
-	public void setMaxYSpeed(double ys) {
-		maxYSpeed = ys;
-	}
-
-	public PlayerInventory getInventory() {
-		return myInventory;
+	public RPGGame getGame() {
+		return game;
 	}
 }

@@ -3,87 +3,100 @@ package inventory;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 import app.InventoryMenu;
 import app.RPGGame;
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.font.SystemFont;
 
 
-public class PlayerInventory extends Inventory
-{
-    private boolean showInventory=false;
+public class PlayerInventory extends Inventory {
+    private boolean showInventory = false;
     private RPGGame game;
     private InventoryMenu menu;
     private ItemSub equippedItem;
-    
-    public PlayerInventory (RPGGame rpggame)
-    {
+    private ArrayList<Accessory> accessoryList;
+
+
+    public PlayerInventory (RPGGame rpggame) {
         super();
         game = rpggame;
+        accessoryList = new ArrayList<Accessory>();
     }
 
 
-    public ItemSub getItem (String itemName)
-    {
+    public ItemSub getItem (String itemName) {
         return null;
     }
-    public void add(ItemSub itm, int quantity){
-        if (myItemMap.isEmpty()){
-            equippedItem=itm;
+
+
+    public void add (ItemSub itm, int quantity) {
+        if (myItemMap.isEmpty()) {
+            equippedItem = itm;
         }
         super.add(itm, quantity);
     }
-    public void add(ItemSub itm){
-        if (myItemMap.isEmpty()){
-            equippedItem=itm;
+
+
+    public void add (ItemSub itm) {
+        if (itm.getCategory().equalsIgnoreCase("accessory")){
+            Accessory acc = (Accessory) itm;
+            acc.equip();
+        }
+        if (myItemMap.isEmpty()) {
+            equippedItem = itm;
         }
         super.add(itm);
     }
-    public void remove(ItemSub itm){
+
+
+    public void remove (ItemSub itm) {
+        if (itm.getCategory().equalsIgnoreCase("accessory")){
+            Accessory acc = (Accessory) itm;
+            acc.unequip();
+        }
+        if (equippedItem == itm) {
+            equippedItem = null;
+        }
         super.remove(itm);
-        if (!myItemMap.containsKey(itm)){
-            equippedItem=null;
+    }
+
+
+    public void remove (ItemSub itm, int quantity) {
+        super.remove(itm);
+        if (!myItemMap.containsKey(itm)) {
+            equippedItem = null;
         }
     }
-    public void remove(ItemSub itm, int quantity){
-        super.remove(itm);
-        if (!myItemMap.containsKey(itm)){
-            equippedItem=null;
-        }
-    }
-    
-    
     public void showFullInventoryMenu(){
         menu=new InventoryMenu(this);
-        game.pauseGame();
+        game.pauseGameForInventory();
     }
-    
-    public void renderMenu(Graphics2D g){
+
+
+    public void renderMenu (Graphics2D g) {
         menu.render(g);
     }
-    
-    public void updateMenu (long elapsed)
-    {
+
+
+    public void updateMenu (long elapsed) {
         menu.update(elapsed);
     }
 
-    public void showInventory (Graphics2D g)
-    {  
-        if (!showInventory)
-            return;
+
+    public void showLimitedInventory (Graphics2D g) {
+        if (!showInventory) return;
         SystemFont font =
             new SystemFont(new Font("Arial", Font.BOLD, 12), new Color(255,
                                                                        255,
                                                                        255));
         drawFiveItemBoxes(g);
         int iter = 0;
-        for (ItemSub currentItem : this)
-        {
+        for (ItemSub currentItem : this) {
             if (iter > 5) break;
             String currentItemName = currentItem.getName();
-            if (currentItemName == null) continue;
-            if (currentItemName.length() > 12)
-            {
+            if (currentItemName == null) break;
+            if (currentItemName.length() > 12) {
                 currentItemName = currentItemName.substring(0, 12) + "...";
             }
             font.drawText(g,
@@ -95,17 +108,21 @@ public class PlayerInventory extends Inventory
                           2,
                           0);
             Sprite itemSprite =
-                new Sprite(currentItem.image,
-                           iter * 80 + 10,
-                           360);
+                new Sprite(currentItem.image, iter * 80 + 10, 360);
             itemSprite.render(g);
             iter++;
         }
     }
 
 
-    private void drawFiveItemBoxes (Graphics2D g)
-    {
+    public void drawAccessories (Graphics2D g) {
+        for (Accessory acc : accessoryList) {
+            acc.render(g);
+        }
+    }
+
+
+    private void drawFiveItemBoxes (Graphics2D g) {
         g.setColor(new Color(0));
         g.drawRect(5, 340, 70, 50); //item one
         g.fillRect(5, 340, 70, 50);
@@ -118,16 +135,24 @@ public class PlayerInventory extends Inventory
         g.drawRect(325, 340, 70, 50); //item five
         g.fillRect(325, 340, 70, 50);
     }
-    public void toggleShow(){
-        showInventory=!showInventory;
+
+
+    public void toggleShow () {
+        showInventory = !showInventory;
     }
-    public void turnShowOff(){
-        showInventory=false;
+
+
+    public void turnShowOff () {
+        showInventory = false;
     }
-    public RPGGame getGame(){
+
+
+    public RPGGame getGame () {
         return game;
     }
-    public int getSize(){
+
+
+    public int getSize () {
         return myItemMap.size();
     }
 
@@ -137,11 +162,27 @@ public class PlayerInventory extends Inventory
     }
 
 
-    public void setEquipped (ItemSub itm) {
-        if(contains(itm)){
-            equippedItem=itm;
+    public void equipAcc (Accessory acc) {
+        if (!accessoryList.contains(acc)) {
+            accessoryList.add(acc);
         }
-        
     }
-    
+
+
+    public void unEquipAcc (Accessory acc) {
+        if (accessoryList.contains(acc)) accessoryList.remove(acc);
+    }
+
+
+    public void setEquipped (ItemSub itm) {
+        if (contains(itm)) {
+            equippedItem = itm;
+        }
+    }
+
+
+    public boolean hasAccessory (Accessory accessory) {
+        return accessoryList.contains(accessory);
+    }
+
 }

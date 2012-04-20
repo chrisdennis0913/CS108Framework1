@@ -21,8 +21,7 @@ public class BowAndArrows extends Weapon {
     public boolean isThisKindOfItem (String toParse)
     {    
         String myCateg=super.parseCategory(toParse);
-        if (myCateg.equalsIgnoreCase("BowAndArrows")) return true;
-        return false;
+        return myCateg.equalsIgnoreCase("BowAndArrows");
     }
     
     public static ItemFactory getFactory(){
