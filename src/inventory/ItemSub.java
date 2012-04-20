@@ -6,7 +6,7 @@ import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
 import app.RPGGame;
 
-public abstract class ItemSub implements Comparable<ItemSub>, UseItemInter
+public abstract class ItemSub implements Comparable<ItemSub>, EquipItemInterface
 {
     protected static RPGGame game;
     protected String myName;
@@ -14,7 +14,6 @@ public abstract class ItemSub implements Comparable<ItemSub>, UseItemInter
     protected SpriteGroup myGroup;
     protected BufferedImage image;
     protected Sprite mySprite;
-
 
     // Can subclass to create other instance variables
     // such as weight
@@ -52,6 +51,7 @@ public abstract class ItemSub implements Comparable<ItemSub>, UseItemInter
         game.getField().addGroup(myGroup);
         setCollision();
     }
+    
     public void setCollision ()
     {
         ItemCollision collision = new ItemCollision(game, myName, this,mySprite);
@@ -65,7 +65,6 @@ public abstract class ItemSub implements Comparable<ItemSub>, UseItemInter
     {
         return myGroup;
     }
-
 
     public String getName ()
     {
@@ -81,7 +80,6 @@ public abstract class ItemSub implements Comparable<ItemSub>, UseItemInter
     {
         return category;
     }
-
 
 
     /**
@@ -145,5 +143,6 @@ public abstract class ItemSub implements Comparable<ItemSub>, UseItemInter
         String[] parseArray = toParse.split(",");
         return parseArray[2].trim();
     }
+
 
 }

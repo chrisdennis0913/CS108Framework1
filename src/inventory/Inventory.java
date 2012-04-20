@@ -14,7 +14,7 @@ public class Inventory implements Iterable<ItemSub> {
 
 	public void add(ItemSub itm) {
 		if (!myItemMap.containsKey(itm))
-			myItemMap.put(itm, 0);
+			myItemMap.put(itm, 1);
 		// implicitly calls compareTo
 		// sorts items by category alphabetically, then by name, then by price
 		// done automatically within the TreeMap
@@ -47,7 +47,15 @@ public class Inventory implements Iterable<ItemSub> {
 					+ itm.getName() + ".");
 			return;
 		}
-		myItemMap.put(itm, quant - quantity);
+	      if (quant == 0) {
+	            System.out.println("That is the last of the"
+	                    + itm.getName() + "s.");
+	            myItemMap.remove(itm);
+	            return;
+	        }
+		myItemMap.put(itm, quant);
+		System.out.println("There are now " + quant+" left of the "
+                + itm.getName() + "s.");
 	}
 
 	public boolean contains(ItemSub itm) {

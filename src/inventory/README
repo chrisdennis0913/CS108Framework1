@@ -17,3 +17,5 @@ It currently looks like
 
 where MI is a MakeItems object instantiated in the Level super class.
 
+"o" opens the full inventory menu
+while "i" toggles the limited menu

@@ -14,6 +14,7 @@ public class PlayerInventory extends Inventory
     private boolean showInventory=false;
     private RPGGame game;
     private InventoryMenu menu;
+    private ItemSub equippedItem;
     
     public PlayerInventory (RPGGame rpggame)
     {
@@ -26,11 +27,35 @@ public class PlayerInventory extends Inventory
     {
         return null;
     }
+    public void add(ItemSub itm, int quantity){
+        if (myItemMap.isEmpty()){
+            equippedItem=itm;
+        }
+        super.add(itm, quantity);
+    }
+    public void add(ItemSub itm){
+        if (myItemMap.isEmpty()){
+            equippedItem=itm;
+        }
+        super.add(itm);
+    }
+    public void remove(ItemSub itm){
+        super.remove(itm);
+        if (!myItemMap.containsKey(itm)){
+            equippedItem=null;
+        }
+    }
+    public void remove(ItemSub itm, int quantity){
+        super.remove(itm);
+        if (!myItemMap.containsKey(itm)){
+            equippedItem=null;
+        }
+    }
+    
     
     public void showFullInventoryMenu(){
         menu=new InventoryMenu(this);
         game.pauseGame();
-        
     }
     
     public void renderMenu(Graphics2D g){
@@ -104,6 +129,19 @@ public class PlayerInventory extends Inventory
     }
     public int getSize(){
         return myItemMap.size();
+    }
+
+
+    public ItemSub getEquipped () {
+        return equippedItem;
+    }
+
+
+    public void setEquipped (ItemSub itm) {
+        if(contains(itm)){
+            equippedItem=itm;
+        }
+        
     }
     
 }

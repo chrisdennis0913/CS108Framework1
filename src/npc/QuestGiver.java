@@ -39,7 +39,7 @@ public class QuestGiver extends NPC implements Observer
 		}
 		if (questComplete)
 		{
-			dialogue.goToNextLine(true);
+			dialogue.goToNextLine(dialogue.new SimpleDialogueObject());
 			qu.completeQuest(game2);
 		}
 		

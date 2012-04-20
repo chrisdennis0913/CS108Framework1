@@ -1,0 +1,46 @@
+[
+{
+	"cardinal": 0,
+	"speedX": 0,
+	"speedY": 0,
+	"images": [
+		"resources/player/attacksword/back_attacksword_1.png",
+		"resources/player/attacksword/back_attacksword_2.png",
+		"resources/player/attacksword/back_attacksword_3.png"
+	],
+	"keys": [17]
+},
+{
+	"cardinal": 1,
+	"speedX": 0,
+	"speedY": 0,
+	"images": [
+		"resources/player/attacksword/front_attacksword_1.png",
+		"resources/player/attacksword/front_attacksword_2.png",
+		"resources/player/attacksword/front_attacksword_3.png"
+	],
+	"keys": [17]
+},
+{
+	"cardinal": 2,
+	"speedX": 0,
+	"speedY": 0,
+	"images": [
+		"resources/player/attacksword/right_attacksword_1.png",
+		"resources/player/attacksword/right_attacksword_2.png",
+		"resources/player/attacksword/right_attacksword_3.png"
+	],
+	"keys": [17]
+},
+{
+	"cardinal": 3,
+	"speedX": 0,
+	"speedY": 0,
+	"images": [
+		"resources/player/attacksword/left_attacksword_1.png",
+		"resources/player/attacksword/left_attacksword_2.png",
+		"resources/player/attacksword/left_attacksword_3.png"
+	],
+	"keys": [17]
+}
+]
