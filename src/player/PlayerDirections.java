@@ -16,7 +16,12 @@ public class PlayerDirections extends Directions {
 		super(url);
 		this.player = player;
 		constructDirections(json);
-		setCurrentDirection(Cardinal.DOWN);
+		curDirection = Cardinal.DOWN;
+	}
+	
+	public void setCurrentDirection(Cardinal direction) {
+		 curDirection = direction;
+		 player.getActions().setCurrentDirection(direction);
 	}
 
 	protected void constructDirections(String json) {
@@ -24,7 +29,6 @@ public class PlayerDirections extends Directions {
 		JSONDirection[] directions = gson.fromJson(json, JSONDirection[].class);
 
 		for (JSONDirection direction : directions) {
-
 			BufferedImage[] images = new BufferedImage[direction.images.length];
 			for (int i = 0; i < images.length; i++)
 				images[i] = player.getGame().getImage(direction.images[i]);

@@ -1,14 +1,14 @@
 package app;
 
+import inventory.Inventory;
+import inventory.ItemSub;
 
 import java.awt.Graphics2D;
 import java.util.Comparator;
 
 import level.Level;
-import saving_loading.LevelFromFile;
 import player.Player;
-
-import ai.GameStateProvider;
+import saving_loading.LevelFromFile;
 
 import com.golden.gamedev.GameEngine;
 import com.golden.gamedev.GameObject;
@@ -16,9 +16,6 @@ import com.golden.gamedev.object.Background;
 import com.golden.gamedev.object.PlayField;
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.background.ImageBackground;
-
-import inventory.Inventory;
-import inventory.ItemSub;
 
 
 public class RPGGame extends GameObject //implements GameStateProvider
@@ -35,7 +32,7 @@ public class RPGGame extends GameObject //implements GameStateProvider
     private Dialog dialog;
     private Level level;
     private Inventory myInventory;
-    private boolean pausedForInventory=false;
+
     private boolean pausedForItemStore=false;
 
     public static String startLevelFilename= "map00.json";
@@ -170,4 +167,5 @@ public class RPGGame extends GameObject //implements GameStateProvider
 		gsp.player = player.clone();
 		gsp.level = level.clone();
 	}*/
+
 }
