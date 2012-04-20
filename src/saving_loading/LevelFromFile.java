@@ -100,13 +100,15 @@ public class LevelFromFile extends Level {
             }
         }
         
-        TestQuestGiver questGiver = new TestQuestGiver(game, sac);
-		
-		
-    	int[] locs = new int[] {game.getBG().getWidth() / 2, 200 };
+    	int[] locs = new int[] {game.getBG().getWidth() / 3, 200 };
     	sac.put("location", locs);
     	sac.put("name", "QuestGiver");
     	sac.put("type", "priest");
+    	pac.put("type", "priest");
+    	pac.put("name", "QuestGiver");
+    	
+        TestQuestGiver questGiver = new TestQuestGiver(game, pac);	
+    	
         questGiver.add(locs, 6);
         npcs.put("QuestGiver", questGiver);
         
@@ -118,15 +120,16 @@ public class LevelFromFile extends Level {
 		
 		Task t = new FetchTask(game, "Collect the item", questGiver, toFetch);
 		
-		ItemSub potion = MI.parseExpression("SuperPotion within Start, sword, HealthPotion, 5");
+		ItemSub pot = MI.parseExpression("SuperPotion within Start, potion, HealthPotion, 5");
 	       
-	    items.put("potion", potion);
+	    items.put("pot", pot);
 		
-		Quest getBow = new RewardQuest("Bow Quest", potion, t);
+		Quest getBow = new RewardQuest("Bow Quest", pot, t);
 		
 		getBow.addObserver(questGiver);
 		
 		game.getPlayer().getQuestJournal().addQuest(getBow);
+		questGiver.addQuest(getBow);
     }
 
 

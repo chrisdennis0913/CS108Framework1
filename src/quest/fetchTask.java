@@ -26,7 +26,7 @@ public class FetchTask extends Task
 		super(description);
 		this.itemsToFetch = itemsToFetch;
 		this.recipient = recipient;
-		inv = game.getInventory();
+		inv = game.getPlayer().getInventory();
 	}
 	
 	public String toString()
@@ -45,7 +45,6 @@ public class FetchTask extends Task
 		return str;
 	}
 
-
 	public boolean checkComplete() 
 	{
 		isComplete = true;
@@ -56,7 +55,4 @@ public class FetchTask extends Task
 		}
 		return isComplete;
 	}
-
-
-	
 }
