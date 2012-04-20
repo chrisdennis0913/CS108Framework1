@@ -2,34 +2,31 @@ package quest;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Queue;
 
-import npc.QuestGiver;
 
 import app.RPGGame;
 
 import inventory.ItemSub;
 
-//QuestLog
-//Register to multiple game objects
-
-
 public abstract class Quest implements Observable
 {
-	protected Queue<Task> toDo;
-	protected Queue<Task> done;
+	protected List<Task> toDo;
+	protected List<Task> done;
 	private boolean isActive = false;
 	protected ArrayList<QuestGiver> observers;
 	
-	public Quest(Queue<Task> required)
+	public Quest(Task... required)
 	{
-		toDo = required;
+		toDo = Arrays.asList(required);
 		observers = new ArrayList<QuestGiver>();
 	}
 	
 	public boolean isDone()
 	{
-		return toDo.peek() == null;
+		return toDo.size() == 0;
 	}
 	
 	public void setActive(boolean b)
@@ -42,21 +39,28 @@ public abstract class Quest implements Observable
 		return isActive;
 	}
 	
-	public void update()
+	public boolean checkComplete()
 	{
 		for (Task t: toDo)
 		{
-			t.update();
-			if(!t.isDone())
-				return;
-			done.offer(toDo.remove());
+			if(!t.checkComplete())
+				return false;
+			done.add(toDo.remove(0));
 		}	
+		return true;
+	}
+	
+	public void update()
+	{
+		for (QuestGiver qg: observers)
+		{
+			qg.update(this);
+		}
 	}
 	
 	public void addObserver(QuestGiver qu)
 	{
-		for (QuestGiver qg: observers)
-			qg.update(this);
+		observers.add(qu);
 	}
 
 

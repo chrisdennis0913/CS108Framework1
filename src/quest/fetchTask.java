@@ -30,7 +30,7 @@ public class FetchTask extends Task
 	}
 	
 
-	public void update()
+	public boolean checkComplete()
 	{
 		isComplete = true;
 		for (ItemSub s: itemsToFetch.keySet())
@@ -38,6 +38,8 @@ public class FetchTask extends Task
 			if (inv.getCount(s) != itemsToFetch.get(s))
 				isComplete = false;
 		}
+		
+		return isComplete;
 	}
 
 	public String toString()
@@ -55,7 +57,4 @@ public class FetchTask extends Task
 		str += " for" + recipient.toString();
 		return str;
 	}
-
-
-	
 }

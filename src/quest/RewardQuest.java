@@ -13,8 +13,7 @@ public class RewardQuest extends Quest
 {
 	private ItemSub reward;
 
-	
-	public RewardQuest(Queue<Task> required, ItemSub reward) {
+	public RewardQuest(ItemSub reward, Task... required ) {
 		super(required);
 		this.reward = reward;
 	}
@@ -23,7 +22,4 @@ public class RewardQuest extends Quest
 	{
 		game2.getPlayer().addItem(reward);
 	}
-
-
-
 }

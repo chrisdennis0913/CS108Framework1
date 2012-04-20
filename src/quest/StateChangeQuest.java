@@ -9,20 +9,17 @@ import inventory.ItemSub;
 
 import java.util.Queue;
 
-import npc.QuestGiver;
-
 import app.RPGGame;
 
 public class StateChangeQuest extends Quest
 {
 
-	public StateChangeQuest(Queue<Task> required) {
+	public StateChangeQuest(Task... required) 
+	{
 		super(required);
 	}
 
 	public void completeQuest(RPGGame game2) 
-	{
-		
-		
+	{	
 	}
 }

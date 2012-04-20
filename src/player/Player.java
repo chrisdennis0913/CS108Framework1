@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import quest.QuestJournal;
+
 import actions.Action1;
 import actions.SwordAttacking;
 import actions.BowAttacking;
@@ -42,6 +44,7 @@ public class Player implements Cloneable {
 	private double maxXSpeed = INITIAL_PLAYER_X_SPEED;
 	private double maxYSpeed = INITIAL_PLAYER_Y_SPEED;
 	private ItemStore myStore;
+	private QuestJournal myQuests;
 
 	public Player(RPGGame rpgGame) {
 		this.game = rpgGame;
@@ -131,6 +134,11 @@ public class Player implements Cloneable {
 
 	public HashMap<String, Action1> getActions() {
 		return actions;
+	}
+	
+	public QuestJournal getQuestLog()
+	{
+		return myQuests;
 	}
 
 	public RPGGame getGame() {
