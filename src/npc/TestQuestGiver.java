@@ -24,7 +24,8 @@ public class TestQuestGiver extends StationaryNPC implements QuestGiver
 		setCanDie(false);
 		myQuests = new ArrayList<Quest>();	
 		attributes = ac;
-		dialogue = new SimpleDialogue("resources/script/testquestgiver.txt");
+//		dialogue = new SimpleDialogue("resources/script/testquestgiver.txt");
+		dialogue = new SimpleDialogue("resources/script/questgiver.txt");
 	}
 
 	public String getTalk() 

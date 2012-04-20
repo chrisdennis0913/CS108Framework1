@@ -1,27 +1,22 @@
 package saving_loading;
 
 import inventory.ItemSub;
-
 import java.awt.Graphics2D;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
+import level.End;
+import level.Level;
+import level.LevelSettings;
+import npc.Priest;
+import npc.TestQuestGiver;
 import quest.FetchTask;
 import quest.Quest;
 import quest.RewardQuest;
 import quest.Task;
-import quest.FetchTask;
-import npc.Priest;
-import npc.TestQuestGiver;
-
-import level.End;
-import level.Level;
-import level.LevelSettings;
 import scenery.Scenery;
 import app.RPGGame;
-
 import com.golden.gamedev.engine.BaseIO;
 import com.golden.gamedev.engine.BaseLoader;
 import com.golden.gamedev.util.FileUtil;
@@ -68,7 +63,7 @@ public class LevelFromFile extends Level {
         sac.put("name", "priest");
         sac.put("type", "priest");
         Priest priest = new Priest(game, pac);
-        Snake snake = new Snake(game, sac);     
+        Snake snake = new Snake(game, sac);
         Scenery scene = new Scenery(game, "resources/scenery/arch.gif");
         gameObjects = new ArrayList<RWGameObject>();
         gameObjects.add(new Priest.Factory());
@@ -85,7 +80,18 @@ public class LevelFromFile extends Level {
                                json);
             // Create an attribute collection from the line of JSON from file
             AttributeContainer ac = new AttributeContainer(json);
-            
+
+            // Set the name of the file for the level after the one being loaded
+            if (ac.getStringForKey("nextLevel") != null) {
+                nextLevelName = ac.getStringForKey("nextLevel");
+                continue;
+            }
+
+            if (ac.getStringForKey("startText") != null) {
+                startText = ac.getStringForKey("startText");
+                continue;
+            }
+
             String type = ac.getType();
             for(int j=0; j< gameObjects.size();j++){
                 if(gameObjects.get(j).isThisKindOfObject(type)){
@@ -128,7 +134,8 @@ public class LevelFromFile extends Level {
 
     }
 
-    protected void addScenery (){
+
+    protected void addScenery () {
 
     }
 
@@ -160,6 +167,7 @@ public class LevelFromFile extends Level {
         items.put("BowAndArrows", bowAndArrows);
 
         ItemSub haloAcc =
+        // name, gifName, type/category, value, relative x, relative y
             MI.parseExpression("Health Halo, halo, Accessory, 8, -2, -2");
         int[] haloLoc =
             new int[] {
@@ -167,25 +175,15 @@ public class LevelFromFile extends Level {
                     game.getBG().getHeight() / 8 * 7 };
         haloAcc.add(haloLoc, 10);
         items.put("Halo Accessory", haloAcc);
-
-//        ItemSub key =
-//                MI.parseExpression("Key, key, KeyItem, 5");
-//            int[] keyLoc =
-//                new int[] {
-//                        game.getBG().getWidth() / 6 * 1,
-//                        game.getBG().getHeight() / 4 * 3 };
-//            key.add(keyLoc, 0);
-//            items.put("key", key);
     }
 
 
-
-    public void render (Graphics2D g)
-    {        
+    public void render (Graphics2D g) {
         if(!(startText == null)){
-        	if (game.getDialog().getMessage().equals("")) game.getDialog().setMessage(startText);
-        	if (getLevelTime() < 1500) game.getDialog().showMessage(g);
-        }        
+            if (game.getDialog().getMessage().equals("")) game.getDialog()
+                                                              .setMessage(startText);
+            if (getLevelTime() < 1500) game.getDialog().showMessage(g);
+        }
     }
 	
     public void nextLevel (String levelFilename)
@@ -203,8 +201,6 @@ public class LevelFromFile extends Level {
     		game.getLevel().generate();
     	}
     	*/
-       game.setLevel(new End(bsLoader, bsIO, game, levelFilename));
-       game.getLevel().generate();
     }
 
 

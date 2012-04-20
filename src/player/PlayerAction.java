@@ -7,7 +7,7 @@ import actions.GraphicalAction;
 
 public abstract class PlayerAction extends GraphicalAction {
 
-	private Player player;
+	protected Player player;
 	
 	public PlayerAction(Player player) {
 		this.player = player;

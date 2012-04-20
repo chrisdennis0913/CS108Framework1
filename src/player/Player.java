@@ -3,7 +3,6 @@ package player;
 import inventory.ItemStore;
 import inventory.ItemSub;
 import inventory.PlayerInventory;
-
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
@@ -13,9 +12,7 @@ import quest.QuestJournal;
 
 import ai.AbstractBehaviorModifier;
 import app.RPGGame;
-
 import collisions.PlayerBoundaryCollision;
-
 import com.golden.gamedev.object.AnimatedSprite;
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
