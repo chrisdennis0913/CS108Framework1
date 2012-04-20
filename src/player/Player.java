@@ -103,12 +103,12 @@ public class Player implements Cloneable {
 		} else if (game.keyPressed(java.awt.event.KeyEvent.VK_S)) {
 			myStore.openStore();
 		}
-//		Iterator<AbstractBehaviorModifier> bmReverse = behaviorModifiers
-//				.descendingIterator();
-//		while (bmReverse.hasNext()) {
-//			if (bmReverse.next().unsetUp(elapsedTime))
-//				bmReverse.remove();
-//		}
+		// Iterator<AbstractBehaviorModifier> bmReverse = behaviorModifiers
+		// .descendingIterator();
+		// while (bmReverse.hasNext()) {
+		// if (bmReverse.next().unsetUp(elapsedTime))
+		// bmReverse.remove();
+		// }
 
 	}
 
@@ -148,7 +148,7 @@ public class Player implements Cloneable {
 	public PlayerInventory getInventory() {
 		return myInventory;
 	}
-	 
+
 	public ItemStore getItemStore() {
 		return myStore;
 	}

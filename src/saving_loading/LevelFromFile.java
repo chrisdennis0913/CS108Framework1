@@ -101,7 +101,7 @@ public class LevelFromFile extends Level {
                     game.getBG().getHeight() / 4 * 3 };
         potion.add(potLoc, 0);
         items.put("potion", potion);
-
+        
         ItemSub bowAndArrows =
             MI.parseExpression("Twin Bow, bowAndArrow, BowAndArrows, 30");
         int[] bowLoc =
@@ -119,6 +119,7 @@ public class LevelFromFile extends Level {
                     game.getBG().getHeight() / 8 * 7 };
         haloAcc.add(haloLoc, 10);
         items.put("Halo Accessory", haloAcc);
+
 //        ItemSub key =
 //                MI.parseExpression("Key, key, KeyItem, 5");
 //            int[] keyLoc =
