@@ -36,9 +36,13 @@ public class RPGGame extends GameObject //implements GameStateProvider
     private Level level;
     private Inventory myInventory;
     private boolean pausedForInventory=false;
+<<<<<<< .merge_file_FznPZ9
     private boolean pausedForItemStore=false;
     public static String startLevelFilename= "map00.json";
 
+=======
+    public static String startLevelFilename= "map00.json";
+>>>>>>> .merge_file_wEK0It
 
 
     @SuppressWarnings("rawtypes")
@@ -141,7 +145,6 @@ public class RPGGame extends GameObject //implements GameStateProvider
     public void addItems (ItemSub itm)
     {
         myInventory.add(itm);
-
     }
 
 

@@ -39,7 +39,7 @@ public abstract class Enemy implements Jsonable, IEnemy {
     private static final int DEFAULT_INITIAL_HEALTH = 1;
 
 
-    public Enemy (RPGGame game, AttributeContainer ac, int health) {
+    public Enemy (RPGGame game, AttributeContainer ac, int health){
         Enemy.game = game;
         name = ac.getName();
         attributes = ac;
@@ -58,6 +58,10 @@ public abstract class Enemy implements Jsonable, IEnemy {
 
     public Enemy (RPGGame game, AttributeContainer ac) {
         this(game, ac, DEFAULT_INITIAL_HEALTH);
+    }
+    
+    public String toJson(){
+		return attributes.asJsonString();    	
     }
 
 

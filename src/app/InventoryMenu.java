@@ -13,7 +13,7 @@ import com.golden.gamedev.object.Timer;
 public class InventoryMenu {
 
     private GameFont font;
-    private BufferedImage title;
+    private BufferedImage menuBackground;
     private BufferedImage arrow;
     private BufferedImage star;
     private int option;
@@ -31,7 +31,7 @@ public class InventoryMenu {
         game = PI.getGame();
         numOptions = PI.getSize();
         arrow = game.getImage("Arrow.png");
-        title = game.getImage("resources/items/itemMenuBackground.gif", false);
+        menuBackground = game.getImage("resources/items/itemMenuBackground.gif", false);
         font = game.fontManager.getFont(game.getImage("BitmapFont.png"));
         star = game.getImage("resources/items/goldStar.gif");
     }
@@ -82,7 +82,7 @@ public class InventoryMenu {
 
 
     public void render (Graphics2D g) {
-        g.drawImage(title, 0, 0, null);
+        g.drawImage(menuBackground, 0, 0, null);
         font.drawString(g, "BACK TO GAME", 30, 20);
         int count = 0;
         for (ItemSub itm : PI) {

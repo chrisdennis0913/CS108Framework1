@@ -23,6 +23,8 @@ public abstract class Level{
 	protected HashMap<String, ItemSub> items = new HashMap<String, ItemSub>();
 	protected SystemTimer levelTimer = new SystemTimer();
 	protected long levelStartTime;
+	protected String nextLevelName;
+	protected String startText;
 	
 	public Level(RPGGame game2) {
 		this.game = game2;
@@ -89,6 +91,14 @@ public abstract class Level{
 		for (String name : items.keySet())
 			items.get(name).getGroup().setActive(false);
 		nextLevel();
+	}
+	
+	public void setStartText(String text){
+		startText = text;
+	}
+	
+	public void setNextLevel(String nextLevel){
+		nextLevelName = nextLevel;
 	}
 	
 	public abstract void nextLevel();

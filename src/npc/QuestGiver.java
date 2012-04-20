@@ -25,10 +25,6 @@ public class QuestGiver extends NPC implements Observer
 		this.game2 = game2;
 	}
 
-	public String toJson() 
-	{
-		return attributes.asJsonString();
-	}
 
 	public String getTalk() 
 	{

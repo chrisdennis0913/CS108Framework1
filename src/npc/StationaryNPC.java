@@ -11,9 +11,6 @@ public abstract class StationaryNPC extends NPC{
 	}
 
 	@Override
-	public abstract String toJson();
-
-	@Override
 	public abstract String getTalk();
 
 	@Override
