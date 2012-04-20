@@ -10,12 +10,12 @@ import com.golden.gamedev.object.GameFont;
 import com.golden.gamedev.object.Timer;
 
 
-public class InventoryMenu
-{
+public class InventoryMenu {
 
     private GameFont font;
     private BufferedImage title;
     private BufferedImage arrow;
+    private BufferedImage star;
     private int option;
     private int numOptions;
     private boolean blink;
@@ -26,44 +26,42 @@ public class InventoryMenu
     private boolean firstTime = true;
 
 
-    public InventoryMenu (PlayerInventory playInv)
-    {
+    public InventoryMenu (PlayerInventory playInv) {
         PI = playInv;
         game = PI.getGame();
         numOptions = PI.getSize();
         arrow = game.getImage("Arrow.png");
         title = game.getImage("resources/items/itemMenuBackground.gif", false);
         font = game.fontManager.getFont(game.getImage("BitmapFont.png"));
+        star = game.getImage("resources/items/goldStar.gif");
     }
 
 
-    public void initResources ()
-    {
+    public void initResources () {
 
     }
 
 
-    public void update (long elapsedTime)
-    {
-        if (blinkTimer.action(elapsedTime))
-        {
+    public void update (long elapsedTime) {
+        if (blinkTimer.action(elapsedTime)) {
             blink = !blink;
         }
 
-        switch (game.bsInput.getKeyPressed())
-        {
+        switch (game.bsInput.getKeyPressed()) {
             case KeyEvent.VK_ENTER:
-                if (option == 0)
-                {
+                if (option == 0) {
                     // Back to main game screen.
-                    game.unPauseGame();
+                    game.unPauseGameForInventory();
                 }
-                else
-                {
+                else {
                     ItemSub currentItem = optionsList.get(option - 1);
                     currentItem.use();
-                    PI.remove(currentItem, 1); //work on removing from inventory and from menu
+                    if (currentItem.getCategory()
+                                   .equalsIgnoreCase("healthpotion")) PI.remove(currentItem,
+                                                                                1);
                 }
+                optionsList = new ArrayList<ItemSub>();
+                firstTime=true;
                 break;
 
             case KeyEvent.VK_UP:
@@ -83,22 +81,21 @@ public class InventoryMenu
     }
 
 
-    public void render (Graphics2D g)
-    {
+    public void render (Graphics2D g) {
         g.drawImage(title, 0, 0, null);
-        font.drawString(g, "BACK TO GAME", 20, 20);
+        font.drawString(g, "BACK TO GAME", 30, 20);
         int count = 0;
-        for (ItemSub itm : PI)
-        {
-            font.drawString(g, itm.getName().toUpperCase(), 20, 40 + count * 20);
+        for (ItemSub itm : PI) {
+            font.drawString(g, itm.getName().toUpperCase(), 30, 40 + count * 20);
             count++;
+            if (itm.isEquipped())
+                g.drawImage(star, 4, 17+count*20,null);
             if (firstTime) optionsList.add(itm);
         }
         firstTime = false;
 
-        if (!blink)
-        {
-            g.drawImage(arrow, 4, 17 + (option * 20), null);
+        if (!blink) {
+            g.drawImage(arrow, 14, 17 + (option * 20), null);
         }
     }
 

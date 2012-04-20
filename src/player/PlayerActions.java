@@ -1,6 +1,7 @@
 package player;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.List;
 
 import actions.BaseActions;
@@ -11,16 +12,20 @@ public class PlayerActions extends BaseActions {
 	private Player player;
 	private Walking walking;
 	private Standing standing;
-	private Attacking attacking;
+	private ArrayList<Attacking> attacking= new ArrayList<Attacking>();
+	private Attacking bowAttacking;
+	private Attacking swordAttacking;
 	
 	public PlayerActions(Player player) {
 		this.player = player;
 		walking = new Walking(this);
 		standing = new Standing(this);
-		attacking = new Attacking(this);
+		Attacking bowAttacking = new SwordAttacking(this);
+		Attacking swordAttacking = new BowAttacking(this);
 		getActions().add(walking);
 		getActions().add(standing);
-		getActions().add(attacking);
+		getActions().add(bowAttacking);
+		getActions().add(swordAttacking);
 	}
 	
 	public boolean checkKeys(List<Integer> keys) {
@@ -52,7 +57,10 @@ public class PlayerActions extends BaseActions {
 	}
 	
 	public boolean isAttacking() {
-		return attacking.isActive();
+	    for(Attacking atk: attacking)
+	        if (atk.isActive())
+	            return true;
+		return false;
 	}
 }
 //

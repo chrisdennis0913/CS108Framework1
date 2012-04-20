@@ -17,7 +17,6 @@ public class ItemCollision extends BasicCollisionGroup {
 	public ItemCollision (RPGGame game, String itemName, ItemSub item, Sprite spr) {
 		this.game = game;
 		itemSpriteMap.put(spr, item);
-//		System.out.println(itemSpriteMap.keySet());
 	}
 	
 	public void collided(Sprite character, Sprite item) {

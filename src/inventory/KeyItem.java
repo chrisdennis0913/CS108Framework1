@@ -24,7 +24,7 @@ public class KeyItem extends ItemSub implements Sellable
     public KeyItem (RPGGame game2, String name, String gifName)
     {
         super(game2, name, gifName);
-        category = "Key Item";
+        category = "KeyItem";
         game2.addItems(this);
     }
 

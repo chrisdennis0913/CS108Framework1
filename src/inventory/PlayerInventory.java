@@ -55,7 +55,7 @@ public class PlayerInventory extends Inventory
     
     public void showFullInventoryMenu(){
         menu=new InventoryMenu(this);
-        game.pauseGame();
+        game.pauseGameForInventory();
     }
     
     public void renderMenu(Graphics2D g){

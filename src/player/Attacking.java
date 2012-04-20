@@ -1,6 +1,5 @@
 package player;
 
-import inventory.ItemSub;
 import inventory.Weapon;
 import actions.Direction;
 
@@ -9,15 +8,15 @@ public class Attacking extends PlayerAction {
 
     private PlayerDirections directions;
     private long timer = 0;
-    private Player player;
+    protected Player player;
 
-
-    public Attacking (PlayerActions pas) {
+    public Attacking (PlayerActions pas, String url) {
         super(pas);
         setEnabled(false);
         directions =
             new PlayerDirections(pas.getPlayer(),
-                                 "resources/player/actions/attacking.json");
+                                 url);
+        System.out.println("player's attacking constructer");
     }
 
 
@@ -26,6 +25,7 @@ public class Attacking extends PlayerAction {
         if (player.getEquipped()==null){
             return false;
         }
+        System.out.println("player's attacking");
         if (player.getEquipped().getCategory().equals("weapon")){
             return true;
         }

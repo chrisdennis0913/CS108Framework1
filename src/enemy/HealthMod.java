@@ -64,7 +64,7 @@ public class HealthMod extends ItemSub implements EnemyMod
 
     @Override
     public boolean isEquipped() {
-        // TODO Auto-generated method stub
+
         return false;
     }
 

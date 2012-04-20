@@ -23,9 +23,12 @@ public class MakeItems
     public ItemSub parseExpression (String input)
     {
         ArrayList<ItemFactory> itemList = new ArrayList<ItemFactory>();
-        itemList.add(Weapon.getFactory());
         itemList.add(KeyItem.getFactory());
         itemList.add(HealthPotion.getFactory());
+        itemList.add(Sword.getFactory());
+        itemList.add(BowAndArrows.getFactory());
+        itemList.add(Weapon.getFactory());
+        
         
         for (ItemFactory itemFact : itemList)
         {

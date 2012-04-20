@@ -35,6 +35,7 @@ public abstract class ItemSub implements Comparable<ItemSub>, EquipItemInterface
         this.myName = name;
         category = "Item";
         myGroup = new SpriteGroup(myName);
+        System.out.println(gifName);
         this.image= game2.getImage("resources/items/" + gifName + ".gif");
     }
 
@@ -65,7 +66,6 @@ public abstract class ItemSub implements Comparable<ItemSub>, EquipItemInterface
     {
         return myGroup;
     }
-
 
     public String getName ()
     {

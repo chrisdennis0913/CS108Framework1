@@ -36,6 +36,7 @@ public class RPGGame extends GameObject //implements GameStateProvider
     private Level level;
     private Inventory myInventory;
     private boolean pausedForInventory=false;
+    private boolean pausedForItemStore=false;
     public static String startLevelFilename= "map00.json";
 
 
@@ -75,6 +76,10 @@ public class RPGGame extends GameObject //implements GameStateProvider
             player.getInventory().renderMenu(g);
             return;
         }
+        if (pausedForItemStore){
+            player.getItemStore().renderStore(g);
+            return;
+        }
         field.render(g);
         player.render(g);
         level.render(g);
@@ -85,6 +90,10 @@ public class RPGGame extends GameObject //implements GameStateProvider
     {
         if (pausedForInventory){
             player.getInventory().updateMenu(elapsed);
+            return;
+        }
+        if (pausedForItemStore){
+            player.getItemStore().updateStore(elapsed);
             return;
         }
         player.update(elapsed);
@@ -141,11 +150,18 @@ public class RPGGame extends GameObject //implements GameStateProvider
         return myInventory;
 
     }
-    public void pauseGame(){
+    public void pauseGameForInventory(){
         pausedForInventory = true;
     }
-    public void unPauseGame(){
+    public void unPauseGameForInventory(){
         pausedForInventory = false;
+    }
+    
+    public void pauseGameForStore(){
+        pausedForItemStore = true;
+    }
+    public void unPauseGameForStore(){
+        pausedForItemStore = false;
     }
 
 
