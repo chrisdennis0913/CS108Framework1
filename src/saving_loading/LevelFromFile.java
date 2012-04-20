@@ -103,16 +103,7 @@ public class LevelFromFile extends Level {
         items.put("potion", potion);
 
         ItemSub bowAndArrows =
-<<<<<<< .merge_file_SHnnKK
-                MI.parseExpression("Twin Bow, bowAndArrow, BowAndArrows, 30");
-            int[] bowLoc =
-                new int[] {
-                        game.getBG().getWidth() / 3,
-                        game.getBG().getHeight() / 4 * 3 };
-            bowAndArrows.add(bowLoc, 0);
-            items.put("BowAndArrows", bowAndArrows);
-            
-=======
+
             MI.parseExpression("Twin Bow, bowAndArrow, BowAndArrows, 30");
         int[] bowLoc =
             new int[] {
@@ -130,7 +121,6 @@ public class LevelFromFile extends Level {
         haloAcc.add(haloLoc, 10);
         items.put("Halo Accessory", haloAcc);
 
->>>>>>> .merge_file_koBfYW
 //        ItemSub key =
 //                MI.parseExpression("Key, key, KeyItem, 5");
 //            int[] keyLoc =

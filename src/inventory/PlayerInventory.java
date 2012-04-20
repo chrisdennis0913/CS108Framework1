@@ -68,19 +68,12 @@ public class PlayerInventory extends Inventory {
             equippedItem = null;
         }
     }
-<<<<<<< .merge_file_3jAlyY
     
     
     public void showFullInventoryMenu(){
         menu=new InventoryMenu(this);
         game.pauseGameForInventory();
-=======
 
-
-    public void showFullInventoryMenu () {
-        menu = new InventoryMenu(this);
-        game.pauseGame();
->>>>>>> .merge_file_QGM59I
     }
 
 
