@@ -1,24 +1,27 @@
 package app;
 
+import inventory.Inventory;
+import inventory.ItemSub;
 
 import java.awt.Graphics2D;
 import java.util.Comparator;
 
 import level.Level;
-import saving_loading.LevelFromFile;
-import player.Player;
 
-import ai.GameStateProvider;
+import level.Map;
+import saving_loading.LevelFromFile;
+
+import player.Player;
+import saving_loading.LevelFromFile;
 
 import com.golden.gamedev.GameEngine;
 import com.golden.gamedev.GameObject;
+import com.golden.gamedev.engine.BaseIO;
+import com.golden.gamedev.engine.BaseLoader;
 import com.golden.gamedev.object.Background;
 import com.golden.gamedev.object.PlayField;
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.background.ImageBackground;
-
-import inventory.Inventory;
-import inventory.ItemSub;
 
 
 public class RPGGame extends GameObject //implements GameStateProvider
@@ -30,20 +33,23 @@ public class RPGGame extends GameObject //implements GameStateProvider
     }
 
     private PlayField field;
+    public Map map;
     private Background bg;
     private Player player;
     private Dialog dialog;
     private Level level;
     private Inventory myInventory;
     private boolean pausedForInventory=false;
+    private boolean pausedForItemStore=false;
     public static String startLevelFilename= "map00.json";
 
 
     @SuppressWarnings("rawtypes")
     public void initResources ()
     {
+    	map = new Map(bsLoader, bsIO);
         bg = new ImageBackground(getImage("resources/bg.jpg"), 600, 600);
-        field = new PlayField();
+        field = new PlayField(level);
         field.setBackground(bg);
         dialog = new Dialog();
         myInventory = new Inventory();
@@ -54,7 +60,8 @@ public class RPGGame extends GameObject //implements GameStateProvider
         player.generate(loc);
 
         //level = new Start(this);
-        level = new LevelFromFile(this,startLevelFilename);
+
+        level = new LevelFromFile(bsLoader, bsIO, this, startLevelFilename);
         level.generate();
 
         field.setComparator(new Comparator()
@@ -74,6 +81,10 @@ public class RPGGame extends GameObject //implements GameStateProvider
             player.getInventory().renderMenu(g);
             return;
         }
+        if (pausedForItemStore){
+            player.getItemStore().renderStore(g);
+            return;
+        }
         field.render(g);
         player.render(g);
         level.render(g);
@@ -86,9 +97,15 @@ public class RPGGame extends GameObject //implements GameStateProvider
             player.getInventory().updateMenu(elapsed);
             return;
         }
+        if (pausedForItemStore){
+            player.getItemStore().updateStore(elapsed);
+            return;
+        }
         player.update(elapsed);
-        level.update(elapsed);
         field.update(elapsed);
+        level.update(elapsed);
+
+        
     }
 
 
@@ -139,11 +156,18 @@ public class RPGGame extends GameObject //implements GameStateProvider
         return myInventory;
 
     }
-    public void pauseGame(){
+    public void pauseGameForInventory(){
         pausedForInventory = true;
     }
-    public void unPauseGame(){
+    public void unPauseGameForInventory(){
         pausedForInventory = false;
+    }
+    
+    public void pauseGameForStore(){
+        pausedForItemStore = true;
+    }
+    public void unPauseGameForStore(){
+        pausedForItemStore = false;
     }
 
 
@@ -153,4 +177,5 @@ public class RPGGame extends GameObject //implements GameStateProvider
 		gsp.player = player.clone();
 		gsp.level = level.clone();
 	}*/
+
 }

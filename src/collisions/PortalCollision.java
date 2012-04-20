@@ -7,6 +7,7 @@ import com.golden.gamedev.object.collision.BasicCollisionGroup;
 
 public class PortalCollision extends BasicCollisionGroup{
 	private RPGGame game;
+	String end = "End";
 	
 	public PortalCollision (RPGGame game) {
 		this.game = game;
@@ -15,7 +16,7 @@ public class PortalCollision extends BasicCollisionGroup{
 	public void collided(Sprite character, Sprite scenery) {
 		game.getField().removeCollisionGroup(this);
 		scenery.setActive(false);
-		game.getLevel().endLevel();
+		game.getLevel().endLevel(end);
 		relocate();
 	}
 	

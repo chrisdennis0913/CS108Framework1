@@ -51,7 +51,7 @@ public class InventoryMenu {
             case KeyEvent.VK_ENTER:
                 if (option == 0) {
                     // Back to main game screen.
-                    game.unPauseGame();
+                    game.unPauseGameForInventory();
                 }
                 else {
                     ItemSub currentItem = optionsList.get(option - 1);
