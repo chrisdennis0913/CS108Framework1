@@ -7,10 +7,12 @@ public abstract class AbstractAttack {
 	protected static RPGGame game;
 	protected IEnemy enemy;
 	protected Player target;
+	private String name;
 	
-	public AbstractAttack (RPGGame game, IEnemy enemy){
+	public AbstractAttack (RPGGame game, IEnemy enemy, String name){
 		AbstractAttack.game = game;
 		this.enemy = enemy;
+		this.name = name;
 		setDefaultPlayerAsTarget();
 	}
 	
@@ -33,7 +35,8 @@ public abstract class AbstractAttack {
 	public abstract boolean isAttackValid(long elapsedTime);
 	
 	public abstract void performAttack(long elapsedTime);
-	
-	public abstract int valueOfAttack();
 		
+	public String getName(){
+		return name;
+	}
 }

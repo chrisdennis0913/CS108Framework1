@@ -1,4 +1,4 @@
-package dialogue;
+/*package dialogue;
 
 import static org.junit.Assert.assertEquals;
 
@@ -46,3 +46,4 @@ public class YesNoDialogueTester {
     	assertEquals("Testing no no no", test3.getCurrentLine());
     }
 }
+*/

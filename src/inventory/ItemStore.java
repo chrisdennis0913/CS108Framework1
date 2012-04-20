@@ -6,13 +6,12 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.TreeMap;
-import inventory.ItemSub;
+
+import app.RPGGame;
 
 import com.golden.gamedev.object.GameFont;
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.font.SystemFont;
-
-import app.RPGGame;
 
 public class ItemStore {
 	private Inventory myInventory;
@@ -123,5 +122,4 @@ public class ItemStore {
 	public void updateStore(long elapsed) {
 		update(elapsed);
 	}
-
 }

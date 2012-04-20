@@ -26,6 +26,14 @@ public abstract class Direction{
 		return speedY;
 	}
 	
+	public void setHorSpeed(double hs) {
+		speedX = hs;
+	}
+	
+	public void setVerSpeed(double vs) {
+		speedY = vs;
+	}
+	
 	public Cardinal getCardinality() {
 		return cardinal;
 	}

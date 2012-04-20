@@ -17,15 +17,16 @@ public class EscortTask extends Task
 		this.loc = loc;
 		this.recipient = recipient;
 	}
-
-	public void update() 
-	{
-		isComplete = (recipient.getLocation()[0] == loc[0] && recipient.getLocation()[1] == loc[1]); 
-	}
 	
 	public String toString()
 	{
 		return "Safely escort " + recipient.toString();
+	}
+
+	public boolean checkComplete() {
+		isComplete = (recipient.getLocation()[0] == loc[0] && 
+					  recipient.getLocation()[1] == loc[1]);
+		return isComplete;
 	}
 
 }

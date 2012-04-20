@@ -5,9 +5,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import npc.Priest;
 import level.Level;
-
 import saving_loading.AttributeContainer;
 import saving_loading.Jsonable;
 import saving_loading.MapContainer;

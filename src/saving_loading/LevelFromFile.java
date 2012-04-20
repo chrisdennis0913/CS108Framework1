@@ -4,13 +4,21 @@ import inventory.ItemSub;
 import java.awt.Graphics2D;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import npc.Priest;
 import level.End;
 import level.Level;
 import level.LevelSettings;
+import npc.Priest;
+import npc.TestQuestGiver;
+import quest.FetchTask;
+import quest.Quest;
+import quest.RewardQuest;
+import quest.Task;
 import scenery.Scenery;
 import app.RPGGame;
+import com.golden.gamedev.engine.BaseIO;
+import com.golden.gamedev.engine.BaseLoader;
 import com.golden.gamedev.util.FileUtil;
 import enemy.Snake;
 
@@ -19,8 +27,18 @@ public class LevelFromFile extends Level {
 
     private List<RWGameObject> gameObjects;
 
-    public LevelFromFile (RPGGame game, String levelFilename) {
-        super(game);
+
+    BaseLoader bsLoader;
+	BaseIO bsIO;
+    
+    public LevelFromFile (BaseLoader bsLoader, BaseIO bsIO, RPGGame game2, String levelFilename){
+    	
+        super(bsLoader, bsIO, game2, levelFilename);
+        
+        this.bsLoader = bsLoader;
+        this.bsIO = bsIO;
+ 
+
 
 //        //FOR DEBUGGING : Create a dummy AttributeCollection to write out for debugging purposes
 //        AttributeContainer testAC = new AttributeContainer();
@@ -34,7 +52,7 @@ public class LevelFromFile extends Level {
 //          f1.write(testAC.asJsonString());
 //          f1.close();
 //      } catch (IOException e) {
-//          // TODO Auto-generated catch block
+//         // TODO Auto-generated catch block
 //          e.printStackTrace();
 //      }         
 
@@ -81,6 +99,34 @@ public class LevelFromFile extends Level {
                 }
             }
         }
+        
+        TestQuestGiver questGiver = new TestQuestGiver(game, sac);
+		
+		
+    	int[] locs = new int[] {game.getBG().getWidth() / 2, 200 };
+    	sac.put("location", locs);
+    	sac.put("name", "QuestGiver");
+    	sac.put("type", "priest");
+        questGiver.add(locs, 6);
+        npcs.put("QuestGiver", questGiver);
+        
+        HashMap<ItemSub, Integer> toFetch = new HashMap<ItemSub, Integer>();
+        
+        ItemSub bowAndArrows = MI.parseExpression("Twin Bow, bowAndArrow, BowAndArrows, 30"); 
+        
+        toFetch.put(bowAndArrows, 1);
+		
+		Task t = new FetchTask(game, "Collect the item", questGiver, toFetch);
+		
+		ItemSub potion = MI.parseExpression("SuperPotion within Start, sword, HealthPotion, 5");
+	       
+	    items.put("potion", potion);
+		
+		Quest getBow = new RewardQuest("Bow Quest", potion, t);
+		
+		getBow.addObserver(questGiver);
+		
+		game.getPlayer().getQuestJournal().addQuest(getBow);
     }
 
 
@@ -139,21 +185,33 @@ public class LevelFromFile extends Level {
             if (getLevelTime() < 1500) game.getDialog().showMessage(g);
         }
     }
-
-
-    public void nextLevel () {
-        if (nextLevelName.equals("") || nextLevelName == null) {
-            game.finish();
-        }
-        else {
-            game.setLevel(new LevelFromFile(game, nextLevelName));
-            game.getLevel().generate();
-        }
-        // game.setLevel(new End(game));
-        // game.getLevel().generate();
+	
+    public void nextLevel (String levelFilename)
+    {
+    	
+        game.setLevel(new End(bsLoader, bsIO, game, levelFilename));
+        game.getLevel().generate();
+    	/*
+    	if(nextLevelName == null){
+    		System.out.println("nextLevelName: " + nextLevelName);
+    		game.finish();
+    	}
+    	else{
+    		game.setLevel(new LevelFromFile(game, nextLevelName));
+    		game.getLevel().generate();
+    	}
+    	*/
     }
 
 
     protected void addEnemies () {}
+
+
+	@Override
+	public void renderTile(Graphics2D arg0, int arg1, int arg2, int arg3,
+			int arg4) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

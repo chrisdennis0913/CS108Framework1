@@ -36,7 +36,7 @@ public class PlayerDirection extends Direction {
 				character.setAnimationFrame(0, frameCount() - 1);
 			}
 		}
-		player.getGame().getBG().setToCenter(character);
+		//player.getGame().getBG().setToCenter(character);
 	}
 	
 	public List<Integer> getKeys() {

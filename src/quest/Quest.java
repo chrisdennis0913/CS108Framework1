@@ -2,34 +2,32 @@ package quest;
 
 
 import java.util.ArrayList;
-import java.util.Queue;
+import java.util.Arrays;
+import java.util.List;
 
-import npc.QuestGiver;
 
 import app.RPGGame;
 
-import inventory.ItemSub;
-
-//QuestLog
-//Register to multiple game objects
-
-
 public abstract class Quest implements Observable
 {
-	protected Queue<Task> toDo;
-	protected Queue<Task> done;
-	private boolean isActive = false;
+	protected ArrayList<Task> toDo;
+	protected ArrayList<Task> done;
+	protected boolean isActive = false;
 	protected ArrayList<QuestGiver> observers;
+	protected String description;
 	
-	public Quest(Queue<Task> required)
+	public Quest(String description, Task... required)
 	{
-		toDo = required;
+		List<Task> temp = Arrays.asList(required);
+		toDo = new ArrayList<Task>(temp);
+		done = new ArrayList<Task>();
 		observers = new ArrayList<QuestGiver>();
+		this.description = description;
 	}
 	
-	public boolean isDone()
+	public String getDescription()
 	{
-		return toDo.peek() == null;
+		return description;
 	}
 	
 	public void setActive(boolean b)
@@ -42,21 +40,27 @@ public abstract class Quest implements Observable
 		return isActive;
 	}
 	
-	public void update()
+	public boolean checkComplete()
 	{
 		for (Task t: toDo)
 		{
-			t.update();
-			if(!t.isDone())
-				return;
-			done.offer(toDo.remove());
+			if(t.checkComplete())
+				done.add(t);
 		}	
+		return done.size() == toDo.size();
+	}
+	
+	public void update()
+	{
+		for (QuestGiver qg: observers)
+		{
+			qg.update(this);
+		}
 	}
 	
 	public void addObserver(QuestGiver qu)
 	{
-		for (QuestGiver qg: observers)
-			qg.update(this);
+		observers.add(qu);
 	}
 
 

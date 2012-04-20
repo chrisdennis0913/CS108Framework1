@@ -4,21 +4,22 @@
 
 package quest;
 
-import npc.NPC;
+import enemy.Enemy;
 
 public class DestroyTask extends Task
 {
-	private NPC recipient;
+	private Enemy recipient;
 
-	public DestroyTask(String description, NPC recipient) 
+	public DestroyTask(String description, Enemy recipient) 
 	{
 		super(description);
 		this.recipient = recipient;
 	}
 
-	public void update() 
+	public boolean checkComplete()
 	{
 		isComplete = recipient.isDead();
+		return isComplete;
 	}
 
 }

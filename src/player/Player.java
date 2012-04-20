@@ -3,75 +3,54 @@ package player;
 import inventory.ItemStore;
 import inventory.ItemSub;
 import inventory.PlayerInventory;
-
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
-
-import actions.Action1;
-import actions.SwordAttacking;
-import actions.BowAttacking;
-import actions.Grabbing;
-import actions.Standing;
-import actions.Talking;
-import actions.Walking;
+import quest.QuestJournal;
 import ai.AbstractBehaviorModifier;
 import app.RPGGame;
 import collisions.PlayerBoundaryCollision;
-
 import com.golden.gamedev.object.AnimatedSprite;
+import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
 
 public class Player implements Cloneable {
 
-	private static final double INITIAL_PLAYER_X_SPEED = 0.1;
-	private static final double INITIAL_PLAYER_Y_SPEED = 0.1;
-
-	private RPGGame game;
+	private HashMap<String, ItemSub> inventoryWithNames =
+	        new HashMap<String, ItemSub>();
+	
 	private SpriteGroup group = new SpriteGroup("Player");
 	public SpriteGroup projectiles = new SpriteGroup("Projectiles");
 	private AnimatedSprite character;
 	private String startSprite = "resources/player/start_sprite.gif";
-	private PlayerInventory myInventory = new PlayerInventory(game);
+	
 	private PlayerCounters pcs = new PlayerCounters(this);
-	private HashMap<String, Action1> actions = new HashMap<String, Action1>();
-	private HashMap<String, ItemSub> inventoryWithNames = new HashMap<String, ItemSub>();
+	private PlayerActions pas;
+	private RPGGame game;
+	private PlayerInventory myInventory = new PlayerInventory(game);
+	
 	private LinkedList<AbstractBehaviorModifier> behaviorModifiers = new LinkedList<AbstractBehaviorModifier>();
-	private double maxXSpeed = INITIAL_PLAYER_X_SPEED;
-	private double maxYSpeed = INITIAL_PLAYER_Y_SPEED;
+
+	private static final double INITIAL_PLAYER_X_SPEED = 0.1;
+	private static final double INITIAL_PLAYER_Y_SPEED = 0.1;
+
 	private ItemStore myStore;
+	private QuestJournal myQuests;
 
 	public Player(RPGGame rpgGame) {
 		this.game = rpgGame;
 		myInventory = new PlayerInventory(game);
+		pas = new PlayerActions(this);
 		myStore = new ItemStore(game);
+		myQuests = new QuestJournal();
 	}
-
-	public PlayerCounters getPCs() {
-		return pcs;
-	}
+	
 
 	public void generate(int[] location) {
 		initCharacter(location);
 		initCollisions();
-		initActions();
-	}
-
-	private void initActions() {
-		actions.put("walking", new Walking(this, 6, "walk"));
-		actions.put("standing", new Standing(this, 1, "stand",
-				(Walking) actions.get("walking")));
-		actions.put("talking", new Talking(this, 1, "stand"));
-		actions.put("grabbing", new Grabbing(this, 1, "stand"));
-
-		for (ItemSub itm : game.getInventory())
-			System.out.println(itm + "in Player");
-		actions.put("swordAttacking" + "", new SwordAttacking(this, 3,
-				"attacksword", game));
-		actions.put("bowAttacking" + "", new BowAttacking(this, 5, "attackbow",
-				game));
 	}
 
 	private void initCharacter(int[] location) {
@@ -81,7 +60,6 @@ public class Player implements Cloneable {
 		character.setLayer(10);
 		group.add(character);
 		game.getField().addGroup(group);
-		game.getField().addGroup(projectiles);
 	}
 
 	private void initCollisions() {
@@ -89,48 +67,50 @@ public class Player implements Cloneable {
 				new PlayerBoundaryCollision(game.getBG()));
 	}
 
-	public void update(long elapsedTime) {
-		for (AbstractBehaviorModifier bm : behaviorModifiers)
-			bm.setUp(elapsedTime);
-		pcs.update(0);
-		for (String name : actions.keySet())
-			if (actions.get(name).isActionable(game))
-				actions.get(name).act(game);
-		if (game.keyPressed(java.awt.event.KeyEvent.VK_I)) {
-			myInventory.toggleShow();
-		} else if (game.keyPressed(java.awt.event.KeyEvent.VK_O)) {
-			myInventory.showFullInventoryMenu();
-		} else if (game.keyPressed(java.awt.event.KeyEvent.VK_S)) {
-			myStore.openStore();
-		}
-		// Iterator<AbstractBehaviorModifier> bmReverse = behaviorModifiers
-		// .descendingIterator();
-		// while (bmReverse.hasNext()) {
-		// if (bmReverse.next().unsetUp(elapsedTime))
-		// bmReverse.remove();
-		// }
+	public PlayerCounters getPCs() {
+		return pcs;
+	}
 
+	public PlayerActions getActions() {
+		return pas;
+	}
+
+	public void update(long elapsed) {
+		pcs.update(elapsed);
+		pas.update(elapsed);
+
+		for (AbstractBehaviorModifier bm : behaviorModifiers)
+			bm.setUp(elapsed);
+
+		if (game.keyPressed(java.awt.event.KeyEvent.VK_I))
+			myInventory.toggleShow();
+
+		else if (game.keyPressed(java.awt.event.KeyEvent.VK_O))
+			myInventory.showFullInventoryMenu();
+		
+		if (game.keyPressed(java.awt.event.KeyEvent.VK_J))
+			myQuests.toggleShow();
+		
+		myQuests.update();
+
+		Iterator<AbstractBehaviorModifier> bmReverse = behaviorModifiers
+				.descendingIterator();
+		while (bmReverse.hasNext())
+			if (bmReverse.next().unsetUp(elapsed))
+				bmReverse.remove();
 	}
 
 	public void render(Graphics2D g) {
 		pcs.render(g);
-		for (String name : actions.keySet()) {
-			Action1 action = actions.get(name);
-			if (action.isActing() && action.isActionable(game)
-					&& action.isMessageable())
-				game.getDialog().showMessage(g);
-		}
+		pas.render(g);
 		myInventory.showLimitedInventory(g);
-		myStore.showStore(g);
-		myInventory.drawAccessories(g);
+		myQuests.showJournal(g);
 	}
+	
 
-	public Action1 getAction(String name) {
-		return actions.get(name);
-	}
-
-	public HashMap<String, Action1> getActions() {
-		return actions;
+	public QuestJournal getQuestJournal()
+	{
+		return myQuests;
 	}
 
 	public RPGGame getGame() {
@@ -140,11 +120,7 @@ public class Player implements Cloneable {
 	public AnimatedSprite getCharacter() {
 		return character;
 	}
-
-	public SpriteGroup getGroup() {
-		return group;
-	}
-
+	
 	public PlayerInventory getInventory() {
 		return myInventory;
 	}
@@ -169,6 +145,10 @@ public class Player implements Cloneable {
 	public boolean hasItem(ItemSub itm) {
 		return myInventory.contains(itm);
 	}
+	
+	public SpriteGroup getGroup() {
+		return group;
+	}
 
 	public boolean hasItem(String itemName) {
 		if (!inventoryWithNames.containsKey(itemName)) {
@@ -176,21 +156,13 @@ public class Player implements Cloneable {
 		}
 		return myInventory.contains(inventoryWithNames.get(itemName));
 	}
-
-	public double getMaxXSpeed() {
-		return maxXSpeed;
+	
+	public void setWalkingSpeed(double[] speed){
+		pas.setWalkingSpeed(speed);
 	}
-
-	public double getMaxYSpeed() {
-		return maxYSpeed;
-	}
-
-	public void setMaxXSpeed(double xs) {
-		maxXSpeed = xs;
-	}
-
-	public void setMaxYSpeed(double ys) {
-		maxYSpeed = ys;
+	
+	public double[] getWalkingSpeed(){
+		return pas.getWalkingSpeed();
 	}
 
 	public void registerBehaviorModifier(AbstractBehaviorModifier bm) {
@@ -218,5 +190,9 @@ public class Player implements Cloneable {
 
 	public void deregisterBehaviorModifier(AbstractBehaviorModifier bm) {
 		behaviorModifiers.remove(bm);
+	}
+
+	public Sprite getSprite(){
+		return character;
 	}
 }

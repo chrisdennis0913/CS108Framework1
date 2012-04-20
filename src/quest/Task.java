@@ -15,10 +15,5 @@ public abstract class Task
 		return toString();
 	}
 	
-	public abstract void update();
-	
-	public boolean isDone()
-	{
-		return isComplete;
-	}
+	public abstract boolean checkComplete();
 }

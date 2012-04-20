@@ -2,6 +2,7 @@ package enemy;
 
 import java.awt.image.BufferedImage;
 import java.util.Collection;
+import java.util.HashMap;
 
 import collisions.EnemyCollision;
 
@@ -41,11 +42,11 @@ public interface IEnemy {
 
 	public abstract void attack(AbstractAttack a, long elapsedTime);
 
-	public abstract Collection<AbstractAttack> getSpontaneousAttacks();
+	public abstract HashMap<String, AbstractAttack> getSpontaneousAttacks();
 
 	public abstract void onCollision();
 
-	public abstract Collection<AbstractAttack> getReactiveAttacks();
+	public abstract HashMap<String, AbstractAttack> getReactiveAttacks();
 
 	public abstract double getMaxXSpeed();
 

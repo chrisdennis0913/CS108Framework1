@@ -1,17 +1,32 @@
 package player;
 
-import actions.BaseAction;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
-public abstract class PlayerAction extends BaseAction {
+import actions.GraphicalAction;
 
-	private PlayerActions pas;
+public abstract class PlayerAction extends GraphicalAction {
+
+	protected Player player;
 	
-	public PlayerAction(PlayerActions pas) {
-		this.pas = pas;
+	public PlayerAction(Player player) {
+		this.player = player;
+	}
+	
+	public Player getPlayer() {
+		return player;
+	}
+	
+	public BufferedImage getImage(String url) {
+		return player.getGame().getImage(url);
 	}
 	
 	public PlayerActions getActions() {
-		return pas;
+		return player.getActions();
+	}
+	
+	public void render(Graphics2D g) {
+		
 	}
 
 }

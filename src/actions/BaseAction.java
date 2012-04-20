@@ -7,7 +7,9 @@ public abstract class BaseAction {
 	
 	public abstract void update(long elapsed);
 	
-	public void setEnabled(boolean enabled) {
+	public void setEnabled(boolean enabled, boolean modifyActive) {
+		if (!enabled && modifyActive)
+			active = false;
 		this.enabled = enabled;
 	}
 	

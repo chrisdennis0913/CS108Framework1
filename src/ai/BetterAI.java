@@ -1,6 +1,7 @@
 package ai;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import app.RPGGame;
@@ -15,9 +16,11 @@ public class BetterAI extends AbstractAI{
 
 	@Override
 	public void act(long elapsedTime) {
-		move(elapsedTime);
-		if (shouldAttack())
-			enemy.attack(pickBestSpontaneousAttack(),elapsedTime);
+		if(!enemy.isDead()){
+			move(elapsedTime);
+			if (shouldAttack())
+				enemy.attack(pickBestSpontaneousAttack(),elapsedTime);
+		}
 	}
 
 	@Override
@@ -34,8 +37,8 @@ public class BetterAI extends AbstractAI{
 	
 	@Override
 	public AbstractAttack pickBestSpontaneousAttack() {
-		Collection<AbstractAttack> attacks = enemy.getSpontaneousAttacks();
-		Iterator<AbstractAttack> itr = attacks.iterator();
+		HashMap<String,AbstractAttack> attacks = enemy.getSpontaneousAttacks();
+		Iterator<AbstractAttack> itr = attacks.values().iterator();
 		if(itr.hasNext())
 			return itr.next();
 		else
@@ -47,16 +50,14 @@ public class BetterAI extends AbstractAI{
 		double playerMaxSpeed = (game.getPlayer().getMaxXSpeed() + game.getPlayer().getMaxYSpeed())/2;
 		double enemyMaxSpeed = (enemy.getMaxXSpeed() + enemy.getMaxYSpeed())/2;
 
-		if(playerMaxSpeed > enemyMaxSpeed){
-			for(AbstractAttack a: enemy.getReactiveAttacks())
-				if(a instanceof SlowPlayerAttack)
-					return a;
-		}
-		else{
-			for(AbstractAttack a: enemy.getReactiveAttacks())
-			if( !(a instanceof SlowPlayerAttack) )
-				return a;
-		}
+		/*if(playerMaxSpeed > enemyMaxSpeed){
+			if(enemy.getReactiveAttacks().get("slow") != null)
+				return enemy.getReactiveAttacks().get("slow");
+		}*/
+		//else{
+			if(enemy.getReactiveAttacks().get("poison") != null)
+				return enemy.getReactiveAttacks().get("poison");
+		//}
 		throw new RuntimeException("No attacks available");
 	}
 
