@@ -66,11 +66,6 @@ public class Snake extends Enemy {
 				new Portal(game, "resources/scenery/portal.gif"));
 	}
 	
-	@Override
-	public String toJson() {
-	    return attributes.asJsonString();
-	}
-	
 	public static class Factory implements RWGameObject{
 		
 		@Override

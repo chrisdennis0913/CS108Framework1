@@ -24,8 +24,7 @@ public class Priest extends StationaryNPC {
 		setCanDie(true);
 		attributes = ac;
 		dialogue = new SimpleDialogue("resources/script/"+attributes.getType()+".txt");
-	}
-	
+	}	
 
 	public String getTalk() {
 		if (game.getPlayer().getEquipped().getCategory().equals("Weapon"))
@@ -42,11 +41,6 @@ public class Priest extends StationaryNPC {
 		}
 	}
 	
-
-	@Override
-	public String toJson() {
-		return attributes.asJsonString();
-	}
 	
 	@Override
 	public void changeLocation(int[] newLocation) {
