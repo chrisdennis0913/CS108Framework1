@@ -48,7 +48,6 @@ public class TestQuestGiver extends StationaryNPC implements QuestGiver
 		
 	}
 
-
 	public void update(Quest qu) 
 	{
 		if (qu.checkComplete())

@@ -13,8 +13,8 @@ public class RewardQuest extends Quest
 {
 	private ItemSub reward;
 
-	public RewardQuest(ItemSub reward, Task... required ) {
-		super(required);
+	public RewardQuest(String description, ItemSub reward, Task... required ) {
+		super(description, required);
 		this.reward = reward;
 	}
 

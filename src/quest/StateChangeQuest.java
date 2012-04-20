@@ -16,7 +16,7 @@ public class StateChangeQuest extends Quest
 
 	public StateChangeQuest(Task... required) 
 	{
-		super(required);
+		super(null, required);
 	}
 
 	public void completeQuest(RPGGame game2) 

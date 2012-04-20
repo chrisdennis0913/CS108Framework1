@@ -15,18 +15,20 @@ public abstract class Quest implements Observable
 {
 	protected List<Task> toDo;
 	protected List<Task> done;
-	private boolean isActive = false;
+	protected boolean isActive = false;
 	protected ArrayList<QuestGiver> observers;
+	protected String description;
 	
-	public Quest(Task... required)
+	public Quest(String description, Task... required)
 	{
 		toDo = Arrays.asList(required);
 		observers = new ArrayList<QuestGiver>();
+		this.description = description;
 	}
 	
-	public boolean isDone()
+	public String getDescription()
 	{
-		return toDo.size() == 0;
+		return description;
 	}
 	
 	public void setActive(boolean b)

@@ -52,6 +52,7 @@ public class Player implements Cloneable {
 		myInventory = new PlayerInventory(game);
 		pas = new PlayerActions(this);
 		myStore = new ItemStore(game);
+		myQuests = new QuestJournal();
 	}
 	
 
@@ -94,6 +95,11 @@ public class Player implements Cloneable {
 
 		else if (game.keyPressed(java.awt.event.KeyEvent.VK_O))
 			myInventory.showFullInventoryMenu();
+		
+		if (game.keyPressed(java.awt.event.KeyEvent.VK_J))
+			myQuests.toggleShow();
+		
+		myQuests.update();
 
 		Iterator<AbstractBehaviorModifier> bmReverse = behaviorModifiers
 				.descendingIterator();
@@ -106,10 +112,11 @@ public class Player implements Cloneable {
 		pcs.render(g);
 		pas.render(g);
 		myInventory.showLimitedInventory(g);
+		myQuests.showJournal(g);
 	}
 	
 
-	public QuestJournal getQuestLog()
+	public QuestJournal getQuestJournal()
 	{
 		return myQuests;
 	}
