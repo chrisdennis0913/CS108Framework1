@@ -1,5 +1,8 @@
 package collisions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import player.Player;
 import app.RPGGame;
 import com.golden.gamedev.object.Sprite;
@@ -13,6 +16,7 @@ public class EnemyCollision extends BasicCollisionGroup {
     private IEnemy enemy;
     private Player player;
 
+    private List<CollisionObserver> collisionObservers = new ArrayList<CollisionObserver>();
 
     public EnemyCollision (RPGGame game, Player player, String enemyname) {
         this.game = game;
@@ -23,6 +27,9 @@ public class EnemyCollision extends BasicCollisionGroup {
 
     public void collided (Sprite character, Sprite scenery) {
         overlap(character, scenery);
+        
+        for(CollisionObserver co : collisionObservers)
+        	co.notifyOfCollision();
         
         if (player.getActions().isAttacking()) {
             enemy.addToHealth(-1);
@@ -57,4 +64,11 @@ public class EnemyCollision extends BasicCollisionGroup {
         }
     }
 
+    public void registerCollisionObserver(CollisionObserver co){
+    	collisionObservers.add(co);
+    }
+    
+    public void deregisterCollisionObserver(CollisionObserver co){
+    	collisionObservers.remove(co);
+    }
 }

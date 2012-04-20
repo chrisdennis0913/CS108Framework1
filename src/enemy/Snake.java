@@ -11,15 +11,11 @@ import saving_loading.AttributeContainer;
 import saving_loading.MapContainer;
 import saving_loading.RWGameObject;
 import scenery.Portal;
-import ai.BetterAI;
-import ai.SimpleAI;
-import ai.SlowPlayerAttack;
+import ai.SnakeDecisionTableAI;
 import app.RPGGame;
 
 import com.golden.gamedev.engine.timer.SystemTimer;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonParser;
+
 
 public class Snake extends Enemy {
 
@@ -34,16 +30,16 @@ public class Snake extends Enemy {
 		timer.setFPS(100);
 		timer.startTimer();
 		setActing(false);
-		setAI(new BetterAI(game,this));
+		setAI(new SnakeDecisionTableAI(game,this));
 		attributes = ac;
 	}
 
 
 	@Override
 	public void initAttacks() {
-		spontaneousAttacks.put("shooting", new ShootingAttack(game,this));
-		reactiveAttacks.put("poison", new PoisonAttack(game,this,true));
-		reactiveAttacks.put("slow", new SlowPlayerAttack(game, this, true));
+		spontaneousAttacks.put("shooting", new ShootingAttack(game,this,"shooting"));
+		reactiveAttacks.put("poison", new BehaviorModifyingCollisionAttack(game, this, "poison", new PoisonedBehaviorModifier(game), true));
+		reactiveAttacks.put("slow", new BehaviorModifyingCollisionAttack(game, this, "slow", new SlowBehaviorModifier(game), true));
 		//attacks.put("supertelepathic", new SuperTelepathicAttack(game,this));
 	}
 
