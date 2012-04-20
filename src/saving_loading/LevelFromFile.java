@@ -8,6 +8,7 @@ import java.util.List;
 import npc.Priest;
 import level.End;
 import level.Level;
+import level.LevelSettings;
 import scenery.Scenery;
 import app.RPGGame;
 import com.golden.gamedev.util.FileUtil;
@@ -17,9 +18,6 @@ import enemy.Snake;
 public class LevelFromFile extends Level {
 
     private List<RWGameObject> gameObjects;
-    private String nextLevelName;
-    private String startText;
-
 
     public LevelFromFile (RPGGame game, String levelFilename) {
         super(game);
@@ -53,6 +51,7 @@ public class LevelFromFile extends Level {
         gameObjects.add(new Priest.Factory());
         gameObjects.add(new Snake.Factory());
         gameObjects.add(new Scenery.Factory());
+        gameObjects.add(new LevelSettings.Factory());
         MapContainer maps = new MapContainer(npcs, enemies, scenery, items);
         String[] event =
             FileUtil.fileRead(new File("savedmaps/" + levelFilename));
@@ -76,9 +75,9 @@ public class LevelFromFile extends Level {
             }
 
             String type = ac.getType();
-            for (int j = 0; j < gameObjects.size(); j++) {
-                if (gameObjects.get(j).isThisKindOfObject(type)) {
-                    gameObjects.get(j).createAndAddToMap(ac, maps);
+            for(int j=0; j< gameObjects.size();j++){
+                if(gameObjects.get(j).isThisKindOfObject(type)){
+                    gameObjects.get(j).createAndAddToMap(ac, maps, this);
                 }
             }
         }
@@ -111,7 +110,7 @@ public class LevelFromFile extends Level {
                     game.getBG().getHeight() / 4 * 3 };
         potion.add(potLoc, 0);
         items.put("potion", potion);
-
+        
         ItemSub bowAndArrows =
             MI.parseExpression("Twin Bow, bowAndArrow, BowAndArrows, 30");
         int[] bowLoc =
@@ -134,7 +133,7 @@ public class LevelFromFile extends Level {
 
 
     public void render (Graphics2D g) {
-        if (!startText.equals("") || !(startText == null)) {
+        if(!(startText == null)){
             if (game.getDialog().getMessage().equals("")) game.getDialog()
                                                               .setMessage(startText);
             if (getLevelTime() < 1500) game.getDialog().showMessage(g);
