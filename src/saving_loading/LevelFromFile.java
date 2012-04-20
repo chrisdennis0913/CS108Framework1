@@ -103,7 +103,6 @@ public class LevelFromFile extends Level {
         items.put("potion", potion);
 
         ItemSub bowAndArrows =
-
             MI.parseExpression("Twin Bow, bowAndArrow, BowAndArrows, 30");
         int[] bowLoc =
             new int[] {
