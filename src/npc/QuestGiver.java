@@ -33,9 +33,10 @@ public class QuestGiver extends NPC implements Observer {
 			talkedTo = true;
 			return dialogue.getCurrentLine();
 		}
-		if (questComplete) {
-			SimpleDialogueObject sdo = dialogue.new SimpleDialogueObject();
-			dialogue.goToNextLine(sdo);
+		
+		if (questComplete)
+		{
+			dialogue.goToNextLine(dialogue.new SimpleDialogueObject());
 			qu.completeQuest(game2);
 		}
 

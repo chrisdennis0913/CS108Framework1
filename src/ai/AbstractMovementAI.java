@@ -2,8 +2,14 @@ package ai;
 
 public abstract class AbstractMovementAI {
 	
-	public abstract void getDirection();
+	public abstract double[] getVelocities();
 	
-	public abstract void getLocation();
+	public double getXVelocity(){
+		return getVelocities()[0];
+	}
+	
+	public double getYVelocity(){
+		return getVelocities()[1];
+	}
 
 }

@@ -3,21 +3,25 @@ package npc;
 import java.util.Arrays;
 
 import saving_loading.AttributeContainer;
+import ai.AbstractMovementAI;
 import app.RPGGame;
 
 public abstract class MovingNPC extends NPC{
 	
+	RPGGame game;
 	int[] velocity;
+	AbstractMovementAI motion;
 
 	public MovingNPC(RPGGame game2, AttributeContainer ac) {
 		super(game2, ac);
 	}
-	
-	//TODO: implement this with different algorithms
-	public void getMovementStrategy(){};
 
 	public int[] getVelocity(){
 		return Arrays.copyOf(velocity, velocity.length);
+	}
+	
+	public void update(){
+		
 	}
 
 	@Override
