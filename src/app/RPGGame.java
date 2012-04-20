@@ -47,6 +47,9 @@ public class RPGGame extends GameObject //implements GameStateProvider
         myInventory = new Inventory();
 
         player = new Player(this);
+        int[] loc =
+            new int[] { getBG().getWidth() / 2, getBG().getHeight() / 2 };
+        player.generate(loc);
 
         //level = new Start(this);
         level = new LevelFromFile(this,startLevelFilename);

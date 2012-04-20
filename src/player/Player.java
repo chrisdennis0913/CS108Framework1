@@ -5,12 +5,15 @@ import inventory.ItemSub;
 import inventory.PlayerInventory;
 
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 
 import ai.AbstractBehaviorModifier;
 import app.RPGGame;
+
+import collisions.PlayerBoundaryCollision;
 
 import com.golden.gamedev.object.AnimatedSprite;
 import com.golden.gamedev.object.SpriteGroup;
@@ -44,6 +47,26 @@ public class Player implements Cloneable {
 		myInventory = new PlayerInventory(game);
 		pas = new PlayerActions(this);
 		myStore = new ItemStore(game);
+	}
+	
+
+	public void generate(int[] location) {
+		initCharacter(location);
+		initCollisions();
+	}
+
+	private void initCharacter(int[] location) {
+		BufferedImage[] image = new BufferedImage[] { game
+				.getImage(startSprite) };
+		character = new AnimatedSprite(image, location[0], location[1]);
+		character.setLayer(10);
+		group.add(character);
+		game.getField().addGroup(group);
+	}
+
+	private void initCollisions() {
+		game.getField().addCollisionGroup(group, null,
+				new PlayerBoundaryCollision(game.getBG()));
 	}
 
 	public PlayerCounters getPCs() {
