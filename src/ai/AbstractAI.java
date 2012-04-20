@@ -21,5 +21,5 @@ public abstract class AbstractAI{
 	public abstract AbstractAttack pickBestSpontaneousAttack();
 	public abstract AbstractAttack pickBestReactiveAttack();
 	public abstract void onCollision();
-
+	
 }

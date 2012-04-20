@@ -12,8 +12,10 @@ import saving_loading.MapContainer;
 import saving_loading.RWGameObject;
 import scenery.Portal;
 import ai.BetterAI;
+import ai.PoisonedBehaviorModifier;
 import ai.SimpleAI;
-import ai.SlowPlayerAttack;
+import ai.BehaviorModifyingCollisionAttack;
+import ai.SlowBehaviorModifier;
 import app.RPGGame;
 
 import com.golden.gamedev.engine.timer.SystemTimer;
@@ -42,8 +44,8 @@ public class Snake extends Enemy {
 	@Override
 	public void initAttacks() {
 		spontaneousAttacks.put("shooting", new ShootingAttack(game,this));
-		reactiveAttacks.put("poison", new PoisonAttack(game,this,true));
-		reactiveAttacks.put("slow", new SlowPlayerAttack(game, this, true));
+		reactiveAttacks.put("poison", new BehaviorModifyingCollisionAttack(game, this, new PoisonedBehaviorModifier(game), true));
+		reactiveAttacks.put("slow", new BehaviorModifyingCollisionAttack(game, this, new SlowBehaviorModifier(game), true));
 		//attacks.put("supertelepathic", new SuperTelepathicAttack(game,this));
 	}
 

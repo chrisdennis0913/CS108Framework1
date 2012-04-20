@@ -1,6 +1,7 @@
 package ai;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import app.RPGGame;
@@ -34,8 +35,8 @@ public class BetterAI extends AbstractAI{
 	
 	@Override
 	public AbstractAttack pickBestSpontaneousAttack() {
-		Collection<AbstractAttack> attacks = enemy.getSpontaneousAttacks();
-		Iterator<AbstractAttack> itr = attacks.iterator();
+		HashMap<String,AbstractAttack> attacks = enemy.getSpontaneousAttacks();
+		Iterator<AbstractAttack> itr = attacks.values().iterator();
 		if(itr.hasNext())
 			return itr.next();
 		else
@@ -48,14 +49,12 @@ public class BetterAI extends AbstractAI{
 		double enemyMaxSpeed = (enemy.getMaxXSpeed() + enemy.getMaxYSpeed())/2;
 
 		if(playerMaxSpeed > enemyMaxSpeed){
-			for(AbstractAttack a: enemy.getReactiveAttacks())
-				if(a instanceof SlowPlayerAttack)
-					return a;
+			if(enemy.getReactiveAttacks().get("slow") != null)
+				return enemy.getReactiveAttacks().get("slow");
 		}
 		else{
-			for(AbstractAttack a: enemy.getReactiveAttacks())
-			if( !(a instanceof SlowPlayerAttack) )
-				return a;
+			if(enemy.getReactiveAttacks().get("poison") != null)
+				return enemy.getReactiveAttacks().get("poison");
 		}
 		throw new RuntimeException("No attacks available");
 	}
@@ -63,6 +62,7 @@ public class BetterAI extends AbstractAI{
 	@Override
 	public void onCollision() {
 		pickBestReactiveAttack().performAttack(0);
+		System.err.println("yay");
 	}
 
 }

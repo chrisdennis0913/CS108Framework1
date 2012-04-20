@@ -171,13 +171,13 @@ public abstract class Enemy implements Jsonable, IEnemy {
     }
 
 
-    public Collection<AbstractAttack> getSpontaneousAttacks () {
-        return spontaneousAttacks.values();
+    public HashMap<String,AbstractAttack> getSpontaneousAttacks () {
+        return spontaneousAttacks;
     }
 
 
-    public Collection<AbstractAttack> getReactiveAttacks () {
-        return reactiveAttacks.values();
+    public HashMap<String,AbstractAttack> getReactiveAttacks () {
+        return reactiveAttacks;
     }
 
 
