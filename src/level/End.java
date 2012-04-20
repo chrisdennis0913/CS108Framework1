@@ -80,26 +80,6 @@ public class End extends Level {
 		Snake snake = new Snake(game, ac);
 		snake.add( (int[]) ac.getObjectForKey("location", int[].class), 4);
 		enemies.put("snake", snake);
-		
-		TestQuestGiver questGiver = new TestQuestGiver(game, ac);
-		
-		
-    	int[] loc = new int[] {game.getBG().getWidth() / 2, 90 };
-    	ac.put("location", loc);
-    	ac.put("name", "QuestGiver");
-    	ac.put("type", "priest");
-        questGiver.add(loc, 6);
-        npcs.put("QuestGiver", questGiver);
-		
-		Task t = new DestroyTask("Kill the snake", snake);
-		
-		ItemSub potion = MI.parseExpression("SuperPotion within Start, sword, HealthPotion, 5");
-	       
-	    items.put("potion", potion);
-		
-		Quest killSnake = new RewardQuest(potion, t);
-		
-		killSnake.addObserver(questGiver);
 	}
 
 }

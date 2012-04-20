@@ -10,18 +10,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-<<<<<<< HEAD
 import quest.QuestJournal;
 
-import actions.Action1;
-import actions.SwordAttacking;
-import actions.BowAttacking;
-import actions.Grabbing;
-import actions.Standing;
-import actions.Talking;
-import actions.Walking;
-=======
->>>>>>> bc536091f09b3a441348d3616a77786db66f0213
 import ai.AbstractBehaviorModifier;
 import app.RPGGame;
 
@@ -42,7 +32,6 @@ public class Player implements Cloneable {
 	
 	private PlayerCounters pcs = new PlayerCounters(this);
 	private PlayerActions pas;
-	private ItemStore myStore;
 	private RPGGame game;
 	private PlayerInventory myInventory = new PlayerInventory(game);
 	
@@ -52,13 +41,11 @@ public class Player implements Cloneable {
 	private static final double INITIAL_PLAYER_Y_SPEED = 0.1;
 
 	private double maxXSpeed = INITIAL_PLAYER_X_SPEED;
-<<<<<<< HEAD
+
 	private double maxYSpeed = INITIAL_PLAYER_Y_SPEED;
 	private ItemStore myStore;
 	private QuestJournal myQuests;
-=======
-	private double maxYSpeed = INITIAL_PLAYER_Y_SPEED;
->>>>>>> bc536091f09b3a441348d3616a77786db66f0213
+
 
 	public Player(RPGGame rpgGame) {
 		this.game = rpgGame;
@@ -121,7 +108,7 @@ public class Player implements Cloneable {
 		myInventory.showLimitedInventory(g);
 	}
 	
-<<<<<<< HEAD
+
 	public QuestJournal getQuestLog()
 	{
 		return myQuests;
@@ -131,8 +118,6 @@ public class Player implements Cloneable {
 		return game;
 	}
 
-=======
->>>>>>> bc536091f09b3a441348d3616a77786db66f0213
 	public AnimatedSprite getCharacter() {
 		return character;
 	}
@@ -214,9 +199,5 @@ public class Player implements Cloneable {
 
 	public void deregisterBehaviorModifier(AbstractBehaviorModifier bm) {
 		behaviorModifiers.remove(bm);
-	}
-
-	public RPGGame getGame() {
-		return game;
 	}
 }

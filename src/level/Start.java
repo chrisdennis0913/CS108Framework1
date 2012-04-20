@@ -1,8 +1,15 @@
 package level;
 
 import java.awt.Graphics2D;
+import java.util.HashMap;
+
+import quest.DestroyTask;
+import quest.Quest;
+import quest.RewardQuest;
+import quest.Task;
 import inventory.ItemSub;
 import npc.Priest;
+import npc.TestQuestGiver;
 import saving_loading.AttributeContainer;
 import scenery.Scenery;
 import app.RPGGame;
@@ -32,6 +39,30 @@ public class Start extends Level
     	ac.put("type", "priest");
         priest.add(loc, 6);
         npcs.put("priest", priest);
+        
+        /*TestQuestGiver questGiver = new TestQuestGiver(game, ac);
+		
+		
+    	int[] locs = new int[] {game.getBG().getWidth() / 2, 90 };
+    	ac.put("location", loc);
+    	ac.put("name", "QuestGiver");
+    	ac.put("type", "priest");
+        questGiver.add(locs, 6);
+        npcs.put("QuestGiver", questGiver);
+        
+        HashMap<ItemSub, Integer> toFetch = new HashMap<ItemSub, Integer>();
+        
+        toFetch.put()
+		
+		Task t = new FetchTask(game, "Collect the item", questGiver, );
+		
+		ItemSub potion = MI.parseExpression("SuperPotion within Start, sword, HealthPotion, 5");
+	       
+	    items.put("potion", potion);
+		
+		Quest getBow = new RewardQuest(potion, t);
+		
+		getBow.addObserver(questGiver);*/
     }
 
 
