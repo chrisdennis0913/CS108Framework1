@@ -4,12 +4,12 @@ import app.RPGGame;
 
 
 /**
- * Class for items that heal the hero.
+ * Class for items that affect the hero's counters.
  * 
  * Health potions are of the form
- * "Name, healthpotion, boolean forSale, int Price"
+ * "Name, gif name, healthpotion, value of change"
  * for example
- * "Super Potion, healthpotion, false"
+ * "Super Potion, potion, healthpotion, 4"
  * 
  * @author Chris Dennis
  */
@@ -33,8 +33,7 @@ public class HealthPotion extends ItemSub
     public boolean isThisKindOfItem (String toParse)
     {    
         String myCateg=super.parseCategory(toParse);
-        if (myCateg.equalsIgnoreCase("HealthPotion")) return true;
-        return false;
+        return myCateg.equalsIgnoreCase("HealthPotion");
     }
 
 
@@ -84,7 +83,6 @@ public class HealthPotion extends ItemSub
 
     public void equip()
     {
-        game.getPlayer().setEquipped(this);
     }
     public void unequip()
     {

@@ -26,53 +26,54 @@ public class BowAttacking extends Attacking {
     protected void animate () {
         AnimatedSprite character = player.getCharacter();
         Walking walking = (Walking) player.getAction("walking");
+        double xPos=0;
+        double yPos=0;
+        double xVel=0;
+        double yVel=0;
 
         if (walking.getDirection().equals(Walking.cardinal.RIGHT)) {
-            character.setImages(images.get("right"));
-            Sprite flameArrow =
-                new Sprite(this.player.getGame()
-                                      .getImage("resources/items/flameArrow.gif"));
-            flameArrow.setLayer(0);
-            this.player.projectiles.add(flameArrow);
-            flameArrow.setLocation(player.getCharacter().getX()+5, player.getCharacter().getY());
-            flameArrow.setSpeed(.5, -.1);
+            xPos=10;
+            xVel=.5;
+            yVel=-.1;
+            sendFlameArrow("right", xPos, yPos, xVel, yVel);
         }
         else if (walking.getDirection().equals(Walking.cardinal.LEFT)) {
-            character.setImages(images.get("left"));
-            Sprite flameArrow =
-                    new Sprite(this.player.getGame()
-                                          .getImage("resources/items/flameArrow.gif"));
-                flameArrow.setLayer(0);
-                this.player.projectiles.add(flameArrow);
-                flameArrow.setLocation(player.getCharacter().getX()-5, player.getCharacter().getY());
-                flameArrow.setSpeed(-.5, .1);
+            xPos=-10;
+            xVel=-.5;
+            yVel=.1;
+            sendFlameArrow("left", xPos, yPos, xVel, yVel);
         }
         else if (walking.getDirection().equals(Walking.cardinal.DOWN)) {
-            character.setImages(images.get("front"));
-            Sprite flameArrow =
-                    new Sprite(this.player.getGame()
-                                          .getImage("resources/items/flameArrow.gif"));
-                flameArrow.setLayer(0);
-                this.player.projectiles.add(flameArrow);
-                flameArrow.setLocation(player.getCharacter().getX(), player.getCharacter().getY()+5);
-                flameArrow.setSpeed(-.1, .5);
+            yPos=10;
+            xVel=-.1;
+            yVel=.5;
+            sendFlameArrow("front",xPos, yPos, xVel, yVel);
         }
         else if (walking.getDirection().equals(Walking.cardinal.UP)) {
-            character.setImages(images.get("back"));
-            Sprite flameArrow =
-                    new Sprite(this.player.getGame()
-                                          .getImage("resources/items/flameArrow.gif"));
-                flameArrow.setLayer(0);
-                this.player.projectiles.add(flameArrow);
-                flameArrow.setLocation(player.getCharacter().getX(), player.getCharacter().getY()-5);
-                flameArrow.setSpeed(.1, -.5);
+            yPos=-10;
+            xVel=.1;
+            yVel=-.5;
+            sendFlameArrow("back",xPos, yPos, xVel, yVel);
         }
 
-        character.getAnimationTimer().setDelay(150);
+        character.getAnimationTimer().setDelay(150); // pull this to superClass
         character.setLoopAnim(true);
         character.setAnimate(true);
         character.setAnimationFrame(0, 2);
         character.setSpeed(0, 0);
+    }
+
+
+    private void sendFlameArrow (String direction, double xPos,double yPos,double xVel,double yVel) {
+        player.getCharacter().setImages(images.get(direction));
+        Sprite flameArrow =
+            new Sprite(this.player.getGame()
+                                  .getImage("resources/items/flameArrow.gif"));
+        flameArrow.setLayer(0);
+        this.player.projectiles.add(flameArrow);
+        flameArrow.setLocation(player.getCharacter().getX() + xPos,
+                               player.getCharacter().getY() + yPos);
+        flameArrow.setSpeed(xVel, yVel);
     }
 
 }
