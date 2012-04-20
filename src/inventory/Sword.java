@@ -21,8 +21,7 @@ public class Sword extends Weapon {
     public boolean isThisKindOfItem (String toParse)
     {    
         String myCateg=super.parseCategory(toParse);
-        if (myCateg.equalsIgnoreCase("sword")) return true;
-        return false;
+        return (myCateg.equalsIgnoreCase("sword"));
     }
     
     public static ItemFactory getFactory(){

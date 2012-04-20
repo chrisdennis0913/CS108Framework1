@@ -39,7 +39,6 @@ public class RPGGame extends GameObject //implements GameStateProvider
     public static String startLevelFilename= "map00.json";
 
 
-
     @SuppressWarnings("rawtypes")
     public void initResources ()
     {
@@ -132,7 +131,6 @@ public class RPGGame extends GameObject //implements GameStateProvider
     public void addItems (ItemSub itm)
     {
         myInventory.add(itm);
-
     }
 
 

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import npc.Priest;
+import level.Level;
 
 import saving_loading.AttributeContainer;
 import saving_loading.Jsonable;
@@ -79,7 +80,7 @@ public class Scenery implements Jsonable{
 		}
 
 		@Override
-		public void createAndAddToMap(AttributeContainer attributeContainer, MapContainer maps) {
+		public void createAndAddToMap(AttributeContainer attributeContainer, MapContainer maps, Level level) {
 			String name = attributeContainer.getName();
 			int layer = attributeContainer.getIntForKey("layer");
 			
