@@ -4,24 +4,23 @@ package quest;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Queue;
 
 
 import app.RPGGame;
 
-import inventory.ItemSub;
-
 public abstract class Quest implements Observable
 {
-	protected List<Task> toDo;
-	protected List<Task> done;
+	protected ArrayList<Task> toDo;
+	protected ArrayList<Task> done;
 	protected boolean isActive = false;
 	protected ArrayList<QuestGiver> observers;
 	protected String description;
 	
 	public Quest(String description, Task... required)
 	{
-		toDo = Arrays.asList(required);
+		List<Task> temp = Arrays.asList(required);
+		toDo = new ArrayList<Task>(temp);
+		done = new ArrayList<Task>();
 		observers = new ArrayList<QuestGiver>();
 		this.description = description;
 	}
@@ -45,11 +44,10 @@ public abstract class Quest implements Observable
 	{
 		for (Task t: toDo)
 		{
-			if(!t.checkComplete())
-				return false;
-			done.add(toDo.remove(0));
+			if(t.checkComplete())
+				done.add(t);
 		}	
-		return true;
+		return done.size() == toDo.size();
 	}
 	
 	public void update()

@@ -17,6 +17,7 @@ import npc.Priest;
 
 import app.Dialog;
 
+import com.golden.gamedev.Game;
 import com.golden.gamedev.GameEngine;
 import com.golden.gamedev.GameObject;
 import com.golden.gamedev.object.GameFont;
@@ -37,7 +38,7 @@ import enemy.Snake;
  * Click		: put tile
  * S		: save
  */
-public class LevelEditor extends GameObject {
+public class LevelEditor extends Game {
 
 	GameFont		font;
 	public static final int PICKING = 0, PRIEST = 1, ENEMY = 2;
@@ -58,8 +59,8 @@ public class LevelEditor extends GameObject {
 	Timer			blinkTimer = new Timer(400);
 
 
-	public LevelEditor(GameEngine main) {
-		super(main);
+	public LevelEditor() {
+		super();
 	}
 
 

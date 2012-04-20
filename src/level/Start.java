@@ -8,6 +8,12 @@ import quest.FetchTask;
 import quest.Quest;
 import quest.RewardQuest;
 import quest.Task;
+
+
+import com.golden.gamedev.engine.BaseIO;
+import com.golden.gamedev.engine.BaseLoader;
+
+
 import inventory.ItemSub;
 import npc.Priest;
 import npc.TestQuestGiver;
@@ -19,11 +25,12 @@ import app.RPGGame;
 public class Start extends Level
 {
 
-    public Start (RPGGame game)
-    {
-        super(game);
-
-    }
+	BaseLoader bsLoader;
+	BaseIO bsIO;
+	
+    public Start (BaseLoader bsLoader, BaseIO bsIO, RPGGame game2, String levelFilename) {
+        super(bsLoader, bsIO, game2, levelFilename);
+	}
 
 
     protected void addNPCs ()
@@ -107,14 +114,15 @@ public class Start extends Level
     }
 
 
-    public void nextLevel ()
+    public void nextLevel (String levelFilename)
     {
-        game.setLevel(new End(game));
+        game.setLevel(new End(bsLoader, bsIO, game, levelFilename));
         game.getLevel().generate();
     }
 
 
     protected void addEnemies ()
     {}
+
 
 }

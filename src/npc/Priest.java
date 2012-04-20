@@ -20,8 +20,9 @@ public class Priest extends StationaryNPC {
 		super(game, ac);
 		setCanDie(true);
 		attributes = ac;
-		dialogue = new SimpleDialogue("resources/script/"+attributes.getType()+".txt");
-	}	
+		if(attributes.getType() != null)
+			dialogue = new SimpleDialogue("resources/script/"+attributes.getType()+".txt");
+	}
 
 	public String getTalk() {
 		if (game.getPlayer().getEquipped().getCategory().equals("Weapon"))

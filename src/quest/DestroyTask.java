@@ -5,7 +5,6 @@
 package quest;
 
 import enemy.Enemy;
-import npc.NPC;
 
 public class DestroyTask extends Task
 {

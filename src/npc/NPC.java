@@ -10,108 +10,107 @@ import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
 import com.google.gson.Gson;
 
-
-@SuppressWarnings("serial")
-public abstract class NPC extends Sprite implements Jsonable {
-    protected static RPGGame game;
-    private SpriteGroup group;
-    private BufferedImage image;
-    protected String name;
-    private String[] script;
-    private boolean canDie = false;
-    private boolean dead = false;
-    private NPCCollision collision;
-    private ProjectileCollision projectileCollision;
-    protected int[] location = new int[2];
-    protected AttributeContainer attributes;
-    protected Gson gson = new Gson();
-
-
-    public NPC (RPGGame game2, AttributeContainer ac) {
-        NPC.game = game2;
-        attributes = ac;
-        name = ac.getName();
-        String type = ac.getType();
-        this.group = new SpriteGroup(name + "_" + game2.getRandom(0, 10000));
-        this.image = game2.getImage("resources/npc/" + type + ".gif");
-    }
-
-    public String toJson(){
-		return attributes.asJsonString();    	
-    }
-
-    public void add (int[] location, int layer) {
-        this.location = location;
-        Sprite npc = new Sprite(image, location[0], location[1]);
-        npc.setLayer(layer);
-        group.add(npc);
-    }
+	@SuppressWarnings("serial")
+	public abstract class NPC extends Sprite implements Jsonable {
+		protected static RPGGame game;
+		private SpriteGroup group;
+		private BufferedImage image;
+		protected String name;
+		private String[] script;
+		private boolean canDie = false;
+		private boolean dead = false;
+		private NPCCollision collision;
+		private ProjectileCollision projectileCollision;
+		protected int[] location = new int[2];
+		protected AttributeContainer attributes;
+		protected Gson gson = new Gson();
 
 
-    public void generate () {
-        game.getField().addGroup(group);
-        setCollision();
-    }
+		public NPC (RPGGame game2, AttributeContainer ac) {
+			NPC.game = game2;
+			attributes = ac;
+			name = ac.getName();
+			String type = ac.getType();
+			this.group = new SpriteGroup(name + "_" + game2.getRandom(0, 10000));
+			this.image = game2.getImage("resources/npc/" + type + ".gif");
+		}
+
+		public String toJson(){
+			return attributes.asJsonString();    	
+		}
+
+		public void add (int[] location, int layer) {
+			this.location = location;
+			Sprite npc = new Sprite(image, location[0], location[1]);
+			npc.setLayer(layer);
+			group.add(npc);
+		}
 
 
-    public abstract String getTalk ();
+		public void generate () {
+			game.getField().addGroup(group);
+			setCollision();
+		}
 
 
-    public void setCanDie (boolean canDie) {
-        this.canDie = canDie;
-    }
+		public abstract String getTalk ();
 
 
-    public int[] getLocation () {
-        return location;
-    }
+		public void setCanDie (boolean canDie) {
+			this.canDie = canDie;
+		}
 
 
-    public boolean canDie () {
-        return canDie;
-    }
+		public int[] getLocation () {
+			return location;
+		}
 
 
-    public void setDead (boolean dead) {
-        this.dead = dead;
-    }
+		public boolean canDie () {
+			return canDie;
+		}
 
 
-    public boolean isDead () {
-        return dead;
-    }
+		public void setDead (boolean dead) {
+			this.dead = dead;
+		}
 
 
-    public BufferedImage getImage () {
-        return image;
-    }
+		public boolean isDead () {
+			return dead;
+		}
 
 
-    public abstract void die ();
+		public BufferedImage getImage () {
+			return image;
+		}
 
 
-    public void setCollision () {
-        collision = new NPCCollision(game, name);
-        collision.pixelPerfectCollision = true;
-        game.getField().addCollisionGroup(game.getPlayer().getGroup(),
-                                          getGroup(),
-                                          collision);
-        projectileCollision =
-            new ProjectileCollision(game, game.getPlayer(), name);
-        projectileCollision.pixelPerfectCollision = true;
-        game.getField().addCollisionGroup(game.getPlayer().projectiles,
-                                          getGroup(),
-                                          projectileCollision);
-    }
+		public abstract void die ();
 
 
-    public NPCCollision getCollision () {
-        return collision;
-    }
+		public void setCollision () {
+			collision = new NPCCollision(game, name);
+			collision.pixelPerfectCollision = true;
+			game.getField().addCollisionGroup(game.getPlayer().getGroup(),
+					getGroup(),
+					collision);
+			projectileCollision =
+				new ProjectileCollision(game, game.getPlayer(), name);
+			projectileCollision.pixelPerfectCollision = true;
+			game.getField().addCollisionGroup(game.getPlayer().projectiles,
+					getGroup(),
+					projectileCollision);
+		}
 
 
-    public SpriteGroup getGroup () {
-        return group;
-    }
+		public NPCCollision getCollision () {
+			return collision;
+		}
 
-}
+
+		public SpriteGroup getGroup () {
+			return group;
+		}	
+	}
+

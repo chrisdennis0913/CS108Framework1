@@ -12,6 +12,7 @@ import quest.FetchTask;
 import quest.Quest;
 import quest.RewardQuest;
 import quest.Task;
+import quest.FetchTask;
 import npc.Priest;
 import npc.TestQuestGiver;
 
@@ -21,6 +22,8 @@ import level.LevelSettings;
 import scenery.Scenery;
 import app.RPGGame;
 
+import com.golden.gamedev.engine.BaseIO;
+import com.golden.gamedev.engine.BaseLoader;
 import com.golden.gamedev.util.FileUtil;
 import enemy.Snake;
 
@@ -29,8 +32,18 @@ public class LevelFromFile extends Level {
 
     private List<RWGameObject> gameObjects;
 
-    public LevelFromFile (RPGGame game, String levelFilename) {
-        super(game);
+
+    BaseLoader bsLoader;
+	BaseIO bsIO;
+    
+    public LevelFromFile (BaseLoader bsLoader, BaseIO bsIO, RPGGame game2, String levelFilename){
+    	
+        super(bsLoader, bsIO, game2, levelFilename);
+        
+        this.bsLoader = bsLoader;
+        this.bsIO = bsIO;
+ 
+
 
 //        //FOR DEBUGGING : Create a dummy AttributeCollection to write out for debugging purposes
 //        AttributeContainer testAC = new AttributeContainer();
@@ -174,10 +187,12 @@ public class LevelFromFile extends Level {
         	if (getLevelTime() < 1500) game.getDialog().showMessage(g);
         }        
     }
-
-
-    public void nextLevel ()
+	
+    public void nextLevel (String levelFilename)
     {
+    	
+        game.setLevel(new End(bsLoader, bsIO, game, levelFilename));
+        game.getLevel().generate();
     	/*
     	if(nextLevelName == null){
     		System.out.println("nextLevelName: " + nextLevelName);
@@ -188,11 +203,19 @@ public class LevelFromFile extends Level {
     		game.getLevel().generate();
     	}
     	*/
-       game.setLevel(new End(game));
+       game.setLevel(new End(bsLoader, bsIO, game, levelFilename));
        game.getLevel().generate();
     }
 
 
     protected void addEnemies () {}
+
+
+	@Override
+	public void renderTile(Graphics2D arg0, int arg1, int arg2, int arg3,
+			int arg4) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

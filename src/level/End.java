@@ -1,18 +1,9 @@
 package level;
 
-
-import inventory.ItemSub;
-
 import java.awt.Graphics2D;
 
-import quest.DestroyTask;
-import quest.Quest;
-import quest.RewardQuest;
-import quest.Task;
-
-import npc.NPC;
-import npc.Priest;
-import npc.TestQuestGiver;
+import com.golden.gamedev.engine.BaseIO;
+import com.golden.gamedev.engine.BaseLoader;
 
 import saving_loading.AttributeContainer;
 import scenery.Scenery;
@@ -21,8 +12,8 @@ import enemy.Snake;
 
 public class End extends Level {
 
-	public End(RPGGame game) {
-		super(game);
+	public End(BaseLoader bsLoader, BaseIO bsIO, RPGGame game2, String levelFilename) {
+        super(bsLoader, bsIO, game2, levelFilename);
 	}
 
 	protected void addNPCs() {
@@ -68,7 +59,7 @@ public class End extends Level {
 			game.getDialog().showMessage(g);
 	}
 
-	public void nextLevel() {
+	public void nextLevel(String next) {
 		game.finish();
 	}
 
@@ -80,6 +71,13 @@ public class End extends Level {
 		Snake snake = new Snake(game, ac);
 		snake.add( (int[]) ac.getObjectForKey("location", int[].class), 4);
 		enemies.put("snake", snake);
+	}
+
+	@Override
+	public void renderTile(Graphics2D arg0, int arg1, int arg2, int arg3,
+			int arg4) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
