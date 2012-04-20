@@ -30,8 +30,10 @@ public abstract class NPC extends Sprite implements Jsonable{
 		attributes = ac;
 		name = ac.getName();
 		String type = ac.getType();
-		this.group = new SpriteGroup(name+"_"+game2.getRandom(0, 10000));
-		this.image = game2.getImage("resources/npc/"+type+".gif");
+		if(type != null){
+			this.group = new SpriteGroup(name+"_"+game2.getRandom(0, 10000));
+			this.image = game2.getImage("resources/npc/"+type+".gif");
+		}
 	}
 	
 	public void add(int[] location, int layer) {

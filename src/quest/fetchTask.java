@@ -14,14 +14,14 @@ import npc.NPC;
 import inventory.Inventory;
 import inventory.ItemSub;
 
-public class FetchTask extends Task 
+public class fetchTask extends Task 
 {
 
 	private HashMap<ItemSub,Integer> itemsToFetch;
 	private NPC recipient;
 	private Inventory inv;
 	
-	public FetchTask(RPGGame game, String description, NPC recipient, HashMap<ItemSub, Integer> itemsToFetch) 
+	public fetchTask(RPGGame game, String description, NPC recipient, HashMap<ItemSub, Integer> itemsToFetch) 
 	{
 		super(description);
 		this.itemsToFetch = itemsToFetch;
