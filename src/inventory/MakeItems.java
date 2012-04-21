@@ -27,7 +27,6 @@ public class MakeItems
         itemList.add(HealthPotion.getFactory());
         itemList.add(Sword.getFactory());
         itemList.add(BowAndArrows.getFactory());
-//        itemList.add(Weapon.getFactory());
         itemList.add(Accessory.getFactory());
         
         

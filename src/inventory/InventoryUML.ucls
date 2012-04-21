@@ -88,8 +88,8 @@
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <interface id="12" corner="BOTTOM_RIGHT" language="java" name="inventory.EquipItemInterface" project="CS-108-Project" 
-    file="/CS-108-Project/src/inventory/EquipItemInterface.java" binary="false">    
+  <interface id="12" corner="BOTTOM_RIGHT" language="java" name="inventory.EquipItemInterface" project="vooga-framework" 
+    file="/vooga-framework/src/inventory/EquipItemInterface.java" binary="false">    
     <position height="-1" width="-1" x="-71" y="302"/>    
     <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      

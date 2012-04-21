@@ -2,22 +2,14 @@ package app;
 
 import inventory.Inventory;
 import inventory.ItemSub;
-
 import java.awt.Graphics2D;
 import java.util.Comparator;
-
 import level.Level;
-
 import level.Map;
-import saving_loading.LevelFromFile;
-
 import player.Player;
 import saving_loading.LevelFromFile;
-
 import com.golden.gamedev.GameEngine;
 import com.golden.gamedev.GameObject;
-import com.golden.gamedev.engine.BaseIO;
-import com.golden.gamedev.engine.BaseLoader;
 import com.golden.gamedev.object.Background;
 import com.golden.gamedev.object.PlayField;
 import com.golden.gamedev.object.Sprite;

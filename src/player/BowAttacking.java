@@ -15,6 +15,7 @@ public class BowAttacking extends Attacking {
         if (super.isEnabled()) {
             Weapon wp= (Weapon) getPlayer().getEquipped();
             if (wp.getWeaponType().equalsIgnoreCase("BowAndArrows")) {
+                player.getGame().getImage("yes");
                 return true;
             }
         }
