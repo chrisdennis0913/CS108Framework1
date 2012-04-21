@@ -1,19 +1,19 @@
-package inventory;
+ package inventory;
 
 import player.PlayerDirection;
 import app.RPGGame;
 import com.golden.gamedev.object.AnimatedSprite;
 
-public class Sword extends Weapon {
+public class Sword extends Weapon implements Sellable{
     private Sword(){
         super();
     }
-    
+    private int price = 1;
     private Sword (RPGGame game2, String name,
                     String gifName,
                    int damage)
     {
-        super(game2, name, gifName, damage);
+        super(game2, name , gifName, damage);
         weaponType="sword";
     }
     
@@ -52,5 +52,12 @@ public class Sword extends Weapon {
         }
         ItemSub.game.getBG().setToCenter(character);
     }
+
+	@Override
+	public boolean isSellable() {
+		if(price == 0)
+            return false;
+        return true;
+	}
 
 }

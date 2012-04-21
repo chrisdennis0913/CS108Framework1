@@ -1,4 +1,4 @@
-/*
+/**
  * The classic fetch x amount of this_item and bring it to so and so
  * A HashMap is used in the constructor in case items of multiple types are required
  */
@@ -26,9 +26,20 @@ public class FetchTask extends Task
 		super(description);
 		this.itemsToFetch = itemsToFetch;
 		this.recipient = recipient;
-		inv = game.getPlayer().getInventory();
+		inv = game.getInventory();
 	}
 	
+
+	public void update()
+	{
+		isComplete = true;
+		for (ItemSub s: itemsToFetch.keySet())
+		{
+			if (inv.getCount(s) != itemsToFetch.get(s))
+				isComplete = false;
+		}
+	}
+
 	public String toString()
 	{
 		String str = "Collect";
@@ -44,7 +55,7 @@ public class FetchTask extends Task
 		str += " for" + recipient.toString();
 		return str;
 	}
-
+	
 	public boolean checkComplete() 
 	{
 		isComplete = true;
@@ -55,4 +66,7 @@ public class FetchTask extends Task
 		}
 		return isComplete;
 	}
+
+
+	
 }

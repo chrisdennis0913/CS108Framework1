@@ -86,6 +86,9 @@ public class Player {
 		else if (game.keyPressed(java.awt.event.KeyEvent.VK_O))
 			myInventory.showFullInventoryMenu();
 		
+		else if (game.keyPressed(java.awt.event.KeyEvent.VK_S))
+			myStore.openStore();
+		
 		if (game.keyPressed(java.awt.event.KeyEvent.VK_J))
 			myQuests.toggleShow();
 		

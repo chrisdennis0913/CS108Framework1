@@ -4,10 +4,11 @@ import player.PlayerDirection;
 import app.RPGGame;
 import com.golden.gamedev.object.AnimatedSprite;
 
-public class BowAndArrows extends Weapon {
+public class BowAndArrows extends Weapon implements Sellable{
     private BowAndArrows(){
         super();
     }
+    private int price = 1;
     
     private BowAndArrows (RPGGame game2, String name,
                     String gifName,
@@ -52,5 +53,12 @@ public class BowAndArrows extends Weapon {
         }
         ItemSub.game.getBG().setToCenter(character);
     }
+
+	@Override
+	public boolean isSellable() {
+		if(price == 0)
+            return false;
+        return true;
+	}
 
 }
