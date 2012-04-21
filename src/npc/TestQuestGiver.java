@@ -14,6 +14,7 @@ import saving_loading.AttributeContainer;
 public class TestQuestGiver extends StationaryNPC implements QuestGiver
 {
 	private ArrayList<Quest> myQuests;
+	private Quest justFinished = null;
 	private boolean talkedTo = false;
 	private boolean questCompleted = false;
 	private SimpleDialogue dialogue;
@@ -24,6 +25,7 @@ public class TestQuestGiver extends StationaryNPC implements QuestGiver
 		setCanDie(false);
 		myQuests = new ArrayList<Quest>();	
 		attributes = ac;
+//		dialogue = new SimpleDialogue("resources/script/testquestgiver.txt");
 		dialogue = new SimpleDialogue("resources/script/testquestgiver.txt");
 	}
 
@@ -37,6 +39,7 @@ public class TestQuestGiver extends StationaryNPC implements QuestGiver
 		if (myQuests.size() == 0 && !questCompleted)
 		{
 			questCompleted = true;
+			justFinished.completeQuest(game);
 			dialogue.goToNextLine(dialogue.new SimpleDialogueObject());
 		}
 		return dialogue.getCurrentLine();
@@ -53,7 +56,7 @@ public class TestQuestGiver extends StationaryNPC implements QuestGiver
 		if (qu.checkComplete())
 		{
 			myQuests.remove(qu);
-			qu.completeQuest(game);
+			justFinished = qu;
 		}
 	}
 

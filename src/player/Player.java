@@ -3,21 +3,15 @@ package player;
 import inventory.ItemStore;
 import inventory.ItemSub;
 import inventory.PlayerInventory;
-
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
-
-
 import quest.QuestJournal;
-
 import enemy.AbstractBehaviorModifier;
 import app.RPGGame;
-
 import collisions.PlayerBoundaryCollision;
-
 import com.golden.gamedev.object.AnimatedSprite;
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
@@ -194,9 +188,5 @@ public class Player {
 
 	public Sprite getSprite(){
 		return character;
-	}
-	
-	public RPGGame getGame() {
-		return game;
 	}
 }

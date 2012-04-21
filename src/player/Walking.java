@@ -32,6 +32,7 @@ public class Walking extends PlayerAction {
 			}
 		if (!checker)
 			setActive(false);
+		player.getGame().getBG().setToCenter(player.getCharacter());
 	}
 
 	public void keyPress(PlayerDirection direction, boolean isSame) {
