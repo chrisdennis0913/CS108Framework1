@@ -9,15 +9,15 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import quest.QuestJournal;
-
-import ai.AbstractBehaviorModifier;
+import enemy.AbstractBehaviorModifier;
 import app.RPGGame;
 import collisions.PlayerBoundaryCollision;
 import com.golden.gamedev.object.AnimatedSprite;
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
 
-public class Player implements Cloneable {
+
+public class Player {
 
 	private HashMap<String, ItemSub> inventoryWithNames =
 	        new HashMap<String, ItemSub>();
@@ -33,9 +33,6 @@ public class Player implements Cloneable {
 	private PlayerInventory myInventory = new PlayerInventory(game);
 	
 	private LinkedList<AbstractBehaviorModifier> behaviorModifiers = new LinkedList<AbstractBehaviorModifier>();
-
-	private static final double INITIAL_PLAYER_X_SPEED = 0.1;
-	private static final double INITIAL_PLAYER_Y_SPEED = 0.1;
 
 	private ItemStore myStore;
 	private QuestJournal myQuests;
@@ -117,10 +114,6 @@ public class Player implements Cloneable {
 		return myQuests;
 	}
 
-	public RPGGame getGame() {
-		return game;
-	}
-
 	public AnimatedSprite getCharacter() {
 		return character;
 	}
@@ -198,5 +191,8 @@ public class Player implements Cloneable {
 
 	public Sprite getSprite(){
 		return character;
+	}
+	public RPGGame getGame(){
+	    return game;
 	}
 }
