@@ -189,4 +189,7 @@ public class Player {
 	public Sprite getSprite(){
 		return character;
 	}
+	public RPGGame getGame(){
+	    return game;
+	}
 }
