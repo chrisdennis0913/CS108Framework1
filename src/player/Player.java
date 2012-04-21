@@ -89,6 +89,9 @@ public class Player implements Cloneable {
 		else if (game.keyPressed(java.awt.event.KeyEvent.VK_O))
 			myInventory.showFullInventoryMenu();
 		
+		else if (game.keyPressed(java.awt.event.KeyEvent.VK_S))
+			myStore.openStore();
+		
 		if (game.keyPressed(java.awt.event.KeyEvent.VK_J))
 			myQuests.toggleShow();
 		
