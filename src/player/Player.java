@@ -18,10 +18,6 @@ import com.golden.gamedev.object.SpriteGroup;
 
 
 public class Player {
-
-	private HashMap<String, ItemSub> inventoryWithNames =
-	        new HashMap<String, ItemSub>();
-	
 	private SpriteGroup group = new SpriteGroup("Player");
 	public SpriteGroup projectiles = new SpriteGroup("Projectiles");
 	private AnimatedSprite character;
@@ -128,7 +124,6 @@ public class Player {
 	}
 
 	public void addItem(ItemSub grabItem) {
-		inventoryWithNames.put(grabItem.getName(), grabItem);
 		myInventory.add(grabItem);
 	}
 
@@ -149,10 +144,7 @@ public class Player {
 	}
 
 	public boolean hasItem(String itemName) {
-		if (!inventoryWithNames.containsKey(itemName)) {
-			return false;
-		}
-		return myInventory.contains(inventoryWithNames.get(itemName));
+		return myInventory.contains(itemName);
 	}
 	
 	public void setWalkingSpeed(double[] speed){
