@@ -2,7 +2,6 @@ package quest;
 
 import java.util.ArrayList;
 
-
 import inventory.ItemSub;
 
 import app.RPGGame;
