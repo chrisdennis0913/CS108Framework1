@@ -105,6 +105,7 @@ public class Player {
 		pcs.render(g);
 		pas.render(g);
 		myInventory.showLimitedInventory(g);
+		myInventory.drawAccessories(g);
 		myQuests.showJournal(g);
 	}
 	

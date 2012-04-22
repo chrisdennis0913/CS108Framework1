@@ -19,18 +19,18 @@ public class ItemStore {
 	private boolean storeOpen = false;
 	private RPGGame game;
 	private GameFont font;
-	private MakeItems MI = new MakeItems(game);
+	private MakeItems MI;
 
 	public ItemStore(RPGGame game2) {
-//
 		myInventory = new Inventory();
 		game = game2;
 		font = game.fontManager.getFont(game.getImage("BitmapFont.png"));
-//		ItemSub key = MI.parseExpression("Key, key, KeyItem, 5");
-//		int[] keyLoc = new int[] { 5, 20 };
-//		key.add(keyLoc, 0);
-//		myInventory.add(key);
-//
+		MI = new MakeItems(game2);
+		ItemSub key = MI.parseExpression("Gold Key, key, KeyItem");
+		int[] keyLoc = new int[] { 5, 20 };
+		key.add(keyLoc, 0);
+		myInventory.add(key);
+
 	}
 
 	public RPGGame getGame() {

@@ -12,7 +12,6 @@ public class SwordAttacking extends Attacking {
     public boolean isEnabled () {
         if (super.isEnabled()) {
             Weapon wp = (Weapon) getPlayer().getEquipped();
-            
             if (wp.getWeaponType()=="sword") {
                 return true;
             }

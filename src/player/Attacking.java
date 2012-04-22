@@ -18,12 +18,10 @@ public class Attacking extends PlayerAction {
 
     public boolean isEnabled() {
 		ItemSub equipped = getPlayer().getEquipped();
-		
         if (equipped == null)
             return false;
         if (equipped.getCategory().equalsIgnoreCase("weapon"))
             return true;
-        
         return false;
 	}
 

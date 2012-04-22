@@ -1,19 +1,13 @@
 package enemy;
 
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Collection;
-
 import level.Level;
-
-
 import saving_loading.AttributeContainer;
 import saving_loading.MapContainer;
 import saving_loading.RWGameObject;
 import scenery.Portal;
 import ai.SnakeDecisionTableAI;
 import app.RPGGame;
-
 import com.golden.gamedev.engine.timer.SystemTimer;
 
 

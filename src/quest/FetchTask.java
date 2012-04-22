@@ -1,4 +1,4 @@
-/*
+/**
  * The classic fetch x amount of this_item and bring it to so and so
  * A HashMap is used in the constructor in case items of multiple types are required
  */
