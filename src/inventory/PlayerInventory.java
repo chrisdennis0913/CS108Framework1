@@ -68,6 +68,7 @@ public class PlayerInventory extends Inventory {
             equippedItem = null;
         }
     }
+    
     public void showFullInventoryMenu(){
         menu=new InventoryMenu(this);
         game.pauseGameForInventory();

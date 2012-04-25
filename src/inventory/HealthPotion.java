@@ -4,99 +4,98 @@ import app.RPGGame;
 
 
 /**
- * Class for items that affect the hero's counters.
- * 
- * Health potions are of the form
- * "Name, gif name, healthpotion, value of change"
- * for example
+ * Class for items that affect the hero's counters. Health potions are of the
+ * form "Name, gif name, healthpotion, value of change" for example
  * "Super Potion, potion, healthpotion, 4"
  * 
  * @author Chris Dennis
  */
-public class HealthPotion extends ItemSub
-{
+public class HealthPotion extends ItemSub {
     private int healthChange;
-    private HealthPotion(){
-        
+
+
+    private HealthPotion () {
+
     }
 
-    public HealthPotion (RPGGame game2, String name, String gifName, int value)
-    {
+
+    public HealthPotion (RPGGame game2, String name, String gifName, int value) {
         super(game2, name, gifName);
         category = "HealthPotion";
         game2.addItems(this);
-        healthChange= value;
+        healthChange = value;
     }
-    
+
 
     @Override
-    public boolean isThisKindOfItem (String toParse)
-    {    
-        String myCateg=super.parseCategory(toParse);
+    public boolean isThisKindOfItem (String toParse) {
+        String myCateg = super.parseCategory(toParse);
         return myCateg.equalsIgnoreCase("HealthPotion");
     }
 
 
     @Override
-    public ItemSub parseItem (RPGGame game2, String toParse)
-    {
-        return new HealthPotion(game2, 
-                           super.parseName(toParse),
-                           super.parseGifName(toParse),
-                          parsePotionValue(toParse));
+    public ItemSub parseItem (RPGGame game2, String toParse) {
+        return new HealthPotion(game2,
+                                super.parseName(toParse),
+                                super.parseGifName(toParse),
+                                parsePotionValue(toParse));
     }
-    private int parsePotionValue (String toParse)
-    {
+
+
+    private int parsePotionValue (String toParse) {
         String[] parseArray = toParse.split(",");
-        return Integer.parseInt(parseArray[parseArray.length-1].trim());
+        return Integer.parseInt(parseArray[parseArray.length - 1].trim());
     }
 
 
-    public static ItemFactory getFactory(){
+    public static ItemFactory getFactory () {
         return new ItemFactory(new HealthPotion());
     }
 
+
     @Override
-    public void use ()
-    {
+    public void use () {
         game.getPlayer().getPCs().getHealth().decrease(1);
-        game.getPlayer().getPCs().getHealth().increase(healthChange+1);
+        game.getPlayer().getPCs().getHealth().increase(healthChange + 1);
     }
-    
-    public int getHealthChange(){
+
+
+    public int getHealthChange () {
         return healthChange;
     }
-    
-    public int compareTo (ItemSub it)
-    {
+
+
+    public int compareTo (ItemSub it) {
         if (category != it.getCategory()) return category.compareTo(it.getCategory());
         return compareTo((HealthPotion) it);
     }
 
 
-    public int compareTo (HealthPotion hp)
-    {
-        if (healthChange != hp.getHealthChange()) return healthChange - hp.getHealthChange();
+    public int compareTo (HealthPotion hp) {
+        if (healthChange != hp.getHealthChange()) return healthChange -
+                                                         hp.getHealthChange();
         if (myName != hp.getName()) return myName.compareTo(hp.getName());
         return 0;
     }
 
-    public void equip()
-    {
-    }
-    public void unequip()
-    {
-        if (game.getPlayer().getEquipped()==this)
-            game.getPlayer().setEquipped(null);
-    }
-    public boolean isEquipped()
-    {
-        return game.getPlayer().getEquipped()==this;
+
+    public void equip () {}
+
+
+    public void unequip () {
+        if (game.getPlayer().getEquipped() == this) game.getPlayer()
+                                                        .setEquipped(null);
     }
 
+
+    public boolean isEquipped () {
+        return game.getPlayer().getEquipped() == this;
+    }
+
+
     @Override
-    public void drop ()
-    {
+    public void drop () {
         // TODO Auto-generated method stub   
     }
 }
