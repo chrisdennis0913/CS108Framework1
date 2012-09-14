@@ -25,8 +25,6 @@ public class NPCCollision extends BasicCollisionGroup {
 				actions.setTalkable(true);
 				actions.setTalkingNPC(npc);
 			}
-
-			System.out.println(game.getPlayer().getActions().isAttacking());
 			
 			if (game.getPlayer().getActions().isAttacking() && npc.canDie())
 				npc.die();

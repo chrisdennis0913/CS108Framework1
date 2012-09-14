@@ -1,0 +1,23 @@
+#Vooga Game v. 0.0.1
+
+Controls for game:
+Control to pick up sword, halo, bow, potion and to talk
+Spacebar to activate weapon
+I to toggle limited Item menu
+O to open Item menu and equip sword, bow, or super bow accessory
+	Choose weapon with Enter.
+Talk to and kill the top NPC to open a portal and move on to the 2nd and last level.
+
+##Authors:
+Chris Dennis- Inventory/Items/Weapons
+Rachel Harris- NPCs/Dialogue
+Andrew Bailey- Level Editor/Level/Scenery 
+Zahava Alston- Item Store  
+James Hong- AI
+Michael Ross- Level Editor/Level/Scenery  
+Kirill Klimuk- Player/Actions
+Robert Xu- Quests
+## TAs:
+Trevor Narayan  
+Alex Galonsky
+
