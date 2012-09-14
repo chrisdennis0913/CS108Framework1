@@ -24,7 +24,12 @@ import app.RPGGame;
 
 public abstract class Level extends AbstractTileBackground{
 	
-	public static final int TILE_WIDTH = 32, TILE_HEIGHT = 32;
+	/**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
+    public static final int TILE_WIDTH = 32, TILE_HEIGHT = 32;
 	
 	Chipset		chipsetE;
 	Chipset		chipsetF;

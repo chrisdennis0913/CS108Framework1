@@ -1,22 +1,20 @@
 package ai;
 
 import player.Player;
-import app.RPGGame;
 
-public class FollowingMovementAI extends AbstractMovementAI{
-	
-	private Player follow;
-	
-	public FollowingMovementAI(Player player){
-		follow = player;
-	}
+public class FollowingMovementAI extends AbstractMovementAI {
 
-	@Override
-	public double[] getVelocities() {
-		double xSpeed = follow.getMaxXSpeed();
-		double ySpeed = follow.getMaxYSpeed();
-		return new double[] {xSpeed, ySpeed};
-		
-	}
+    public FollowingMovementAI (Player player) {
+    }
 
+    @Override
+    public double[] getVelocities () {
+        /*
+         * double xSpeed = follow.getMaxXSpeed(); double ySpeed =
+         * follow.getMaxYSpeed(); return new double[] { xSpeed, ySpeed };
+         */
+
+        return new double[] { 0, 0 };
+
+    }
 }

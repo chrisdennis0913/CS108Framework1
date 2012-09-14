@@ -1,8 +1,8 @@
 package ai;
 
+import app.RPGGame;
 import enemy.AbstractAttack;
 import enemy.IEnemy;
-import app.RPGGame;
 
 
 public abstract class AbstractAI{
@@ -11,7 +11,7 @@ public abstract class AbstractAI{
 	protected IEnemy enemy;
 
 	public AbstractAI(RPGGame game, IEnemy enemy){
-		this.game = game;
+		AbstractAI.game = game;
 		this.enemy = enemy;
 	}
 

@@ -1,9 +1,7 @@
 package ai;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
-
 import app.RPGGame;
 import enemy.AbstractAttack;
 import enemy.IEnemy;
@@ -47,17 +45,17 @@ public class BetterAI extends AbstractAI{
 
 	@Override
 	public AbstractAttack pickBestReactiveAttack() {
-		double playerMaxSpeed = (game.getPlayer().getMaxXSpeed() + game.getPlayer().getMaxYSpeed())/2;
+		/*double playerMaxSpeed = (game.getPlayer().getWalkingSpeed()[0] + game.getPlayer().getWalkingSpeed()[0])/2;
 		double enemyMaxSpeed = (enemy.getMaxXSpeed() + enemy.getMaxYSpeed())/2;
 
-		/*if(playerMaxSpeed > enemyMaxSpeed){
+		if(playerMaxSpeed > enemyMaxSpeed){
 			if(enemy.getReactiveAttacks().get("slow") != null)
 				return enemy.getReactiveAttacks().get("slow");
-		}*/
-		//else{
+		}
+		else{
 			if(enemy.getReactiveAttacks().get("poison") != null)
 				return enemy.getReactiveAttacks().get("poison");
-		//}
+		}*/
 		throw new RuntimeException("No attacks available");
 	}
 

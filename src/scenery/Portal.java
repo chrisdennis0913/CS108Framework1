@@ -1,7 +1,5 @@
 package scenery;
 
-import saving_loading.AttributeContainer;
-import app.Main;
 import app.RPGGame;
 import collisions.PortalCollision;
 

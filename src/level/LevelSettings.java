@@ -1,6 +1,6 @@
 package level;
 
-import npc.Priest;
+import app.RPGGame;
 import saving_loading.AttributeContainer;
 import saving_loading.Jsonable;
 import saving_loading.MapContainer;
@@ -24,7 +24,7 @@ public class LevelSettings implements Jsonable{
 		}
 
 		@Override
-		public void createAndAddToMap(AttributeContainer attributeContainer, MapContainer maps, Level level) {
+		public void createAndAddToMap(AttributeContainer attributeContainer, MapContainer maps, Level level, RPGGame game2) {
 			level.setNextLevel(attributeContainer.getStringForKey("nextLevel"));
 			level.setStartText(attributeContainer.getStringForKey("startText"));
 		}		

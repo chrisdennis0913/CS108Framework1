@@ -6,7 +6,7 @@ public abstract class AbstractRangeAttack extends AbstractAttack{
 
 
 	public AbstractRangeAttack(RPGGame game, IEnemy enemy) {
-		super(game, enemy);
+		super(game, enemy, "AbstractRangeAttack");
 	}
 
 	@Override

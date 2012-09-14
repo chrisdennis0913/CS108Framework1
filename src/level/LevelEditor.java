@@ -2,28 +2,20 @@ package level;
 
 
 import java.awt.Graphics2D;
-import java.util.List;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 import java.util.Scanner;
-
-import saving_loading.AttributeContainer;
-
 import npc.Priest;
-
+import saving_loading.AttributeContainer;
 import app.Dialog;
-
 import com.golden.gamedev.Game;
-import com.golden.gamedev.GameEngine;
-import com.golden.gamedev.GameObject;
 import com.golden.gamedev.object.GameFont;
 import com.golden.gamedev.object.Timer;
 import com.google.gson.Gson;
-
 import enemy.Snake;
 
 

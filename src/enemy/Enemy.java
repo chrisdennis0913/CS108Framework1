@@ -3,7 +3,6 @@ package enemy;
 import inventory.ItemSub;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import saving_loading.AttributeContainer;
 import saving_loading.Jsonable;

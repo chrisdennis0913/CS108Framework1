@@ -1,11 +1,9 @@
 package enemy;
 
-import java.util.Random;
-import java.util.TreeMap;
-
 import inventory.ItemSub;
 import inventory.MakeItems;
-
+import java.util.Random;
+import java.util.TreeMap;
 import app.RPGGame;
 
 /*
@@ -22,17 +20,13 @@ public class EnemyItemGen
 	   private MakeItems itemMaker;
 	   private ValueComparator<String> vC;
 	   
-	   //provides original drop rates, in case a drop rate is overwritten, 
-	   //and the developer wants to revert to the default drop rate.
-	   private TreeMap<String, Double> originalRates;
-	   
 	   private EnemyItemGen(RPGGame g)
 	   {
 		   rand = new Random();
 		   itemMaker = new MakeItems(g);
 		   vC = new ValueComparator<String>(dropRates);
 		   sortMapByValues();
-		   originalRates = new TreeMap<String, Double>(dropRates);
+		   new TreeMap<String, Double>(dropRates);
 	   }
 	   
 	   public void changeProb(String descr, double newProb)
@@ -43,11 +37,6 @@ public class EnemyItemGen
 	   public void sortMapByValues()
 	   {
 		   dropRates = new TreeMap<String,Double>(vC);
-	   }
-	   
-	   private void parseEnemyProbabilities(Enemy en)
-	   {
-		   
 	   }
 	   
 	   public ItemSub getDroppedItem(Enemy en)

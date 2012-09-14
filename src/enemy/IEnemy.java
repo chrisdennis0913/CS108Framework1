@@ -1,11 +1,8 @@
 package enemy;
 
 import java.awt.image.BufferedImage;
-import java.util.Collection;
 import java.util.HashMap;
-
 import collisions.EnemyCollision;
-
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
 

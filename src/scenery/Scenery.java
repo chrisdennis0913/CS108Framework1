@@ -78,13 +78,15 @@ public class Scenery implements Jsonable{
 		}
 
 		@Override
-		public void createAndAddToMap(AttributeContainer attributeContainer, MapContainer maps, Level level) {
+		public void createAndAddToMap(AttributeContainer attributeContainer, MapContainer maps, Level level, RPGGame game2) {
 			String name = attributeContainer.getName();
 			int layer = attributeContainer.getIntForKey("layer");
+			game = game2;
 			
 			// Have to include this when retrieving a Collection
 	        Type collectionType = new TypeToken<ArrayList<int[]>>(){}.getType();
-	        List<int[]> locations = (List<int[]>) attributeContainer.getCollectionForKey("locations", collectionType);
+	        @SuppressWarnings("unchecked")
+            List<int[]> locations = (List<int[]>) attributeContainer.getCollectionForKey("locations", collectionType);
 	        
 		    Scenery scenery = new Scenery(game, attributeContainer);
 		    for(int[] location : locations){

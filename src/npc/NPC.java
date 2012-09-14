@@ -16,7 +16,7 @@ public abstract class NPC extends Sprite implements Jsonable {
 	private SpriteGroup group;
 	private BufferedImage image;
 	protected String name;
-	private String[] script;
+//	private String[] script;
 	private boolean canDie = false;
 	private boolean dead = false;
 	private NPCCollision collision;

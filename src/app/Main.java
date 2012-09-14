@@ -1,9 +1,6 @@
 package app;
 
 import java.awt.Dimension;
-
-import level.LevelEditor;
-
 import com.golden.gamedev.GameEngine;
 import com.golden.gamedev.GameLoader;
 import com.golden.gamedev.GameObject;

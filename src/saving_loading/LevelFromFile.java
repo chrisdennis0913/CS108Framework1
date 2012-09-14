@@ -22,23 +22,23 @@ import com.golden.gamedev.engine.BaseLoader;
 import com.golden.gamedev.util.FileUtil;
 import enemy.Snake;
 
-
+@SuppressWarnings("serial")
 public class LevelFromFile extends Level {
 
     private List<RWGameObject> gameObjects;
 
-
     BaseLoader bsLoader;
-	BaseIO bsIO;
-    
-    public LevelFromFile (BaseLoader bsLoader, BaseIO bsIO, RPGGame game2, String levelFilename){
-    	
+    BaseIO bsIO;
+
+    public LevelFromFile (BaseLoader bsLoader,
+                          BaseIO bsIO,
+                          RPGGame game2,
+                          String levelFilename) {
+
         super(bsLoader, bsIO, game2, levelFilename);
-        
+
         this.bsLoader = bsLoader;
         this.bsIO = bsIO;
- 
-
 
 //        //FOR DEBUGGING : Create a dummy AttributeCollection to write out for debugging purposes
 //        AttributeContainer testAC = new AttributeContainer();
@@ -62,9 +62,9 @@ public class LevelFromFile extends Level {
         AttributeContainer sac = new AttributeContainer();
         sac.put("name", "priest");
         sac.put("type", "priest");
-        Priest priest = new Priest(game, pac);
-        Snake snake = new Snake(game, sac);
-        Scenery scene = new Scenery(game, "resources/scenery/arch.gif");
+//        Priest priest = new Priest(game, pac);
+//        Snake snake = new Snake(game, sac);
+//        Scenery scene = new Scenery(game, "resources/scenery/arch.gif");
         gameObjects = new ArrayList<RWGameObject>();
         gameObjects.add(new Priest.Factory());
         gameObjects.add(new Snake.Factory());
@@ -93,55 +93,54 @@ public class LevelFromFile extends Level {
             }
 
             String type = ac.getType();
-            for(int j=0; j< gameObjects.size();j++){
-                if(gameObjects.get(j).isThisKindOfObject(type)){
-                    gameObjects.get(j).createAndAddToMap(ac, maps, this);
+            for (int j = 0; j < gameObjects.size(); j++) {
+                if (gameObjects.get(j).isThisKindOfObject(type)) {
+                    gameObjects.get(j).createAndAddToMap(ac, maps, this, game2);
                 }
             }
         }
-        
-    	int[] locs = new int[] {game.getBG().getWidth() / 3, 200 };
-    	sac.put("location", locs);
-    	sac.put("name", "QuestGiver");
-    	sac.put("type", "priest");
-    	pac.put("type", "priest");
-    	pac.put("name", "QuestGiver");
-    	
-        TestQuestGiver questGiver = new TestQuestGiver(game, pac);	
-    	
+
+        int[] locs = new int[] { game.getBG().getWidth() / 3, 200 };
+        sac.put("location", locs);
+        sac.put("name", "QuestGiver");
+        sac.put("type", "priest");
+        pac.put("type", "priest");
+        pac.put("name", "QuestGiver");
+
+        TestQuestGiver questGiver = new TestQuestGiver(game, pac);
+
         questGiver.add(locs, 6);
         npcs.put("QuestGiver", questGiver);
-        
-        HashMap<ItemSub, Integer> toFetch = new HashMap<ItemSub, Integer>();
-        
-        ItemSub bowAndArrows = MI.parseExpression("Twin Bow, bowAndArrow, BowAndArrows, 30"); 
-        
-        toFetch.put(bowAndArrows, 1);
-		
-		Task t = new FetchTask(game, "Collect the item", questGiver, toFetch);
-		
-		ItemSub pot = MI.parseExpression("SuperPotion within Start, potion, HealthPotion, 5");
-	       
-	    items.put("pot", pot);
-		
-		Quest getBow = new RewardQuest("Bow Quest", pot, t);
-		
-		getBow.addObserver(questGiver);
-		
-		game.getPlayer().getQuestJournal().addQuest(getBow);
-		questGiver.addQuest(getBow);
-    }
 
+        HashMap<ItemSub, Integer> toFetch = new HashMap<ItemSub, Integer>();
+
+        ItemSub bowAndArrows =
+            MI.parseExpression("Twin Bow, bowAndArrow, BowAndArrows, 30");
+
+        toFetch.put(bowAndArrows, 1);
+
+        Task t = new FetchTask(game, "Collect the item", questGiver, toFetch);
+
+        ItemSub pot =
+            MI.parseExpression("SuperPotion within Start, potion, HealthPotion, 5");
+
+        items.put("pot", pot);
+
+        Quest getBow = new RewardQuest("Bow Quest", pot, t);
+
+        getBow.addObserver(questGiver);
+
+        game.getPlayer().getQuestJournal().addQuest(getBow);
+        questGiver.addQuest(getBow);
+    }
 
     protected void addNPCs () {
 
     }
 
-
     protected void addScenery () {
 
     }
-
 
     protected void addItems () { // name, gifName, type/category, damage/value
         ItemSub sword = MI.parseExpression("Golden Sword, sword, Sword, 55");
@@ -159,7 +158,7 @@ public class LevelFromFile extends Level {
                     game.getBG().getHeight() / 4 * 3 };
         potion.add(potLoc, 0);
         items.put("potion", potion);
-        
+
         ItemSub bowAndArrows =
             MI.parseExpression("Twin Bow, bowAndArrow, BowAndArrows, 30");
         int[] bowLoc =
@@ -180,41 +179,35 @@ public class LevelFromFile extends Level {
         items.put("Halo Accessory", haloAcc);
     }
 
-
     public void render (Graphics2D g) {
-        if(!(startText == null)){
+        if (!(startText == null)) {
             if (game.getDialog().getMessage().equals("")) game.getDialog()
                                                               .setMessage(startText);
             if (getLevelTime() < 1500) game.getDialog().showMessage(g);
         }
     }
-	
-    public void nextLevel (String levelFilename)
-    {
-    	
+
+    public void nextLevel (String levelFilename) {
+
         game.setLevel(new End(bsLoader, bsIO, game, levelFilename));
         game.getLevel().generate();
-    	/*
-    	if(nextLevelName == null){
-    		System.out.println("nextLevelName: " + nextLevelName);
-    		game.finish();
-    	}
-    	else{
-    		game.setLevel(new LevelFromFile(game, nextLevelName));
-    		game.getLevel().generate();
-    	}
-    	*/
+        /*
+         * if(nextLevelName == null){ System.out.println("nextLevelName: " +
+         * nextLevelName); game.finish(); } else{ game.setLevel(new
+         * LevelFromFile(game, nextLevelName)); game.getLevel().generate(); }
+         */
     }
-
 
     protected void addEnemies () {}
 
+    @Override
+    public void renderTile (Graphics2D arg0,
+                            int arg1,
+                            int arg2,
+                            int arg3,
+                            int arg4) {
+        // TODO Auto-generated method stub
 
-	@Override
-	public void renderTile(Graphics2D arg0, int arg1, int arg2, int arg3,
-			int arg4) {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
 }

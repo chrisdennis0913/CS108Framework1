@@ -1,18 +1,14 @@
 package player;
 
-import java.util.ArrayList;
 import inventory.MakeItems;
 import inventory.Weapon;
-
 
 public class BowAttacking extends Attacking {
     MakeItems MI = new MakeItems(getPlayer().getGame());
 
-
     public BowAttacking (Player player) {
         super(player, "resources/player/actions/bowattacking.json");
     }
-
 
     public boolean isEnabled () {
         if (super.isEnabled()) {
@@ -25,10 +21,7 @@ public class BowAttacking extends Attacking {
             }
         }
         return false;
-        
-        
     }
-
 
     public String[] potential () {
         String[] pot = { "bow", "superBow" };

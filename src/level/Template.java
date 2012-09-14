@@ -2,51 +2,49 @@ package level;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-
+import app.RPGGame;
 import com.golden.gamedev.engine.BaseIO;
 import com.golden.gamedev.engine.BaseLoader;
 
-import inventory.ItemSub;
-import npc.Priest;
-import saving_loading.AttributeContainer;
-import scenery.Scenery;
-import app.RPGGame;
+public class Template extends Level {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+    BaseLoader bsLoader;
+    BaseIO bsIO;
 
-public class Template extends Level
-{
-
-	BaseLoader bsLoader;
-	BaseIO bsIO;
-	
-    public Template (BaseLoader bsLoader, BaseIO bsIO, RPGGame game2, String levelFilename) {
+    public Template (BaseLoader bsLoader,
+                     BaseIO bsIO,
+                     RPGGame game2,
+                     String levelFilename) {
         super(bsLoader, bsIO, game2, levelFilename);
-	}
-    
-    public void renderTile(Graphics2D g,
-    						int tileX, int tileY,
-    						int x, int y) {
-    	// render layer 1
-    	int tilenum = layer1[tileX][tileY];
-    	if (tilenum < chipsetE.image.length) {
-    		g.drawImage(chipsetE.image[tilenum], x, y, null);
-
-    	} else if (tilenum >= chipsetE.image.length) {
-    		BufferedImage image = chipset[tilenum-chipsetE.image.length].image[2];
-    		g.drawImage(image, x, y, null);
-    	}
-
-    	// render layer 2
-    	int tilenum2 = layer2[tileX][tileY];
-    	if (tilenum2 != -1) {
-    		g.drawImage(chipsetF.image[tilenum2], x, y, null);
-    	}
-
-    	// layer 3 is rendered by sprite group
     }
-    
-    protected void addNPCs ()
-    {
+
+    public void renderTile (Graphics2D g, int tileX, int tileY, int x, int y) {
+        // render layer 1
+        int tilenum = layer1[tileX][tileY];
+        if (tilenum < chipsetE.image.length) {
+            g.drawImage(chipsetE.image[tilenum], x, y, null);
+
+        }
+        else if (tilenum >= chipsetE.image.length) {
+            BufferedImage image =
+                chipset[tilenum - chipsetE.image.length].image[2];
+            g.drawImage(image, x, y, null);
+        }
+
+        // render layer 2
+        int tilenum2 = layer2[tileX][tileY];
+        if (tilenum2 != -1) {
+            g.drawImage(chipsetF.image[tilenum2], x, y, null);
+        }
+
+        // layer 3 is rendered by sprite group
+    }
+
+    protected void addNPCs () {
 //    	AttributeContainer ac = new AttributeContainer();
 //    	Priest priest = new Priest(game, ac); 
 //    	int[] loc =
@@ -61,9 +59,7 @@ public class Template extends Level
 //        npcs.put("priest", priest);
     }
 
-
-    protected void addScenery ()
-    {
+    protected void addScenery () {
 //        Scenery shrubs = new Scenery(game, "resources/scenery/plant.gif");
 //        int reverser = -1;
 //        int leveler = 0;
@@ -95,9 +91,7 @@ public class Template extends Level
 //        scenery.put("arch", arch);
     }
 
-
-    protected void addItems ()
-    {
+    protected void addItems () {
 //        ItemSub sword =
 //            MI.parseExpression("Golden Sword within Start, sword, Weapon, 55");
 //        int[] swordLoc =
@@ -117,20 +111,14 @@ public class Template extends Level
 //        items.put("potion", potion);
     }
 
+    public void render (Graphics2D g) {
 
-    public void render (Graphics2D g){
-        
     }
 
+    public void nextLevel (String levelFilename) {
 
-    public void nextLevel (String levelFilename){
-        
     }
 
-
-    protected void addEnemies ()
-    {}
-
+    protected void addEnemies () {}
 
 }
-

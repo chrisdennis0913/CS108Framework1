@@ -56,8 +56,9 @@ public class Priest extends StationaryNPC {
 		}
 
 		@Override
-		public void createAndAddToMap(AttributeContainer attributeContainer, MapContainer maps, Level level) {
-			String name = attributeContainer.getName();
+		public void createAndAddToMap(AttributeContainer attributeContainer, MapContainer maps, Level level, RPGGame game2) {
+			game = game2;
+		    String name = attributeContainer.getName();
 			int[] location = (int[]) attributeContainer.getObjectForKey("location", int[].class);
 		    Priest priest = new Priest(game, attributeContainer);
 		    priest.add(location, 6);

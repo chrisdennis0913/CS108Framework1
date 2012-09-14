@@ -67,7 +67,7 @@ public class Snake extends Enemy {
 		
 		@Override
 		public void createAndAddToMap(AttributeContainer attributeContainer,
-				MapContainer maps, Level level) {
+				MapContainer maps, Level level, RPGGame game2) {
 			String name = attributeContainer.getName();
 			int[] location = (int[]) attributeContainer.getObjectForKey("location", int[].class);
 		    Snake snake = new Snake(game, attributeContainer);

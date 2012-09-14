@@ -1,13 +1,8 @@
 package ai;
 
 import java.util.HashMap;
-import java.util.HashSet;
-
 import app.RPGGame;
-import enemy.AbstractAttack;
 import enemy.IEnemy;
-import enemy.ShootingAttack;
-import enemy.SlowBehaviorModifier;
 
 public class SnakeDecisionTableAI extends AbstractDecisionTableAI {
 

@@ -8,7 +8,11 @@ import app.RPGGame;
 
 public abstract class MovingNPC extends NPC{
 	
-	RPGGame game;
+	/**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+    RPGGame game;
 	int[] velocity;
 	AbstractMovementAI motion;
 

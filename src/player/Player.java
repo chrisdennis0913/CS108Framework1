@@ -5,187 +5,178 @@ import inventory.ItemSub;
 import inventory.PlayerInventory;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import quest.QuestJournal;
-import enemy.AbstractBehaviorModifier;
 import app.RPGGame;
 import collisions.PlayerBoundaryCollision;
 import com.golden.gamedev.object.AnimatedSprite;
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
-
+import enemy.AbstractBehaviorModifier;
 
 public class Player {
-	private SpriteGroup group = new SpriteGroup("Player");
-	public SpriteGroup projectiles = new SpriteGroup("Projectiles");
-	private AnimatedSprite character;
-	private String startSprite = "resources/player/start_sprite.gif";
-	
-	private PlayerCounters pcs = new PlayerCounters(this);
-	private PlayerActions pas;
-	private RPGGame game;
-	private PlayerInventory myInventory = new PlayerInventory(game);
-	
-	private LinkedList<AbstractBehaviorModifier> behaviorModifiers = new LinkedList<AbstractBehaviorModifier>();
+    private SpriteGroup group = new SpriteGroup("Player");
+    public SpriteGroup projectiles = new SpriteGroup("Projectiles");
+    private AnimatedSprite character;
+    private String startSprite = "resources/player/start_sprite.gif";
 
-	private ItemStore myStore;
-	private QuestJournal myQuests;
+    private PlayerCounters pcs = new PlayerCounters(this);
+    private PlayerActions pas;
+    private RPGGame game;
+    private PlayerInventory myInventory = new PlayerInventory(game);
 
-	public Player(RPGGame rpgGame) {
-		this.game = rpgGame;
-		myInventory = new PlayerInventory(game);
-		pas = new PlayerActions(this);
-		myStore = new ItemStore(game);
-		myQuests = new QuestJournal();
-	}
-	
+    private LinkedList<AbstractBehaviorModifier> behaviorModifiers =
+        new LinkedList<AbstractBehaviorModifier>();
 
-	public void generate(int[] location) {
-		initCharacter(location);
-		initCollisions();
-	}
+    private ItemStore myStore;
+    private QuestJournal myQuests;
 
-	private void initCharacter(int[] location) {
-		BufferedImage[] image = new BufferedImage[] { game
-				.getImage(startSprite) };
-		character = new AnimatedSprite(image, location[0], location[1]);
-		character.setLayer(10);
-		group.add(character);
-		game.getField().addGroup(group);
-	}
+    public Player (RPGGame rpgGame) {
+        this.game = rpgGame;
+        myInventory = new PlayerInventory(game);
+        pas = new PlayerActions(this);
+        myStore = new ItemStore(game);
+        myQuests = new QuestJournal();
+    }
 
-	private void initCollisions() {
-		game.getField().addCollisionGroup(group, null,
-				new PlayerBoundaryCollision(game.getBG()));
-	}
+    public void generate (int[] location) {
+        initCharacter(location);
+        initCollisions();
+    }
 
-	public PlayerCounters getPCs() {
-		return pcs;
-	}
+    private void initCharacter (int[] location) {
+        BufferedImage[] image =
+            new BufferedImage[] { game.getImage(startSprite) };
+        character = new AnimatedSprite(image, location[0], location[1]);
+        character.setLayer(10);
+        group.add(character);
+        game.getField().addGroup(group);
+    }
 
-	public PlayerActions getActions() {
-		return pas;
-	}
+    private void initCollisions () {
+        game.getField()
+            .addCollisionGroup(group,
+                               null,
+                               new PlayerBoundaryCollision(game.getBG()));
+    }
 
-	public void update(long elapsed) {
-		pcs.update(elapsed);
-		pas.update(elapsed);
+    public PlayerCounters getPCs () {
+        return pcs;
+    }
 
-		for (AbstractBehaviorModifier bm : behaviorModifiers)
-			bm.setUp(elapsed);
+    public PlayerActions getActions () {
+        return pas;
+    }
 
-		if (game.keyPressed(java.awt.event.KeyEvent.VK_I))
-			myInventory.toggleShow();
+    public void update (long elapsed) {
+        pcs.update(elapsed);
+        pas.update(elapsed);
 
-		else if (game.keyPressed(java.awt.event.KeyEvent.VK_O))
-			myInventory.showFullInventoryMenu();
-		
-		else if (game.keyPressed(java.awt.event.KeyEvent.VK_S))
-			myStore.openStore();
-		
-		if (game.keyPressed(java.awt.event.KeyEvent.VK_J))
-			myQuests.toggleShow();
-		
-		myQuests.update();
+        for (AbstractBehaviorModifier bm : behaviorModifiers)
+            bm.setUp(elapsed);
 
-		Iterator<AbstractBehaviorModifier> bmReverse = behaviorModifiers
-				.descendingIterator();
-		while (bmReverse.hasNext())
-			if (bmReverse.next().unsetUp(elapsed))
-				bmReverse.remove();
-	}
+        if (game.keyPressed(java.awt.event.KeyEvent.VK_I)) myInventory.toggleShow();
 
-	public void render(Graphics2D g) {
-		pcs.render(g);
-		pas.render(g);
-		myInventory.showLimitedInventory(g);
-		myInventory.drawAccessories(g);
-		myQuests.showJournal(g);
-	}
-	
+        else if (game.keyPressed(java.awt.event.KeyEvent.VK_O)) myInventory.showFullInventoryMenu();
 
-	public QuestJournal getQuestJournal()
-	{
-		return myQuests;
-	}
+        else if (game.keyPressed(java.awt.event.KeyEvent.VK_S)) myStore.openStore();
 
-	public AnimatedSprite getCharacter() {
-		return character;
-	}
-	
-	public PlayerInventory getInventory() {
-		return myInventory;
-	}
+        if (game.keyPressed(java.awt.event.KeyEvent.VK_J)) myQuests.toggleShow();
 
-	public ItemStore getItemStore() {
-		return myStore;
-	}
+        myQuests.update();
 
-	public void addItem(ItemSub grabItem) {
-		myInventory.add(grabItem);
-	}
+        Iterator<AbstractBehaviorModifier> bmReverse =
+            behaviorModifiers.descendingIterator();
+        while (bmReverse.hasNext())
+            if (bmReverse.next().unsetUp(elapsed)) bmReverse.remove();
+    }
 
-	public ItemSub getEquipped() {
-		return myInventory.getEquipped();
-	}
+    public void render (Graphics2D g) {
+        pcs.render(g);
+        pas.render(g);
+        myInventory.showLimitedInventory(g);
+        myInventory.drawAccessories(g);
+        myQuests.showJournal(g);
+    }
 
-	public void setEquipped(ItemSub itm) {
-		myInventory.setEquipped(itm);
-	}
+    public QuestJournal getQuestJournal () {
+        return myQuests;
+    }
 
-	public boolean hasItem(ItemSub itm) {
-		return myInventory.contains(itm);
-	}
-	
-	public SpriteGroup getGroup() {
-		return group;
-	}
+    public AnimatedSprite getCharacter () {
+        return character;
+    }
 
-	public boolean hasItem(String itemName) {
-		return myInventory.contains(itemName);
-	}
-	
-	public void setWalkingSpeed(double[] speed){
-		pas.setWalkingSpeed(speed);
-	}
-	
-	public double[] getWalkingSpeed(){
-		return pas.getWalkingSpeed();
-	}
+    public PlayerInventory getInventory () {
+        return myInventory;
+    }
 
-	public void registerBehaviorModifier(AbstractBehaviorModifier bm) {
-		// default is to insert at end of linked list
-		registerBehaviorModifier(bm, false);
-	}
+    public ItemStore getItemStore () {
+        return myStore;
+    }
 
-	public void registerBehaviorModifier(AbstractBehaviorModifier bm,
-			boolean insertAtTop) {
-		if (insertAtTop)
-			behaviorModifiers.addFirst(bm);
-		else
-			behaviorModifiers.addLast(bm);
-	}
+    public void addItem (ItemSub grabItem) {
+        myInventory.add(grabItem);
+    }
 
-	public void registerBehaviorModifierExclusive(AbstractBehaviorModifier bm,
-			boolean insertAtTop) {
-		Iterator<AbstractBehaviorModifier> iter = behaviorModifiers.iterator();
-		while (iter.hasNext())
-			if (iter.next().getClass() == bm.getClass())
-				iter.remove();
+    public ItemSub getEquipped () {
+        return myInventory.getEquipped();
+    }
 
-		registerBehaviorModifier(bm, insertAtTop);
-	}
+    public void setEquipped (ItemSub itm) {
+        myInventory.setEquipped(itm);
+    }
 
-	public void deregisterBehaviorModifier(AbstractBehaviorModifier bm) {
-		behaviorModifiers.remove(bm);
-	}
+    public boolean hasItem (ItemSub itm) {
+        return myInventory.contains(itm);
+    }
 
-	public Sprite getSprite(){
-		return character;
-	}
-	public RPGGame getGame(){
-	    return game;
-	}
+    public SpriteGroup getGroup () {
+        return group;
+    }
+
+    public boolean hasItem (String itemName) {
+        return myInventory.contains(itemName);
+    }
+
+    public void setWalkingSpeed (double[] speed) {
+        pas.setWalkingSpeed(speed);
+    }
+
+    public double[] getWalkingSpeed () {
+        return pas.getWalkingSpeed();
+    }
+
+    public void registerBehaviorModifier (AbstractBehaviorModifier bm) {
+        // default is to insert at end of linked list
+        registerBehaviorModifier(bm, false);
+    }
+
+    public void registerBehaviorModifier (AbstractBehaviorModifier bm,
+                                          boolean insertAtTop) {
+        if (insertAtTop) behaviorModifiers.addFirst(bm);
+        else behaviorModifiers.addLast(bm);
+    }
+
+    public void registerBehaviorModifierExclusive (AbstractBehaviorModifier bm,
+                                                   boolean insertAtTop) {
+        Iterator<AbstractBehaviorModifier> iter = behaviorModifiers.iterator();
+        while (iter.hasNext())
+            if (iter.next().getClass() == bm.getClass()) iter.remove();
+
+        registerBehaviorModifier(bm, insertAtTop);
+    }
+
+    public void deregisterBehaviorModifier (AbstractBehaviorModifier bm) {
+        behaviorModifiers.remove(bm);
+    }
+
+    public Sprite getSprite () {
+        return character;
+    }
+
+    public RPGGame getGame () {
+        return game;
+    }
 }

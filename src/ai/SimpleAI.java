@@ -1,14 +1,10 @@
 package ai;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
-
+import app.RPGGame;
 import enemy.AbstractAttack;
 import enemy.IEnemy;
-
-import ai.AbstractAI;
-import app.RPGGame;
 
 public class SimpleAI extends AbstractAI {
 

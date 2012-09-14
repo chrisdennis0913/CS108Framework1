@@ -6,7 +6,6 @@ public class YesNoDialogue extends AbstractDialogue{
 	private int count;
 
 	public YesNoDialogue(String url){
-		int count = 0;
 		String[] lines = readFile(url);
 		currentNode = generateTree(lines);
 	}

@@ -5,17 +5,14 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.TreeMap;
-
 import app.RPGGame;
-
 import com.golden.gamedev.object.GameFont;
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.font.SystemFont;
 
 public class ItemStore {
 	private Inventory myInventory;
-	private TreeMap<ItemSub, Integer> myPrices;
+//	private TreeMap<ItemSub, Integer> myPrices;
 	private boolean storeOpen = false;
 	private RPGGame game;
 	private GameFont font;

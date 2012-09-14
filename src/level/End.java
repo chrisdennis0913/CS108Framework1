@@ -12,7 +12,12 @@ import enemy.Snake;
 
 public class End extends Level {
 
-	public End(BaseLoader bsLoader, BaseIO bsIO, RPGGame game2, String levelFilename) {
+	/**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
+    public End(BaseLoader bsLoader, BaseIO bsIO, RPGGame game2, String levelFilename) {
         super(bsLoader, bsIO, game2, levelFilename);
 	}
 

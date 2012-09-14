@@ -2,15 +2,16 @@ package level;
 
 
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
-
-import com.golden.gamedev.*;
-import com.golden.gamedev.object.*;
-import com.golden.gamedev.object.background.*;
-import com.golden.gamedev.util.*;
+import com.golden.gamedev.Game;
+import com.golden.gamedev.GameLoader;
+import com.golden.gamedev.util.FileUtil;
 
 
 /**

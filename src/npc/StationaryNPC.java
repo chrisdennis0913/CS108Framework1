@@ -3,6 +3,7 @@ package npc;
 import saving_loading.AttributeContainer;
 import app.RPGGame;
 
+@SuppressWarnings("serial")
 public abstract class StationaryNPC extends NPC{
 
 	public StationaryNPC(RPGGame game2, AttributeContainer ac) {

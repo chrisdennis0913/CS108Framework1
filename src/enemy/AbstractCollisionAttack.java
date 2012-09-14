@@ -1,10 +1,6 @@
 package enemy;
 
 import app.RPGGame;
-import collisions.AttackVectorCollision;
-
-import com.golden.gamedev.object.Sprite;
-import com.golden.gamedev.object.SpriteGroup;
 
 public abstract class AbstractCollisionAttack extends AbstractAttack {
 

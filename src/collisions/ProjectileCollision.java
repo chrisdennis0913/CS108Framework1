@@ -11,13 +11,11 @@ import enemy.IEnemy;
 public class ProjectileCollision extends BasicCollisionGroup {
     private RPGGame game;
     private IEnemy enemy;
-    private Player player;
     private NPC npc;
 
 
     public ProjectileCollision (RPGGame game, Player player, String enemyname) {
         this.game = game;
-        this.player = player;
         this.enemy = game.getLevel().getEnemy(enemyname);
         this.npc = game.getLevel().getNPC(enemyname);
 //        game.getImage(".gif");

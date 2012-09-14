@@ -15,7 +15,11 @@ import com.golden.gamedev.object.sprite.AdvanceSprite;
 public class RPGSprite extends AdvanceSprite {
 
 
-	// sprite constant direction
+	/**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+    // sprite constant direction
 	public static final int LEFT 	= 0;
 	public static final int RIGHT 	= 1;
 	public static final int UP 		= 2;

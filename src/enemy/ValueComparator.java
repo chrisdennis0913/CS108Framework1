@@ -6,6 +6,7 @@ import java.util.Map;
  * Sorts a map based upon its values, in descending order
  */
 
+@SuppressWarnings("hiding")
 public class ValueComparator<String> implements Comparator<String> {
 
 	  Map<String, Double> toSort;

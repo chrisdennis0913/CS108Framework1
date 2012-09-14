@@ -8,11 +8,8 @@ public abstract class AbstractAttackVector {
 
 	protected static RPGGame game;
 	private AnimatedSprite vectorSprite;
-	private AbstractVectorAttack owner;
-	
 	public AbstractAttackVector(RPGGame game, AbstractVectorAttack owner, double x, double y, double speedX, double speedY){
-		this.game = game;
-		this.owner = owner;
+		AbstractAttackVector.game = game;
 		vectorSprite = loadVectorSprite();
 		vectorSprite.setLocation(x, y);
 		vectorSprite.setSpeed(speedX, speedY);

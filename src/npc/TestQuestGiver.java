@@ -1,14 +1,11 @@
 package npc;
 
 import java.util.ArrayList;
-
-import dialogue.SimpleDialogue;
-import dialogue.SimpleDialogue.SimpleDialogueObject;
-
-import app.RPGGame;
 import quest.Quest;
 import quest.QuestGiver;
 import saving_loading.AttributeContainer;
+import app.RPGGame;
+import dialogue.SimpleDialogue;
 
 @SuppressWarnings("serial")
 public class TestQuestGiver extends StationaryNPC implements QuestGiver

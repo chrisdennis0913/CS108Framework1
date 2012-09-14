@@ -15,12 +15,10 @@ import com.golden.gamedev.object.PlayField;
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.background.ImageBackground;
 
-
 public class RPGGame extends GameObject //implements GameStateProvider
 {
 
-    public RPGGame (GameEngine arg0)
-    {
+    public RPGGame (GameEngine arg0) {
         super(arg0);
     }
 
@@ -32,15 +30,13 @@ public class RPGGame extends GameObject //implements GameStateProvider
     private Level level;
     private Inventory myInventory;
 
-    private boolean pausedForItemStore=false;
-    private boolean pausedForInventory=false;
-    public static String startLevelFilename= "map00.json";
-
+    private boolean pausedForItemStore = false;
+    private boolean pausedForInventory = false;
+    public static String startLevelFilename = "map00.json";
 
     @SuppressWarnings("rawtypes")
-    public void initResources ()
-    {
-    	map = new Map(bsLoader, bsIO);
+    public void initResources () {
+        map = new Map(bsLoader, bsIO);
         bg = new ImageBackground(getImage("resources/bg.jpg"), 600, 600);
         field = new PlayField(level);
         field.setBackground(bg);
@@ -57,24 +53,20 @@ public class RPGGame extends GameObject //implements GameStateProvider
         level = new LevelFromFile(bsLoader, bsIO, this, startLevelFilename);
         level.generate();
 
-        field.setComparator(new Comparator()
-        {
-            public int compare (Object o1, Object o2)
-            {
+        field.setComparator(new Comparator() {
+            public int compare (Object o1, Object o2) {
                 Sprite s1 = (Sprite) o1, s2 = (Sprite) o2;
                 return (int) (s1.getLayer() - s2.getLayer());
             }
         });
     }
 
-
-    public void render (Graphics2D g)
-    {
-        if (pausedForInventory){
+    public void render (Graphics2D g) {
+        if (pausedForInventory) {
             player.getInventory().renderMenu(g);
             return;
         }
-        if (pausedForItemStore){
+        if (pausedForItemStore) {
             player.getItemStore().renderStore(g);
             return;
         }
@@ -83,14 +75,12 @@ public class RPGGame extends GameObject //implements GameStateProvider
         level.render(g);
     }
 
-
-    public void update (long elapsed)
-    {
-        if (pausedForInventory){
+    public void update (long elapsed) {
+        if (pausedForInventory) {
             player.getInventory().updateMenu(elapsed);
             return;
         }
-        if (pausedForItemStore){
+        if (pausedForItemStore) {
             player.getItemStore().updateStore(elapsed);
             return;
         }
@@ -98,77 +88,60 @@ public class RPGGame extends GameObject //implements GameStateProvider
         field.update(elapsed);
         level.update(elapsed);
 
-        
     }
 
-
-    public Background getBG ()
-    {
+    public Background getBG () {
         return bg;
     }
 
-
-    public Dialog getDialog ()
-    {
+    public Dialog getDialog () {
         return dialog;
     }
 
-
-    public PlayField getField ()
-    {
+    public PlayField getField () {
         return field;
     }
 
-
-    public Player getPlayer ()
-    {
+    public Player getPlayer () {
         return player;
     }
 
-
-    public Level getLevel ()
-    {
+    public Level getLevel () {
         return level;
     }
 
-
-    public void setLevel (Level level)
-    {
+    public void setLevel (Level level) {
         this.level = level;
     }
 
-
-    public void addItems (ItemSub itm)
-    {
+    public void addItems (ItemSub itm) {
         myInventory.add(itm);
     }
 
-
-    public Inventory getInventory ()
-    {
+    public Inventory getInventory () {
         return myInventory;
 
     }
-    public void pauseGameForInventory(){
+
+    public void pauseGameForInventory () {
         pausedForInventory = true;
     }
-    public void unPauseGameForInventory(){
+
+    public void unPauseGameForInventory () {
         pausedForInventory = false;
     }
-    
-    public void pauseGameForStore(){
+
+    public void pauseGameForStore () {
         pausedForItemStore = true;
     }
-    public void unPauseGameForStore(){
+
+    public void unPauseGameForStore () {
         pausedForItemStore = false;
     }
 
-
     /*
-	@Override
-	public void copyGameState(GameStateProvider gsp) {
-		gsp.player = player.clone();
-		gsp.level = level.clone();
-	}*/
+     * @Override public void copyGameState(GameStateProvider gsp) { gsp.player =
+     * player.clone(); gsp.level = level.clone(); }
+     */
 
 }
